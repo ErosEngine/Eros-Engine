@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 #include <SDL_video.h>
-#include <iostream>
+#include <QDebug>
 
 
 class MainWindow_SDL

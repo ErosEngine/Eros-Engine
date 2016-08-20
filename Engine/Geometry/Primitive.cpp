@@ -1,6 +1,6 @@
 #include "Primitive.h"
 
-#define PRINTGL std::cout << glGetError() << "\n";
+#define PRINTGL qDebug() << glGetError();
 
 Primitive::Primitive()
 {
@@ -12,11 +12,11 @@ void Primitive::bind()
     fragShader.bind();
     if (vertShader.compile())
     {
-        std::cout << "Vertex shader compiled\n";
+        qDebug() << "Vertex shader compiled";
     }
     if (fragShader.compile())
     {
-        std::cout << "fragment shader compiled\n";
+        qDebug() << "fragment shader compiled";
     }
     
     glGenVertexArrays(1, &m_vaoId);
@@ -40,7 +40,7 @@ void Primitive::bind()
     if (mainShader.compile())
     {
         PRINTGL
-        std::cout << "No shader compilation errors\n";
+        qDebug() << "No shader compilation errors";
     }
     
 }

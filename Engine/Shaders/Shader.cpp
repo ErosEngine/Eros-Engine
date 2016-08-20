@@ -10,7 +10,7 @@ void SubShader::bind()
     else if (m_shaderType == BANE_FRAG_SHADER)
         subShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
     else
-        std::cout << "ERROR, SHADERTYPE NOT RECOGNIZED\n";
+        qDebug() << "ERROR, SHADERTYPE NOT RECOGNIZED";
     
     const GLchar *temp_ = data.c_str();
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
@@ -21,7 +21,7 @@ bool SubShader::compile()
     glCompileShader(subShaderProgram);
     GLint shaderCompOutput;
     GLchar compileOutput[512];
-    string shaderType_;
+    QString shaderType_;
     if (m_shaderType == BANE_VERTEX_SHADER)
     {
         shaderType_ = "VERTEX SHADER"; 
@@ -36,7 +36,7 @@ bool SubShader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetShaderInfoLog(subShaderProgram, 512, NULL, compileOutput);
-        std::cout << shaderType_ << " COMPILATION FAILED\n" << compileOutput << "\n";
+        qDebug() << shaderType_ << " COMPILATION FAILED\n" << (char *)compileOutput;
         return false;
     }
     
@@ -91,8 +91,8 @@ bool Shader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetProgramInfoLog(shaderProgram, 512, NULL, compileOutput);
-        std::cout << "MAINSHADER LINK FAILED\n";
-        std::cout << compileOutput << "\n";
+        qDebug() << "MAINSHADER LINK FAILED";
+        qDebug() << compileOutput;
         
         for (int i = 0; i < m_shaderList.size(); ++i)
         {
@@ -101,7 +101,7 @@ bool Shader::compile()
         return false;
     }
     
-    std::cout << "Main Shader linkage success \n";
+    qDebug() << "Main Shader linkage success";
     
     for (int i = 0; i < m_shaderList.size(); ++i)
         glDetachShader(shaderProgram, m_shaderList[i].subShaderProgram);

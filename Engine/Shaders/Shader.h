@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <fstream>
 #include <vector>
-#include <iostream>
+#include <QDebug>
 #include "Engine/Geometry/Coordinates.h"
 
 #define BANE_VERTEX_SHADER 1

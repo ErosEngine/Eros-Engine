@@ -45,11 +45,11 @@ void MainWindow_SDL::gameStart()
     GLenum GlResult = glewInit();
     if (GlResult != GLEW_OK)
     {
-        std::cout << "OpenGL failed to initialize\n";
+        qDebug() << "OpenGL failed to initialize";
     }
     else if (GlResult == GLEW_OK)
     {
-        std::cout << "OpenGL has initialized, Current version number " << glGetString(GL_VERSION) << "\n";
+        qDebug() << "OpenGL has initialized, Current version: " << glGetString(GL_VERSION);
     }
     
     gameLoop();
@@ -63,9 +63,6 @@ void MainWindow_SDL::gameLoop()
     while (m_state == GameState::RUNNING)
     {
         glPushMatrix();
-        glClearColor(0.1f, 0.5f, 0.2f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
         renderer.DuringGameRender();
         
         SDL_Event e;

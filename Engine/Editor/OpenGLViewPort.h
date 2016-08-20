@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <QOpenGLWidget>
+#include <QDebug>
 #include "Engine/Window/OpenGLRenderer.h"
 
 

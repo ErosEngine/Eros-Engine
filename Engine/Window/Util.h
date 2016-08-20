@@ -21,9 +21,9 @@ enum KeyCode
 
 enum MouseButton
 {
-    right = SDL_BUTTON_RIGHT,
-    left = SDL_BUTTON_LEFT,
-    middle = SDL_BUTTON_MIDDLE    
+    Mouse_right = SDL_BUTTON_RIGHT,
+    Mouse_left = SDL_BUTTON_LEFT,
+    Mouse_middle = SDL_BUTTON_MIDDLE    
 };
 
 void setKeyPtr()
