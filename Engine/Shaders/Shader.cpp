@@ -96,13 +96,15 @@ bool Shader::compile()
         
         for (int i = 0; i < m_shaderList.size(); ++i)
         {
-            glDeleteProgram(shaderProgram);
+            glDeleteShader(m_shaderList[i].subShaderProgram);
         }
+        glDeleteProgram(shaderProgram);
         return false;
     }
     
     qDebug() << "Main Shader linkage success";
     
+    // After compilation was successful detach 
     for (int i = 0; i < m_shaderList.size(); ++i)
         glDetachShader(shaderProgram, m_shaderList[i].subShaderProgram);
     return true;

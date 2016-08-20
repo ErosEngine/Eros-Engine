@@ -30,7 +30,7 @@ void setKeyPtr()
 {
 }
 
-void UpdateEvent(SDL_Event &event)
+static void UpdateEvent(SDL_Event &pevent)
 {
 }
 
