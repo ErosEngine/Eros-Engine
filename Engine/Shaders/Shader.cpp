@@ -104,7 +104,7 @@ bool Shader::compile()
     
     qDebug() << "Main Shader linkage success";
     
-    // After compilation was successful detach 
+    // After compilation was successful, detach 
     for (int i = 0; i < m_shaderList.size(); ++i)
         glDetachShader(shaderProgram, m_shaderList[i].subShaderProgram);
     return true;
