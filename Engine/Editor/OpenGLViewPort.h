@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <QOpenGLWidget>
 #include <QDebug>
-#include "Engine/Window/OpenGLRenderer.h"
+#include "Engine/Renderer/OpenGLRenderer.h"
 
 
 class OpenGLViewPort : public QOpenGLWidget

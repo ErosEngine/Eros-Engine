@@ -13,8 +13,8 @@ public:
     void bind();
     void draw();
     
-    SubShader vertShader = loadShaderFromFile("Engine/Shaders/baseVert.vert", BANE_VERTEX_SHADER);
-    SubShader fragShader = loadShaderFromFile("Engine/Shaders/baseFrag.frag", BANE_FRAG_SHADER);
+    SubShader vertShader = loadShaderFromFile("Engine/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
+    SubShader fragShader = loadShaderFromFile("Engine/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
     Shader mainShader;
     
 private:

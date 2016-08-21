@@ -14,7 +14,7 @@ SOURCES += main.cpp \
     Engine/Shaders/Shader.cpp \
     Engine/FileSystem/Resource.cpp \
     Engine/Geometry/Primitive.cpp \
-    Engine/Window/MainWindow_Qt.cpp \
+    Engine/Editor/MainWindow_Qt.cpp \
     Engine/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
     Engine/Renderer/OpenGLRenderer.cpp \
@@ -29,16 +29,17 @@ HEADERS += \
     Engine/Geometry/Primitive.h \
     Engine/Renderer/OpenGLRenderer.h \
     Engine/Window/Util.h \
-    Engine/Window/MainWindow_Qt.h \
+    Engine/Editor/MainWindow_Qt.h \
     Engine/Window/OpeningDialog.h \
     Engine/Editor/OpenGLViewPort.h \
     Engine/FileSystem/stb_image.h \
-    Engine/Geometry/Texture.h
+    Engine/Geometry/Texture.h \
+    Engine/FileSystem/stb_font.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \
     Engine/Shaders/baseVert.vert
 
 FORMS += \
-    Engine/Window/MainWindow_Qt.ui \
+    Engine/Editor/MainWindow_Qt.ui \
     Engine/Window/OpeningDialog.ui

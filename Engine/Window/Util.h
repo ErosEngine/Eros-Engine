@@ -2,10 +2,11 @@
 #define UTIL_H
 
 #include <SDL_events.h>
+#include "Engine/Editor/MainWindow_Qt.h"
 
 enum KeyCode
 {
-    Space = SDLK_KP_SPACE, Escape = SDLK_ESCAPE, BackSpace = SDLK_BACKSPACE, Caps = SDLK_CAPSLOCK,
+    Key_Space = SDLK_KP_SPACE, Key_Escape = SDLK_ESCAPE, Key_BackSpace = SDLK_BACKSPACE, Key_Caps = SDLK_CAPSLOCK,
     a = SDLK_a, b = SDLK_b, c = SDLK_c, d = SDLK_d, e = SDLK_e, f = SDLK_f, g = SDLK_g, h = SDLK_h,
     i = SDLK_i, j = SDLK_j, k = SDLK_k, l = SDLK_l, m = SDLK_m, n = SDLK_n, o = SDLK_o, p = SDLK_p,
     q = SDLK_q, r = SDLK_r, s = SDLK_s, t = SDLK_t, u = SDLK_u, v = SDLK_v, w = SDLK_w, x = SDLK_x, 
@@ -26,53 +27,63 @@ enum MouseButton
     Mouse_middle = SDL_BUTTON_MIDDLE    
 };
 
-void setKeyPtr()
-{
-}
-
-static void UpdateEvent(SDL_Event &pevent)
+inline void setKeyPtr()
 {
 }
 
 /// @returns return true if the key is being pressed \
 /// warning, fires twice when the key is pressed, reccommended for character movement
-bool getKeyPressed(const KeyCode &key)
+inline bool getKeyPressed(const KeyCode &key)
 {
     return false;
 }
 
 /// @returns returns true if the desired key is released \
 /// fires once, recommended for pause menus, etc.
-bool getKeyReleased(const KeyCode &key)
+inline bool getKeyReleased(const KeyCode &key)
 {
     return false;
 }
 
 /// @returns returns true when the desired key is pressed \
 /// fires once on press
-bool getKeyDown(const KeyCode &key)
+inline bool getKeyDown(const KeyCode &key)
 {
     return false;
 }
 
 /// @returns returns true when the user clicks down on the desired button \
 /// fires once
-bool getMouseDown(const MouseButton &pbutton)
+inline bool getMouseDown(const MouseButton &pbutton)
 {
     return false;
 }
 
 /// @returns returns true when the user releases the desired button \
 /// fires once
-bool getMouseUp(const MouseButton &pbutton)
+inline bool getMouseUp(const MouseButton &pbutton)
 {
     return false;
 }
 
-bool getMouseButtonDown(const MouseButton &pbutton)
+inline bool getMouseButtonDown(const MouseButton &pbutton)
 {
     return false;
 }
 
+inline void debugLog(const char *string)
+{
+    MainWindow_Qt::getInstance()->sendDebugString(string);
+}
+
+inline void debugLog(QString &string)
+{
+    MainWindow_Qt::getInstance()->sendDebugString(string);
+}
+
+inline void printGLError()
+{
+    //MainWindow_Qt::getInstance()->sendDebugString((GLenum)glGetError());
+}
 
 #endif // UTIL_H

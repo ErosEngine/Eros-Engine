@@ -1,6 +1,7 @@
 #include "Engine/Window/OpeningDialog.h"
 #include "Engine/Window/MainWindow.h"
-#include "Engine/Window/MainWindow_Qt.h"
+#include "Engine/Editor/MainWindow_Qt.h"
+#include "Engine/Window/Util.h"
 #include <QApplication>
 
 

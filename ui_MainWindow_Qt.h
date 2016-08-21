@@ -17,6 +17,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
 #include "Engine/Editor/OpenGLViewPort.h"
 
@@ -27,6 +28,7 @@ class Ui_MainWindow_Qt
 public:
     QWidget *centralwidget;
     OpenGLViewPort *openGLWidget;
+    QTextBrowser *debugOutput;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -40,6 +42,9 @@ public:
         openGLWidget = new OpenGLViewPort(centralwidget);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
         openGLWidget->setGeometry(QRect(110, 0, 751, 441));
+        debugOutput = new QTextBrowser(centralwidget);
+        debugOutput->setObjectName(QStringLiteral("debugOutput"));
+        debugOutput->setGeometry(QRect(110, 440, 751, 171));
         MainWindow_Qt->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow_Qt);
         menubar->setObjectName(QStringLiteral("menubar"));

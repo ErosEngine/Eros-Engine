@@ -7,8 +7,8 @@
 #include <QDebug>
 #include "Engine/Geometry/Coordinates.h"
 
-#define BANE_VERTEX_SHADER 1
-#define BANE_FRAG_SHADER 2
+#define EROS_VERTEX_SHADER 1
+#define EROS_FRAG_SHADER 2
 
 using std::string;
 

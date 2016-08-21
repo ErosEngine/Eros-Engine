@@ -1,16 +1,17 @@
 #include "Shader.h"
 #include <string>
 #include "Engine/FileSystem/Resource.h"
+#include "Engine/Window/Util.h"
 
 
 void SubShader::bind()
 {
-    if (m_shaderType == BANE_VERTEX_SHADER)
+    if (m_shaderType == EROS_VERTEX_SHADER)
         subShaderProgram = glCreateShader(GL_VERTEX_SHADER);
-    else if (m_shaderType == BANE_FRAG_SHADER)
+    else if (m_shaderType == EROS_FRAG_SHADER)
         subShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
     else
-        qDebug() << "ERROR, SHADERTYPE NOT RECOGNIZED";
+        debugLog("ERROR, SHADERTYPE NOT RECOGNIZED");
     
     const GLchar *temp_ = data.c_str();
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
@@ -22,11 +23,11 @@ bool SubShader::compile()
     GLint shaderCompOutput;
     GLchar compileOutput[512];
     QString shaderType_;
-    if (m_shaderType == BANE_VERTEX_SHADER)
+    if (m_shaderType == EROS_VERTEX_SHADER)
     {
         shaderType_ = "VERTEX SHADER"; 
     }
-    if (m_shaderType == BANE_FRAG_SHADER)
+    if (m_shaderType == EROS_FRAG_SHADER)
     {
         shaderType_ = "FRAGMENT SHADER";
     }
@@ -36,7 +37,7 @@ bool SubShader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetShaderInfoLog(subShaderProgram, 512, NULL, compileOutput);
-        qDebug() << shaderType_ << " COMPILATION FAILED\n" << (char *)compileOutput;
+        //debugLog(QString(shaderType_) + QString(" COMPILATION FAILED\n") + QString((char *)compileOutput));
         return false;
     }
     
@@ -80,6 +81,8 @@ void Shader::bind()
     {
         glAttachShader(shaderProgram, m_shaderList[i].subShaderProgram);
     }
+    
+    debugLog("Shader bound");
 }
 
 bool Shader::compile()
@@ -91,8 +94,8 @@ bool Shader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetProgramInfoLog(shaderProgram, 512, NULL, compileOutput);
-        qDebug() << "MAINSHADER LINK FAILED";
-        qDebug() << compileOutput;
+        debugLog("MAINSHADER LINK FAILED");
+        debugLog(compileOutput);
         
         for (int i = 0; i < m_shaderList.size(); ++i)
         {
@@ -102,7 +105,7 @@ bool Shader::compile()
         return false;
     }
     
-    qDebug() << "Main Shader linkage success";
+    debugLog(QString("Main Shader linkage success"));
     
     // After compilation was successful, detach 
     for (int i = 0; i < m_shaderList.size(); ++i)

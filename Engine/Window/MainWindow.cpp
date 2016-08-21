@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include "OpenGLRenderer.h"
+#include "Engine/Renderer/OpenGLRenderer.h"
 #include "MainWindow.h"
 #include "Util.h"
 #include <cassert>
