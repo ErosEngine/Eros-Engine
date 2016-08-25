@@ -4,7 +4,7 @@ CONFIG -= app_bundle console
 
 QT += core gui widgets network opengl
 
-LIBS += -L$$PWD/ExtLibs/libs/ -lglew32 -lSDL2 -lSDL2main -lSDL2test -lopengl32
+LIBS += -L$$PWD/ExtLibs/libs/ -lglew32 -lSDL2 -lSDL2main -lSDL2test -lopengl32 -llibfreetype-6
 
 INCLUDEPATH += $$PWD/ExtLibs/include
 DEPENDPATH += $$PWD/ExtLibs/include
@@ -18,7 +18,11 @@ SOURCES += main.cpp \
     Engine/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
     Engine/Renderer/OpenGLRenderer.cpp \
-    Engine/Geometry/Texture.cpp
+    Engine/Geometry/Texture.cpp \
+    Engine/Renderer/FontRenderer.cpp \
+    Engine/Geometry/Shape.cpp \
+    Engine/Util/BTextStream.cpp \
+    Engine/Util/EDebugStream.cpp
     
 
 HEADERS += \
@@ -28,13 +32,17 @@ HEADERS += \
     Engine/FileSystem/Resource.h \
     Engine/Geometry/Primitive.h \
     Engine/Renderer/OpenGLRenderer.h \
-    Engine/Window/Util.h \
+    Engine/Util/Util.h \
     Engine/Editor/MainWindow_Qt.h \
     Engine/Window/OpeningDialog.h \
     Engine/Editor/OpenGLViewPort.h \
     Engine/FileSystem/stb_image.h \
     Engine/Geometry/Texture.h \
-    Engine/FileSystem/stb_font.h
+    Engine/Window/Input.h \
+    Engine/Renderer/FontRenderer.h \
+    Engine/Geometry/Shape.h \
+    Engine/Util/BTextStream.h \
+    Engine/Util/EDebugStream.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \

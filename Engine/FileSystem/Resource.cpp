@@ -24,7 +24,7 @@ void Resource::openFile(const char *fileName, const fileType &file_type)
     if (m_stream.is_open())
     {
         while (m_stream.good())
-        {        
+        {
             std::string temp;
             std::getline(m_stream, temp);
             this->m_data.append(temp + "\n");
@@ -44,9 +44,13 @@ void Resource::closeFile()
     }
 }
 
-const char *Resource::getData() const
+const char *Resource::getDataConst() const
 {
     return m_data.c_str();
 }
 
+char *Resource::getData() const
+{
+    return strdup(m_data.c_str());
+}
 

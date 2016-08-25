@@ -1,8 +1,8 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef INPUT_H
+#define INPUT_H
 
 #include <SDL_events.h>
-#include "Engine/Editor/MainWindow_Qt.h"
+
 
 enum KeyCode
 {
@@ -71,19 +71,5 @@ inline bool getMouseButtonDown(const MouseButton &pbutton)
     return false;
 }
 
-inline void debugLog(const char *string)
-{
-    MainWindow_Qt::getInstance()->sendDebugString(string);
-}
 
-inline void debugLog(QString &string)
-{
-    MainWindow_Qt::getInstance()->sendDebugString(string);
-}
-
-inline void printGLError()
-{
-    //MainWindow_Qt::getInstance()->sendDebugString((GLenum)glGetError());
-}
-
-#endif // UTIL_H
+#endif // INPUT_H

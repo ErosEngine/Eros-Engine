@@ -27,6 +27,7 @@ private:
     
     SDL_Window *m_window;
     GameState m_state;
+    
 };
 
 

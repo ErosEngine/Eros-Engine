@@ -26,7 +26,8 @@ public:
     
     void openFile(const char *fileName, const fileType &file_type = fileType::TEXT);
     void closeFile();
-    const char *getData() const;
+    const char *getDataConst() const;
+    char *getData() const;
     
 private:
     

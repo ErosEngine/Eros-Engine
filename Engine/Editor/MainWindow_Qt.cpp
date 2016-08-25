@@ -19,7 +19,7 @@ MainWindow_Qt::~MainWindow_Qt()
 
 void MainWindow_Qt::sendDebugString(QString &string)
 {
-    ui->debugOutput->append(string + "\n");
+    ui->debugOutput->append(string);
 }
 
 void MainWindow_Qt::sendDebugString(const char *string)
@@ -60,7 +60,8 @@ void MainWindow_Qt::sendDebugString(GLenum &errorCode)
             errorMessage += "no error";
         break;
         default:
-            errorMessage += "Unknown error, error code: " + QString((int)errorCode);
+            errorMessage += "Unknown error, error code: " + 
+                    QString::fromStdString(std::to_string((int)errorCode));
         break;
     }
     
@@ -71,7 +72,5 @@ MainWindow_Qt *MainWindow_Qt::m_singleton = 0;
 
 MainWindow_Qt *MainWindow_Qt::getInstance()
 {
-    if (!m_singleton)
-        m_singleton = new MainWindow_Qt();
     return m_singleton;
 }

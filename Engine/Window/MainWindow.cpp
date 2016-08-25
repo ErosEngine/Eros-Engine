@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include "Engine/Renderer/OpenGLRenderer.h"
 #include "MainWindow.h"
-#include "Util.h"
+#include "Engine/Util/Util.h"
 #include <cassert>
 
 
@@ -15,7 +15,7 @@ void MainWindow_SDL::start()
 {
     m_window = SDL_CreateWindow
     (
-        "Bane Engine",
+        "Eros Engine",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
         900, 600, SDL_WINDOW_OPENGL

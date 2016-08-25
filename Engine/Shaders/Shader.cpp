@@ -1,7 +1,7 @@
 #include "Shader.h"
 #include <string>
 #include "Engine/FileSystem/Resource.h"
-#include "Engine/Window/Util.h"
+#include "Engine/Util/Util.h"
 
 
 void SubShader::bind()
@@ -10,8 +10,6 @@ void SubShader::bind()
         subShaderProgram = glCreateShader(GL_VERTEX_SHADER);
     else if (m_shaderType == EROS_FRAG_SHADER)
         subShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
-    else
-        debugLog("ERROR, SHADERTYPE NOT RECOGNIZED");
     
     const GLchar *temp_ = data.c_str();
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
@@ -37,7 +35,6 @@ bool SubShader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetShaderInfoLog(subShaderProgram, 512, NULL, compileOutput);
-        //debugLog(QString(shaderType_) + QString(" COMPILATION FAILED\n") + QString((char *)compileOutput));
         return false;
     }
     
@@ -52,7 +49,7 @@ SubShader loadShaderFromFile(const char *_fileName, const short &shaderType)
 {
     Resource resource(_fileName);
     SubShader returnShader(shaderType);
-    returnShader.data = resource.getData();
+    returnShader.data = resource.getDataConst();
     return returnShader;
 }
 
@@ -82,7 +79,6 @@ void Shader::bind()
         glAttachShader(shaderProgram, m_shaderList[i].subShaderProgram);
     }
     
-    debugLog("Shader bound");
 }
 
 bool Shader::compile()
@@ -94,8 +90,6 @@ bool Shader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetProgramInfoLog(shaderProgram, 512, NULL, compileOutput);
-        debugLog("MAINSHADER LINK FAILED");
-        debugLog(compileOutput);
         
         for (int i = 0; i < m_shaderList.size(); ++i)
         {
@@ -105,7 +99,6 @@ bool Shader::compile()
         return false;
     }
     
-    debugLog(QString("Main Shader linkage success"));
     
     // After compilation was successful, detach 
     for (int i = 0; i < m_shaderList.size(); ++i)

@@ -2,8 +2,9 @@
 #define COORDINATES_H
 
 #include <SDL_opengl.h>
+#include <glm/glm.hpp>
 #include <cmath>
-#include <QVector3D>
+#include <QMatrix4x4>
 
 struct Vector4
 {
@@ -16,11 +17,7 @@ struct Vector4
         x(_x), y(_y), z(_z), w(_w){}
     GLfloat length()
     {
-        GLfloat _x = x;
-        GLfloat _y = y;
-        GLfloat _z = z;
-        GLfloat _w = w;
-        return (GLfloat)sqrt(_x * _x * _y * _y * _z * _z * _w * _w);
+        return (GLfloat)sqrt(x * x * y * y * z * z * w * w);
     }
     Vector4 normalized()
     {
@@ -33,13 +30,6 @@ struct Vector4
             this->w / tempLength
         );
     }
-    void operator *= (Vector4 &right)
-    {
-        this->x *= right.x;
-        this->y *= right.y;
-        this->z *= right.z;
-        this->w *= right.w;        
-    }
 };
 inline bool operator == (const Vector4 &right, const Vector4 &left)
 {
@@ -48,20 +38,6 @@ inline bool operator == (const Vector4 &right, const Vector4 &left)
 inline bool operator != (const Vector4 &right, const Vector4 &left)
 {
     return !(right == left);
-}
-inline Vector4 operator * (Vector4 &left, Vector4 &right)
-{
-    return Vector4
-    (
-        right.x * left.x,
-        right.y * left.y,
-        right.z * left.z,
-        right.w * left.w
-    );
-}
-inline void operator *= (Vector4 &left, Vector4 &right)
-{
-    left = right * left;
 }
 
 struct Vector3
@@ -76,10 +52,7 @@ struct Vector3
     }
     GLfloat length()
     {
-        GLfloat _x = x;
-        GLfloat _y = y;
-        GLfloat _z = z;
-        return (GLfloat)sqrt(_x * _x * _y * _y * _z * _z);
+        return (GLfloat)sqrt(x * x * y * y * z * z);
     }
     Vector3 normalized()
     {
@@ -113,9 +86,7 @@ struct Vector2
     }
     GLfloat length()
     {
-        GLfloat _x = x;
-        GLfloat _y = y;
-        return (GLfloat)sqrt(_x * _x * _y * _y);
+        return (GLfloat)sqrt(x * x * y * y);
     }
     Vector2 normalized()
     {
@@ -136,9 +107,120 @@ inline bool operator != (const Vector2 &right, const Vector2 &left)
     return !(right == left);
 }
 
-// Will most likely just use glm anyway
-struct Matrix4
+inline Vector4 operator * (Vector4 &left, Vector4 &right)
 {
-};
+    return Vector4
+    (
+        right.x * left.x,
+        right.y * left.y,
+        right.z * left.z,
+        right.w * left.w
+    );
+}
+inline Vector3 operator * (Vector3 &left, Vector3 &right)
+{
+    return Vector3
+    (
+        right.x * left.x,
+        right.y * left.y,
+        right.z * left.z
+    );
+}
+inline Vector2 operator * (Vector2 &left, Vector2 &right)
+{
+    return Vector2
+    (
+        right.x * left.x,
+        right.y * left.y
+    );
+}
+inline Vector4 operator * (Vector4 &left, Vector3 &right)
+{
+    return Vector4
+    (
+        right.x * left.x,
+        right.y * left.y,
+        right.z * left.z,
+        left.w
+    );
+}
+inline Vector4 operator * (Vector4 &left, Vector2 &right)
+{
+    return Vector4
+    (
+        left.x * right.x,
+        left.y * right.y,
+        left.z,
+        left.w
+    );
+}
+inline Vector3 operator * (Vector3 &left, Vector4 &right)
+{
+    return Vector3
+    (
+        left.x * right.x,
+        left.y * right.y,
+        left.z * right.z
+    );
+}
+inline Vector3 operator * (Vector3 &left, Vector2 &right)
+{
+    return Vector3
+    (
+        left.x * right.x,
+        left.y * right.y,
+        left.z
+    );
+}
+inline Vector2 operator * (Vector2 &left, Vector4 &right)
+{
+    return Vector2
+    (
+        left.x * right.x,
+        left.y * right.y
+    );
+}
+inline Vector2 operator * (Vector2 &left, Vector3 &right)
+{
+    return Vector2
+    (
+        left.x * right.x,
+        left.y * right.y
+    );
+}
+inline bool operator == (Vector2 &left, Vector4 &right)
+{
+    return (left.x == right.x && left.y == right.y);
+}
+inline bool operator != (Vector2 &left, Vector4 &right)
+{
+    return !(left == right);
+}
+inline bool operator == (Vector2 &left, Vector3 &right)
+{
+    return (left.x == right.x && left.y == right.y);
+}
+inline bool operator != (Vector2 &left, Vector3 &right)
+{
+    return !(left == right);
+}
+inline bool operator == (Vector3 &left, Vector4 &right)
+{
+    return (left.x == right.x && left.y == right.y && left.z == right.z);
+}
+inline bool operator != (Vector3 &left, Vector4 &right)
+{
+    return !(left == right);
+}
+inline bool operator == (Vector3 &left, Vector2 &right)
+{
+    return (left.x == right.x && left.y == right.y);
+}
+inline bool operator != (Vector3 &left, Vector2 &right)
+{
+    return !(left == right);
+}
+
+
 
 #endif // COORDINATES_H

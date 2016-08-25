@@ -19,33 +19,7 @@
     }
 */
 
-
-Texture::Texture()
+void Texture::setBuffer(ubyte *byteArr)
 {
-    // Nothing for default constructor
-}
-
-Texture::Texture(const char *fileName)
-{
-    loadFile(fileName);
-}
-
-ubyte *Texture::getPixelPtr()
-{
-    return m_pxlPtr;
-}
-
-int Texture::width()
-{
-    return m_width;
-}
-
-int Texture::height()
-{
-    return m_height;
-}
-
-void Texture::loadFile(const char *fileName)
-{
-    m_pxlPtr = stbi_load(fileName, &m_width, &m_height, &m_bpp, 3);
+    this->m_bitmap = byteArr;
 }

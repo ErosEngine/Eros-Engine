@@ -1,7 +1,7 @@
 #include "Engine/Window/OpeningDialog.h"
 #include "Engine/Window/MainWindow.h"
 #include "Engine/Editor/MainWindow_Qt.h"
-#include "Engine/Window/Util.h"
+#include "Engine/Util/Util.h"
 #include <QApplication>
 
 
@@ -16,15 +16,19 @@ int main(int argc, char **argv)
     // Once the selector is finished    
     if (d.returnedType == WindowType::WINDOW_SDL)
     {
+        Priv::isEditor = false;
         MainWindow_SDL w;
         w.start();
+        delete Priv::stream;
     }
     if (d.returnedType == WindowType::WINDOW_QT)
     {
+        Priv::isEditor = true;
         MainWindow_Qt w;
         w.show();
-        return a.exec();
+        a.exec();
+        delete Priv::stream;
     }
     
-    return a.exec();    
+    return 0;
 }

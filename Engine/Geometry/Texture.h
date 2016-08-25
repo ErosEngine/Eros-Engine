@@ -10,19 +10,17 @@ class Texture
 {
 public:
     
-    Texture();
-    Texture(const char *fileName);
-
-    // Returns an unsigned byte
-    ubyte *getPixelPtr();
+    void setBuffer(ubyte *byteArr);
+    void setWidth(int newWidth);
+    void setHeight(int newHeight);
     
     int width();
     int height();
-    void loadFile(const char *fileName);
+    ubyte *texPtr();
     
 private:
-    ubyte *m_pxlPtr;
-    int m_width, m_height, m_bpp;
+    
+    ubyte *m_bitmap;
 };
 
 #endif // TEXTURE_H

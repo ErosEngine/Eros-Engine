@@ -1,9 +1,12 @@
 #include "OpenGLViewPort.h"
-#include "Engine/Window/Util.h"
+#include "Engine/Util/Util.h"
+
+#define PARENT (MainWindow_Qt *)parentWidget()
 
 
 OpenGLViewPort::OpenGLViewPort(QWidget *parent) : QOpenGLWidget(parent)
 {
+    
 }
 
 OpenGLViewPort::~OpenGLViewPort()
@@ -17,7 +20,7 @@ void OpenGLViewPort::initializeGL()
     GLenum GlResult = glewInit();
     if (GlResult != GLEW_OK)
     {
-        debugLog("OpenGL failed to initialize");
+        
     }
     else if (GlResult == GLEW_OK)
     {
