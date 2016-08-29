@@ -96,6 +96,11 @@ void BTextStream::insert(unsigned short s)
 
 void BTextStream::onInsert() { /* ... */ }
 
+void BTextStream::freeData()
+{
+    m_data = ""; // free it!
+}
+
 BTextStream &operator <<(BTextStream &bs, const char *str)
 {
     bs.insert(str);

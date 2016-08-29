@@ -30,6 +30,8 @@ public:
     
     virtual void onInsert();
     
+    void freeData();
+    
     QString m_data;
     
 protected:

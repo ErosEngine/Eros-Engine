@@ -20,11 +20,10 @@ void OpenGLViewPort::initializeGL()
     GLenum GlResult = glewInit();
     if (GlResult != GLEW_OK)
     {
-        
     }
     else if (GlResult == GLEW_OK)
-    {   // Add null terminator, because c++
-        //eDebug() << "OpenGL has initialized, Current version number ";// << glGetString(GL_VERSION);
+    {
+        eDebug() << "OpenGL has initialized, Current version number " << glGetString(GL_VERSION) << endl;
     }
     m_renderer = new OpenGLRenderer();
     

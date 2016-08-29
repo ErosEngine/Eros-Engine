@@ -12,7 +12,6 @@ EDebugStream::EDebugStream(bool isEditor) : BTextStream() // Default constructor
 
 void EDebugStream::onInsert()
 {
-    qDebug() << this->m_data;
     SENDDEBUG();
 }
 
@@ -22,7 +21,7 @@ EDebugStream *EDebugStream::getInstance()
 {
     if (m_instance == nullptr)
     {
-        m_instance = new EDebugStream(true); // fail if "this" isn't initialized
+        m_instance = new EDebugStream(true);
     }
     return m_instance;
 }

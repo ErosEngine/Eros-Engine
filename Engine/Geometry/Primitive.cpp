@@ -12,11 +12,11 @@ void Primitive::bind()
     fragShader.bind();
     if (vertShader.compile())
     {
-        eDebug() << "Vertex shader compiled";
+        eDebug() << "Vertex shader compiled" << endl;
     }
     if (fragShader.compile())
     {
-        eDebug() << "fragment shader compiled";
+        eDebug() << "fragment shader compiled" << endl;
     }
     
     glGenVertexArrays(1, &m_vaoId);
@@ -39,7 +39,7 @@ void Primitive::bind()
     mainShader.bind();
     if (mainShader.compile())
     {
-        eDebug() << "No shader compilation errors";
+        eDebug() << "No shader compilation errors" << endl;
     }
     
 }

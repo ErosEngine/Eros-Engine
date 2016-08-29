@@ -6,18 +6,27 @@
 #include "Engine/Renderer/FontRenderer.h"
 #include "Engine/Util/EDebugStream.h"
 
-#define eDebug() (*EDebug())
-#define endL "\n"
+#define eDebug() (*Util::EDebug())
+#define endl Util::freeData();
 
-inline EDebugStream *EDebug()
+namespace Util
 {
-    return EDebugStream::getInstance();
-}
-
-template<typename T>
-inline int eros_arraySize(T *arr) 
-{ 
-    return sizeof(arr / sizeof(T)); 
+    inline EDebugStream *EDebug()
+    {
+        return EDebugStream::getInstance();
+    }
+    
+    template<typename T>
+    inline int eros_arraySize(T *arr) 
+    {
+        return sizeof(arr) / sizeof(T); 
+    }
+    
+    inline const char *freeData() // End line and free data
+    {
+        EDebug()->freeData();
+        return "\n";
+    }
 }
 
 #endif // UTIL_H
