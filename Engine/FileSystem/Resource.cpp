@@ -1,4 +1,5 @@
 #include "Resource.h"
+#include "Engine/Util/Util.h"
 
 
 Resource::Resource()
@@ -32,7 +33,7 @@ void Resource::openFile(const char *fileName, const fileType &file_type)
     }
     else
     {
-        qDebug() << "FAILED TO OPEN SPECIFIED FILE";
+        eDebug() << "FAILED TO OPEN SPECIFIED FILE";
     }
 }
 

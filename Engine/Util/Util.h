@@ -7,19 +7,17 @@
 #include "Engine/Util/EDebugStream.h"
 
 #define eDebug() (*EDebug())
+#define endL "\n"
 
-namespace Priv 
-{ 
-    static bool isEditor;
-    static EDebugStream *stream;
-}
-
-inline static EDebugStream *EDebug()
+inline EDebugStream *EDebug()
 {
-    if (!Priv::stream) // if the stream hasn't initialized yet
-        Priv::stream = new EDebugStream(Priv::isEditor); // Alloc some memory
-    return Priv::stream;
+    return EDebugStream::getInstance();
 }
 
+template<typename T>
+inline int eros_arraySize(T *arr) 
+{ 
+    return sizeof(arr / sizeof(T)); 
+}
 
 #endif // UTIL_H

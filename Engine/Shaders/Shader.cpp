@@ -1,5 +1,5 @@
 #include "Shader.h"
-#include <string>
+#include <iostream>
 #include "Engine/FileSystem/Resource.h"
 #include "Engine/Util/Util.h"
 
@@ -114,13 +114,13 @@ void Shader::use()
 void Shader::setUniformV4f(const char *variableName, const Vector4 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);    
+    glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);
 }
 
 void Shader::setUniformV3f(const char *variableName, const Vector3 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform3f(uniformLoc, data.x, data.y, data.z);    
+    glUniform3f(uniformLoc, data.x, data.y, data.z);
 }
 
 void Shader::setUniformV2f(const char *variableName, const Vector2 &data)

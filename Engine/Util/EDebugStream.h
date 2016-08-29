@@ -6,16 +6,18 @@
 
 
 class EDebugStream : public BTextStream
-{
-    friend class BTextStream;
-    
+{    
 public:
     
     explicit EDebugStream(bool isEditor);
     
     void onInsert() override;
     
+    static EDebugStream *getInstance();
+    
 private:
+    
+    static EDebugStream *m_instance;
     
     bool m_isEditor;
 

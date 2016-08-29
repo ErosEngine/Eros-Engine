@@ -16,18 +16,15 @@ int main(int argc, char **argv)
     // Once the selector is finished    
     if (d.returnedType == WindowType::WINDOW_SDL)
     {
-        Priv::isEditor = false;
         MainWindow_SDL w;
         w.start();
-        delete Priv::stream;
+        return 0;
     }
     if (d.returnedType == WindowType::WINDOW_QT)
     {
-        Priv::isEditor = true;
         MainWindow_Qt w;
         w.show();
-        a.exec();
-        delete Priv::stream;
+        return a.exec();
     }
     
     return 0;

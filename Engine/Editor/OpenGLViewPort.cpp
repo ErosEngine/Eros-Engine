@@ -23,8 +23,8 @@ void OpenGLViewPort::initializeGL()
         
     }
     else if (GlResult == GLEW_OK)
-    {
-        qDebug() << "OpenGL has initialized, Current version number " << glGetString(GL_VERSION);
+    {   // Add null terminator, because c++
+        //eDebug() << "OpenGL has initialized, Current version number ";// << glGetString(GL_VERSION);
     }
     m_renderer = new OpenGLRenderer();
     

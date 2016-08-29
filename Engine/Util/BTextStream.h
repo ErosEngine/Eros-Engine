@@ -30,9 +30,9 @@ public:
     
     virtual void onInsert();
     
-protected:
+    QString m_data;
     
-    std::string m_data;
+protected:
     
 };
 
