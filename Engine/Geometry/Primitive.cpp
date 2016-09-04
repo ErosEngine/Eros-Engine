@@ -1,5 +1,6 @@
 #include "Primitive.h"
 #include "Engine/Util/Util.h"
+#include "Coordinates.h"
 
 
 Primitive::Primitive()
@@ -14,11 +15,11 @@ void Primitive::bind()
     fragShader.bind();
     if (vertShader.compile())
     {
-        eDebug() << "Vertex shader compiled" << endl;
+        qDebug() << "Vertex shader compiled" << endl;
     }
     if (fragShader.compile())
     {
-        eDebug() << "fragment shader compiled" << endl;
+        qDebug() << "fragment shader compiled" << endl;
     }
     
     glGenVertexArrays(1, &m_vaoId);
@@ -40,7 +41,7 @@ void Primitive::bind()
     mainShader.bind();
     if (mainShader.compile())
     {
-        eDebug() << "No shader compilation errors" << endl;
+        qDebug() << "No shader compilation errors" << endl;
     }
     GLfloat xPosition = 1.0f;
     m_matrix.translate(xPosition, 0.0f, 0.0f);
@@ -50,7 +51,10 @@ void Primitive::draw()
 {
     m_time++;
     GLfloat xPosition = sinf((float)m_time / 100.0f);
+    GLfloat rotation = xPosition * 3;
     m_matrix.translate(xPosition, 0.0f, 0.0f); 
+    m_matrix.rotate(rotation, Matrix4x4::RotDir::ZAxis);
+    m_matrix.rotate(rotation, Matrix4x4::RotDir::XAxis);
     glBindVertexArray(m_vaoId);
     mainShader.use();
     mainShader.setUniformM44("translation", m_matrix);

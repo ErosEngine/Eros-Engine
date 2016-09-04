@@ -23,7 +23,7 @@ void OpenGLViewPort::initializeGL()
     }
     else if (GlResult == GLEW_OK)
     {
-        eDebug() << "OpenGL has initialized, Current version number " << glGetString(GL_VERSION) << endl;
+        qDebug() << "OpenGL has initialized, Current version number " << glGetString(GL_VERSION) << endl;
     }
     m_renderer = new OpenGLRenderer();
     
@@ -35,6 +35,9 @@ void OpenGLViewPort::paintGL()
 {
     glPushMatrix();
     m_renderer->DuringGameRender();
+    
+    
+    
     glPopMatrix();
 }
 

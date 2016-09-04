@@ -33,7 +33,7 @@ void Resource::openFile(const char *fileName, const fileType &file_type)
     }
     else
     {
-        eDebug() << "FAILED TO OPEN SPECIFIED FILE";
+        qDebug() << "FAILED TO OPEN SPECIFIED FILE";
     }
 }
 
