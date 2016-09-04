@@ -6,7 +6,7 @@
 
 
 class BTextStream
-{
+{    
 public:
     
     BTextStream();
@@ -28,13 +28,14 @@ public:
     void insert(const unsigned char *str);
     void insert(unsigned short s);
     
-    virtual void onInsert();
+    const char *freeData();
     
-    void freeData();
-    
-    QString m_data;
+    QString data;
     
 protected:
+    
+    virtual void onInsert();
+    virtual const char *onFree();
     
 };
 
@@ -50,5 +51,7 @@ BTextStream &operator << (BTextStream &bs, std::string &str);
 BTextStream &operator << (BTextStream &bs, QString &str);
 BTextStream &operator << (BTextStream &bs, const unsigned char *str);
 BTextStream &operator << (BTextStream &bs, unsigned short s);
+BTextStream &operator << (BTextStream &bs, BTextStream &other);
+
 
 #endif // BTEXTSTREAM_H

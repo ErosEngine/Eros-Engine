@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += c++14 windeployqt
+CONFIG += c++14 windeployqt 
 CONFIG -= app_bundle console
 
 QT += core gui widgets network opengl

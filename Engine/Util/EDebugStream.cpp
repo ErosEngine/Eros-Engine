@@ -1,12 +1,11 @@
 #include "EDebugStream.h"
 #include <QDebug>
 
-#define SENDDEBUG() MainWindow_Qt::getInstance()->sendDebugString(this->m_data)
+#define SENDDEBUG() MainWindow_Qt::getInstance()->queueDebugStr(this->data)
 
 
-EDebugStream::EDebugStream(bool isEditor) : BTextStream() // Default constructor
+EDebugStream::EDebugStream() : BTextStream() // Default constructor
 {
-    this->m_isEditor = isEditor;
     m_instance = this;
 }
 
@@ -21,7 +20,13 @@ EDebugStream *EDebugStream::getInstance()
 {
     if (m_instance == nullptr)
     {
-        m_instance = new EDebugStream(true);
+        m_instance = new EDebugStream();
     }
     return m_instance;
+}
+
+const char *EDebugStream::onFree()
+{
+    this->data.clear();
+    return "\n";
 }

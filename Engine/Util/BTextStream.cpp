@@ -3,102 +3,103 @@
 
 BTextStream::BTextStream()
 {
-    m_data = QString(); // Default constructor
+    data = QString(); // Default constructor
 }
 
 const char *BTextStream::getConstData() const
 {
-    return m_data.toLatin1().constData();
+    return data.toLatin1().constData();
 }
 
 std::string BTextStream::getStringData() const
 {
-    return std::string(m_data.toLatin1().constData());
+    return std::string(data.toLatin1().constData());
 }
 
 QString BTextStream::getQStringData() const
 {
-    return m_data;
+    return data;
 }
 
 void BTextStream::insert(const char *str)
 {
-    m_data += (str);
+    data += (str);
     onInsert();
 }
 
 void BTextStream::insert(char *str)
 {
-    m_data += (str);
+    data += (str);
     onInsert();
 }
 
 void BTextStream::insert(int i)
 {
-    m_data += (QString::fromStdString(std::to_string(i)));
+    data += (QString::fromStdString(std::to_string(i)));
     onInsert();
 }
 
 void BTextStream::insert(float f)
 {
-    m_data += (QString::fromStdString(std::to_string(f)));
+    data += (QString::fromStdString(std::to_string(f)));
     onInsert();
 }
 
 void BTextStream::insert(char c)
 {
-    m_data += (c);
+    data += (c);
     onInsert();
 }
 
 void BTextStream::insert(double d)
 {
-    m_data += (QString::fromStdString(std::to_string(d)));
+    data += (QString::fromStdString(std::to_string(d)));
     onInsert();
 }
 
 
 void BTextStream::insert(unsigned char c)
 {
-    m_data += ((const char *)&c);
+    data += ((const char *)&c);
     onInsert();
 }
 
 void BTextStream::insert(short s)
 {
-    m_data += (QString::fromStdString(std::to_string(s)));    
+    data += (QString::fromStdString(std::to_string(s)));    
     onInsert();
 }
 
 void BTextStream::insert(std::string &str)
 {
-    m_data += (QString::fromStdString(str));
+    data += (QString::fromStdString(str));
     onInsert();
 }
 
 void BTextStream::insert(QString &str)
 {
-    m_data += (str);
+    data += (str);
     onInsert();
 }
 
 void BTextStream::insert(const unsigned char *str)
 {
-    m_data += ((const char *)str);
+    data += ((const char *)str);
     onInsert();
 }
 
 void BTextStream::insert(unsigned short s)
 {
-    m_data += (QString::fromStdString(std::to_string(s)));
+    data += (QString::fromStdString(std::to_string(s)));
     onInsert();
 }
 
-void BTextStream::onInsert() { /* ... */ }
+void BTextStream::onInsert()        { /* .... */ }
+const char *BTextStream::onFree()   { return ""; }
 
-void BTextStream::freeData()
+const char *BTextStream::freeData()
 {
-    m_data = ""; // free it!
+    return onFree();
 }
 
 BTextStream &operator <<(BTextStream &bs, const char *str)
@@ -170,5 +171,11 @@ BTextStream &operator <<(BTextStream &bs, double d)
 BTextStream &operator <<(BTextStream &bs, unsigned short s)
 {
     bs.insert(s);
+    return bs;
+}
+
+BTextStream &operator <<(BTextStream &bs, BTextStream &other)
+{
+    bs.insert(other.data);
     return bs;
 }

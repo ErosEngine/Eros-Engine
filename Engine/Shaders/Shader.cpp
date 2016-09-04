@@ -11,8 +11,18 @@ void SubShader::bind()
     else if (m_shaderType == EROS_FRAG_SHADER)
         subShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
     
-    const GLchar *temp_ = data.c_str();
+    const GLchar *temp_ = m_data.c_str();
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
+}
+
+void SubShader::setData(const string &value)
+{
+    this->m_data = value;
+}
+
+string SubShader::getData() const
+{
+    return m_data;
 }
 
 bool SubShader::compile()
@@ -35,6 +45,7 @@ bool SubShader::compile()
     if (shaderCompOutput == GL_FALSE)
     {
         glGetShaderInfoLog(subShaderProgram, 512, NULL, compileOutput);
+        qDebug() << compileOutput << endl;
         return false;
     }
     
@@ -49,7 +60,7 @@ SubShader loadShaderFromFile(const char *_fileName, const short &shaderType)
 {
     Resource resource(_fileName);
     SubShader returnShader(shaderType);
-    returnShader.data = resource.getDataConst();
+    returnShader.setData(std::string(resource.getDataConst()));
     return returnShader;
 }
 
@@ -69,16 +80,11 @@ Shader::~Shader()
 
 void Shader::addShader(const SubShader &shader)
 {
-    m_shaderList.push_back(shader);
+    glAttachShader(shaderProgram, shader.subShaderProgram);
 }
 
 void Shader::bind()
 {
-    for (int i = 0; i < m_shaderList.size(); ++i)
-    {
-        glAttachShader(shaderProgram, m_shaderList[i].subShaderProgram);
-    }
-    
 }
 
 bool Shader::compile()
@@ -111,21 +117,31 @@ void Shader::use()
     glUseProgram(shaderProgram);
 }
 
-void Shader::setUniformV4f(const char *variableName, const Vector4 &data)
+void Shader::setUniformV4f(const char *variableName, Vector4 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);
 }
 
-void Shader::setUniformV3f(const char *variableName, const Vector3 &data)
+void Shader::setUniformV3f(const char *variableName, Vector3 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniform3f(uniformLoc, data.x, data.y, data.z);
 }
 
-void Shader::setUniformV2f(const char *variableName, const Vector2 &data)
+void Shader::setUniformV2f(const char *variableName, Vector2 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniform2f(uniformLoc, data.x, data.y);
+}
+
+void Shader::setUniformM44(const char *variableName, Matrix4x4 &data)
+{
+    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+    for (int i = 0; i < 16; ++i)
+    {
+        qDebug() << "Matrix:" << data.getValuePtr()[i];
+    }
+    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data.matrix[0][0]);
 }
 

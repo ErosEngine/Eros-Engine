@@ -10,6 +10,7 @@
 #define EROS_VERTEX_SHADER 1
 #define EROS_FRAG_SHADER 2
 
+
 using std::string;
 
 class SubShader
@@ -19,13 +20,17 @@ public:
     
     explicit SubShader(const short &shaderType = 5) : m_shaderType(shaderType) { /* ... */ }
     
-    string data;
     GLuint subShaderProgram;
     
     void bind();
     bool compile();
     
+    string getData() const;
+    void setData(const string &value);
+    
 private:
+    
+    string m_data;
     
     short m_shaderType;
 };
@@ -48,12 +53,10 @@ public:
     bool compile();
     void use();
     
-    void setUniformV4f(const char *variableName, const Vector4 &data);
-    void setUniformV3f(const char *variableName, const Vector3 &data);
-    void setUniformV2f(const char *variableName, const Vector2 &data);
-    
-//  Not fully implemented    
-//  void setUniformMT4(const char *variableName, const Matrix4 &data);
+    void setUniformV4f(const char *variableName, Vector4 &data);
+    void setUniformV3f(const char *variableName, Vector3 &data);
+    void setUniformV2f(const char *variableName, Vector2 &data);
+    void setUniformM44(const char *variableName, Matrix4x4 &data);
 };
 
 #endif // SHADER_H

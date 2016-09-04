@@ -9,17 +9,19 @@ class EDebugStream : public BTextStream
 {    
 public:
     
-    explicit EDebugStream(bool isEditor);
+    EDebugStream();
     
     void onInsert() override;
     
     static EDebugStream *getInstance();
     
+protected:
+    
+    const char *onFree() override;
+    
 private:
     
     static EDebugStream *m_instance;
-    
-    bool m_isEditor;
 
 };
 

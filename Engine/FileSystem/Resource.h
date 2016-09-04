@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <iostream>
 
+
 enum fileType
 {
     TEXT,
@@ -28,6 +29,8 @@ public:
     void closeFile();
     const char *getDataConst() const;
     char *getData() const;
+    
+    
     
 private:
     

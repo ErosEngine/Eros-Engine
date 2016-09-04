@@ -33,7 +33,7 @@ void Resource::openFile(const char *fileName, const fileType &file_type)
     }
     else
     {
-        eDebug() << "FAILED TO OPEN SPECIFIED FILE" << endl;
+        eDebug() << "FAILED TO OPEN SPECIFIED FILE";
     }
 }
 
@@ -54,4 +54,3 @@ char *Resource::getData() const
 {
     return strdup(m_data.c_str());
 }
-

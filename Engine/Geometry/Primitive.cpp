@@ -4,10 +4,12 @@
 
 Primitive::Primitive()
 {
+    m_matrix.setIdentity();
 }
 
 void Primitive::bind()
 {
+    m_time = 0;
     vertShader.bind();
     fragShader.bind();
     if (vertShader.compile())
@@ -33,7 +35,6 @@ void Primitive::bind()
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    
     mainShader.addShader(this->fragShader);
     mainShader.addShader(this->vertShader);
     mainShader.bind();
@@ -41,13 +42,19 @@ void Primitive::bind()
     {
         eDebug() << "No shader compilation errors" << endl;
     }
-    
+    GLfloat xPosition = 1.0f;
+    m_matrix.translate(xPosition, 0.0f, 0.0f);
 }
 
 void Primitive::draw()
 {
+    m_time++;
+    GLfloat xPosition = sinf((float)m_time / 100.0f);
+    m_matrix.translate(xPosition, 0.0f, 0.0f); 
     glBindVertexArray(m_vaoId);
     mainShader.use();
+    mainShader.setUniformM44("translation", m_matrix);
+    qDebug() << "Error code: " << (int)glGetError();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0);
     glBindVertexArray(0);
 }

@@ -17,17 +17,17 @@ MainWindow_Qt::~MainWindow_Qt()
     delete ui;
 }
 
-void MainWindow_Qt::sendDebugString(QString &string)
+void MainWindow_Qt::queueDebugStr(QString &string)
 {
     ui->debugOutput->append(string);
 }
 
-void MainWindow_Qt::sendDebugString(const char *string)
+void MainWindow_Qt::queueDebugStr(const char *string)
 {
-    sendDebugString(QString(string));
+    queueDebugStr(QString(string));
 }
 
-void MainWindow_Qt::sendDebugString(GLenum &errorCode)
+void MainWindow_Qt::queueDebugStr(GLenum &errorCode)
 {
     QString errorMessage = "OPENGL ERROR: ";
     switch (errorCode)
@@ -65,12 +65,20 @@ void MainWindow_Qt::sendDebugString(GLenum &errorCode)
         break;
     }
     
-    sendDebugString(errorMessage);
+    queueDebugStr(errorMessage);
+}
+
+void MainWindow_Qt::freeQueue()
+{
 }
 
 MainWindow_Qt *MainWindow_Qt::m_singleton = 0;
 
 MainWindow_Qt *MainWindow_Qt::getInstance()
 {
+    if (!m_singleton)
+    {
+        m_singleton = new MainWindow_Qt();
+    }
     return m_singleton;
 }

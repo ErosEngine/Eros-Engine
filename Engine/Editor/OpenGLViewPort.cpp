@@ -28,6 +28,7 @@ void OpenGLViewPort::initializeGL()
     m_renderer = new OpenGLRenderer();
     
     m_renderer->PreGameRender();
+    m_renderer->DuringGameRender();
 }
 
 void OpenGLViewPort::paintGL()

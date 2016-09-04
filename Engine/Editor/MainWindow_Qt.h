@@ -8,8 +8,9 @@
 #include <QObject>
 
 
-namespace Ui {
-class MainWindow_Qt;
+namespace Ui 
+{
+    class MainWindow_Qt;
 }
 
 class MainWindow_Qt : public QMainWindow
@@ -20,13 +21,16 @@ public:
     explicit MainWindow_Qt(QWidget *parent = 0);
     ~MainWindow_Qt();
     
-    void sendDebugString(QString &string);
-    void sendDebugString(const char *string);
-    void sendDebugString(GLenum &errorCode);
+    void queueDebugStr(QString &string);
+    void queueDebugStr(const char *string);
+    void queueDebugStr(GLenum &errorCode);
+    void freeQueue();
     
     static MainWindow_Qt *getInstance();
     
 private:
+    
+    std::vector<QString> m_stringArr;
     
     static MainWindow_Qt *m_singleton;
     Ui::MainWindow_Qt *ui;

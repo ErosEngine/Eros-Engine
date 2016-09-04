@@ -45,11 +45,11 @@ void MainWindow_SDL::gameStart()
     GLenum GlResult = glewInit();
     if (GlResult != GLEW_OK)
     {
-        eDebug() << "OpenGL failed to initialize" << endl;
+        eDebug() << "OpenGL failed to initialize";
     }
     else if (GlResult == GLEW_OK)
     {
-        eDebug() << "OpenGL has initialized, Current version: " << glGetString(GL_VERSION) << endl;
+        eDebug() << "OpenGL has initialized, Current version: " << glGetString(GL_VERSION);
     }
     
     gameLoop();
