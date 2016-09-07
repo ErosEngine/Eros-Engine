@@ -5,7 +5,8 @@
 #include <fstream>
 #include <vector>
 #include <QDebug>
-#include "Engine/Geometry/Coordinates.h"
+#include "Engine/OpenGL/Coordinates.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 #define EROS_VERTEX_SHADER 1
 #define EROS_FRAG_SHADER 2
@@ -56,7 +57,10 @@ public:
     void setUniformV4f(const char *variableName, Vector4 &data);
     void setUniformV3f(const char *variableName, Vector3 &data);
     void setUniformV2f(const char *variableName, Vector2 &data);
+    void setUniformInt(const char *variableName, int data);
     void setUniformM44(const char *variableName, Matrix4x4 &data);
+    void setUniformM44(const char *variableName, glm::mat4 &data);
+    
 };
 
 #endif // SHADER_H

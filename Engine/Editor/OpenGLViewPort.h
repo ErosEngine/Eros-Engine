@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 #include <QOpenGLWidget>
+#include <QKeyEvent>
+#include <QMouseEvent>
 #include <QDebug>
 #include "Engine/Renderer/OpenGLRenderer.h"
 
@@ -19,6 +21,11 @@ public:
     void initializeGL() override;
     void paintGL() override;
     void resizeGL(int w, int h) override;
+    
+protected:
+    
+    void keyPressEvent(QKeyEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
     
 private:
     

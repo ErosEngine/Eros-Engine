@@ -18,7 +18,7 @@ void MainWindow_SDL::start()
         "Eros Engine",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        900, 600, SDL_WINDOW_OPENGL
+        1000, 600, SDL_WINDOW_OPENGL
     );
     
     // Force application failure if window is null
@@ -45,11 +45,11 @@ void MainWindow_SDL::gameStart()
     GLenum GlResult = glewInit();
     if (GlResult != GLEW_OK)
     {
-        eDebug() << "OpenGL failed to initialize";
+        qDebug() << "OpenGL failed to initialize";
     }
     else if (GlResult == GLEW_OK)
     {
-        eDebug() << "OpenGL has initialized, Current version: " << glGetString(GL_VERSION);
+        qDebug() << "OpenGL has initialized, Current version: " << glGetString(GL_VERSION);
     }
     
     gameLoop();
@@ -77,6 +77,7 @@ void MainWindow_SDL::gameLoop()
         
         SDL_GL_SwapWindow(m_window);
         glPopMatrix();
+        
     }
     
     renderer.PostGameRender();

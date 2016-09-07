@@ -30,7 +30,7 @@ public:
     void setSize(GLfloat x, GLfloat y, GLfloat z);
     void setSize(Vector3 &size);
     void setScale(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-    void setScale(Vector4 &scale);
+    void setScale(Vector4 &Scale);
     
 private:
     

@@ -1,7 +1,6 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "Engine/Geometry/Coordinates.h"
 
 
 typedef unsigned char ubyte;

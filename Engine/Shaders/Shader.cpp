@@ -135,13 +135,21 @@ void Shader::setUniformV2f(const char *variableName, Vector2 &data)
     glUniform2f(uniformLoc, data.x, data.y);
 }
 
+void Shader::setUniformInt(const char *variableName, int data)
+{
+    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+    glUniform1i(uniformLoc, data);
+}
+
 void Shader::setUniformM44(const char *variableName, Matrix4x4 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    for (int i = 0; i < 16; ++i)
-    {
-        qDebug() << "Matrix:" << data.getValuePtr()[i];
-    }
     glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data.matrix[0][0]);
+}
+
+void Shader::setUniformM44(const char *variableName, glm::mat4 &data)
+{    
+    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data[0][0]);
 }
 

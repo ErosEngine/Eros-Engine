@@ -14,9 +14,9 @@
 #define eDebug() (*EDebug())
 #define endl EDebug()->freeData();
 
+
 inline EDebugStream *EDebug()
 {
-    
     return EDebugStream::getInstance();
 }
 

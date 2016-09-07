@@ -6,7 +6,7 @@ uniform int time;
 
 vec4 getRandColor()
 {
-    return vec4(0.3f, 0.1f, 1.0f, 1.0f);
+    return vec4(sin(time), cos(time), tan(time), 1.0f);
 }
 
 void main()

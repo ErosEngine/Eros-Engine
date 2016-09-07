@@ -35,13 +35,44 @@ void OpenGLViewPort::paintGL()
 {
     glPushMatrix();
     m_renderer->DuringGameRender();
-    
-    
-    
     glPopMatrix();
+    //repaint();
 }
 
 void OpenGLViewPort::resizeGL(int w, int h)
 {
-    
+    repaint();
+}
+
+void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
+{
+    switch (e->key())
+    {
+        case (Qt::Key::Key_W):
+            m_renderer->camera->moveForward();
+        break;
+        case (Qt::Key::Key_A):
+            m_renderer->camera->strafeLeft();
+        break;
+        case (Qt::Key::Key_S):
+            m_renderer->camera->moveBack();
+        break;
+        case (Qt::Key::Key_D):
+            m_renderer->camera->strafeRight();
+        break;
+        case (Qt::Key::Key_E):
+            m_renderer->camera->moveUp();
+        break;
+        case (Qt::Key::Key_Q):
+            m_renderer->camera->moveDownward();
+        break;
+    }
+    repaint();
+}
+
+void OpenGLViewPort::mouseMoveEvent(QMouseEvent *e)
+{
+    setFocus();
+    m_renderer->camera->mouseUpdate((float)e->x(), (float)e->y());
+    repaint();
 }

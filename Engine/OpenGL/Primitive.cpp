@@ -1,11 +1,11 @@
 #include "Primitive.h"
 #include "Engine/Util/Util.h"
 #include "Coordinates.h"
-
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 Primitive::Primitive()
 {
-    m_matrix.setIdentity();
 }
 
 void Primitive::bind()
@@ -43,22 +43,16 @@ void Primitive::bind()
     {
         qDebug() << "No shader compilation errors" << endl;
     }
-    GLfloat xPosition = 1.0f;
-    m_matrix.translate(xPosition, 0.0f, 0.0f);
 }
 
 void Primitive::draw()
 {
     m_time++;
-    GLfloat xPosition = sinf((float)m_time / 100.0f);
-    GLfloat rotation = xPosition * 3;
-    m_matrix.translate(xPosition, 0.0f, 0.0f); 
-    m_matrix.rotate(rotation, Matrix4x4::RotDir::ZAxis);
-    m_matrix.rotate(rotation, Matrix4x4::RotDir::XAxis);
+    float xPos = sinf((float)m_time / 1000.0f);
     glBindVertexArray(m_vaoId);
     mainShader.use();
-    mainShader.setUniformM44("translation", m_matrix);
-    qDebug() << "Error code: " << (int)glGetError();
+    mainShader.setUniformM44("translation", Translate(xPos));
+    mainShader.setUniformInt("time", m_time / 1000);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0);
     glBindVertexArray(0);
 }

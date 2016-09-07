@@ -3,7 +3,6 @@
 
 #include <GL/glew.h>
 #include "Engine/Shaders/Shader.h"
-#include "Coordinates.h"
 
 class Primitive
 {
@@ -34,7 +33,6 @@ private:
     
     GLuint m_vboId, m_eboId, m_vaoId;
     int m_time;
-    Matrix4x4 m_matrix;
     
 };
 

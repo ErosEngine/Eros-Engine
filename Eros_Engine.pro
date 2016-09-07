@@ -13,36 +13,38 @@ SOURCES += main.cpp \
     Engine/Window/MainWindow.cpp \
     Engine/Shaders/Shader.cpp \
     Engine/FileSystem/Resource.cpp \
-    Engine/Geometry/Primitive.cpp \
+    Engine/OpenGL/Primitive.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
     Engine/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
     Engine/Renderer/OpenGLRenderer.cpp \
-    Engine/Geometry/Texture.cpp \
+    Engine/OpenGL/Texture.cpp \
     Engine/Renderer/FontRenderer.cpp \
-    Engine/Geometry/Shape.cpp \
+    Engine/OpenGL/Shape.cpp \
     Engine/Util/BTextStream.cpp \
-    Engine/Util/EDebugStream.cpp
+    Engine/Util/EDebugStream.cpp \
+    Engine/OpenGL/Camera.cpp
     
 
 HEADERS += \
     Engine/Window/MainWindow.h \
     Engine/Shaders/Shader.h \
-    Engine/Geometry/Coordinates.h \
+    Engine/OpenGL/Coordinates.h \
     Engine/FileSystem/Resource.h \
-    Engine/Geometry/Primitive.h \
+    Engine/OpenGL/Primitive.h \
     Engine/Renderer/OpenGLRenderer.h \
     Engine/Util/Util.h \
     Engine/Editor/MainWindow_Qt.h \
     Engine/Window/OpeningDialog.h \
     Engine/Editor/OpenGLViewPort.h \
     Engine/FileSystem/stb_image.h \
-    Engine/Geometry/Texture.h \
+    Engine/OpenGL/Texture.h \
     Engine/Window/Input.h \
     Engine/Renderer/FontRenderer.h \
-    Engine/Geometry/Shape.h \
+    Engine/OpenGL/Shape.h \
     Engine/Util/BTextStream.h \
-    Engine/Util/EDebugStream.h
+    Engine/Util/EDebugStream.h \
+    Engine/OpenGL/Camera.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \
