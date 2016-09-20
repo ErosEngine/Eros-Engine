@@ -47,12 +47,12 @@ void Primitive::bind()
 
 void Primitive::draw()
 {
-    m_time++;
+    m_time += 1.0f;
     float xPos = sinf((float)m_time / 1000.0f);
     glBindVertexArray(m_vaoId);
     mainShader.use();
-    mainShader.setUniformM44("translation", Translate(xPos));
-    mainShader.setUniformInt("time", m_time / 1000);
+    mainShader.setUniformM44("translation", Translate(xPos, 0.0f, 0.0f));
+    mainShader.setUniformFloat("time", m_time / 1000.0f);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0);
     glBindVertexArray(0);
 }

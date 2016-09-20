@@ -32,7 +32,7 @@ private:
     };
     
     GLuint m_vboId, m_eboId, m_vaoId;
-    int m_time;
+    float m_time;
     
 };
 

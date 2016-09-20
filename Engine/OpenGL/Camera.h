@@ -10,9 +10,9 @@ class Camera
 public:
     Camera();
     
-    Vector3 position;
-    Vector3 target;
-    Vector3 up;
+    glm::vec3 position;
+    glm::vec3 target;
+    glm::vec3 up;
     GLfloat speed;
     
     glm::mat4 getWorldToViewMatrixGLM();

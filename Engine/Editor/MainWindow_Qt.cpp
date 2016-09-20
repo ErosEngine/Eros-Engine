@@ -17,7 +17,7 @@ MainWindow_Qt::~MainWindow_Qt()
     delete ui;
 }
 
-void MainWindow_Qt::queueDebugStr(QString &string)
+void MainWindow_Qt::queueDebugStr(const QString &string)
 {
     ui->debugOutput->append(string);
 }
@@ -27,7 +27,7 @@ void MainWindow_Qt::queueDebugStr(const char *string)
     queueDebugStr(QString(string));
 }
 
-void MainWindow_Qt::queueDebugStr(GLenum &errorCode)
+void MainWindow_Qt::queueDebugStr(const GLenum &errorCode)
 {
     QString errorMessage = "OPENGL ERROR: ";
     switch (errorCode)

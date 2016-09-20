@@ -2,7 +2,7 @@
 
 out vec4 color;
 
-uniform int time;
+uniform float time;
 
 vec4 getRandColor()
 {

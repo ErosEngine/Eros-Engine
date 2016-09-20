@@ -21,9 +21,9 @@ public:
     explicit MainWindow_Qt(QWidget *parent = 0);
     ~MainWindow_Qt();
     
-    void queueDebugStr(QString &string);
+    void queueDebugStr(const QString &string);
     void queueDebugStr(const char *string);
-    void queueDebugStr(GLenum &errorCode);
+    void queueDebugStr(const GLenum &errorCode);
     void freeQueue();
     
     static MainWindow_Qt *getInstance();

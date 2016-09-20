@@ -1,5 +1,6 @@
 TEMPLATE = app
-CONFIG += c++14 windeployqt 
+CONFIG += c++14
+win32: CONFIG += windeployqt
 CONFIG -= app_bundle console
 
 QT += core gui widgets network opengl
@@ -23,7 +24,8 @@ SOURCES += main.cpp \
     Engine/OpenGL/Shape.cpp \
     Engine/Util/BTextStream.cpp \
     Engine/Util/EDebugStream.cpp \
-    Engine/OpenGL/Camera.cpp
+    Engine/OpenGL/Camera.cpp \
+    Engine/Client/input.cpp
     
 
 HEADERS += \
@@ -39,12 +41,12 @@ HEADERS += \
     Engine/Editor/OpenGLViewPort.h \
     Engine/FileSystem/stb_image.h \
     Engine/OpenGL/Texture.h \
-    Engine/Window/Input.h \
     Engine/Renderer/FontRenderer.h \
     Engine/OpenGL/Shape.h \
     Engine/Util/BTextStream.h \
     Engine/Util/EDebugStream.h \
-    Engine/OpenGL/Camera.h
+    Engine/OpenGL/Camera.h \
+    Engine/Client/input.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \

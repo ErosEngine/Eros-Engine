@@ -28,9 +28,6 @@ struct OpenGLRenderer
         glMatrixMode(GL_MODELVIEW);
         glDisable(GL_LIGHTING);
         glewExperimental = GL_TRUE;
-        camera->position = Vector3(1.0f, 3.0f, -1.0f);
-        camera->target = Vector3(0.0f, 0.0f, 0.0f);
-        camera->up = Vector3(0.0f, 1.0f, 0.0f);
         p->bind();
         perspective = Perspective(60.0f, 1.33f, 0.1f, 100.0f);
     }

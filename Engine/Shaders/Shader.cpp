@@ -117,19 +117,19 @@ void Shader::use()
     glUseProgram(shaderProgram);
 }
 
-void Shader::setUniformV4f(const char *variableName, Vector4 &data)
+void Shader::setUniformV4f(const char *variableName, const Vector4 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);
 }
 
-void Shader::setUniformV3f(const char *variableName, Vector3 &data)
+void Shader::setUniformV3f(const char *variableName, const Vector3 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniform3f(uniformLoc, data.x, data.y, data.z);
 }
 
-void Shader::setUniformV2f(const char *variableName, Vector2 &data)
+void Shader::setUniformV2f(const char *variableName, const Vector2 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniform2f(uniformLoc, data.x, data.y);
@@ -141,13 +141,19 @@ void Shader::setUniformInt(const char *variableName, int data)
     glUniform1i(uniformLoc, data);
 }
 
-void Shader::setUniformM44(const char *variableName, Matrix4x4 &data)
+void Shader::setUniformFloat(const char *variableName, float data)
+{
+    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+    glUniform1f(uniformLoc, data);
+}
+
+void Shader::setUniformM44(const char *variableName, const Matrix4x4 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data.matrix[0][0]);
 }
 
-void Shader::setUniformM44(const char *variableName, glm::mat4 &data)
+void Shader::setUniformM44(const char *variableName, const glm::mat4 &data)
 {    
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
     glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data[0][0]);

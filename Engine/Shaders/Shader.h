@@ -42,7 +42,7 @@ class Shader
 {
     
     std::vector<SubShader> m_shaderList;
-    
+
 public:
     
     Shader();
@@ -54,12 +54,13 @@ public:
     bool compile();
     void use();
     
-    void setUniformV4f(const char *variableName, Vector4 &data);
-    void setUniformV3f(const char *variableName, Vector3 &data);
-    void setUniformV2f(const char *variableName, Vector2 &data);
+    void setUniformV4f(const char *variableName, const Vector4 &data);
+    void setUniformV3f(const char *variableName, const Vector3 &data);
+    void setUniformV2f(const char *variableName, const Vector2 &data);
     void setUniformInt(const char *variableName, int data);
-    void setUniformM44(const char *variableName, Matrix4x4 &data);
-    void setUniformM44(const char *variableName, glm::mat4 &data);
+    void setUniformFloat(const char *variableName, float data);
+    void setUniformM44(const char *variableName, const Matrix4x4 &data);
+    void setUniformM44(const char *variableName, const glm::mat4 &data);
     
 };
 

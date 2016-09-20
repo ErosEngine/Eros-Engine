@@ -49,9 +49,9 @@ void MainWindow_SDL::gameStart()
     }
     else if (GlResult == GLEW_OK)
     {
-        qDebug() << "OpenGL has initialized, Current version: " << glGetString(GL_VERSION);
+        qDebug() << "OpenGL has initialized, Current version: " << QString((const char *)glGetString(GL_VERSION));
     }
-    
+
     gameLoop();
 }
 
@@ -59,25 +59,39 @@ void MainWindow_SDL::gameLoop()
 {
     OpenGLRenderer renderer;
     renderer.PreGameRender();
-    
+
     while (m_state == GameState::RUNNING)
     {
         glPushMatrix();
         renderer.DuringGameRender();
-        
+
         SDL_Event e;
-        
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
             {
                 m_state = GameState::ENDING;
             }
+            if (e.key.keysym.sym == SDLK_w)
+            {
+                renderer.camera->moveForward();
+            }
+            if (e.key.keysym.sym == SDLK_a)
+            {
+                renderer.camera->strafeLeft();
+            }
+            if (e.key.keysym.sym == SDLK_s)
+            {
+                renderer.camera->moveBack();
+            }
+            if (e.key.keysym.sym == SDLK_d)
+            {
+                renderer.camera->strafeRight();
+            }
         }
-        
+
         SDL_GL_SwapWindow(m_window);
         glPopMatrix();
-        
     }
     
     renderer.PostGameRender();

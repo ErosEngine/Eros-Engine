@@ -30,15 +30,16 @@ public:
     {
         if (OpeningDialog->objectName().isEmpty())
             OpeningDialog->setObjectName(QStringLiteral("OpeningDialog"));
-        OpeningDialog->resize(316, 151);
+        OpeningDialog->resize(294, 131);
         buttonBox = new QDialogButtonBox(OpeningDialog);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setGeometry(QRect(-50, 100, 341, 32));
+        buttonBox->setGeometry(QRect(-110, 70, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         comboBox = new QComboBox(OpeningDialog);
         comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(20, 40, 261, 22));
+        comboBox->setGeometry(QRect(20, 30, 261, 22));
+        comboBox->setStyleSheet(QStringLiteral(""));
 
         retranslateUi(OpeningDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), OpeningDialog, SLOT(accept()));
