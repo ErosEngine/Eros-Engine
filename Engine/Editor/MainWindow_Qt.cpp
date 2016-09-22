@@ -1,5 +1,6 @@
 #include "MainWindow_Qt.h"
 #include "ui_MainWindow_Qt.h"
+#include "Engine/Window/MainWindow.h"
 
 
 MainWindow_Qt::MainWindow_Qt(QWidget *parent) :
@@ -81,4 +82,11 @@ MainWindow_Qt *MainWindow_Qt::getInstance()
         m_singleton = new MainWindow_Qt();
     }
     return m_singleton;
+}
+
+void MainWindow_Qt::on_pushButton_released()
+{
+    MainWindow_SDL w;
+    w.start();
+    return;
 }

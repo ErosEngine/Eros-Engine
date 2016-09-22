@@ -19,10 +19,6 @@ Input *Input::getInstance()
 
 void Input::updateKeys()
 {
-    if (m_keys)
-    {
-        delete[] m_keys;
-    }
     SDL_PumpEvents();
     m_keys = (Uint8 *)SDL_GetKeyboardState(NULL);
 }

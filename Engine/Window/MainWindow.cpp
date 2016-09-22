@@ -2,6 +2,7 @@
 #include "Engine/Renderer/OpenGLRenderer.h"
 #include "MainWindow.h"
 #include "Engine/Util/Util.h"
+#include "Engine/Client/input.h"
 #include <cassert>
 
 
@@ -87,6 +88,10 @@ void MainWindow_SDL::gameLoop()
             if (e.key.keysym.sym == SDLK_d)
             {
                 renderer.camera->strafeRight();
+            }
+            if (e.type == SDL_MOUSEMOTION)
+            {
+                renderer.camera->mouseUpdate(e.motion.x, e.motion.y);
             }
         }
 

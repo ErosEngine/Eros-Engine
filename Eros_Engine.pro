@@ -5,7 +5,8 @@ CONFIG -= app_bundle console
 
 QT += core gui widgets network opengl
 
-LIBS += -L$$PWD/ExtLibs/libs/ -lglew32 -lSDL2 -lSDL2main -lSDL2test -lopengl32 -llibfreetype-6
+win32: LIBS += -L$$PWD/ExtLibs/libs/ -lglew32 -lSDL2 -lSDL2main -lSDL2test -lopengl32 -llibfreetype-6
+unix: LIBS += -lGLEW -lSDL2 -lfreetype
 
 INCLUDEPATH += $$PWD/ExtLibs/include
 DEPENDPATH += $$PWD/ExtLibs/include
@@ -55,3 +56,6 @@ DISTFILES += \
 FORMS += \
     Engine/Editor/MainWindow_Qt.ui \
     Engine/Window/OpeningDialog.ui
+
+RESOURCES += \
+    Assets/PlayButton.qrc

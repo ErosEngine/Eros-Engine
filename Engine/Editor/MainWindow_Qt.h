@@ -28,6 +28,9 @@ public:
     
     static MainWindow_Qt *getInstance();
     
+private slots:
+    void on_pushButton_released();
+
 private:
     
     std::vector<QString> m_stringArr;

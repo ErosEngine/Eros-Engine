@@ -19,7 +19,7 @@ public:
     Matrix4x4 getWorldToViewMatrix();
     
     // ALL TRANSFOMATIONS ARE RELATIVE
-    void mouseUpdate(float x, float y);
+    void mouseUpdate(int x, int y);
     void strafeRight();
     void strafeLeft();
     void moveForward();

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Assets">
+        <file>PlayButton.png</file>
+    </qresource>
+</RCC>
