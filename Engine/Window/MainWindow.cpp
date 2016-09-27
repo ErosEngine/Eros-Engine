@@ -81,6 +81,10 @@ void MainWindow_SDL::gameLoop()
             {
                 renderer.camera->strafeLeft();
             }
+            if (e.key.keysym.sym == SDLK_ESCAPE)
+            {
+                m_state = GameState::ENDING;
+            }
             if (e.key.keysym.sym == SDLK_s)
             {
                 renderer.camera->moveBack();

@@ -8,8 +8,8 @@
 #include "Engine/OpenGL/Coordinates.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-#define EROS_VERTEX_SHADER 1
-#define EROS_FRAG_SHADER 2
+#define EROS_VERTEX_SHADER GL_VERTEX_SHADER
+#define EROS_FRAG_SHADER GL_FRAGMENT_SHADER
 
 
 using std::string;
@@ -19,29 +19,24 @@ class SubShader
     
 public:
     
-    explicit SubShader(const short &shaderType = 5) : m_shaderType(shaderType) { /* ... */ }
+    explicit SubShader(const GLenum &shaderType_ = GL_INVALID_ENUM) :
+        shaderType(shaderType_) { /* ... */ }
     
     GLuint subShaderProgram;
     
     void bind();
     bool compile();
     
-    string getData() const;
-    void setData(const string &value);
-    
-private:
-    
-    string m_data;
-    
-    short m_shaderType;
+    string shaderCode;
+    GLenum shaderType;
 };
 
-SubShader loadShaderFromFile(const char *fileName, const short &shaderType);
+SubShader loadShaderFromFile(const char *fileName, const GLenum &shaderType);
 
 class Shader
 {
-    
-    std::vector<SubShader> m_shaderList;
+    typedef std::vector<SubShader> Shaders;
+    Shaders m_shaderList;
 
 public:
     

@@ -36,7 +36,6 @@ void OpenGLViewPort::paintGL()
     glPushMatrix();
     m_renderer->DuringGameRender();
     glPopMatrix();
-    //repaint();
 }
 
 void OpenGLViewPort::resizeGL(int w, int h)
@@ -73,6 +72,6 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
 void OpenGLViewPort::mouseMoveEvent(QMouseEvent *e)
 {
     setFocus();
-    m_renderer->camera->mouseUpdate((float)e->x(), (float)e->y());
+    m_renderer->camera->mouseUpdate(e->x(), e->y());
     repaint();
 }

@@ -6,23 +6,10 @@
 
 void SubShader::bind()
 {
-    if (m_shaderType == EROS_VERTEX_SHADER)
-        subShaderProgram = glCreateShader(GL_VERTEX_SHADER);
-    else if (m_shaderType == EROS_FRAG_SHADER)
-        subShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
+    this->subShaderProgram = glCreateShader(shaderType);
     
-    const GLchar *temp_ = m_data.c_str();
+    const GLchar *temp_ = shaderCode.c_str();
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
-}
-
-void SubShader::setData(const string &value)
-{
-    this->m_data = value;
-}
-
-string SubShader::getData() const
-{
-    return m_data;
 }
 
 bool SubShader::compile()
@@ -31,11 +18,11 @@ bool SubShader::compile()
     GLint shaderCompOutput;
     GLchar compileOutput[512];
     QString shaderType_;
-    if (m_shaderType == EROS_VERTEX_SHADER)
+    if (shaderType == EROS_VERTEX_SHADER)
     {
         shaderType_ = "VERTEX SHADER"; 
     }
-    if (m_shaderType == EROS_FRAG_SHADER)
+    if (shaderType == EROS_FRAG_SHADER)
     {
         shaderType_ = "FRAGMENT SHADER";
     }
@@ -56,11 +43,11 @@ bool SubShader::compile()
 /**************************************************************************/
 
 
-SubShader loadShaderFromFile(const char *_fileName, const short &shaderType)
+SubShader loadShaderFromFile(const char *_fileName, const GLenum &shaderType)
 {
     Resource resource(_fileName);
     SubShader returnShader(shaderType);
-    returnShader.setData(std::string(resource.getDataConst()));
+    returnShader.shaderCode = (resource.getDataConst());
     return returnShader;
 }
 
@@ -80,6 +67,7 @@ Shader::~Shader()
 
 void Shader::addShader(const SubShader &shader)
 {
+    m_shaderList.push_back(shader);
     glAttachShader(shaderProgram, shader.subShaderProgram);
 }
 
@@ -102,13 +90,17 @@ bool Shader::compile()
             glDeleteShader(m_shaderList[i].subShaderProgram);
         }
         glDeleteProgram(shaderProgram);
+        qDebug() << QString((const char *)compileOutput);
         return false;
     }
     
     
     // After compilation was successful, detach 
     for (int i = 0; i < m_shaderList.size(); ++i)
+    {
         glDetachShader(shaderProgram, m_shaderList[i].subShaderProgram);
+        m_shaderList.clear();
+    }
     return true;
 }
 
@@ -150,12 +142,14 @@ void Shader::setUniformFloat(const char *variableName, float data)
 void Shader::setUniformM44(const char *variableName, const Matrix4x4 &data)
 {
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data.matrix[0][0]);
+    glUniformMatrix4fv(uniformLoc, 1, GL_TRUE, &data.matrix[0][0]);
 }
+
+#include <glm/gtc/type_ptr.hpp>
 
 void Shader::setUniformM44(const char *variableName, const glm::mat4 &data)
 {    
     GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data[0][0]);
+    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(data));
 }
 

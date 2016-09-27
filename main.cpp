@@ -2,8 +2,8 @@
 #include "Engine/Window/MainWindow.h"
 #include "Engine/Editor/MainWindow_Qt.h"
 #include "Engine/Util/Util.h"
+#include <linux/tcp.h>
 #include <QApplication>
-
 
 int main(int argc, char **argv)
 {
@@ -13,7 +13,6 @@ int main(int argc, char **argv)
     d.show();
     d.exec();
     
-    // Once the selector is finished    
     if (d.returnedType == WindowType::WINDOW_SDL)
     {
         MainWindow_SDL w;

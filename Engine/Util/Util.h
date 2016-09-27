@@ -1,7 +1,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#define endl "\n"
+#define endl ""
 
 template<typename T>
 inline int eros_arraySize(T *arr)

@@ -10,10 +10,14 @@
 // Just a skeleton renderer at the moment
 struct OpenGLRenderer
 {
+    int windowWidth = 1000;
+    int windowHeight = 600;
+    
     Primitive *p;
     Camera *camera;
     Matrix4x4 perspective;
-    
+    glm::mat4 gPerspective;
+        
     OpenGLRenderer()
     {
         p = new Primitive();
@@ -29,7 +33,11 @@ struct OpenGLRenderer
         glDisable(GL_LIGHTING);
         glewExperimental = GL_TRUE;
         p->bind();
+        camera->updatePerspective(60.0f, 4.0f, 3.0f, 0.1f, 100.0f, 1.33f);
         perspective = Perspective(60.0f, 1.33f, 0.1f, 100.0f);
+        gPerspective = camera->getPerspective();
+        camera->width = (float)windowWidth;
+        camera->height = (float)windowHeight;
     }
     
     void DuringGameRender()
@@ -38,8 +46,8 @@ struct OpenGLRenderer
         glClearColor(0.3f, 0.1f, 0.4f, 1.0f);
         glMatrixMode(GL_PROJECTION);        
         p->draw();
-        p->mainShader.setUniformM44("perspective", perspective);
-        p->mainShader.setUniformM44("modelView", camera->getWorldToViewMatrixGLM());
+        p->mainShader.setUniformM44("perspective", gPerspective);
+        p->mainShader.setUniformM44("modelView", camera->getViewMatrix());
     }
     
     void PostGameRender()

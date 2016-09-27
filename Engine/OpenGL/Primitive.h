@@ -17,6 +17,9 @@ public:
     SubShader fragShader = loadShaderFromFile("Engine/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
     Shader mainShader;
     
+    
+    glm::vec3 position;
+    
 private:
     
     GLfloat m_verts[12] = {
@@ -33,6 +36,7 @@ private:
     
     GLuint m_vboId, m_eboId, m_vaoId;
     float m_time;
+    
     
 };
 
