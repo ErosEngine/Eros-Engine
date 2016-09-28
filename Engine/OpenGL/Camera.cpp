@@ -1,6 +1,5 @@
 #include "Camera.h"
 #include <QDebug>
-#include <SDL.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -37,13 +36,10 @@ Matrix4x4 Camera::getWorldToViewMatrix()
 void Camera::mouseUpdate(int x, int y)
 {
     float xDiff = (float)x - prevX;
-    float yDiff = prevY - (float)y;
-    
-    qDebug() << "X Diff: " << xDiff;
-    qDebug() << "Y Diff: " << yDiff;
-    
+    float yDiff = prevY - (float)y;    
     float pitch = (yDiff * sensitivity);
     float yaw = (xDiff * sensitivity);
+    
     xRot += yaw;
     yRot += pitch;
         
@@ -79,15 +75,13 @@ void Camera::moveForward()
     position += target * speed;
 }
 
-
-// TODO(kiecker):
 void Camera::moveDownward()
 {
-    position -= up;
+    position -= up * speed;
 }
 void Camera::moveUp()
 {
-    position += up;
+    position += up * speed;
 }
 
 void Camera::moveBack()
