@@ -1,12 +1,9 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
-#include <GL/glew.h>
 #include <fstream>
 #include <string>
-#include <stdio.h>
 #include <QDebug>
-#include <iostream>
 
 
 enum fileType
@@ -29,13 +26,11 @@ public:
     void closeFile();
     const char *getDataConst() const;
     char *getData() const;
-    
-    
-    
+
 private:
-    
-    std::string m_data;
+
     std::ifstream m_stream;
+    std::string m_data;
     
 };
 

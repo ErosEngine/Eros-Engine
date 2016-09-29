@@ -2,10 +2,9 @@
 #include "Engine/Window/MainWindow.h"
 #include "Engine/Editor/MainWindow_Qt.h"
 #include "Engine/Util/Util.h"
-#include <linux/tcp.h>
 #include <QApplication>
 
-int main(int argc, char **argv)
+int kmain(int argc, char **argv)
 {
     QApplication a(argc, argv);
     
