@@ -13,12 +13,11 @@ struct Camera
     glm::vec3 position;
     glm::vec3 target;
     glm::vec3 up;
+    glm::vec2 prevMousePos;
     
     float speed;
     float yRot;
-    float xRot;
-    float prevX;
-    float prevY;    
+    float xRot;    
     float fov;
     float zNear;
     float zFar;

@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 #include <vector>
-#include "Coordinates.h"
+#include <glm/glm.hpp>
 #include "Texture.h"
 
 
@@ -21,22 +21,12 @@ public:
     void setTexture(Texture &texture);
     void setCoordArray(GLfloat *arr);
     
-    Vector3 getPosition();
-    Vector3 getSize();
-    Vector4 getScale();
-
-    void setPosition(GLfloat x, GLfloat y, GLfloat z);
-    void setPosition(Vector3 &position);
-    void setSize(GLfloat x, GLfloat y, GLfloat z);
-    void setSize(Vector3 &size);
-    void setScale(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-    void setScale(Vector4 &Scale);
+    
+    glm::vec3 position;
+    glm::vec3 size;
+    glm::vec4 scale;
     
 private:
-    
-    Vector3 m_position;
-    Vector3 m_size;
-    Vector4 m_scale;
     
     GLfloat *m_verts;
     GLushort *m_indices;

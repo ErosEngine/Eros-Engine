@@ -4,7 +4,6 @@
 #include "Engine/Util/Util.h"
 #include "Engine/Client/input.h"
 #include <cassert>
-#include <QVector>
 
 
 MainWindow_SDL::MainWindow_SDL()
@@ -61,9 +60,6 @@ void MainWindow_SDL::gameLoop()
 {
     OpenGLRenderer renderer;
     renderer.PreGameRender();
-    
-    SDL_SetRelativeMouseMode(SDL_TRUE);
-    qDebug() << "Error: " << QString(SDL_GetError());
     
     while (m_state == GameState::RUNNING)
     {

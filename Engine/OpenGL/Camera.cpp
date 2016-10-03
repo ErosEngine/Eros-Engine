@@ -9,8 +9,7 @@ Camera::Camera()
     target = glm::vec3(0.0f, 0.0f, -1.0f);
     up = glm::vec3(0.0f, 1.0f, 0.0f);
     sensitivity = 0.1f;
-    prevX = 0.0f;
-    prevY = 0.0f;
+    prevMousePos = glm::vec2(0.0f, 0.0f);
     xRot = 0.0f;
     yRot = 0.0f;
     speed = 0.1f;
@@ -35,6 +34,21 @@ Matrix4x4 Camera::getWorldToViewMatrix()
 
 void Camera::mouseUpdate(int x, int y)
 {
+    glm::vec2 currentMousePos(x, y);
+    glm::vec2 mouseDelta = currentMousePos - prevMousePos;
+    
+    if (glm::length(mouseDelta) > 50.0f)
+    {
+        prevMousePos = currentMousePos;
+        return;
+    }
+    glm::vec3 rightAxis = glm::cross(target, up);
+    target = glm::mat3x3(glm::rotate(-mouseDelta.x * sensitivity, up) * 
+                         glm::rotate(-mouseDelta.y * sensitivity, rightAxis)) * target;
+    
+    prevMousePos = currentMousePos;
+    // NOTE(kiecker): Deprecated
+    /*
     float xDiff = (float)x - prevX;
     float yDiff = prevY - (float)y;    
     float pitch = (yDiff * sensitivity);
@@ -54,10 +68,8 @@ void Camera::mouseUpdate(int x, int y)
     newFront.y = sin(glm::radians(yRot));
     newFront.z = sin(glm::radians(xRot)) * cos(glm::radians(yRot));
     target = glm::normalize(newFront);
-    
+    */
     // NOTE(kiecker): Once we are done
-    prevX = (float)x;
-    prevY = (float)y;
 }
 
 void Camera::strafeRight()
