@@ -5,35 +5,14 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "Texture.h"
+#ifndef PRIMITIVE_H
+#include "Primitive.h"
+#endif
 
 
-class Shape
+class Shape: public Primitive
 {
-public:
-    Shape();
-    Shape(GLfloat *arr);
-   ~Shape();
-    
-    void bind();
-    void draw();
-    
-    void setTexture(GLuint &texBuffer);
-    void setTexture(Texture &texture);
-    void setCoordArray(GLfloat *arr);
-    
-    
-    glm::vec3 position;
-    glm::vec3 size;
-    glm::vec4 scale;
-    
-private:
-    
-    GLfloat *m_verts;
-    GLushort *m_indices;
-    GLuint m_vboId, m_vaoId, m_eboId, m_texId;
-    
-    int m_numVerts;
-    
+public:    
 };
 
 #endif // SHAPE_H

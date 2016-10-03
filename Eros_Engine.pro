@@ -26,7 +26,8 @@ SOURCES += main.cpp \
     Engine/Util/BTextStream.cpp \
     Engine/Util/EDebugStream.cpp \
     Engine/OpenGL/Camera.cpp \
-    Engine/Client/input.cpp
+    Engine/Client/input.cpp \
+    Engine/Renderer/ShapeData.cpp
     
 
 HEADERS += \
@@ -47,7 +48,8 @@ HEADERS += \
     Engine/Util/BTextStream.h \
     Engine/Util/EDebugStream.h \
     Engine/OpenGL/Camera.h \
-    Engine/Client/input.h
+    Engine/Client/input.h \
+    Engine/Renderer/ShapeData.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \

@@ -1,7 +1,10 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-
+#include <memory.h>
+#ifndef QSTRING_H
+#include <QString>
+#endif
 
 typedef unsigned char ubyte;
 
@@ -9,13 +12,16 @@ class Texture
 {
 public:
     
-    void setBuffer(ubyte *byteArr);
-    void setWidth(int newWidth);
-    void setHeight(int newHeight);
+    QString fileName;
     
-    int width();
-    int height();
+    int width;
+    int height;
+    int comp; // For stb compatibility
     ubyte *texPtr();
+    
+    Texture &operator = (Texture &right);
+    
+    void openTexture(const char *filename);
     
 private:
     

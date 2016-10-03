@@ -19,7 +19,32 @@
     }
 */
 
-void Texture::setBuffer(ubyte *byteArr)
+// Simple function call
+void Texture::openTexture(const char *filename)
 {
-    this->m_bitmap = byteArr;
+    fileName = filename;
+    
+    if (m_bitmap)
+    {
+        delete[] m_bitmap;
+    }
+    
+    m_bitmap = stbi_load(filename, &width, &height, &comp, STBI_rgb);
+}
+
+ubyte *Texture::texPtr()
+{
+    return m_bitmap;
+}
+
+Texture &Texture::operator = (Texture &right)
+{
+    // NOTE(kiecker): Overwrite the memory,
+    // no telling yet if there will be a crash
+    memcpy(right.texPtr(), this->m_bitmap, sizeof(right.texPtr()));
+    
+    // NOTE(kiecker): self explanitory
+    this->width = right.width;
+    this->height = right.height;
+    return *this;
 }

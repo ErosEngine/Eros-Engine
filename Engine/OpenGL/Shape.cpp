@@ -26,20 +26,5 @@ void Shape::draw()
     
 }
 
-void Shape::setTexture(GLuint &texBuffer)
-{
-    
-}
-
-void Shape::setTexture(Texture &texture)
-{
-    
-}
-
-void Shape::setCoordArray(GLfloat *arr)
-{
-    this->m_verts = arr;
-    this->m_numVerts = eros_arraySize<GLfloat>(arr);
-}
 
 

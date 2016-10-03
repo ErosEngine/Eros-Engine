@@ -4,6 +4,7 @@
 #include "Engine/OpenGL/Primitive.h"
 #include "Engine/OpenGL/Coordinates.h"
 #include "Engine/OpenGL/Camera.h"
+#include "ShapeData.h"
 #include <cassert>
 
 
@@ -49,6 +50,8 @@ struct OpenGLRenderer
         p->mainShader.setUniformM44("perspective", gPerspective);
         p->mainShader.setUniformM44("modelView", camera->getViewMatrix());
     }
+    
+    void drawShape(ShapeData *data);
     
     void PostGameRender()
     {
