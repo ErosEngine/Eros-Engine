@@ -43,33 +43,12 @@ void Camera::mouseUpdate(int x, int y)
         return;
     }
     glm::vec3 rightAxis = glm::cross(target, up);
-    target = glm::mat3x3(glm::rotate(-mouseDelta.x * sensitivity, up) * 
-                         glm::rotate(-mouseDelta.y * sensitivity, rightAxis)) * target;
+    target = glm::mat3x3(
+                glm::rotate(-mouseDelta.x * sensitivity, up) * 
+                glm::rotate(-mouseDelta.y * sensitivity, rightAxis)
+                ) * target;
     
     prevMousePos = currentMousePos;
-    // NOTE(kiecker): Deprecated
-    /*
-    float xDiff = (float)x - prevX;
-    float yDiff = prevY - (float)y;    
-    float pitch = (yDiff * sensitivity);
-    float yaw = (xDiff * sensitivity);
-    
-    xRot += yaw;
-    yRot += pitch;
-        
-    if (yRot > 89.f)
-        yRot = 89.f;
-    
-    if (yRot < -89.f)
-        yRot = -89.f;
-        
-    glm::vec3 newFront;
-    newFront.x = cos(glm::radians(xRot)) * cos(glm::radians(yRot));
-    newFront.y = sin(glm::radians(yRot));
-    newFront.z = sin(glm::radians(xRot)) * cos(glm::radians(yRot));
-    target = glm::normalize(newFront);
-    */
-    // NOTE(kiecker): Once we are done
 }
 
 void Camera::strafeRight()

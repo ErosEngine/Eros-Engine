@@ -1,6 +1,10 @@
 #include "ShapeData.h"
 
-ShapeData::ShapeData()
+
+void ShapeData::convertVertsToVertex()
 {
-    
+}
+
+void ShapeData::convertVertexToVerts()
+{
 }

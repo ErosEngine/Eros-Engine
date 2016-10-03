@@ -9,9 +9,6 @@
 
 #define ARRAY_SIZE(x) sizeof(x) / sizeof(typeof(x))
 
-
-typedef unsigned int uint;
-
 struct Vertex
 {
     glm::vec3 position;
@@ -22,11 +19,29 @@ struct Vertex
 
 struct ShapeData
 {
-    GLfloat *verticies;
+private:
+    typedef unsigned int uint;
+    
+public:
+    
+    // Convert vertexes to vertices
+    // and if needed vertices to vertexes
+    void convertVertsToVertex();
+    void convertVertexToVerts();
+    
+    Vertex *vertexes;
+    GLfloat *vertices;
     GLushort *indices;
     uint numIndices;
     GLuint buffer;
 };
+
+ShapeData CreateCube(glm::vec3 pos, glm::vec3 size);
+ShapeData CreatePlane(glm::vec3 pos, unsigned int numFaces, int scale);
+ShapeData CreateQuad(glm::vec3 pos, glm::vec3 size);
+ShapeData CreatePyramid(glm::vec3 pos, glm::vec3 size);
+ShapeData CreateSphere(glm::vec3 pos, glm::vec3 size);
+
 
 
 #endif // SHAPEDATA_H
