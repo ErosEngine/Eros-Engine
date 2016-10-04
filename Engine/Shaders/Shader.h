@@ -8,6 +8,12 @@
 #include "Engine/OpenGL/Coordinates.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+#ifndef TRANSFORM_H
+#include "Engine/OpenGL/Transform.h"
+#else
+class Transform;
+#endif
+
 #define EROS_VERTEX_SHADER GL_VERTEX_SHADER
 #define EROS_FRAG_SHADER GL_FRAGMENT_SHADER
 
@@ -37,7 +43,9 @@ class Shader
 {
     typedef std::vector<SubShader> Shaders;
     Shaders m_shaderList;
-
+    
+    friend class Transform;
+    
 public:
     
     Shader();
@@ -56,6 +64,7 @@ public:
     void setUniformFloat(const char *variableName, float data);
     void setUniformM44(const char *variableName, const Matrix4x4 &data);
     void setUniformM44(const char *variableName, const glm::mat4 &data);
+    void setTransform(const char *modelMatName, const Transform &data);
     
 };
 

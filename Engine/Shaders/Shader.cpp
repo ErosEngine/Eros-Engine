@@ -153,3 +153,8 @@ void Shader::setUniformM44(const char *variableName, const glm::mat4 &data)
     glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(data));
 }
 
+void Shader::setTransform(const char *modelMatName, const Transform &data)
+{
+    setUniformM44(modelMatName, data.modelMat);
+}
+

@@ -2,17 +2,18 @@
 #define SHAPE_H
 
 #include <GL/glew.h>
-#include <vector>
 #include <glm/glm.hpp>
 #include "Texture.h"
-#ifndef PRIMITIVE_H
-#include "Primitive.h"
-#endif
+#include "Engine/Shaders/Shader.h"
 
-
-class Shape: public Primitive
+class Shape
 {
 public:    
+    
+    SubShader vertShader;
+    SubShader fragShader;
+    Shader shader;   
+    
 };
 
 #endif // SHAPE_H

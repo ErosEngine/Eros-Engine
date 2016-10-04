@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     Engine/Util/EDebugStream.cpp \
     Engine/OpenGL/Camera.cpp \
     Engine/Client/input.cpp \
-    Engine/Renderer/ShapeData.cpp
+    Engine/Renderer/ShapeData.cpp \
+    Engine/OpenGL/Transform.cpp
     
 
 HEADERS += \
@@ -49,7 +50,8 @@ HEADERS += \
     Engine/Util/EDebugStream.h \
     Engine/OpenGL/Camera.h \
     Engine/Client/input.h \
-    Engine/Renderer/ShapeData.h
+    Engine/Renderer/ShapeData.h \
+    Engine/OpenGL/Transform.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \

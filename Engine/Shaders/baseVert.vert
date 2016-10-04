@@ -8,5 +8,5 @@ uniform mat4 modelView;
 
 void main()
 {
-    gl_Position = (perspective * modelView) * (vec4(position, 1.0f));
+    gl_Position = (perspective * modelView * translation) * (vec4(position, 1.0f));
 }
