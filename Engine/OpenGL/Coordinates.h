@@ -19,6 +19,7 @@ EROS_INLINE float inversesqrt(float value)
     return 1.0f / sqrtf(value);
 }
 
+/*
 struct Vector4
 {
     float x,y,z,w;
@@ -946,7 +947,7 @@ EROS_INLINE bool operator != (Vector2 &left, Vector2 &right)
     return !(left == right);
 }
 
-
+*/
 // -------- MATRICES ---------- //
 
 enum RotDir
@@ -981,7 +982,7 @@ struct Matrix4x4
         matrix[2][0] = m31; matrix[2][1] = m32; matrix[2][2] = m33; matrix[2][3] = m34; 
         matrix[3][0] = m41; matrix[3][1] = m42; matrix[3][2] = m43; matrix[3][3] = m44;
     }
-    
+    /*
     EROS_INLINE Matrix4x4(Vector4 &row1, Vector4 &row2, Vector4 &row3, Vector4 &row4)
     {
         matrix[0][0] = row1.x; matrix[0][1] = row1.y; matrix[0][2] = row1.z; matrix[0][3] = row1.w;
@@ -989,7 +990,7 @@ struct Matrix4x4
         matrix[2][0] = row3.x; matrix[2][1] = row3.y; matrix[2][2] = row3.z; matrix[2][3] = row3.w; 
         matrix[3][0] = row4.x; matrix[3][1] = row4.y; matrix[3][2] = row4.z; matrix[3][3] = row4.w;
     }
-
+    */
     EROS_INLINE Matrix4x4 &operator = (const Matrix4x4 &right)
     {
         this->matrix[0][0] = right.matrix[0][0];
@@ -1020,7 +1021,7 @@ struct Matrix4x4
     }
     
 };
-
+/*
 EROS_INLINE Vector4 operator * (Vector4 &left, Matrix4x4 &right)
 {
     return Vector4
@@ -1031,7 +1032,7 @@ EROS_INLINE Vector4 operator * (Vector4 &left, Matrix4x4 &right)
         ((right.matrix[3][0] * left.x) + (right.matrix[3][1] * left.y) + (right.matrix[3][2] * left.z) + (right.matrix[3][3] * left.w))
     );
 }
-
+*/
 EROS_INLINE Matrix4x4 operator * (Matrix4x4 &left, Matrix4x4 &right)
 {
     return Matrix4x4(
@@ -1052,6 +1053,7 @@ EROS_INLINE Matrix4x4 operator * (Matrix4x4 &left, Matrix4x4 &right)
     ((left.matrix[3][0] * right.matrix[3][2]) + (left.matrix[3][1] * right.matrix[1][2]) + (left.matrix[3][2] * right.matrix[2][2]) + (left.matrix[3][3] * right.matrix[3][2])),
     ((left.matrix[3][0] * right.matrix[3][3]) + (left.matrix[3][1] * right.matrix[1][3]) + (left.matrix[3][2] * right.matrix[2][3]) + (left.matrix[3][3] * right.matrix[3][3])));
 }
+/*
 EROS_INLINE Vector4 &operator *= (Vector4 &left, Matrix4x4 &right)
 {
     left.x = ((right.matrix[0][0] * left.x) + (right.matrix[0][1] * left.y) + (right.matrix[0][2] * left.z) + (right.matrix[0][3] * left.w));
@@ -1060,6 +1062,7 @@ EROS_INLINE Vector4 &operator *= (Vector4 &left, Matrix4x4 &right)
     left.w = ((right.matrix[3][0] * left.x) + (right.matrix[3][1] * left.y) + (right.matrix[3][2] * left.z) + (right.matrix[3][3] * left.w));
     return left;
 }
+*/
 EROS_INLINE Matrix4x4 &operator *= (Matrix4x4 &left, Matrix4x4 &right)
 {
     left.matrix[0][0] = ((left.matrix[0][0] * right.matrix[0][0]) + (left.matrix[0][1] * right.matrix[1][0]) + (left.matrix[0][2] * right.matrix[2][0]) + (left.matrix[0][3] * right.matrix[3][0]));
@@ -1125,12 +1128,12 @@ EROS_INLINE Matrix4x4 Translate(float offsetX = 0.0f, float offsetY = 0.0f, floa
     m.matrix[2][3] = offsetZ;
     return m;
 }
-
+/*
 EROS_INLINE Matrix4x4 Translate(Vector3 &offset)
 {
     return Translate(offset.x, offset.y, offset.z);
 }
-
+*/
 EROS_INLINE Matrix4x4 Scale(float scaleX, float scaleY, float scaleZ)
 {
     Matrix4x4 m;
@@ -1158,7 +1161,7 @@ EROS_INLINE Matrix4x4 Perspective(float fovy, float aspect, float zNear, float z
     m.matrix[3][3] = 1.0f;
     return m;
 }
-
+/*
 EROS_INLINE Matrix4x4 LookAt(Vector3 eye, Vector3 center, Vector3 up)
 {
     Matrix4x4 m;
@@ -1182,7 +1185,7 @@ EROS_INLINE Matrix4x4 LookAt(Vector3 eye, Vector3 center, Vector3 up)
     
     return m;
 }
-
+*/
 
 
 #endif // COORDINATES_H

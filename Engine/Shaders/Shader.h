@@ -64,7 +64,6 @@ public:
     void setUniformFloat(const char *variableName, float data);
     void setUniformM44(const char *variableName, const Matrix4x4 &data);
     void setUniformM44(const char *variableName, const glm::mat4 &data);
-    void setTransform(const char *modelMatName, const Transform &data);
     
 };
 
