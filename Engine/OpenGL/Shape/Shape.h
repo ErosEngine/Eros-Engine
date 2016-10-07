@@ -21,7 +21,7 @@ public:
     
     void bind();
     void sendToOpenGL();
-    void draw();    
+    void draw();
     
 private:
     

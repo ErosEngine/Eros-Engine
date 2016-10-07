@@ -34,9 +34,7 @@ private:
     };
     
     GLuint m_vboId, m_eboId, m_vaoId;
-    float m_time;
-    
-    
+    float m_time;    
 };
 
 #endif // PRIMITIVE_H

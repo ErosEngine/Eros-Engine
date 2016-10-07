@@ -239,7 +239,6 @@ void Shader::setUniformM44(const char *variableName, const Matrix4x4 &data)
 
 void Shader::setUniformM44(const char *variableName, const glm::mat4 &data)
 {
-    qDebug() << "Hello world, I am new code!";
     int b = findInList(variableName);
     if (b) // if we found the variable
     {
