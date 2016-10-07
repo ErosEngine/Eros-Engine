@@ -55,6 +55,24 @@ SubShader loadShaderFromFile(const char *_fileName, const GLenum &shaderType)
 /**************************************************************************/
 
 
+// Note(kiecker): These are just some quick util funcs
+
+bool Shader::ShaderInformation::operator ==(const Shader::ShaderInformation &left)
+{
+    return (this->varName == left.varName); // Shouln't need to return more than this
+}
+
+int Shader::findInList(const char *name)
+{
+    for (int i = 0; i < m_infoList.size(); ++i)
+    {
+        // Note(kiecker): string on right order to avoid warnings        
+        if (m_infoList[i].varName == name) 
+            return i;
+    }
+    return false; // <- this works o_O
+}
+
 Shader::Shader()
 {
     shaderProgram = glCreateProgram();
@@ -111,46 +129,132 @@ void Shader::use()
 
 void Shader::setUniformV4f(const char *variableName, const Vector4 &data)
 {
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform4f(m_infoList[b].varPos, data.x, data.y, data.z, data.w);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
 
 void Shader::setUniformV3f(const char *variableName, const Vector3 &data)
 {
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform3f(uniformLoc, data.x, data.y, data.z);
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform3f(m_infoList[b].varPos, data.x, data.y, data.z);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform3f(uniformLoc, data.x, data.y, data.z);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
 
 void Shader::setUniformV2f(const char *variableName, const Vector2 &data)
 {
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform2f(uniformLoc, data.x, data.y);
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform2f(m_infoList[b].varPos, data.x, data.y);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform2f(uniformLoc, data.x, data.y);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
 
 void Shader::setUniformInt(const char *variableName, int data)
 {
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform1i(uniformLoc, data);
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform1i(m_infoList[b].varPos, data);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform1i(uniformLoc, data);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
 
 void Shader::setUniformFloat(const char *variableName, float data)
 {
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniform1f(uniformLoc, data);
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform1f(m_infoList[b].varPos, data);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform1f(uniformLoc, data);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
 
 void Shader::setUniformM44(const char *variableName, const Matrix4x4 &data)
-{
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniformMatrix4fv(uniformLoc, 1, GL_TRUE, &data.matrix[0][0]);
+{    
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniformMatrix4fv(m_infoList[b].varPos, 1, GL_TRUE, &data.matrix[0][0]);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniformMatrix4fv(uniformLoc, 1, GL_TRUE, &data.matrix[0][0]);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
 
 #include <glm/gtc/type_ptr.hpp>
 
 void Shader::setUniformM44(const char *variableName, const glm::mat4 &data)
-{    
-    GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(data));
+{
+    qDebug() << "Hello world, I am new code!";
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniformMatrix4fv(m_infoList[b].varPos, 1, GL_FALSE, glm::value_ptr(data));
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(data));
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
 }
+
 
 

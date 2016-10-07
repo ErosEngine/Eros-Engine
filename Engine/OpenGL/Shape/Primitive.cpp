@@ -1,6 +1,6 @@
 #include "Primitive.h"
 #include "Engine/Util/Util.h"
-#include "Coordinates.h"
+#include "../Coordinates.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 

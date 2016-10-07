@@ -15,7 +15,7 @@ public:
     SubShader vertShader;
     SubShader fragShader;
     
-    Shader shader;  
+    Shader shader;
     
     Transform *transform();
     

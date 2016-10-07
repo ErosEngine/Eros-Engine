@@ -9,7 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #ifndef TRANSFORM_H
-#include "Engine/OpenGL/Transform.h"
+#include "Engine/OpenGL/Shape/Transform.h"
 #else
 class Transform;
 #endif
@@ -41,8 +41,23 @@ SubShader loadShaderFromFile(const char *fileName, const GLenum &shaderType);
 
 class Shader
 {
+    struct ShaderInformation
+    {
+        string varName;
+        GLint varPos;
+        
+        bool operator == (const ShaderInformation &left);
+    };
+        
+    typedef std::vector<ShaderInformation> ShaderInfoList;
     typedef std::vector<SubShader> Shaders;
+    
     Shaders m_shaderList;
+    ShaderInfoList m_infoList;
+    
+    // Note(kiecker): returns 0 if it wasn't found, 
+    // so you can do: if (findInList(var)) { ... }
+    int findInList(const char *name);
     
     friend class Transform;
     

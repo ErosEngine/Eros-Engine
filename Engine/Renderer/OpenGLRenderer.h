@@ -1,7 +1,7 @@
 #ifndef OPENGLRENDERER_H
 #define OPENGLRENDERER_H
 
-#include "Engine/OpenGL/Primitive.h"
+#include "Engine/OpenGL/Shape/Primitive.h"
 #include "Engine/OpenGL/Coordinates.h"
 #include "Engine/OpenGL/Camera.h"
 #include "ShapeData.h"
@@ -39,15 +39,16 @@ struct OpenGLRenderer
         gPerspective = camera->getPerspective();
         camera->width = (float)windowWidth;
         camera->height = (float)windowHeight;
+        p->mainShader.use();
+        p->mainShader.setUniformM44("perspective", gPerspective);
     }
     
     void DuringGameRender()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.3f, 0.1f, 0.4f, 1.0f);
-        glMatrixMode(GL_PROJECTION);        
+        glMatrixMode(GL_PROJECTION);
         p->draw();
-        p->mainShader.setUniformM44("perspective", gPerspective);
         p->mainShader.setUniformM44("modelView", camera->getViewMatrix());
     }
     

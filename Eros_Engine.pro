@@ -15,20 +15,20 @@ SOURCES += main.cpp \
     Engine/Window/MainWindow.cpp \
     Engine/Shaders/Shader.cpp \
     Engine/FileSystem/Resource.cpp \
-    Engine/OpenGL/Primitive.cpp \
+    Engine/OpenGL/Shape/Primitive.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
     Engine/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
     Engine/Renderer/OpenGLRenderer.cpp \
-    Engine/OpenGL/Texture.cpp \
+    Engine/OpenGL/Shape/Texture.cpp \
     Engine/Renderer/FontRenderer.cpp \
-    Engine/OpenGL/Shape.cpp \
+    Engine/OpenGL/Shape/Shape.cpp \
     Engine/Util/BTextStream.cpp \
     Engine/Util/EDebugStream.cpp \
     Engine/OpenGL/Camera.cpp \
     Engine/Client/input.cpp \
     Engine/Renderer/ShapeData.cpp \
-    Engine/OpenGL/Transform.cpp
+    Engine/OpenGL/Shape/Transform.cpp
     
 
 HEADERS += \
@@ -36,22 +36,22 @@ HEADERS += \
     Engine/Shaders/Shader.h \
     Engine/OpenGL/Coordinates.h \
     Engine/FileSystem/Resource.h \
-    Engine/OpenGL/Primitive.h \
+    Engine/OpenGL/Shape/Primitive.h \
     Engine/Renderer/OpenGLRenderer.h \
     Engine/Util/Util.h \
     Engine/Editor/MainWindow_Qt.h \
     Engine/Window/OpeningDialog.h \
     Engine/Editor/OpenGLViewPort.h \
     Engine/FileSystem/stb_image.h \
-    Engine/OpenGL/Texture.h \
+    Engine/OpenGL/Shape/Texture.h \
     Engine/Renderer/FontRenderer.h \
-    Engine/OpenGL/Shape.h \
+    Engine/OpenGL/Shape/Shape.h \
     Engine/Util/BTextStream.h \
     Engine/Util/EDebugStream.h \
     Engine/OpenGL/Camera.h \
     Engine/Client/input.h \
     Engine/Renderer/ShapeData.h \
-    Engine/OpenGL/Transform.h
+    Engine/OpenGL/Shape/Transform.h
 
 DISTFILES += \
     Engine/Shaders/baseFrag.frag \

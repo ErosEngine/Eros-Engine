@@ -32,15 +32,16 @@ public:
     Vertex *vertexes;
     GLfloat *vertices;
     GLushort *indices;
+    GLushort *texCoords;
     uint numIndices;
     GLuint buffer;
 };
 
-ShapeData CreateCube(glm::vec3 pos, glm::vec3 size);
-ShapeData CreatePlane(glm::vec3 pos, unsigned int numFaces, int scale);
-ShapeData CreateQuad(glm::vec3 pos, glm::vec3 size);
-ShapeData CreatePyramid(glm::vec3 pos, glm::vec3 size);
-ShapeData CreateSphere(glm::vec3 pos, glm::vec3 size);
+ShapeData CreateCube(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
+ShapeData CreatePlane(glm::vec3 pos, unsigned int numFaces, int scale, bool useTexture = false);
+ShapeData CreateQuad(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
+ShapeData CreatePyramid(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
+ShapeData CreateSphere(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
 
 
 
