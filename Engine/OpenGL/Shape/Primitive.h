@@ -15,7 +15,7 @@ public:
     
     SubShader vertShader = loadShaderFromFile("Engine/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
     SubShader fragShader = loadShaderFromFile("Engine/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
-    Shader mainShader;
+    Shader mainShader; 
     
     glm::vec3 position;
     

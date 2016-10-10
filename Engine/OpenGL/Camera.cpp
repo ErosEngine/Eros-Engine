@@ -26,12 +26,6 @@ glm::mat4 Camera::getPerspective()
     return glm::perspective(fov, aspect, zNear, zFar);
 }
 
-Matrix4x4 Camera::getWorldToViewMatrix()
-{
-    return Matrix4x4();
-    //return LookAt(this->position, this->target, this->up);
-}
-
 void Camera::mouseUpdate(int x, int y)
 {
     glm::vec2 currentMousePos(x, y);
@@ -44,9 +38,9 @@ void Camera::mouseUpdate(int x, int y)
     }
     glm::vec3 rightAxis = glm::cross(target, up);
     target = glm::mat3x3(
-                glm::rotate(-mouseDelta.x * sensitivity, up) * 
-                glm::rotate(-mouseDelta.y * sensitivity, rightAxis)
-                ) * target;
+        glm::rotate(-mouseDelta.x * sensitivity, up) * 
+        glm::rotate(-mouseDelta.y * sensitivity, rightAxis)
+    ) * target;
     
     prevMousePos = currentMousePos;
 }

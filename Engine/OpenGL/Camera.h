@@ -3,7 +3,6 @@
 
 #include <GL/glew.h>
 #include "Coordinates.h"
-#include "Engine/Shaders/Shader.h"
 #include <glm/glm.hpp>
 
 struct Camera

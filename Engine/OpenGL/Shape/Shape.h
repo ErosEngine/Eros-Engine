@@ -17,15 +17,12 @@ public:
     
     Shader shader;
     
-    Transform *transform();
+    Transform transform;
     
     void bind();
-    void sendToOpenGL();
     void draw();
     
 private:
-    
-    Transform m_transform;
 };
 
 #endif // SHAPE_H
