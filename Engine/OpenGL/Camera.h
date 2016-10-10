@@ -2,7 +2,6 @@
 #define CAMERA_H
 
 #include <GL/glew.h>
-#include "Coordinates.h"
 #include <glm/glm.hpp>
 
 struct Camera
@@ -29,7 +28,6 @@ struct Camera
     
     glm::mat4 getViewMatrix();
     glm::mat4 getPerspective();
-    Matrix4x4 getWorldToViewMatrix();
     
     // ALL TRANSFOMATIONS ARE RELATIVE
     void mouseUpdate(int x, int y);
