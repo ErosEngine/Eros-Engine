@@ -1,9 +1,9 @@
 #ifndef OPENGLRENDERER_H
 #define OPENGLRENDERER_H
 
-#include "Engine/OpenGL/Shape/Primitive.h"
-#include "Engine/OpenGL/Coordinates.h"
-#include "Engine/OpenGL/Camera.h"
+#include "Engine/Runtime/OpenGL/Shape/Primitive.h"
+#include "Engine/Runtime/OpenGL/Coordinates.h"
+#include "Engine/Runtime/OpenGL/Camera.h"
 #include "ShapeData.h"
 #include <cassert>
 
@@ -26,7 +26,7 @@ struct OpenGLRenderer
     }
     
     void PreGameRender()
-    {      
+    {
         glLoadIdentity();
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_DEPTH_TEST);

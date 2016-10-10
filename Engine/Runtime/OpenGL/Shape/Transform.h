@@ -35,7 +35,7 @@ public:
     mat4 modelMat() const;
     
 private:
-
+    
     Vector3 m_position;
     Quaternion m_rotation;
     

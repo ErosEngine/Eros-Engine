@@ -1,8 +1,8 @@
 #include <SDL.h>
-#include "Engine/Renderer/OpenGLRenderer.h"
+#include "Engine/Runtime/Renderer/OpenGLRenderer.h"
 #include "MainWindow.h"
-#include "Engine/Util/Util.h"
-#include "Engine/Client/input.h"
+#include "Engine/Developer/Util/Util.h"
+#include "Engine/Developer/Client/Input.h"
 #include <cassert>
 
 

@@ -1,7 +1,7 @@
 #include "Shader.h"
 #include <iostream>
-#include "Engine/FileSystem/Resource.h"
-#include "Engine/Util/Util.h"
+#include "Engine/Developer/FileSystem/Resource.h"
+#include "Engine/Developer/Util/Util.h"
 
 
 void SubShader::bind()
@@ -57,9 +57,9 @@ SubShader loadShaderFromFile(const char *_fileName, const GLenum &shaderType)
 
 // Note(kiecker): These are just some quick util funcs
 
-bool Shader::ShaderInformation::operator ==(const Shader::ShaderInformation &left)
+bool Shader::ShaderInformation::operator ==(const Shader::ShaderInformation &right)
 {
-    return (this->varName == left.varName); // Shouln't need to return more than this
+    return (this->varName == right.varName); // Shouln't need to return more than this
 }
 
 int Shader::findInList(const char *name)

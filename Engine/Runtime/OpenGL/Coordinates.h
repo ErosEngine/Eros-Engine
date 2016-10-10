@@ -2,6 +2,7 @@
 #define COORDINATES_H
 
 #include <cmath>
+#include <linux/kernel.h>
 
 #define EROS_INLINE inline
 #define PI 3.1415926535897932384626433832795f

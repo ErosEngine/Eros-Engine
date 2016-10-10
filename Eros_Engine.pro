@@ -12,54 +12,54 @@ INCLUDEPATH += $$PWD/ExtLibs/include
 DEPENDPATH += $$PWD/ExtLibs/include
 
 SOURCES += main.cpp \
-    Engine/Window/MainWindow.cpp \
-    Engine/Shaders/Shader.cpp \
-    Engine/FileSystem/Resource.cpp \
-    Engine/OpenGL/Shape/Primitive.cpp \
+    Engine/Runtime/Window/MainWindow.cpp \
+    Engine/Runtime/Shaders/Shader.cpp \
+    Engine/Developer/FileSystem/Resource.cpp \
+    Engine/Runtime/OpenGL/Shape/Primitive.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
-    Engine/Window/OpeningDialog.cpp \
+    Engine/Runtime/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
-    Engine/Renderer/OpenGLRenderer.cpp \
-    Engine/OpenGL/Shape/Texture.cpp \
-    Engine/Renderer/FontRenderer.cpp \
-    Engine/OpenGL/Shape/Shape.cpp \
-    Engine/Util/BTextStream.cpp \
-    Engine/Util/EDebugStream.cpp \
-    Engine/OpenGL/Camera.cpp \
-    Engine/Client/input.cpp \
-    Engine/Renderer/ShapeData.cpp \
-    Engine/OpenGL/Shape/Transform.cpp
+    Engine/Runtime/Renderer/OpenGLRenderer.cpp \
+    Engine/Runtime/OpenGL/Shape/Texture.cpp \
+    Engine/Runtime/Renderer/FontRenderer.cpp \
+    Engine/Runtime/OpenGL/Shape/Shape.cpp \
+    Engine/Developer/Util/BTextStream.cpp \
+    Engine/Developer/Util/EDebugStream.cpp \
+    Engine/Runtime/OpenGL/Camera.cpp \
+    Engine/Developer/Client/Input.cpp \
+    Engine/Runtime/Renderer/ShapeData.cpp \
+    Engine/Runtime/OpenGL/Shape/Transform.cpp
     
 
 HEADERS += \
-    Engine/Window/MainWindow.h \
-    Engine/Shaders/Shader.h \
-    Engine/OpenGL/Coordinates.h \
-    Engine/FileSystem/Resource.h \
-    Engine/OpenGL/Shape/Primitive.h \
-    Engine/Renderer/OpenGLRenderer.h \
-    Engine/Util/Util.h \
+    Engine/Runtime/Window/MainWindow.h \
+    Engine/Runtime/Shaders/Shader.h \
+    Engine/Runtime/OpenGL/Coordinates.h \
+    Engine/Developer/FileSystem/Resource.h \
+    Engine/Runtime/OpenGL/Shape/Primitive.h \
+    Engine/Runtime/Renderer/OpenGLRenderer.h \
+    Engine/Developer/Util/Util.h \
     Engine/Editor/MainWindow_Qt.h \
-    Engine/Window/OpeningDialog.h \
+    Engine/Runtime/Window/OpeningDialog.h \
     Engine/Editor/OpenGLViewPort.h \
-    Engine/FileSystem/stb_image.h \
-    Engine/OpenGL/Shape/Texture.h \
-    Engine/Renderer/FontRenderer.h \
-    Engine/OpenGL/Shape/Shape.h \
-    Engine/Util/BTextStream.h \
-    Engine/Util/EDebugStream.h \
-    Engine/OpenGL/Camera.h \
-    Engine/Client/input.h \
-    Engine/Renderer/ShapeData.h \
-    Engine/OpenGL/Shape/Transform.h
+    Engine/Developer/FileSystem/stb_image.h \
+    Engine/Runtime/OpenGL/Shape/Texture.h \
+    Engine/Runtime/Renderer/FontRenderer.h \
+    Engine/Runtime/OpenGL/Shape/Shape.h \
+    Engine/Developer/Util/BTextStream.h \
+    Engine/Developer/Util/EDebugStream.h \
+    Engine/Runtime/OpenGL/Camera.h \
+    Engine/Developer/Client/Input.h \
+    Engine/Runtime/Renderer/ShapeData.h \
+    Engine/Runtime/OpenGL/Shape/Transform.h
 
 DISTFILES += \
-    Engine/Shaders/baseFrag.frag \
-    Engine/Shaders/baseVert.vert
+    Engine/Runtime/Shaders/baseFrag.frag \
+    Engine/Runtime/Shaders/baseVert.vert
 
 FORMS += \
     Engine/Editor/MainWindow_Qt.ui \
-    Engine/Window/OpeningDialog.ui
+    Engine/Runtime/Window/OpeningDialog.ui
 
 RESOURCES += \
     Assets/PlayButton.qrc

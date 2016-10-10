@@ -2,19 +2,19 @@
 #define PRIMITIVE_H
 
 #include <GL/glew.h>
-#include "Engine/Shaders/Shader.h"
+#include "Engine/Runtime/Shaders/Shader.h"
+
 
 class Primitive
 {
 public:
-    
     Primitive();
     
     void bind();
     void draw();
     
-    SubShader vertShader = loadShaderFromFile("Engine/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
-    SubShader fragShader = loadShaderFromFile("Engine/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
+    SubShader vertShader = loadShaderFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
+    SubShader fragShader = loadShaderFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
     Shader mainShader; 
     
     glm::vec3 position;

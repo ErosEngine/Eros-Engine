@@ -5,13 +5,11 @@
 #include <fstream>
 #include <vector>
 #include <QDebug>
-#include "Engine/OpenGL/Coordinates.h"
+#include "Engine/Runtime/OpenGL/Coordinates.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 #ifndef TRANSFORM_H
-#include "Engine/OpenGL/Shape/Transform.h"
-#else
-class Transform;
+#include "../OpenGL/Shape/Transform.h"
 #endif
 
 #define EROS_VERTEX_SHADER GL_VERTEX_SHADER
@@ -46,7 +44,7 @@ class Shader
         string varName;
         GLint varPos;
         
-        bool operator == (const ShaderInformation &left);
+        bool operator == (const ShaderInformation &right);
     };
         
     typedef std::vector<ShaderInformation> ShaderInfoList;

@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include "Texture.h"
-#include "Engine/Shaders/Shader.h"
+#include "Engine/Runtime/Shaders/Shader.h"
 
 class Shape
 {
