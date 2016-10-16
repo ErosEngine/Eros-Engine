@@ -3,17 +3,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
-Camera::Camera()
+Camera::Camera():
+    position(0.0f, 0.0f, 1.0f),
+    target(0.0f, 0.0f, -1.0f),
+    up(0.0f, 1.0f, 0.0f),
+    sensitivity(0.1f),
+    prevMousePos(0.0f, 0.0f),
+    xRot(0.0f),
+    yRot(0.0f),
+    speed(0.1f),
+    isFirstMouse(true)
 {
-    position = glm::vec3(0.0f, 0.0f, 1.0f);
-    target = glm::vec3(0.0f, 0.0f, -1.0f);
-    up = glm::vec3(0.0f, 1.0f, 0.0f);
-    sensitivity = 0.1f;
-    prevMousePos = glm::vec2(0.0f, 0.0f);
-    xRot = 0.0f;
-    yRot = 0.0f;
-    speed = 0.1f;
-    isFirstMouse = true;
 }
 
 glm::mat4 Camera::getViewMatrix()

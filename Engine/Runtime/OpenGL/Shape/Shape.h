@@ -5,9 +5,12 @@
 #include <glm/glm.hpp>
 #include "Texture.h"
 #include "Engine/Runtime/Shaders/Shader.h"
+#include <vector>
+
 
 class Shape
 {
+    
 public:    
     
     Shape();
@@ -19,10 +22,12 @@ public:
     
     Transform transform;
     
-    void bind();
-    void draw();
+    virtual void bind() { }
+    virtual void draw() { }
     
-private:
+    std::vector<glm::vec3> points;
+    
+    GLfloat *verts;
 };
 
 #endif // SHAPE_H

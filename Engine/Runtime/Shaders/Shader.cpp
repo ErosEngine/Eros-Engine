@@ -75,7 +75,7 @@ int Shader::findInList(const char *name)
 
 Shader::Shader()
 {
-    shaderProgram = glCreateProgram();
+    shaderProgram = glCreateProgram();    
 }
 
 Shader::~Shader()
@@ -111,8 +111,7 @@ bool Shader::compile()
         qDebug() << QString((const char *)compileOutput);
         return false;
     }
-    
-    
+        
     // After compilation was successful, detach 
     for (int i = 0; i < m_shaderList.size(); ++i)
     {

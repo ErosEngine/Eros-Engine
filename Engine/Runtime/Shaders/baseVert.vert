@@ -6,6 +6,7 @@ uniform mat4 translation;
 uniform mat4 perspective;
 uniform mat4 modelView;
 
+
 void main()
 {
     gl_Position = (perspective * modelView * translation) * (vec4(position, 1.0f));

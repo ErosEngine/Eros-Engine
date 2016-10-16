@@ -1,6 +1,6 @@
 #include "Texture.h"
 #define STB_IMAGE_IMPLEMENTATION // To prevent link errors
-#include "Engine/FileSystem/stb_image.h"
+#include "Engine/Developer/FileSystem/stb_image.h"
 
 
 /*

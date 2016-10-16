@@ -14,6 +14,8 @@ typedef glm::vec3 Vector3;
 typedef glm::vec2 Vector2;
 using glm::mat4;
 
+
+
 class Transform
 {
 public:
@@ -25,14 +27,15 @@ public:
     void moveTo(float x, float y, float z, float speed = 1.0f);
     void moveTo(Vector3 pos, float speed = 1.0f);
     
+    
     // NOTE(kiecker): Using the getters and setters because I 
     // will need the accessors to do stuff when they are changed
     void setPosition(Vector3 pos);
     void setRotation(Quaternion rot);
     
-    Vector3 position() const; 
-    Quaternion rotation() const;
-    mat4 modelMat() const;
+    Vector3 &position() const; 
+    Quaternion &rotation() const;
+    mat4 &modelMat() const;
     
 private:
     

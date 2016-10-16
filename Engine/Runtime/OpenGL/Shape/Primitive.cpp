@@ -23,6 +23,7 @@ void Primitive::bind()
         qDebug() << "fragment shader compiled" << endl;
     }
     
+    
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
     glGenBuffers(1, &m_eboId);

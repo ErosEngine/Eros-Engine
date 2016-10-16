@@ -1,5 +1,4 @@
 #include "Resource.h"
-#include "Engine/Util/Util.h"
 
 
 Resource::Resource()

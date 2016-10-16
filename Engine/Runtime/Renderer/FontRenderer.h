@@ -1,7 +1,7 @@
 #ifndef FONTRENDERER_H
 #define FONTRENDERER_H
 
-#include "Engine/FileSystem/Resource.h" // For file loading
+#include "Engine/Developer/FileSystem/Resource.h" // For file loading
 #include <QString>
 #include <GL/glew.h>
 #include <ft2build.h>

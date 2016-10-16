@@ -37,8 +37,9 @@ struct Camera
     void moveDownward();
     void moveUp();
     void moveBack();
-    void updatePerspective(float fov, float width, float height, 
-                           float zNear, float zFar, float aspect_);
+    void updatePerspective(float fov, float width, 
+                           float height, float zNear, 
+                           float zFar, float aspect_);
     
 };
 
