@@ -5,28 +5,21 @@
 #include <QApplication>
 
 
-int _main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     QApplication a(argc, argv);
     
-    Shape s;
-    for (int i = 0; i < 4; ++i)
-    {
-        s.points.push_back(glm::vec3(i * 2, i * 5, i * 6));
-    }
+    glm::vec3 vector = glm::vec3( 50.0f, 28.0f, 60.0f );
+    glm::vec3 normalized = glm::normalize(vector);
+    qDebug() << "X: " << normalized.x;
+    qDebug() << "Y: " << normalized.y;
+    qDebug() << "Z: " << normalized.z;
     
-    s.convertPointsToGLFloatPointer();
-    
-    for (int i = 0; i < 12; ++i)
-    {
-        qDebug() << s.verts[i];
-    }
-    
-    return 0;
+    return a.exec();
 }
 
 
-int main(int argc, char **argv)
+int _main(int argc, char **argv)
 {
     QApplication a(argc, argv);
     

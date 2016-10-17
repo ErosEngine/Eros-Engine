@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include "Texture.h"
+#include "Primitive.h"
 #include "Engine/Runtime/Shaders/Shader.h"
 #include <vector>
 
@@ -29,5 +30,7 @@ public:
     
     GLfloat *verts;
 };
+
+
 
 #endif // SHAPE_H

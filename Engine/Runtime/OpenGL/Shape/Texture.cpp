@@ -41,7 +41,8 @@ Texture &Texture::operator = (Texture &right)
 {
     // NOTE(kiecker): Overwrite the memory,
     // no telling yet if there will be a crash
-    memcpy(right.texPtr(), this->m_bitmap, sizeof(right.texPtr()));
+    memmove(right.texPtr(), this->m_bitmap, sizeof(right.texPtr()));
+    
     
     // NOTE(kiecker): self explanitory
     this->width = right.width;

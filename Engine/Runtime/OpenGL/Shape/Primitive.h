@@ -10,14 +10,20 @@ class Primitive
 public:
     Primitive();
     
+    void setup();
     void bind();
     void draw();
+    void unbind();
     
     SubShader vertShader = loadShaderFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
     SubShader fragShader = loadShaderFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
     Shader mainShader; 
     
     glm::vec3 position;
+    
+    GLuint &vboId();
+    GLuint &eboId();    
+    GLuint &vaoId();
     
 private:
     
@@ -36,5 +42,7 @@ private:
     GLuint m_vboId, m_eboId, m_vaoId;
     float m_time;    
 };
+
+void DrawMultiplePrimitives(Primitive *prim, int numTimes);
 
 #endif // PRIMITIVE_H

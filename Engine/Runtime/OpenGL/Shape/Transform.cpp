@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include <GL/internal/glcore.h>
 
 Transform::Transform()
 {

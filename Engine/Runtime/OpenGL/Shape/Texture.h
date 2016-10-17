@@ -5,6 +5,9 @@
 #ifndef QSTRING_H
 #include <QString>
 #endif
+#ifndef __glew_h__
+#include <GL/glew.h>
+#endif
 
 typedef unsigned char ubyte;
 
@@ -13,6 +16,8 @@ class Texture
 public:
     
     QString fileName;
+    
+    GLuint texture;
     
     int width;
     int height;

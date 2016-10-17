@@ -9,7 +9,7 @@ Primitive::Primitive()
     position = glm::vec3(0, 0, 0);
 }
 
-void Primitive::bind()
+void Primitive::setup()
 {
     m_time = 0;
     vertShader.bind();
@@ -47,15 +47,44 @@ void Primitive::bind()
     }
 }
 
+void Primitive::bind()
+{
+    glBindVertexArray(this->vaoId());
+}
+
 void Primitive::draw()
 {
     m_time += 1.0f;
     float xPos = sinf((float)m_time / 1000.0f);
-    glBindVertexArray(m_vaoId);
+    this->bind();
     mainShader.use();
     mainShader.setUniformFloat("time", m_time / 1000.0f);
     mainShader.setUniformM44("translation", Translate(xPos));
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0);
-    glBindVertexArray(0);
+    this->unbind();
 }
 
+void Primitive::unbind()
+{
+    glBindVertexArray(0);    
+}
+
+GLuint &Primitive::vboId()
+{
+    return m_vboId;
+}
+
+GLuint &Primitive::eboId()
+{
+    return m_eboId;
+}
+
+GLuint &Primitive::vaoId()
+{
+    return m_vaoId;
+}
+
+void DrawMultiplePrimitives(Primitive *prim, int numTimes)
+{
+    
+}

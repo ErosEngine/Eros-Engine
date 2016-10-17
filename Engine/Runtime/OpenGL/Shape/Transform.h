@@ -35,15 +35,13 @@ public:
     
     Vector3 &position() const; 
     Quaternion &rotation() const;
-    mat4 &modelMat() const;
+    glm::mat4 &modelMat() const;
     
 private:
     
     Vector3 m_position;
     Quaternion m_rotation;
     
-    
-    // Note(kiecker): friend out to the shader class
     mat4 m_modelMat;
 };
 
