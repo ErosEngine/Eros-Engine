@@ -33,9 +33,9 @@ public:
     void setPosition(Vector3 pos);
     void setRotation(Quaternion rot);
     
-    Vector3 &position() const; 
-    Quaternion &rotation() const;
-    glm::mat4 &modelMat() const;
+    Vector3 position() const; 
+    Quaternion rotation() const;
+    glm::mat4 modelMat() const;
     
 private:
     

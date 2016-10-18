@@ -1,5 +1,4 @@
 #include "Transform.h"
-#include <GL/internal/glcore.h>
 
 Transform::Transform()
 {
@@ -45,17 +44,17 @@ void Transform::setRotation(Quaternion rot)
     m_rotation = rot;
 }
 
-Vector3 &Transform::position() const
+Vector3 Transform::position() const
 {
     return m_position;
 }
 
-Quaternion &Transform::rotation() const
+Quaternion Transform::rotation() const
 {
     return m_rotation;
 }
 
-mat4 &Transform::modelMat() const
+mat4 Transform::modelMat() const
 {
     return m_modelMat;
 }
