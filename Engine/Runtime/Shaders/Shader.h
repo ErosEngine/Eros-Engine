@@ -9,7 +9,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #ifndef TRANSFORM_H
-#include "../OpenGL/Shape/Transform.h"
+#include "../OpenGL/Transform.h"
+#endif
+#ifndef TEXTURE_H
+#include "../OpenGL/Texture.h"
 #endif
 
 #define EROS_VERTEX_SHADER GL_VERTEX_SHADER
@@ -33,9 +36,17 @@ public:
     
     string shaderCode;
     GLenum shaderType;
+    
+    inline SubShader &operator = (const SubShader &right)
+    {
+        this->shaderCode = right.shaderCode;
+        this->shaderType = right.shaderType;
+        this->subShaderProgram = right.subShaderProgram;
+        return *this;
+    }
 };
 
-SubShader loadShaderFromFile(const char *fileName, const GLenum &shaderType);
+SubShader LoadShaderFromFile(const char *fileName, const GLenum &shaderType);
 
 class Shader
 {
@@ -47,6 +58,7 @@ class Shader
         bool operator == (const ShaderInformation &right);
     };
         
+    // Note(kiecker):
     typedef std::vector<ShaderInformation> ShaderInfoList;
     typedef std::vector<SubShader> Shaders;
     
@@ -75,6 +87,7 @@ public:
     void setUniformV2f(const char *variableName, const Vector2 &data);
     void setUniformInt(const char *variableName, int data);
     void setUniformFloat(const char *variableName, float data);
+    void submitTexture(const char *variableName, Texture &data);
     void setUniformM44(const char *variableName, const Matrix4x4 &data);
     void setUniformM44(const char *variableName, const glm::mat4 &data);
     

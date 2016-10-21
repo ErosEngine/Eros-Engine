@@ -2,10 +2,11 @@
 #define COORDINATES_H
 
 #include <cmath>
-#include <linux/kernel.h>
 
 #define EROS_INLINE inline
 #define PI 3.1415926535897932384626433832795f
+
+
 
 EROS_INLINE float radians(float value)
 {
@@ -964,12 +965,7 @@ struct Matrix4x4
     
     EROS_INLINE float *getValuePtr()
     {
-        float arr[16];
-        arr[0] = matrix[0][0]; arr[1] = matrix[0][1]; arr[2] = matrix[0][2]; arr[3] = matrix[0][3];
-        arr[4] = matrix[1][0]; arr[5] = matrix[1][1]; arr[6] = matrix[1][2]; arr[7] = matrix[1][3];
-        arr[8] = matrix[2][0]; arr[9] = matrix[2][1]; arr[10] = matrix[2][2]; arr[11] = matrix[2][3];
-        arr[12] = matrix[3][0]; arr[13] = matrix[3][1]; arr[14] = matrix[3][2]; arr[15] = matrix[3][3];
-        return arr;
+        return &matrix[0][0];
     }
     
     explicit EROS_INLINE Matrix4x4(

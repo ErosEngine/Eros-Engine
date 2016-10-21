@@ -1,6 +1,6 @@
 #include "Primitive.h"
 #include "Engine/Developer/Util/Util.h"
-#include "../Coordinates.h"
+#include "Coordinates.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -86,5 +86,5 @@ GLuint &Primitive::vaoId()
 
 void DrawMultiplePrimitives(Primitive *prim, int numTimes)
 {
-    
+
 }

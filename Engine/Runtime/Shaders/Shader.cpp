@@ -43,7 +43,7 @@ bool SubShader::compile()
 /**************************************************************************/
 
 
-SubShader loadShaderFromFile(const char *_fileName, const GLenum &shaderType)
+SubShader LoadShaderFromFile(const char *_fileName, const GLenum &shaderType)
 {
     Resource resource(_fileName);
     SubShader returnShader(shaderType);
@@ -89,6 +89,7 @@ void Shader::addShader(const SubShader &shader)
     glAttachShader(shaderProgram, shader.subShaderProgram);
 }
 
+// DEPRECATED
 void Shader::bind()
 {
 }
@@ -108,7 +109,7 @@ bool Shader::compile()
             glDeleteShader(m_shaderList[i].subShaderProgram);
         }
         glDeleteProgram(shaderProgram);
-        qDebug() << QString((const char *)compileOutput);
+        qDebug() << "Shader Program error :" << QString((const char *)compileOutput);
         return false;
     }
         
@@ -209,6 +210,30 @@ void Shader::setUniformFloat(const char *variableName, float data)
     {
         GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
         glUniform1f(uniformLoc, data);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
+}
+
+void Shader::submitTexture(const char *variableName, Texture &data)
+{
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glActiveTexture(GL_TEXTURE0 + data.activeTexture);
+        data.bind();
+        glUniform1i(m_infoList[b].varPos, data.activeTexture);
+        data.unbind();
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glActiveTexture(GL_TEXTURE0);
+        data.bind();
+        glUniform1i(uniformLoc, 0);
+        data.unbind();
         ShaderInformation i;
         i.varName = variableName;
         i.varPos = uniformLoc;

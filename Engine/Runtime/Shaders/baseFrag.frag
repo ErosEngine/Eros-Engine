@@ -2,7 +2,12 @@
 
 out vec4 color;
 
+in vec3 ourColor;
+in vec2 texCoord;
+
 uniform float time;
+
+uniform sampler2D myTexture1;
 
 vec4 getRandColor()
 {
@@ -11,6 +16,6 @@ vec4 getRandColor()
 
 void main()
 {
-    color = getRandColor();
+    color = texture(myTexture1, texCoord);
 }
 

@@ -1,26 +1,19 @@
 #include "Engine/Runtime/Window/OpeningDialog.h"
 #include "Engine/Runtime/Window/MainWindow.h"
 #include "Engine/Editor/MainWindow_Qt.h"
-#include "Engine/Runtime/OpenGL/Shape/Shape.h"
 #include <QApplication>
+
+#define TEST 0
 
 
 int main(int argc, char **argv)
 {
-    QApplication a(argc, argv);
+#if TEST
     
-    glm::vec3 vector = glm::vec3( 50.0f, 28.0f, 60.0f );
-    glm::vec3 normalized = glm::normalize(vector);
-    qDebug() << "X: " << normalized.x;
-    qDebug() << "Y: " << normalized.y;
-    qDebug() << "Z: " << normalized.z;
     
-    return a.exec();
-}
-
-
-int _main(int argc, char **argv)
-{
+    
+#else
+    
     QApplication a(argc, argv);
     
     OpeningDialog d;
@@ -39,6 +32,8 @@ int _main(int argc, char **argv)
         w.show();
         a.exec();
     }
+    
+#endif
     
     return 0;
 }

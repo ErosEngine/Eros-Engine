@@ -6,43 +6,38 @@
 #endif
 
 #include <glm/glm.hpp>
+#include <vector>
+#include <QString>
+#include "../OpenGL/Texture.h"
 
 #define ARRAY_SIZE(x) sizeof(x) / sizeof(typeof(x))
+
 
 struct Vertex
 {
     glm::vec3 position;
-    glm::vec3 color;
     glm::vec3 normal;
+    glm::vec2 texCoords;
 };
-
 
 struct ShapeData
-{
-private:
-    typedef unsigned int uint;
-    
-public:
-    
-    // Convert vertexes to vertices
-    // and if needed vertices to vertexes
-    void convertVertsToVertex();
-    void convertVertexToVerts();
-    
-    Vertex *vertexes;
-    GLfloat *vertices;
-    GLushort *indices;
-    GLushort *texCoords;
-    uint numIndices;
-    GLuint buffer;
+{    
+    std::vector<Vertex> vertexes;
+    std::vector<GLushort> indices;
+    std::vector<Texture> textures;
 };
 
-ShapeData CreateCube(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
-ShapeData CreatePlane(glm::vec3 pos, unsigned int numFaces, int scale, bool useTexture = false);
-ShapeData CreateQuad(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
-ShapeData CreatePyramid(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
-ShapeData CreateSphere(glm::vec3 pos, glm::vec3 size, bool useTexture = false);
+struct Mesh : public ShapeData
+{
+    QString directory;
+};
 
+ShapeData CreateCube();
+ShapeData CreatePlane();
+ShapeData CreateQuad();
+ShapeData CreatePyramid();
+ShapeData CreateSphere();
+Mesh *LoadShapeFromFile(const char *fileName);
 
 
 #endif // SHAPEDATA_H
