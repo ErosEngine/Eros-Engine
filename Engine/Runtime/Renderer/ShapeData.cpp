@@ -47,7 +47,7 @@ ShapeData CreateSphere()
     return ShapeData();
 }
 
-void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, std::string typeName, Mesh *base)
+void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Mesh *base)
 {
     for (uint i = 0; i < mat->GetTextureCount(type); ++i)
     {
@@ -68,8 +68,12 @@ void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, std::string typeN
             std::string texName;
             texName.append(base->directory.toLatin1().constData());
             texName.append(str.C_Str());
-            Texture texture = LoadTextureFromFile(texName.c_str());
-            base->textures.push_back(texture);
+            Texture texture;
+            texture.type = tType;
+            if (texture.loadFromFile(texName.c_str()))
+            {
+                base->textures.push_back(texture);
+            }
         }
     }
 }
@@ -112,7 +116,8 @@ void ProcessAssimpMesh(aiMesh *mesh, const aiScene *scene, Mesh *base)
     if (mesh->mMaterialIndex >= 0)
     {
         aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-        
+        ProcessAssimpTexture(material, aiTextureType_DIFFUSE, DiffuseTexture, base);
+        ProcessAssimpTexture(material, aiTextureType_SPECULAR, SpecularTexture, base);
     }
 }
 
@@ -130,7 +135,7 @@ void ProcessAssimpNodes(aiNode *node, const aiScene *scene, Mesh *base)
     }
 }
 
-Mesh *LoadShapeFromFile(const char *fileName)
+Mesh *LoadMeshFromFile(const char *fileName)
 {
     Mesh *returnVal = new Mesh;
     Assimp::Importer importer;

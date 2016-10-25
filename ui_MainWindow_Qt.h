@@ -56,7 +56,7 @@ public:
         debugOutput->setGeometry(QRect(80, 460, 751, 171));
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(0, 0, 91, 31));
+        pushButton->setGeometry(QRect(0, 10, 91, 21));
         pushButton->setStyleSheet(QLatin1String("QPushButton#pushButton\n"
 "{\n"
 "	\n"

@@ -16,8 +16,13 @@ Shape::~Shape()
 
 void Shape::setup()
 {
-    mesh = LoadShapeFromFile("Engine/Assets/cube3.obj");
-    texture = LoadTextureFromFile("Engine/Assets/cubeTexture.jpg");
+    mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
+    
+    if (!texture.loadFromFile("Engine/Assets/Suit/glass_dif.png"))
+    {
+        qDebug() << "Failed to load texture";
+    }
+    
     vertShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
     fragShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
     vertShader.bind();
@@ -63,7 +68,6 @@ void Shape::setup()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texCoords));
     
     shader.use();
-    shader.submitTexture("myTexture1", this->texture);
     unbind();
 }
 
@@ -78,8 +82,39 @@ void Shape::bind()
 }
 
 void Shape::draw()
-{     
-    glBindTexture(GL_TEXTURE_2D, texture.texture);
+{   
+    // TODO(kiecker): This is far from optimal drawing code
+    // I will need to look into improving it
+    
+    for (GLuint i = 0; i < mesh->textures.size(); ++i)
+    {
+        glActiveTexture(GL_TEXTURE0 + i);
+        
+        QString currentTexture;
+        
+        // Note(kiecker): submit a diffuse texture
+        if (mesh->textures[i].type == DiffuseTexture)
+        {
+            currentTexture = "diffuse_texture";
+            currentTexture.append(i);
+            shader.submitTexture(
+                     currentTexture.toLatin1().constData(),
+                     mesh->textures[i]);
+            
+        }
+        // Note(kiecker): submit a specular texture
+        else if (mesh->textures[i].type == SpecularTexture)
+        {
+            currentTexture = "specular_texture";
+            currentTexture.append(i);
+            shader.submitTexture(
+                     currentTexture.toLatin1().constData(),
+                     mesh->textures[i]);
+        }
+        mesh->textures[i].bind();
+    }
+    glActiveTexture(GL_TEXTURE0); // cleanup
+    
     bind();
     glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, 0);
     shader.use();

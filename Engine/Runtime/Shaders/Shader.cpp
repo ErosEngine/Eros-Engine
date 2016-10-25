@@ -219,20 +219,19 @@ void Shader::setUniformFloat(const char *variableName, float data)
 
 void Shader::submitTexture(const char *variableName, Texture &data)
 {
+    // We have to assume that they set the active texture already
     int b = findInList(variableName);
     if (b) // if we found the variable
     {
-        glActiveTexture(GL_TEXTURE0);
         data.bind();
-        glUniform1i(m_infoList[b].varPos, 0);
+        glUniform1i(m_infoList[b].varPos, data.texture);
         data.unbind();
     }
     else
     {
         GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-        glActiveTexture(GL_TEXTURE0);
         data.bind();
-        glUniform1i(uniformLoc, 0);
+        glUniform1i(uniformLoc, data.texture);
         data.unbind();
         ShaderInformation i;
         i.varName = variableName;

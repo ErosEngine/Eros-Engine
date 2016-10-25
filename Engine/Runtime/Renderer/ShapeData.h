@@ -37,7 +37,7 @@ ShapeData CreatePlane();
 ShapeData CreateQuad();
 ShapeData CreatePyramid();
 ShapeData CreateSphere();
-Mesh *LoadShapeFromFile(const char *fileName);
+Mesh *LoadMeshFromFile(const char *fileName);
 
 
 #endif // SHAPEDATA_H

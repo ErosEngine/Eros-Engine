@@ -1,26 +1,33 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#ifndef QSTRING_H
 #include <QString>
-#endif
-#ifndef __glew_h__
 #include <GL/glew.h>
-#endif
 
+
+enum TextureType
+{
+    DiffuseTexture = 1,
+    SpecularTexture = 2
+};
 
 class Texture
 {
 public:
+    
+   ~Texture();
     
     QString fileName;
     
     GLuint texture;
     GLuint activeTexture;
     
+    int type;
     int width;
     int height;
     int comp;
+    
+    bool loadFromFile(const char *fileName);    
     
     inline void bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
     inline void unbind() { glBindTexture(GL_TEXTURE_2D, 0); }
@@ -28,6 +35,7 @@ public:
     inline Texture &operator = (const Texture &right)
     {
         this->texture = right.texture;
+        this->type = right.type;
         this->fileName = right.fileName;
         this->width = right.width;
         this->height = right.height;
@@ -36,6 +44,5 @@ public:
     }
 };
 
-Texture LoadTextureFromFile(const char *fileName);
 
 #endif // TEXTURE_H

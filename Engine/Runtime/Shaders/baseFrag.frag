@@ -7,7 +7,12 @@ in vec2 texCoord;
 
 uniform float time;
 
-uniform sampler2D myTexture1;
+uniform sampler2D diffuse_texture1;
+uniform sampler2D diffuse_texture2;
+uniform sampler2D diffuse_texture3;
+uniform sampler2D diffuse_texture4;
+uniform sampler2D specular_texture1;
+uniform sampler2D specular_texture2;
 
 vec4 getRandColor()
 {
@@ -16,6 +21,6 @@ vec4 getRandColor()
 
 void main()
 {
-    color = texture2D(myTexture1, texCoord);
+    color = texture2D(diffuse_texture1, texCoord);
 }
 
