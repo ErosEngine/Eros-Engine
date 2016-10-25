@@ -222,9 +222,9 @@ void Shader::submitTexture(const char *variableName, Texture &data)
     int b = findInList(variableName);
     if (b) // if we found the variable
     {
-        glActiveTexture(GL_TEXTURE0 + data.activeTexture);
+        glActiveTexture(GL_TEXTURE0);
         data.bind();
-        glUniform1i(m_infoList[b].varPos, data.activeTexture);
+        glUniform1i(m_infoList[b].varPos, 0);
         data.unbind();
     }
     else

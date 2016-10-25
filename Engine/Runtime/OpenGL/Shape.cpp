@@ -16,7 +16,7 @@ Shape::~Shape()
 
 void Shape::setup()
 {
-    mesh = LoadShapeFromFile("Engine/Assets/cube.obj");
+    mesh = LoadShapeFromFile("Engine/Assets/cube3.obj");
     texture = LoadTextureFromFile("Engine/Assets/cubeTexture.jpg");
     vertShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
     fragShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
@@ -64,7 +64,6 @@ void Shape::setup()
     
     shader.use();
     shader.submitTexture("myTexture1", this->texture);
-    
     unbind();
 }
 
@@ -79,7 +78,8 @@ void Shape::bind()
 }
 
 void Shape::draw()
-{
+{     
+    glBindTexture(GL_TEXTURE_2D, texture.texture);
     bind();
     glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, 0);
     shader.use();

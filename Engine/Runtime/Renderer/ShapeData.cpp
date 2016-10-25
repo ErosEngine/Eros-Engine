@@ -47,17 +47,29 @@ ShapeData CreateSphere()
     return ShapeData();
 }
 
-void ProcessAssimpMaterial(aiMaterial *mat, aiTextureType type, QString typeName, Mesh *base)
+void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, std::string typeName, Mesh *base)
 {
     for (uint i = 0; i < mat->GetTextureCount(type); ++i)
     {
         aiString str;
         mat->GetTexture(type, i, &str);
         bool skip = false;
-        
-        for (uint j = 0; j < base->textures.size(); ++j)
+        for (uint t = 0; t < base->textures.size(); t++)
         {
-            
+            if (base->textures[t].fileName == str.C_Str())
+            {
+                base->textures.push_back(base->textures[t]);
+                skip = true;
+                break;
+            }
+        }
+        if (!skip)
+        {
+            std::string texName;
+            texName.append(base->directory.toLatin1().constData());
+            texName.append(str.C_Str());
+            Texture texture = LoadTextureFromFile(texName.c_str());
+            base->textures.push_back(texture);
         }
     }
 }
@@ -76,8 +88,8 @@ void ProcessAssimpMesh(aiMesh *mesh, const aiScene *scene, Mesh *base)
         
         if (mesh->mTextureCoords[0])
         {
-            vert.texCoords.x = mesh->mTextureCoords[i]->x;
-            vert.texCoords.y = mesh->mTextureCoords[i]->y;
+            vert.texCoords.x = mesh->mTextureCoords[0][i].x;
+            vert.texCoords.y = mesh->mTextureCoords[0][i].y;
         }
         else
         {
@@ -95,6 +107,12 @@ void ProcessAssimpMesh(aiMesh *mesh, const aiScene *scene, Mesh *base)
         {
             base->indices.push_back(face.mIndices[j]);
         }
+    }
+    
+    if (mesh->mMaterialIndex >= 0)
+    {
+        aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+        
     }
 }
 

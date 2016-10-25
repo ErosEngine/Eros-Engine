@@ -16,6 +16,6 @@ vec4 getRandColor()
 
 void main()
 {
-    color = texture(myTexture1, texCoord);
+    color = texture2D(myTexture1, texCoord);
 }
 

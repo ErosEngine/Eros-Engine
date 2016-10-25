@@ -1,7 +1,7 @@
 #include "Texture.h"
 #define STB_IMAGE_IMPLEMENTATION // To prevent link errors
 #include "Engine/Developer/FileSystem/stb_image.h"
-
+#include <GL/glew.h>
 
 /*
     EXAMPLE TEXTURE SHADER

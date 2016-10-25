@@ -36,7 +36,6 @@ struct OpenGLRenderer
         glDisable(GL_LIGHTING);
         glewExperimental = GL_TRUE;
         shape->setup();
-        //p->setup();
         camera->updatePerspective(60.0f, 4.0f, 3.0f, 0.1f, 100.0f, 1.33f);
         perspective = Perspective(60.0f, 1.33f, 0.1f, 100.0f);
         gPerspective = camera->getPerspective();
