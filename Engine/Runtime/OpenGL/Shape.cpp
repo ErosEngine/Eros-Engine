@@ -16,12 +16,12 @@ Shape::~Shape()
 
 void Shape::setup()
 {
-    mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
+    mesh = LoadMeshFromFile("Engine/Assets/cube3.obj");
     
-    if (!texture.loadFromFile("Engine/Assets/Suit/glass_dif.png"))
-    {
-        qDebug() << "Failed to load texture";
-    }
+    //if (!texture.loadFromFile("Engine/Assets/Suit/arm_dif.png"))
+    //{
+    //    qDebug() << "Failed to load texture";
+    //}
     
     vertShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
     fragShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
@@ -82,10 +82,10 @@ void Shape::bind()
 }
 
 void Shape::draw()
-{   
+{
     // TODO(kiecker): This is far from optimal drawing code
     // I will need to look into improving it
-    
+    /*
     for (GLuint i = 0; i < mesh->textures.size(); ++i)
     {
         glActiveTexture(GL_TEXTURE0 + i);
@@ -100,7 +100,6 @@ void Shape::draw()
             shader.submitTexture(
                      currentTexture.toLatin1().constData(),
                      mesh->textures[i]);
-            
         }
         // Note(kiecker): submit a specular texture
         else if (mesh->textures[i].type == SpecularTexture)
@@ -114,7 +113,7 @@ void Shape::draw()
         mesh->textures[i].bind();
     }
     glActiveTexture(GL_TEXTURE0); // cleanup
-    
+    */
     bind();
     glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, 0);
     shader.use();

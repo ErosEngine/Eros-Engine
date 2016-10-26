@@ -20,7 +20,7 @@ public:
     SubShader fragShader;
     Shader shader;
     
-    Texture texture;
+    //Texture texture;
     Transform transform;
     Mesh *mesh;
     
