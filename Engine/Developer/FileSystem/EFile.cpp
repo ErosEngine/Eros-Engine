@@ -9,10 +9,6 @@ EFile::~EFile()
 
 FileErrorCode EFile::OpenFile(const char *fileName, OpenType type)
 {
-    m_file = fopen(fileName, type);
-    
-    
-    
     return NoError;
 }
 

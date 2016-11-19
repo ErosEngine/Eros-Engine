@@ -6,14 +6,15 @@
 #include <QDebug>
 #include "Engine/Developer/Util/ErosDefines.h"
 
-
 enum OpenType
 {
+    /*
     READWRITE = "rw",
     READONLY = "r",
     WRITEONLY = "w",
     READBINARY = "rb",
     WRITEBINARY = "wb"
+    */
 };
 
 enum FileErrorCode
@@ -28,7 +29,7 @@ public:
     
    ~EFile();
     
-    FileErrorCode OpenFile(const char *fileName, OpenType type = READWRITE);
+    FileErrorCode OpenFile(const char *fileName, OpenType type);
     void CloseFile();
     const char *GetError();
     const char *GetDataConst() const; // This is maximum string compatibility
