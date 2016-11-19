@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     Engine/Developer/Client/Input.cpp \
     Engine/Runtime/Renderer/ShapeData.cpp \
     Engine/Runtime/OpenGL/Transform.cpp \
-    Engine/Runtime/OpenGL/Model.cpp
+    Engine/Runtime/OpenGL/Model.cpp \
+    Engine/Developer/FileSystem/EFile.cpp
     
 
 HEADERS += \
@@ -52,7 +53,8 @@ HEADERS += \
     Engine/Runtime/Renderer/ShapeData.h \
     Engine/Runtime/OpenGL/Transform.h \
     Engine/Runtime/OpenGL/Model.h \
-    Engine/Developer/Util/ErosDefines.h
+    Engine/Developer/Util/ErosDefines.h \
+    Engine/Developer/FileSystem/EFile.h 
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

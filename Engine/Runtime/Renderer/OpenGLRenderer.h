@@ -43,7 +43,7 @@ struct OpenGLRenderer
         camera->height = (float)windowHeight;
         shape->shader.Use();
         shape->shader.SetUniform("perspective", gPerspective);
-        shape->shader.SetUniform("translation", Translate(0.0f, 0.0f, -7.0f));
+        shape->shader.SetUniform("translation", glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -7.0f)));
     }
     
     void DuringGameRender()

@@ -1076,12 +1076,12 @@ EROS_INLINE EMatrix4x4 operator * (EMatrix4x4 &left, EMatrix4x4 &right)
     RETURN_NOTHING(EMatrix4x4);
 }
 
-EROS_INLINE EVector4 &operator *= (EVector4 &left, EMatrix4x4 &right)
+EROS_INLINE EVector4 operator *= (EVector4 &left, EMatrix4x4 &right)
 {
     RETURN_NOTHING(EVector4);
 }
 
-EROS_INLINE EMatrix4x4 &operator *= (EMatrix4x4 &left, EMatrix4x4 &right)
+EROS_INLINE EMatrix4x4 operator *= (EMatrix4x4 &left, EMatrix4x4 &right)
 {
     RETURN_NOTHING(EMatrix4x4);
 }

@@ -16,7 +16,7 @@ Shape::~Shape()
 
 void Shape::Setup()
 {
-    mesh = LoadMeshFromFile("Engine/Assets/spider.obj");
+    mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
     
     if (!texture.LoadFromFile("Engine/Assets/Suit/arm_dif.png"))
     {
