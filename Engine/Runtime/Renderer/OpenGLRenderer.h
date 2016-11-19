@@ -18,7 +18,7 @@ struct OpenGLRenderer
     Primitive *p;
     Shape *shape;
     Camera *camera;
-    Matrix4x4 perspective;
+    EMatrix4x4 perspective;
     glm::mat4 gPerspective;
         
     OpenGLRenderer()
@@ -35,23 +35,23 @@ struct OpenGLRenderer
         glMatrixMode(GL_MODELVIEW);
         glDisable(GL_LIGHTING);
         glewExperimental = GL_TRUE;
-        shape->setup();
-        camera->updatePerspective(60.0f, 4.0f, 3.0f, 0.1f, 100.0f, 1.33f);
+        shape->Setup();
+        camera->UpdatePerspective(60.0f, 4.0f, 3.0f, 0.1f, 100.0f, 1.33f);
         perspective = Perspective(60.0f, 1.33f, 0.1f, 100.0f);
-        gPerspective = camera->getPerspective();
+        gPerspective = camera->GetPerspective();
         camera->width = (float)windowWidth;
         camera->height = (float)windowHeight;
-        shape->shader.use();
-        shape->shader.setUniformM44("perspective", gPerspective);
-        shape->shader.setUniformM44("translation", Translate(0.0f, 0.0f, -7.0f));
+        shape->shader.Use();
+        shape->shader.SetUniform("perspective", gPerspective);
+        shape->shader.SetUniform("translation", Translate(0.0f, 0.0f, -7.0f));
     }
     
     void DuringGameRender()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_PROJECTION);
-        shape->draw();
-        shape->shader.setUniformM44("modelView", camera->getViewMatrix());
+        shape->Draw();
+        shape->shader.SetUniform("modelView", camera->GetViewMatrix());
     }
     
     void PostGameRender()

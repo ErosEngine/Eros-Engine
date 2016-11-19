@@ -5,7 +5,7 @@ CONFIG -= app_bundle console
 
 QT += core gui widgets network opengl
 
-win32: LIBS += -L$$PWD/ExtLibs/libs/ -lglew32 -lSDL2 -lSDL2main -lSDL2test -lopengl32 -llibfreetype-6
+win32: LIBS += -L$$PWD/ExtLibs/libs/ -lglew32 -lSDL2 -lSDL2main -lSDL2test -lopengl32 -llibfreetype-6 -lassimp
 unix: LIBS += -lGLEW -lSDL2 -lfreetype -lassimp
 
 INCLUDEPATH += $$PWD/ExtLibs/include
@@ -14,7 +14,6 @@ DEPENDPATH += $$PWD/ExtLibs/include
 SOURCES += main.cpp \
     Engine/Runtime/Window/MainWindow.cpp \
     Engine/Runtime/Shaders/Shader.cpp \
-    Engine/Developer/FileSystem/Resource.cpp \
     Engine/Runtime/OpenGL/Primitive.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
     Engine/Runtime/Window/OpeningDialog.cpp \
@@ -36,7 +35,6 @@ HEADERS += \
     Engine/Runtime/Window/MainWindow.h \
     Engine/Runtime/Shaders/Shader.h \
     Engine/Runtime/OpenGL/Coordinates.h \
-    Engine/Developer/FileSystem/Resource.h \
     Engine/Runtime/OpenGL/Primitive.h \
     Engine/Runtime/Renderer/OpenGLRenderer.h \
     Engine/Developer/Util/Util.h \
@@ -53,7 +51,8 @@ HEADERS += \
     Engine/Developer/Client/Input.h \
     Engine/Runtime/Renderer/ShapeData.h \
     Engine/Runtime/OpenGL/Transform.h \
-    Engine/Runtime/OpenGL/Model.h
+    Engine/Runtime/OpenGL/Model.h \
+    Engine/Developer/Util/ErosDefines.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

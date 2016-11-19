@@ -1,7 +1,7 @@
 #include "EDebugStream.h"
 #include <QDebug>
 
-#define SENDDEBUG() MainWindow_Qt::getInstance()->queueDebugStr(this->data)
+#define SENDDEBUG()
 
 
 EDebugStream::EDebugStream() : BTextStream() // Default constructor

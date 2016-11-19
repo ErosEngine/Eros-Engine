@@ -6,6 +6,7 @@
 #define EROS_INLINE inline
 #define PI 3.1415926535897932384626433832795f
 
+#define RETURN_NOTHING(type) return type()
 
 
 EROS_INLINE float radians(float value)
@@ -21,12 +22,12 @@ EROS_INLINE float inversesqrt(float value)
     return 1.0f / sqrtf(value);
 }
 
-/*
-struct Vector4
+
+struct EVector4
 {
     float x,y,z,w;
-    Vector4() : x(0), y(0), z(0), w(0){}
-    Vector4(const float &_x,
+    EVector4() : x(0), y(0), z(0), w(0){}
+    EVector4(const float &_x,
             const float &_y,
             const float &_z,
             const float &_w) :
@@ -35,10 +36,10 @@ struct Vector4
     {
         return (float)sqrt(x * x * y * y * z * z * w * w);
     }
-    Vector4 normalized()
+    EVector4 normalized()
     {
         float tempLength = length();
-        return Vector4
+        return EVector4
         (
             this->x / tempLength,
             this->y / tempLength,
@@ -48,11 +49,11 @@ struct Vector4
     }
 };
 
-struct Vector3
+struct EVector3
 {
     float x,y,z;
-    Vector3() : x(0), y(0), z(0) {}
-    Vector3(const float &_x, 
+    EVector3() : x(0), y(0), z(0) {}
+    EVector3(const float &_x, 
             const float &_y, 
             const float &_z) :
         x(_x), y(_y), z(_z)
@@ -62,10 +63,10 @@ struct Vector3
     {
         return sqrtf(x * x * y * y * z * z);
     }
-    Vector3 normalized()
+    EVector3 normalized()
     {
         float tempLength = length();
-        return Vector3
+        return EVector3
         (
             this->x / tempLength,
             this->y / tempLength,
@@ -74,20 +75,20 @@ struct Vector3
     }
 };
 
-EROS_INLINE bool operator == (const Vector3 &right, const Vector3 &left)
+EROS_INLINE bool operator == (const EVector3 &right, const EVector3 &left)
 {
     return (right.x == left.x && right.y == left.y && right.z == left.z);
 }
-EROS_INLINE bool operator != (const Vector3 &right, const Vector3 &left)
+EROS_INLINE bool operator != (const EVector3 &right, const EVector3 &left)
 {
     return !(right == left);
 }
 
-struct Vector2
+struct EVector2
 {
     float x,y;
-    Vector2() : x(0), y(0){}
-    Vector2(const float &_x, 
+    EVector2() : x(0), y(0){}
+    EVector2(const float &_x, 
             const float &_y) :
         x(_x), y(_y)
     {
@@ -96,10 +97,10 @@ struct Vector2
     {
         return (float)sqrt(x * x * y * y);
     }
-    Vector2 normalized()
+    EVector2 normalized()
     {
         float tempLength = length();
-        return Vector2
+        return EVector2
         (
             this->x / tempLength,
             this->y / tempLength
@@ -107,10 +108,10 @@ struct Vector2
     }
 };
 
-EROS_INLINE Vector4 normalize(const Vector4 &arg)
+EROS_INLINE EVector4 normalize(const EVector4 &arg)
 {
     float length = inversesqrt(arg.x * arg.x * arg.y * arg.y * arg.z * arg.z * arg.w * arg.w);
-    return Vector4
+    return EVector4
     (
         arg.x / length,
         arg.y / length,
@@ -118,43 +119,43 @@ EROS_INLINE Vector4 normalize(const Vector4 &arg)
         arg.w / length
     );
 }
-EROS_INLINE Vector3 normalize(const Vector3 &arg)
+EROS_INLINE EVector3 normalize(const EVector3 &arg)
 {
     float length = inversesqrt(arg.x * arg.x * arg.y * arg.y * arg.z * arg.z);
-    return Vector3
+    return EVector3
     (
         arg.x / length,
         arg.y / length,
         arg.z / length
     );
 }
-EROS_INLINE Vector2 normalize(const Vector2 &arg)
+EROS_INLINE EVector2 normalize(const EVector2 &arg)
 {
     float length = inversesqrt(arg.x * arg.x * arg.y * arg.y);
-    return Vector2
+    return EVector2
     (
         arg.x / length,
         arg.y / length
     );
 }
 
-EROS_INLINE float dot(Vector4 &x, Vector4 &y)
+EROS_INLINE float dot(EVector4 &x, EVector4 &y)
 {
     return (x.x * y.x + x.y * y.y + x.z * y.z + x.w * y.w);
 }
-EROS_INLINE float dot(Vector3 &x, Vector3 &y)
+EROS_INLINE float dot(EVector3 &x, EVector3 &y)
 {
     return (x.x * y.x + x.y * y.y + x.z * y.z);
 }
 
-EROS_INLINE float dot(Vector2 &x, Vector2 &y)
+EROS_INLINE float dot(EVector2 &x, EVector2 &y)
 {
     return x.x * y.x + x.y * y.y;
 }
 
-EROS_INLINE Vector3 cross(Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 cross(EVector3 &left, EVector3 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.y * right.z - left.z * right.y,
         left.z * right.x - left.x * right.z,
@@ -162,9 +163,9 @@ EROS_INLINE Vector3 cross(Vector3 &left, Vector3 &right)
     );
 }
 
-EROS_INLINE Vector4 operator * (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 operator * (EVector4 &left, EVector4 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x * right.x,
         left.y * right.y,
@@ -172,9 +173,9 @@ EROS_INLINE Vector4 operator * (Vector4 &left, Vector4 &right)
         left.w * right.w
     );
 }
-EROS_INLINE Vector4 operator * (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 operator * (EVector4 &left, EVector3 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x * right.x,
         left.y * right.y,
@@ -182,9 +183,9 @@ EROS_INLINE Vector4 operator * (Vector4 &left, Vector3 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator * (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 operator * (EVector4 &left, EVector2 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x * right.x,
         left.y * right.y,
@@ -192,9 +193,9 @@ EROS_INLINE Vector4 operator * (Vector4 &left, Vector2 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator * (Vector4 &left, float right)
+EROS_INLINE EVector4 operator * (EVector4 &left, float right)
 {
-    return Vector4
+    return EVector4
     (
         left.x * right,
         left.y * right,
@@ -203,36 +204,36 @@ EROS_INLINE Vector4 operator * (Vector4 &left, float right)
     );
 }
 
-EROS_INLINE Vector3 operator * (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 operator * (EVector3 &left, EVector4 &right)
 {   
-    return Vector3
+    return EVector3
     (
         left.x * right.x,
         left.y * right.y,
         left.z * right.z
     );
 }
-EROS_INLINE Vector3 operator * (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 operator * (EVector3 &left, EVector3 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x * right.x,
         left.y * right.y,
         left.z * right.z
     );
 }
-EROS_INLINE Vector3 operator * (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 operator * (EVector3 &left, EVector2 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x * right.x,
         left.y * right.y,
         left.z
     );
 }
-EROS_INLINE Vector3 operator * (Vector3 &left, float right)
+EROS_INLINE EVector3 operator * (EVector3 &left, float right)
 {
-    return Vector3
+    return EVector3
     (
         left.x * right,
         left.y * right,
@@ -240,24 +241,24 @@ EROS_INLINE Vector3 operator * (Vector3 &left, float right)
     );
 }
 
-EROS_INLINE Vector2 operator * (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 operator * (EVector2 &left, EVector4 &right)
 {
-    return Vector2(left.x * right.x, left.y * right.y);
+    return EVector2(left.x * right.x, left.y * right.y);
 }
-EROS_INLINE Vector2 operator * (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 operator * (EVector2 &left, EVector3 &right)
 {
-    return Vector2(left.x * right.x, left.y * right.y);
+    return EVector2(left.x * right.x, left.y * right.y);
 }
-EROS_INLINE Vector2 operator * (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 operator * (EVector2 &left, EVector2 &right)
 {
-    return Vector2(left.x * right.x, left.y * right.y);
+    return EVector2(left.x * right.x, left.y * right.y);
 }
-EROS_INLINE Vector2 operator * (Vector2 &left, float &right)
+EROS_INLINE EVector2 operator * (EVector2 &left, float &right)
 {
-    return Vector2(left.x * right, left.y * right);
+    return EVector2(left.x * right, left.y * right);
 }
 
-EROS_INLINE Vector4 &operator *= (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 &operator *= (EVector4 &left, EVector4 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
@@ -265,20 +266,20 @@ EROS_INLINE Vector4 &operator *= (Vector4 &left, Vector4 &right)
     left.w *= right.w;
     return left;
 }
-EROS_INLINE Vector4 &operator *= (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 &operator *= (EVector4 &left, EVector3 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     left.z *= right.z;
     return left;
 }
-EROS_INLINE Vector4 &operator *= (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 &operator *= (EVector4 &left, EVector2 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     return left;
 }
-EROS_INLINE Vector4 &operator *= (Vector4 &left, float right)
+EROS_INLINE EVector4 &operator *= (EVector4 &left, float right)
 {
     left.x *= right;
     left.y *= right;
@@ -287,27 +288,27 @@ EROS_INLINE Vector4 &operator *= (Vector4 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector3 &operator *= (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 &operator *= (EVector3 &left, EVector4 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     left.z *= right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator *= (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 &operator *= (EVector3 &left, EVector3 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     left.z *= right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator *= (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 &operator *= (EVector3 &left, EVector2 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     return left;
 }
-EROS_INLINE Vector3 &operator *= (Vector3 &left, float right)
+EROS_INLINE EVector3 &operator *= (EVector3 &left, float right)
 {
     left.x *= right;
     left.y *= right;
@@ -315,34 +316,34 @@ EROS_INLINE Vector3 &operator *= (Vector3 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector2 &operator *= (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 &operator *= (EVector2 &left, EVector4 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator *= (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 &operator *= (EVector2 &left, EVector3 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator *= (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 &operator *= (EVector2 &left, EVector2 &right)
 {
     left.x *= right.x;
     left.y *= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator *= (Vector2 &left, float right)
+EROS_INLINE EVector2 &operator *= (EVector2 &left, float right)
 {
     left.x *= right;
     left.y *= right;
     return left;
 }
 
-EROS_INLINE Vector4 operator / (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 operator / (EVector4 &left, EVector4 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x / right.x,
         left.y / right.y,
@@ -350,9 +351,9 @@ EROS_INLINE Vector4 operator / (Vector4 &left, Vector4 &right)
         left.w / right.w
     );
 }
-EROS_INLINE Vector4 operator / (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 operator / (EVector4 &left, EVector3 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x / right.x,
         left.y / right.y,
@@ -360,9 +361,9 @@ EROS_INLINE Vector4 operator / (Vector4 &left, Vector3 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator / (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 operator / (EVector4 &left, EVector2 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x / right.x,
         left.y / right.y,
@@ -370,9 +371,9 @@ EROS_INLINE Vector4 operator / (Vector4 &left, Vector2 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator / (Vector4 &left, float right)
+EROS_INLINE EVector4 operator / (EVector4 &left, float right)
 {
-    return Vector4
+    return EVector4
     (
         left.x / right,
         left.y / right,
@@ -381,36 +382,36 @@ EROS_INLINE Vector4 operator / (Vector4 &left, float right)
     );
 }
 
-EROS_INLINE Vector3 operator / (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 operator / (EVector3 &left, EVector4 &right)
 {   
-    return Vector3
+    return EVector3
     (
         left.x / right.x,
         left.y / right.y,
         left.z / right.z
     );
 }
-EROS_INLINE Vector3 operator / (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 operator / (EVector3 &left, EVector3 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x / right.x,
         left.y / right.y,
         left.z / right.z
     );
 }
-EROS_INLINE Vector3 operator / (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 operator / (EVector3 &left, EVector2 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x / right.x,
         left.y / right.y,
         left.z
     );
 }
-EROS_INLINE Vector3 operator / (Vector3 &left, float right)
+EROS_INLINE EVector3 operator / (EVector3 &left, float right)
 {
-    return Vector3
+    return EVector3
     (
         left.x / right,
         left.y / right,
@@ -418,24 +419,24 @@ EROS_INLINE Vector3 operator / (Vector3 &left, float right)
     );
 }
 
-EROS_INLINE Vector2 operator / (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 operator / (EVector2 &left, EVector4 &right)
 {
-    return Vector2(left.x / right.x, left.y / right.y);
+    return EVector2(left.x / right.x, left.y / right.y);
 }
-EROS_INLINE Vector2 operator / (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 operator / (EVector2 &left, EVector3 &right)
 {
-    return Vector2(left.x / right.x, left.y / right.y);
+    return EVector2(left.x / right.x, left.y / right.y);
 }
-EROS_INLINE Vector2 operator / (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 operator / (EVector2 &left, EVector2 &right)
 {
-    return Vector2(left.x / right.x, left.y / right.y);
+    return EVector2(left.x / right.x, left.y / right.y);
 }
-EROS_INLINE Vector2 operator / (Vector2 &left, float &right)
+EROS_INLINE EVector2 operator / (EVector2 &left, float &right)
 {
-    return Vector2(left.x / right, left.y / right);
+    return EVector2(left.x / right, left.y / right);
 }
 
-EROS_INLINE Vector4 &operator /= (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 &operator /= (EVector4 &left, EVector4 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
@@ -443,20 +444,20 @@ EROS_INLINE Vector4 &operator /= (Vector4 &left, Vector4 &right)
     left.w /= right.w;
     return left;
 }
-EROS_INLINE Vector4 &operator /= (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 &operator /= (EVector4 &left, EVector3 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     left.z /= right.z;
     return left;
 }
-EROS_INLINE Vector4 &operator /= (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 &operator /= (EVector4 &left, EVector2 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     return left;
 }
-EROS_INLINE Vector4 &operator /= (Vector4 &left, float right)
+EROS_INLINE EVector4 &operator /= (EVector4 &left, float right)
 {
     left.x /= right;
     left.y /= right;
@@ -465,27 +466,27 @@ EROS_INLINE Vector4 &operator /= (Vector4 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector3 &operator /= (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 &operator /= (EVector3 &left, EVector4 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     left.z /= right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator /= (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 &operator /= (EVector3 &left, EVector3 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     left.z /= right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator /= (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 &operator /= (EVector3 &left, EVector2 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     return left;
 }
-EROS_INLINE Vector3 &operator /= (Vector3 &left, float right)
+EROS_INLINE EVector3 &operator /= (EVector3 &left, float right)
 {
     left.x /= right;
     left.y /= right;
@@ -493,34 +494,34 @@ EROS_INLINE Vector3 &operator /= (Vector3 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector2 &operator /= (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 &operator /= (EVector2 &left, EVector4 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator /= (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 &operator /= (EVector2 &left, EVector3 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator /= (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 &operator /= (EVector2 &left, EVector2 &right)
 {
     left.x /= right.x;
     left.y /= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator /= (Vector2 &left, float right)
+EROS_INLINE EVector2 &operator /= (EVector2 &left, float right)
 {
     left.x /= right;
     left.y /= right;
     return left;
 }
 
-EROS_INLINE Vector4 operator + (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 operator + (EVector4 &left, EVector4 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x + right.x,
         left.y + right.y,
@@ -528,9 +529,9 @@ EROS_INLINE Vector4 operator + (Vector4 &left, Vector4 &right)
         left.w + right.w
     );
 }
-EROS_INLINE Vector4 operator + (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 operator + (EVector4 &left, EVector3 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x + right.x,
         left.y + right.y,
@@ -538,9 +539,9 @@ EROS_INLINE Vector4 operator + (Vector4 &left, Vector3 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator + (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 operator + (EVector4 &left, EVector2 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x + right.x,
         left.y + right.y,
@@ -548,9 +549,9 @@ EROS_INLINE Vector4 operator + (Vector4 &left, Vector2 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator + (Vector4 &left, float right)
+EROS_INLINE EVector4 operator + (EVector4 &left, float right)
 {
-    return Vector4
+    return EVector4
     (
         left.x + right,
         left.y + right,
@@ -559,36 +560,36 @@ EROS_INLINE Vector4 operator + (Vector4 &left, float right)
     );
 }
 
-EROS_INLINE Vector3 operator + (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 operator + (EVector3 &left, EVector4 &right)
 {   
-    return Vector3
+    return EVector3
     (
         left.x + right.x,
         left.y + right.y,
         left.z + right.z
     );
 }
-EROS_INLINE Vector3 operator + (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 operator + (EVector3 &left, EVector3 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x + right.x,
         left.y + right.y,
         left.z + right.z
     );
 }
-EROS_INLINE Vector3 operator + (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 operator + (EVector3 &left, EVector2 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x + right.x,
         left.y + right.y,
         left.z
     );
 }
-EROS_INLINE Vector3 operator + (Vector3 &left, float right)
+EROS_INLINE EVector3 operator + (EVector3 &left, float right)
 {
-    return Vector3
+    return EVector3
     (
         left.x + right,
         left.y + right,
@@ -596,24 +597,24 @@ EROS_INLINE Vector3 operator + (Vector3 &left, float right)
     );
 }
 
-EROS_INLINE Vector2 operator + (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 operator + (EVector2 &left, EVector4 &right)
 {
-    return Vector2(left.x + right.x, left.y + right.y);
+    return EVector2(left.x + right.x, left.y + right.y);
 }
-EROS_INLINE Vector2 operator + (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 operator + (EVector2 &left, EVector3 &right)
 {
-    return Vector2(left.x + right.x, left.y + right.y);
+    return EVector2(left.x + right.x, left.y + right.y);
 }
-EROS_INLINE Vector2 operator + (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 operator + (EVector2 &left, EVector2 &right)
 {
-    return Vector2(left.x + right.x, left.y + right.y);
+    return EVector2(left.x + right.x, left.y + right.y);
 }
-EROS_INLINE Vector2 operator + (Vector2 &left, float &right)
+EROS_INLINE EVector2 operator + (EVector2 &left, float &right)
 {
-    return Vector2(left.x + right, left.y + right);
+    return EVector2(left.x + right, left.y + right);
 }
 
-EROS_INLINE Vector4 &operator += (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 &operator += (EVector4 &left, EVector4 &right)
 {
     left.x += right.x;
     left.y += right.y;
@@ -621,20 +622,20 @@ EROS_INLINE Vector4 &operator += (Vector4 &left, Vector4 &right)
     left.w += right.w;
     return left;
 }
-EROS_INLINE Vector4 &operator += (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 &operator += (EVector4 &left, EVector3 &right)
 {
     left.x += right.x;
     left.y += right.y;
     left.z += right.z;
     return left;
 }
-EROS_INLINE Vector4 &operator += (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 &operator += (EVector4 &left, EVector2 &right)
 {
     left.x += right.x;
     left.y += right.y;
     return left;
 }
-EROS_INLINE Vector4 &operator += (Vector4 &left, float right)
+EROS_INLINE EVector4 &operator += (EVector4 &left, float right)
 {
     left.x += right;
     left.y += right;
@@ -643,27 +644,27 @@ EROS_INLINE Vector4 &operator += (Vector4 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector3 &operator += (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 &operator += (EVector3 &left, EVector4 &right)
 {
     left.x += right.x;
     left.y += right.y;
     left.z += right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator += (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 &operator += (EVector3 &left, EVector3 &right)
 {
     left.x += right.x;
     left.y += right.y;
     left.z += right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator += (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 &operator += (EVector3 &left, EVector2 &right)
 {
     left.x += right.x;
     left.y += right.y;
     return left;
 }
-EROS_INLINE Vector3 &operator += (Vector3 &left, float right)
+EROS_INLINE EVector3 &operator += (EVector3 &left, float right)
 {
     left.x += right;
     left.y += right;
@@ -671,34 +672,34 @@ EROS_INLINE Vector3 &operator += (Vector3 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector2 &operator += (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 &operator += (EVector2 &left, EVector4 &right)
 {
     left.x += right.x;
     left.y += right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator += (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 &operator += (EVector2 &left, EVector3 &right)
 {
     left.x += right.x;
     left.y += right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator += (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 &operator += (EVector2 &left, EVector2 &right)
 {
     left.x += right.x;
     left.y += right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator += (Vector2 &left, float right)
+EROS_INLINE EVector2 &operator += (EVector2 &left, float right)
 {
     left.x += right;
     left.y += right;
     return left;
 }
 
-EROS_INLINE Vector4 operator - (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 operator - (EVector4 &left, EVector4 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x - right.x,
         left.y - right.y,
@@ -706,9 +707,9 @@ EROS_INLINE Vector4 operator - (Vector4 &left, Vector4 &right)
         left.w - right.w
     );
 }
-EROS_INLINE Vector4 operator - (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 operator - (EVector4 &left, EVector3 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x - right.x,
         left.y - right.y,
@@ -716,9 +717,9 @@ EROS_INLINE Vector4 operator - (Vector4 &left, Vector3 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator - (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 operator - (EVector4 &left, EVector2 &right)
 {
-    return Vector4
+    return EVector4
     (
         left.x - right.x,
         left.y - right.y,
@@ -726,9 +727,9 @@ EROS_INLINE Vector4 operator - (Vector4 &left, Vector2 &right)
         left.w
     );
 }
-EROS_INLINE Vector4 operator - (Vector4 &left, float right)
+EROS_INLINE EVector4 operator - (EVector4 &left, float right)
 {
-    return Vector4
+    return EVector4
     (
         left.x - right,
         left.y - right,
@@ -737,36 +738,36 @@ EROS_INLINE Vector4 operator - (Vector4 &left, float right)
     );
 }
 
-EROS_INLINE Vector3 operator - (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 operator - (EVector3 &left, EVector4 &right)
 {   
-    return Vector3
+    return EVector3
     (
         left.x - right.x,
         left.y - right.y,
         left.z - right.z
     );
 }
-EROS_INLINE Vector3 operator - (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 operator - (EVector3 &left, EVector3 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x - right.x,
         left.y - right.y,
         left.z - right.z
     );
 }
-EROS_INLINE Vector3 operator - (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 operator - (EVector3 &left, EVector2 &right)
 {
-    return Vector3
+    return EVector3
     (
         left.x - right.x,
         left.y - right.y,
         left.z
     );
 }
-EROS_INLINE Vector3 operator - (Vector3 &left, float right)
+EROS_INLINE EVector3 operator - (EVector3 &left, float right)
 {
-    return Vector3
+    return EVector3
     (
         left.x - right,
         left.y - right,
@@ -774,24 +775,24 @@ EROS_INLINE Vector3 operator - (Vector3 &left, float right)
     );
 }
 
-EROS_INLINE Vector2 operator - (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 operator - (EVector2 &left, EVector4 &right)
 {
-    return Vector2(left.x - right.x, left.y - right.y);
+    return EVector2(left.x - right.x, left.y - right.y);
 }
-EROS_INLINE Vector2 operator - (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 operator - (EVector2 &left, EVector3 &right)
 {
-    return Vector2(left.x - right.x, left.y - right.y);
+    return EVector2(left.x - right.x, left.y - right.y);
 }
-EROS_INLINE Vector2 operator - (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 operator - (EVector2 &left, EVector2 &right)
 {
-    return Vector2(left.x - right.x, left.y - right.y);
+    return EVector2(left.x - right.x, left.y - right.y);
 }
-EROS_INLINE Vector2 operator - (Vector2 &left, float &right)
+EROS_INLINE EVector2 operator - (EVector2 &left, float &right)
 {
-    return Vector2(left.x - right, left.y - right);
+    return EVector2(left.x - right, left.y - right);
 }
 
-EROS_INLINE Vector4 &operator -= (Vector4 &left, Vector4 &right)
+EROS_INLINE EVector4 &operator -= (EVector4 &left, EVector4 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
@@ -799,20 +800,20 @@ EROS_INLINE Vector4 &operator -= (Vector4 &left, Vector4 &right)
     left.w -= right.w;
     return left;
 }
-EROS_INLINE Vector4 &operator -= (Vector4 &left, Vector3 &right)
+EROS_INLINE EVector4 &operator -= (EVector4 &left, EVector3 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     left.z -= right.z;
     return left;
 }
-EROS_INLINE Vector4 &operator -= (Vector4 &left, Vector2 &right)
+EROS_INLINE EVector4 &operator -= (EVector4 &left, EVector2 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     return left;
 }
-EROS_INLINE Vector4 &operator -= (Vector4 &left, float right)
+EROS_INLINE EVector4 &operator -= (EVector4 &left, float right)
 {
     left.x -= right;
     left.y -= right;
@@ -821,27 +822,27 @@ EROS_INLINE Vector4 &operator -= (Vector4 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector3 &operator -= (Vector3 &left, Vector4 &right)
+EROS_INLINE EVector3 &operator -= (EVector3 &left, EVector4 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     left.z -= right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator -= (Vector3 &left, Vector3 &right)
+EROS_INLINE EVector3 &operator -= (EVector3 &left, EVector3 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     left.z -= right.z;
     return left;
 }
-EROS_INLINE Vector3 &operator -= (Vector3 &left, Vector2 &right)
+EROS_INLINE EVector3 &operator -= (EVector3 &left, EVector2 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     return left;
 }
-EROS_INLINE Vector3 &operator -= (Vector3 &left, float right)
+EROS_INLINE EVector3 &operator -= (EVector3 &left, float right)
 {
     left.x -= right;
     left.y -= right;
@@ -849,340 +850,272 @@ EROS_INLINE Vector3 &operator -= (Vector3 &left, float right)
     return left;
 }
 
-EROS_INLINE Vector2 &operator -= (Vector2 &left, Vector4 &right)
+EROS_INLINE EVector2 &operator -= (EVector2 &left, EVector4 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator -= (Vector2 &left, Vector3 &right)
+EROS_INLINE EVector2 &operator -= (EVector2 &left, EVector3 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator -= (Vector2 &left, Vector2 &right)
+EROS_INLINE EVector2 &operator -= (EVector2 &left, EVector2 &right)
 {
     left.x -= right.x;
     left.y -= right.y;
     return left;
 }
-EROS_INLINE Vector2 &operator -= (Vector2 &left, float right)
+EROS_INLINE EVector2 &operator -= (EVector2 &left, float right)
 {
     left.x -= right;
     left.y -= right;
     return left;
 }
 
-EROS_INLINE bool operator == (Vector4 &left, Vector4 &right)
+EROS_INLINE bool operator == (EVector4 &left, EVector4 &right)
 {
     return (left.x == right.x && left.y == right.y && left.z == right.z && left.w == right.w);
 }
-EROS_INLINE bool operator != (Vector4 &left, Vector4 &right)
+EROS_INLINE bool operator != (EVector4 &left, EVector4 &right)
 {
     return !(right == left);
 }
-EROS_INLINE bool operator == (Vector4 &left, Vector3 &right)
+EROS_INLINE bool operator == (EVector4 &left, EVector3 &right)
 {
     return (left.x == right.x && left.y == right.y && left.z == right.z);
 }
-EROS_INLINE bool operator != (Vector4 &left, Vector3 &right)
+EROS_INLINE bool operator != (EVector4 &left, EVector3 &right)
 {
     return !(left == right);
 }
-EROS_INLINE bool operator == (Vector4 &left, Vector2 &right)
+EROS_INLINE bool operator == (EVector4 &left, EVector2 &right)
 {
     return (left.x == right.x && left.y == right.y);
 }
-EROS_INLINE bool operator != (Vector4 &left, Vector2 &right)
+EROS_INLINE bool operator != (EVector4 &left, EVector2 &right)
 {
     return !(left == right);
 }
 
-EROS_INLINE bool operator == (Vector3 &left, Vector4 &right)
+EROS_INLINE bool operator == (EVector3 &left, EVector4 &right)
 {
     return (left.x == right.x && left.y == right.y && left.z == right.z);
 }
-EROS_INLINE bool operator != (Vector3 &left, Vector4 &right)
+EROS_INLINE bool operator != (EVector3 &left, EVector4 &right)
 {
     return !(left == right);
 }
-EROS_INLINE bool operator == (Vector3 &left, Vector3 &right)
+EROS_INLINE bool operator == (EVector3 &left, EVector3 &right)
 {
     return (left.x == right.x && left.y == right.y && left.z == right.z);
 }
-EROS_INLINE bool operator != (Vector3 &left, Vector3 &right)
+EROS_INLINE bool operator != (EVector3 &left, EVector3 &right)
 {
     return !(left == right);
 }
-EROS_INLINE bool operator == (Vector3 &left, Vector2 &right)
+EROS_INLINE bool operator == (EVector3 &left, EVector2 &right)
 {
     return (left.x == right.x && left.y == right.y);
 }
-EROS_INLINE bool operator != (Vector3 &left, Vector2 &right)
+EROS_INLINE bool operator != (EVector3 &left, EVector2 &right)
 {
     return !(left == right);
 }
 
-EROS_INLINE bool operator == (Vector2 &left, Vector4 &right)
+EROS_INLINE bool operator == (EVector2 &left, EVector4 &right)
 {
     return (left.x == right.x && left.y == right.y);
 }
-EROS_INLINE bool operator != (Vector2 &left, Vector4 &right)
+EROS_INLINE bool operator != (EVector2 &left, EVector4 &right)
 {
     return !(left == right);
 }
-EROS_INLINE bool operator == (Vector2 &left, Vector3 &right)
+EROS_INLINE bool operator == (EVector2 &left, EVector3 &right)
 {
     return (left.x == right.x && left.y == right.y);
 }
-EROS_INLINE bool operator != (Vector2 &left, Vector3 &right)
+EROS_INLINE bool operator != (EVector2 &left, EVector3 &right)
 {
     return !(left == right);
 }
-EROS_INLINE bool operator == (Vector2 &left, Vector2 &right)
+EROS_INLINE bool operator == (EVector2 &left, EVector2 &right)
 {
     return (left.x == right.x && left.y == right.y);
 }
-EROS_INLINE bool operator != (Vector2 &left, Vector2 &right)
+EROS_INLINE bool operator != (EVector2 &left, EVector2 &right)
 {
     return !(left == right);
 }
 
-*/
+
 // -------- MATRICES ---------- //
 
-enum RotDir
-{
-    XAxis,
-    YAxis,
-    ZAxis
-};
 
-struct Matrix4x4
+struct Column4
 {
-    float matrix[4][4];
+private:
     
-    EROS_INLINE float *getValuePtr()
+    float m[4];
+    
+public:
+    
+    EROS_INLINE float &operator[](int pos)
     {
-        return &matrix[0][0];
+        return m[pos];
     }
     
-    explicit EROS_INLINE Matrix4x4(
-    float m11 = 0.0f, float m12 = 0.0f, float m13 = 0.0f, float m14 = 0.0f,
-    float m21 = 0.0f, float m22 = 0.0f, float m23 = 0.0f, float m24 = 0.0f,
-    float m31 = 0.0f, float m32 = 0.0f, float m33 = 0.0f, float m34 = 0.0f,
-    float m41 = 0.0f, float m42 = 0.0f, float m43 = 0.0f, float m44 = 0.0f)
+    EROS_INLINE const float &operator [](int pos) const 
     {
-        matrix[0][0] = m11; matrix[0][1] = m12; matrix[0][2] = m13; matrix[0][3] = m14;
-        matrix[1][0] = m21; matrix[1][1] = m22; matrix[1][2] = m23; matrix[1][3] = m24;
-        matrix[2][0] = m31; matrix[2][1] = m32; matrix[2][2] = m33; matrix[2][3] = m34; 
-        matrix[3][0] = m41; matrix[3][1] = m42; matrix[3][2] = m43; matrix[3][3] = m44;
-    }
-    /*
-    EROS_INLINE Matrix4x4(Vector4 &row1, Vector4 &row2, Vector4 &row3, Vector4 &row4)
-    {
-        matrix[0][0] = row1.x; matrix[0][1] = row1.y; matrix[0][2] = row1.z; matrix[0][3] = row1.w;
-        matrix[1][0] = row2.x; matrix[1][1] = row2.y; matrix[1][2] = row2.z; matrix[1][3] = row2.w;
-        matrix[2][0] = row3.x; matrix[2][1] = row3.y; matrix[2][2] = row3.z; matrix[2][3] = row3.w; 
-        matrix[3][0] = row4.x; matrix[3][1] = row4.y; matrix[3][2] = row4.z; matrix[3][3] = row4.w;
-    }
-    */
-    EROS_INLINE Matrix4x4 &operator = (const Matrix4x4 &right)
-    {
-        this->matrix[0][0] = right.matrix[0][0];
-        this->matrix[0][1] = right.matrix[0][1];
-        this->matrix[0][2] = right.matrix[0][2];
-        this->matrix[0][3] = right.matrix[0][3];
-        this->matrix[1][0] = right.matrix[1][0];
-        this->matrix[1][1] = right.matrix[1][1];
-        this->matrix[1][2] = right.matrix[1][2];
-        this->matrix[1][3] = right.matrix[1][3];
-        this->matrix[2][0] = right.matrix[2][0];
-        this->matrix[2][1] = right.matrix[2][1];
-        this->matrix[2][2] = right.matrix[2][2];
-        this->matrix[2][3] = right.matrix[2][3];
-        this->matrix[3][0] = right.matrix[3][0];
-        this->matrix[3][1] = right.matrix[3][1];
-        this->matrix[3][2] = right.matrix[3][2];
-        this->matrix[3][3] = right.matrix[3][3];
-        return *this;
-    }
-
-    EROS_INLINE void setIdentity()
-    {
-        matrix[0][0] = 1.0f; matrix[0][1] = 0.0f; matrix[0][2] = 0.0f; matrix[0][3] = 0.0f;
-        matrix[1][0] = 0.0f; matrix[1][1] = 1.0f; matrix[1][2] = 0.0f; matrix[1][3] = 0.0f;
-        matrix[2][0] = 0.0f; matrix[2][1] = 0.0f; matrix[2][2] = 1.0f; matrix[2][3] = 0.0f;
-        matrix[3][0] = 0.0f; matrix[3][1] = 0.0f; matrix[3][2] = 0.0f; matrix[3][3] = 1.0f;
+        return m[pos];
     }
     
 };
-/*
-EROS_INLINE Vector4 operator * (Vector4 &left, Matrix4x4 &right)
-{
-    return Vector4
-    (
-        ((right.matrix[0][0] * left.x) + (right.matrix[0][1] * left.y) + (right.matrix[0][2] * left.z) + (right.matrix[0][3] * left.w)),
-        ((right.matrix[1][0] * left.x) + (right.matrix[1][1] * left.y) + (right.matrix[1][2] * left.z) + (right.matrix[1][3] * left.w)),
-        ((right.matrix[2][0] * left.x) + (right.matrix[2][1] * left.y) + (right.matrix[2][2] * left.z) + (right.matrix[2][3] * left.w)),
-        ((right.matrix[3][0] * left.x) + (right.matrix[3][1] * left.y) + (right.matrix[3][2] * left.z) + (right.matrix[3][3] * left.w))
-    );
-}
-*/
-EROS_INLINE Matrix4x4 operator * (Matrix4x4 &left, Matrix4x4 &right)
-{
-    return Matrix4x4(
-    ((left.matrix[0][0] * right.matrix[0][0]) + (left.matrix[0][1] * right.matrix[1][0]) + (left.matrix[0][2] * right.matrix[2][0]) + (left.matrix[0][3] * right.matrix[3][0])),
-    ((left.matrix[0][0] * right.matrix[0][1]) + (left.matrix[0][1] * right.matrix[1][1]) + (left.matrix[0][2] * right.matrix[2][1]) + (left.matrix[0][3] * right.matrix[3][1])),
-    ((left.matrix[0][0] * right.matrix[0][2]) + (left.matrix[0][1] * right.matrix[1][2]) + (left.matrix[0][2] * right.matrix[2][2]) + (left.matrix[0][3] * right.matrix[3][2])),
-    ((left.matrix[0][0] * right.matrix[0][3]) + (left.matrix[0][1] * right.matrix[1][3]) + (left.matrix[0][2] * right.matrix[2][3]) + (left.matrix[0][3] * right.matrix[3][3])),
-    ((left.matrix[1][0] * right.matrix[1][0]) + (left.matrix[1][1] * right.matrix[1][0]) + (left.matrix[1][2] * right.matrix[2][0]) + (left.matrix[1][3] * right.matrix[3][0])),
-    ((left.matrix[1][0] * right.matrix[1][1]) + (left.matrix[1][1] * right.matrix[1][1]) + (left.matrix[1][2] * right.matrix[2][1]) + (left.matrix[1][3] * right.matrix[3][1])),
-    ((left.matrix[1][0] * right.matrix[1][2]) + (left.matrix[1][1] * right.matrix[1][2]) + (left.matrix[1][2] * right.matrix[2][2]) + (left.matrix[1][3] * right.matrix[3][2])),
-    ((left.matrix[1][0] * right.matrix[1][3]) + (left.matrix[1][1] * right.matrix[1][3]) + (left.matrix[1][2] * right.matrix[2][3]) + (left.matrix[1][3] * right.matrix[3][3])),
-    ((left.matrix[2][0] * right.matrix[2][0]) + (left.matrix[2][1] * right.matrix[1][0]) + (left.matrix[2][2] * right.matrix[2][0]) + (left.matrix[2][3] * right.matrix[3][0])),
-    ((left.matrix[2][0] * right.matrix[2][1]) + (left.matrix[2][1] * right.matrix[1][1]) + (left.matrix[2][2] * right.matrix[2][1]) + (left.matrix[2][3] * right.matrix[3][1])),
-    ((left.matrix[2][0] * right.matrix[2][2]) + (left.matrix[2][1] * right.matrix[1][2]) + (left.matrix[2][2] * right.matrix[2][2]) + (left.matrix[2][3] * right.matrix[3][2])),
-    ((left.matrix[2][0] * right.matrix[2][3]) + (left.matrix[2][1] * right.matrix[1][3]) + (left.matrix[2][2] * right.matrix[2][3]) + (left.matrix[2][3] * right.matrix[3][3])),
-    ((left.matrix[3][0] * right.matrix[3][0]) + (left.matrix[3][1] * right.matrix[1][0]) + (left.matrix[3][2] * right.matrix[2][0]) + (left.matrix[3][3] * right.matrix[3][0])),
-    ((left.matrix[3][0] * right.matrix[3][1]) + (left.matrix[3][1] * right.matrix[1][1]) + (left.matrix[3][2] * right.matrix[2][1]) + (left.matrix[3][3] * right.matrix[3][1])),
-    ((left.matrix[3][0] * right.matrix[3][2]) + (left.matrix[3][1] * right.matrix[1][2]) + (left.matrix[3][2] * right.matrix[2][2]) + (left.matrix[3][3] * right.matrix[3][2])),
-    ((left.matrix[3][0] * right.matrix[3][3]) + (left.matrix[3][1] * right.matrix[1][3]) + (left.matrix[3][2] * right.matrix[2][3]) + (left.matrix[3][3] * right.matrix[3][3])));
-}
-/*
-EROS_INLINE Vector4 &operator *= (Vector4 &left, Matrix4x4 &right)
-{
-    left.x = ((right.matrix[0][0] * left.x) + (right.matrix[0][1] * left.y) + (right.matrix[0][2] * left.z) + (right.matrix[0][3] * left.w));
-    left.y = ((right.matrix[1][0] * left.x) + (right.matrix[1][1] * left.y) + (right.matrix[1][2] * left.z) + (right.matrix[1][3] * left.w));
-    left.z = ((right.matrix[2][0] * left.x) + (right.matrix[2][1] * left.y) + (right.matrix[2][2] * left.z) + (right.matrix[2][3] * left.w));
-    left.w = ((right.matrix[3][0] * left.x) + (right.matrix[3][1] * left.y) + (right.matrix[3][2] * left.z) + (right.matrix[3][3] * left.w));
-    return left;
-}
-*/
-EROS_INLINE Matrix4x4 &operator *= (Matrix4x4 &left, Matrix4x4 &right)
-{
-    left.matrix[0][0] = ((left.matrix[0][0] * right.matrix[0][0]) + (left.matrix[0][1] * right.matrix[1][0]) + (left.matrix[0][2] * right.matrix[2][0]) + (left.matrix[0][3] * right.matrix[3][0]));
-    left.matrix[0][1] = ((left.matrix[0][0] * right.matrix[0][1]) + (left.matrix[0][1] * right.matrix[1][1]) + (left.matrix[0][2] * right.matrix[2][1]) + (left.matrix[0][3] * right.matrix[3][1]));
-    left.matrix[0][2] = ((left.matrix[0][0] * right.matrix[0][2]) + (left.matrix[0][1] * right.matrix[1][2]) + (left.matrix[0][2] * right.matrix[2][2]) + (left.matrix[0][3] * right.matrix[3][2]));
-    left.matrix[0][3] = ((left.matrix[0][0] * right.matrix[0][3]) + (left.matrix[0][1] * right.matrix[1][3]) + (left.matrix[0][2] * right.matrix[2][3]) + (left.matrix[0][3] * right.matrix[3][3]));
-    left.matrix[1][0] = ((left.matrix[1][0] * right.matrix[1][0]) + (left.matrix[1][1] * right.matrix[1][0]) + (left.matrix[1][2] * right.matrix[2][0]) + (left.matrix[1][3] * right.matrix[3][0]));
-    left.matrix[1][1] = ((left.matrix[1][0] * right.matrix[1][1]) + (left.matrix[1][1] * right.matrix[1][1]) + (left.matrix[1][2] * right.matrix[2][1]) + (left.matrix[1][3] * right.matrix[3][1]));
-    left.matrix[1][2] = ((left.matrix[1][0] * right.matrix[1][2]) + (left.matrix[1][1] * right.matrix[1][2]) + (left.matrix[1][2] * right.matrix[2][2]) + (left.matrix[1][3] * right.matrix[3][2]));
-    left.matrix[1][3] = ((left.matrix[1][0] * right.matrix[1][3]) + (left.matrix[1][1] * right.matrix[1][3]) + (left.matrix[1][2] * right.matrix[2][3]) + (left.matrix[1][3] * right.matrix[3][3]));
-    left.matrix[2][0] = ((left.matrix[2][0] * right.matrix[2][0]) + (left.matrix[2][1] * right.matrix[1][0]) + (left.matrix[2][2] * right.matrix[2][0]) + (left.matrix[2][3] * right.matrix[3][0]));
-    left.matrix[2][1] = ((left.matrix[2][0] * right.matrix[2][1]) + (left.matrix[2][1] * right.matrix[1][1]) + (left.matrix[2][2] * right.matrix[2][1]) + (left.matrix[2][3] * right.matrix[3][1]));
-    left.matrix[2][2] = ((left.matrix[2][0] * right.matrix[2][2]) + (left.matrix[2][1] * right.matrix[1][2]) + (left.matrix[2][2] * right.matrix[2][2]) + (left.matrix[2][3] * right.matrix[3][2]));
-    left.matrix[2][3] = ((left.matrix[2][0] * right.matrix[2][3]) + (left.matrix[2][1] * right.matrix[1][3]) + (left.matrix[2][2] * right.matrix[2][3]) + (left.matrix[2][3] * right.matrix[3][3]));
-    left.matrix[3][0] = ((left.matrix[3][0] * right.matrix[3][0]) + (left.matrix[3][1] * right.matrix[1][0]) + (left.matrix[3][2] * right.matrix[2][0]) + (left.matrix[3][3] * right.matrix[3][0]));
-    left.matrix[3][1] = ((left.matrix[3][0] * right.matrix[3][1]) + (left.matrix[3][1] * right.matrix[1][1]) + (left.matrix[3][2] * right.matrix[2][1]) + (left.matrix[3][3] * right.matrix[3][1]));
-    left.matrix[3][2] = ((left.matrix[3][0] * right.matrix[3][2]) + (left.matrix[3][1] * right.matrix[1][2]) + (left.matrix[3][2] * right.matrix[2][2]) + (left.matrix[3][3] * right.matrix[3][2]));
-    left.matrix[3][3] = ((left.matrix[3][0] * right.matrix[3][3]) + (left.matrix[3][1] * right.matrix[1][3]) + (left.matrix[3][2] * right.matrix[2][3]) + (left.matrix[3][3] * right.matrix[3][3]));
-    return left;
-}
 
-EROS_INLINE Matrix4x4 Rotate(float angle, RotDir dir)
+struct Column3
 {
-    Matrix4x4 m;
-    m.setIdentity();
-    switch (dir)
+private:
+    
+    float m[3];
+    
+public:
+    
+    EROS_INLINE float &operator[](int pos)
     {
-        case (RotDir::XAxis):
-        {
-            m.matrix[1][1] = cosf(angle);
-            m.matrix[1][2] = sinf(angle) * -1.0f;
-            m.matrix[2][1] = sinf(angle);
-            m.matrix[2][2] = cosf(angle);
-        }
-        break;
-        case (RotDir::YAxis):
-        {
-            m.matrix[0][0] = cosf(angle);
-            m.matrix[0][3] = sinf(angle);
-            m.matrix[2][0] = sinf(angle) * -1.0f;
-            m.matrix[2][2] = cosf(angle);
-        }
-        break;
-        case (RotDir::ZAxis):
-        {
-            m.matrix[0][0] = cosf(angle);
-            m.matrix[0][1] = sinf(angle) * -1.0f;
-            m.matrix[1][0] = sinf(angle);
-            m.matrix[1][1] = cosf(angle);
-        }
-        break;
+        return m[pos];
     }
     
-    return m;
+    EROS_INLINE const float &operator[](int pos) const
+    {
+        return m[pos];
+    }
+};
+
+struct Column2
+{
+private:
+    
+    float m[2];
+    
+public:
+    
+    EROS_INLINE float &operator[](int pos)
+    {
+        return m[pos];
+    }
+    
+    EROS_INLINE const float &operator[](int pos) const
+    {
+        return m[pos];
+    }
+};
+
+struct EMatrix4x4
+{
+private:
+    
+    Column4 mat[4];
+    
+public:
+    
+    explicit EROS_INLINE EMatrix4x4(
+    float m11 = 0.0f, float m21 = 0.0f, float m31 = 0.0f, float m41 = 0.0f,
+    float m12 = 0.0f, float m22 = 0.0f, float m32 = 0.0f, float m42 = 0.0f,
+    float m13 = 0.0f, float m23 = 0.0f, float m33 = 0.0f, float m43 = 0.0f,
+    float m14 = 0.0f, float m24 = 0.0f, float m34 = 0.0f, float m44 = 0.0f)
+    {
+        mat[0][0] = m11; mat[1][0] = m21; mat[2][0] = m31; mat[3][0] = m41;
+        mat[0][1] = m12; mat[1][1] = m22; mat[2][1] = m32; mat[3][1] = m42;
+        mat[0][2] = m13; mat[1][2] = m23; mat[2][2] = m33; mat[3][2] = m43;
+        mat[0][3] = m14; mat[1][3] = m24; mat[2][3] = m34; mat[3][3] = m44;        
+    }
+    
+    EROS_INLINE EMatrix4x4(const EVector4 &column1, const EVector4 &column2, 
+                           const EVector4 &column3, const EVector4 &column4)
+    {
+        mat[0][0] = column1.x; mat[1][0] = column2.x; mat[2][0] = column3.x; mat[3][0] = column4.x;
+        mat[0][1] = column1.y; mat[1][1] = column2.y; mat[2][1] = column3.y; mat[3][1] = column4.y;
+        mat[0][2] = column1.z; mat[1][2] = column2.z; mat[2][2] = column3.z; mat[3][2] = column4.z;
+        mat[0][3] = column1.w; mat[1][3] = column2.w; mat[2][3] = column3.w; mat[3][3] = column4.w;        
+    }
+    
+    EROS_INLINE EMatrix4x4 &operator = (const EMatrix4x4 &right)
+    {
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       mat[0][0] = right[0][0];
+       return *this;
+    }
+    
+    EROS_INLINE Column4 &operator[] (int pos)
+    {
+        return mat[pos];
+    }
+    
+    EROS_INLINE const Column4 &operator[] (int pos) const
+    {
+        return mat[pos];
+    }
+    
+};
+
+EROS_INLINE EVector4 operator * (EVector4 &left, EMatrix4x4 &right)
+{
+    RETURN_NOTHING(EVector4);
 }
 
-EROS_INLINE Matrix4x4 Translate(float offsetX = 0.0f, float offsetY = 0.0f, float offsetZ = 0.0f)
+EROS_INLINE EMatrix4x4 operator * (EMatrix4x4 &left, EMatrix4x4 &right)
 {
-    Matrix4x4 m;
-    m.setIdentity();
-    m.matrix[0][3] = offsetX;
-    m.matrix[1][3] = offsetY;
-    m.matrix[2][3] = offsetZ;
-    return m;
+    RETURN_NOTHING(EMatrix4x4);
 }
-/*
-EROS_INLINE Matrix4x4 Translate(Vector3 &offset)
+
+EROS_INLINE EVector4 &operator *= (EVector4 &left, EMatrix4x4 &right)
+{
+    RETURN_NOTHING(EVector4);
+}
+
+EROS_INLINE EMatrix4x4 &operator *= (EMatrix4x4 &left, EMatrix4x4 &right)
+{
+    RETURN_NOTHING(EMatrix4x4);
+}
+
+EROS_INLINE EMatrix4x4 Rotate(float angle)
+{
+    RETURN_NOTHING(EMatrix4x4);
+}
+
+EROS_INLINE EMatrix4x4 Translate(float offsetX = 0.0f, float offsetY = 0.0f, float offsetZ = 0.0f)
+{
+    RETURN_NOTHING(EMatrix4x4);
+}
+
+EROS_INLINE EMatrix4x4 Translate(EVector3 &offset)
 {
     return Translate(offset.x, offset.y, offset.z);
 }
-*/
-EROS_INLINE Matrix4x4 Scale(float scaleX, float scaleY, float scaleZ)
+
+EROS_INLINE EMatrix4x4 Scale(float scaleX, float scaleY, float scaleZ)
 {
-    Matrix4x4 m;
-    m.matrix[0][0] = scaleX; 
-    m.matrix[1][1] = scaleY;
-    m.matrix[2][2] = scaleZ;
-    m.matrix[3][3] = 0.0f;
-    return m;
+    return EMatrix4x4();
 }
 
-EROS_INLINE Matrix4x4 Perspective(float fovy, float aspect, float zNear, float zFar)
+EROS_INLINE EMatrix4x4 Perspective(float fovy, float aspect, float zNear, float zFar)
 {
-    float range = tanf(radians(fovy / (2.0f))) * zNear;	
-    float left = -range * aspect;
-    float right = range * aspect;
-    float bottom = -range;
-    float top = range;
-    
-    Matrix4x4 m;
-    m.matrix[0][0] = ((2.0f) * zNear) / (right - left);
-    m.matrix[1][1] = ((2.0f) * zNear) / (top - bottom);
-    m.matrix[2][2] = - (zFar + zNear) / (zFar - zNear);
-    m.matrix[3][2] = - (1.0f);
-    m.matrix[2][3] = - ((2.0f) * zFar * zNear) / (zFar - zNear);
-    m.matrix[3][3] = 1.0f;
-    return m;
+    return EMatrix4x4();
 }
-/*
-EROS_INLINE Matrix4x4 LookAt(Vector3 eye, Vector3 center, Vector3 up)
+
+EROS_INLINE EMatrix4x4 LookAt(EVector3 eye, EVector3 center, EVector3 up)
 {
-    Matrix4x4 m;
-    Vector3 f = normalize(center - eye);
-    Vector3 u = normalize(up);
-    Vector3 s = normalize(cross(f, u));
-    u = cross(s, f);
-    
-    m.matrix[0][0] = s.x;
-    m.matrix[1][0] = s.y;
-    m.matrix[2][0] = s.z;
-    m.matrix[0][1] = u.x;
-    m.matrix[1][1] = u.y;
-    m.matrix[2][1] = u.z;
-    m.matrix[0][2] =-f.x;
-    m.matrix[1][2] =-f.y;
-    m.matrix[2][2] =-f.z;
-    m.matrix[3][0] =-dot(s, eye);
-    m.matrix[3][1] =-dot(u, eye);
-    m.matrix[3][2] = dot(f, eye);
-    
-    return m;
+    return EMatrix4x4();
 }
-*/
+
 
 
 #endif // COORDINATES_H

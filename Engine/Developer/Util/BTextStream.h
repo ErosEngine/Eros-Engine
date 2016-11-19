@@ -11,24 +11,24 @@ public:
     
     BTextStream();
     
-    const char *getConstData() const;
-    std::string getStringData() const;
-    QString getQStringData() const;
+    const char *ConstData() const;
+    std::string StdStringData() const;
+    QString QStringData() const;
     
-    void insert(const char *str);
-    void insert(char *str);
-    void insert(int i);
-    void insert(float f);
-    void insert(char c);
-    void insert(double d);
-    void insert(unsigned char c);
-    void insert(short s);
-    void insert(std::string &str);
-    void insert(QString &str);
-    void insert(const unsigned char *str);
-    void insert(unsigned short s);
+    void Insert(const char *str);
+    void Insert(char *str);
+    void Insert(int i);
+    void Insert(float f);
+    void Insert(char c);
+    void Insert(double d);
+    void Insert(unsigned char c);
+    void Insert(short s);
+    void Insert(std::string &str);
+    void Insert(QString &str);
+    void Insert(const unsigned char *str);
+    void Insert(unsigned short s);
     
-    const char *freeData();
+    const char *FreeData();
     
     QString data;
     

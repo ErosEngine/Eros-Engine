@@ -20,18 +20,18 @@ public:
     SubShader fragShader;
     Shader shader;
     
-    //Texture texture;
+    Texture texture;
     Transform transform;
-    Mesh *mesh;
+    Model *mesh;
     
-    void setup();
-    void unbind();
-    void bind();
-    void draw();
+    void Setup();
+    void UnBind();
+    void Bind();
+    void Draw();
     
-    GLuint &vboId();
-    GLuint &eboId();
-    GLuint &vaoId();
+    GLuint &VboId();
+    GLuint &EboId();
+    GLuint &VaoId();
     
 private:
     

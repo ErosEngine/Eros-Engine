@@ -47,22 +47,22 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
     switch (e->key())
     {
         case (Qt::Key::Key_W):
-            m_renderer->camera->moveForward();
+            m_renderer->camera->MoveForward();
         break;
         case (Qt::Key::Key_A):
-            m_renderer->camera->strafeLeft();
+            m_renderer->camera->StrafeLeft();
         break;
         case (Qt::Key::Key_S):
-            m_renderer->camera->moveBack();
+            m_renderer->camera->MoveBack();
         break;
         case (Qt::Key::Key_D):
-            m_renderer->camera->strafeRight();
+            m_renderer->camera->StrafeRight();
         break;
         case (Qt::Key::Key_E):
-            m_renderer->camera->moveUp();
+            m_renderer->camera->MoveUp();
         break;
         case (Qt::Key::Key_Q):
-            m_renderer->camera->moveDownward();
+            m_renderer->camera->MoveDownward();
         break;
     }
     repaint();
@@ -71,6 +71,6 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
 void OpenGLViewPort::mouseMoveEvent(QMouseEvent *e)
 {
     setFocus();
-    m_renderer->camera->mouseUpdate(e->x(), e->y());
+    m_renderer->camera->MouseUpdate(e->x(), e->y());
     repaint();
 }

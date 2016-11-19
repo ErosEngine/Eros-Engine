@@ -27,10 +27,10 @@ public:
     int height;
     int comp;
     
-    bool loadFromFile(const char *fileName);    
+    bool LoadFromFile(const char *fileName);    
     
-    inline void bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
-    inline void unbind() { glBindTexture(GL_TEXTURE_2D, 0); }
+    inline void Bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
+    inline void UnBind() { glBindTexture(GL_TEXTURE_2D, 0); }
     
     inline Texture &operator = (const Texture &right)
     {

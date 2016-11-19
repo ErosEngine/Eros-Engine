@@ -6,89 +6,89 @@ BTextStream::BTextStream()
     data = QString(); // Default constructor
 }
 
-const char *BTextStream::getConstData() const
+const char *BTextStream::ConstData() const
 {
     return data.toLatin1().constData();
 }
 
-std::string BTextStream::getStringData() const
+std::string BTextStream::StdStringData() const
 {
     return std::string(data.toLatin1().constData());
 }
 
-QString BTextStream::getQStringData() const
+QString BTextStream::QStringData() const
 {
     return data;
 }
 
-void BTextStream::insert(const char *str)
+void BTextStream::Insert(const char *str)
 {
     data += (str);
     onInsert();
 }
 
-void BTextStream::insert(char *str)
+void BTextStream::Insert(char *str)
 {
     data += (str);
     onInsert();
 }
 
-void BTextStream::insert(int i)
+void BTextStream::Insert(int i)
 {
     data += (QString::fromStdString(std::to_string(i)));
     onInsert();
 }
 
-void BTextStream::insert(float f)
+void BTextStream::Insert(float f)
 {
     data += (QString::fromStdString(std::to_string(f)));
     onInsert();
 }
 
-void BTextStream::insert(char c)
+void BTextStream::Insert(char c)
 {
     data += (c);
     onInsert();
 }
 
-void BTextStream::insert(double d)
+void BTextStream::Insert(double d)
 {
     data += (QString::fromStdString(std::to_string(d)));
     onInsert();
 }
 
 
-void BTextStream::insert(unsigned char c)
+void BTextStream::Insert(unsigned char c)
 {
     data += ((const char *)&c);
     onInsert();
 }
 
-void BTextStream::insert(short s)
+void BTextStream::Insert(short s)
 {
     data += (QString::fromStdString(std::to_string(s)));    
     onInsert();
 }
 
-void BTextStream::insert(std::string &str)
+void BTextStream::Insert(std::string &str)
 {
     data += (QString::fromStdString(str));
     onInsert();
 }
 
-void BTextStream::insert(QString &str)
+void BTextStream::Insert(QString &str)
 {
     data += (str);
     onInsert();
 }
 
-void BTextStream::insert(const unsigned char *str)
+void BTextStream::Insert(const unsigned char *str)
 {
     data += ((const char *)str);
     onInsert();
 }
 
-void BTextStream::insert(unsigned short s)
+void BTextStream::Insert(unsigned short s)
 {
     data += (QString::fromStdString(std::to_string(s)));
     onInsert();
@@ -97,85 +97,85 @@ void BTextStream::insert(unsigned short s)
 void BTextStream::onInsert()        { /* .... */ }
 const char *BTextStream::onFree()   { return ""; }
 
-const char *BTextStream::freeData()
+const char *BTextStream::FreeData()
 {
     return onFree();
 }
 
 BTextStream &operator <<(BTextStream &bs, const char *str)
 {
-    bs.insert(str);
+    bs.Insert(str);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, char *str)
 {
-    bs.insert(str);
+    bs.Insert(str);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, int i)
 {
-    bs.insert(i);
+    bs.Insert(i);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, float f)
 {
-    bs.insert(f);
+    bs.Insert(f);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, char c)
 {
-    bs.insert(c);
+    bs.Insert(c);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, unsigned char c)
 {
-    bs.insert(c);
+    bs.Insert(c);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, short s)
 {
-    bs.insert(s);
+    bs.Insert(s);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, std::string &str)
 {
-    bs.insert(str);
+    bs.Insert(str);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, QString &str)
 {
-    bs.insert(str);
+    bs.Insert(str);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, const unsigned char *str)
 {
-    bs.insert(str);
+    bs.Insert(str);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, double d)
 {
-    bs.insert(d);
+    bs.Insert(d);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, unsigned short s)
 {
-    bs.insert(s);
+    bs.Insert(s);
     return bs;
 }
 
 BTextStream &operator <<(BTextStream &bs, BTextStream &other)
 {
-    bs.insert(other.data);
+    bs.Insert(other.data);
     return bs;
 }

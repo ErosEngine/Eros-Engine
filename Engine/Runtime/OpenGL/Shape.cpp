@@ -14,39 +14,38 @@ Shape::~Shape()
     delete mesh;
 }
 
-void Shape::setup()
+void Shape::Setup()
 {
-    mesh = LoadMeshFromFile("Engine/Assets/cube3.obj");
+    mesh = LoadMeshFromFile("Engine/Assets/spider.obj");
     
-    //if (!texture.loadFromFile("Engine/Assets/Suit/arm_dif.png"))
-    //{
-    //    qDebug() << "Failed to load texture";
-    //}
+    if (!texture.LoadFromFile("Engine/Assets/Suit/arm_dif.png"))
+    {
+        qDebug() << "Failed to load texture";
+    }
     
-    vertShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
-    fragShader = LoadShaderFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
-    vertShader.bind();
-    fragShader.bind();
-    if (vertShader.compile())
+    vertShader.LoadFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
+    fragShader.LoadFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
+    vertShader.Setup();
+    fragShader.Setup();
+    if (vertShader.Compile())
     {
         qDebug() << "Vertex Shader compiled";
     }
-    if (fragShader.compile())
+    if (fragShader.Compile())
     {
         qDebug() << "Frag shader compiled";
     }
     
-    shader.bind();
-    shader.addShader(vertShader);
-    shader.addShader(fragShader);
-    shader.compile();
+    shader.AddShader(vertShader);
+    shader.AddShader(fragShader);
+    shader.Compile();
     
     
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
     glGenBuffers(1, &m_eboId);
     
-    bind();
+    Bind();
     
     glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
     glBufferData(GL_ARRAY_BUFFER, mesh->vertexes.size() * sizeof(Vertex), 
@@ -67,21 +66,21 @@ void Shape::setup()
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texCoords));
     
-    shader.use();
-    unbind();
+    shader.Use();
+    UnBind();
 }
 
-void Shape::unbind()
+void Shape::UnBind()
 {
     glBindVertexArray(0);
 }
 
-void Shape::bind()
+void Shape::Bind()
 {
     glBindVertexArray(m_vaoId);
 }
 
-void Shape::draw()
+void Shape::Draw()
 {
     // TODO(kiecker): This is far from optimal drawing code
     // I will need to look into improving it
@@ -114,23 +113,23 @@ void Shape::draw()
     }
     glActiveTexture(GL_TEXTURE0); // cleanup
     */
-    bind();
+    Bind();
     glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, 0);
-    shader.use();
-    unbind();
+    shader.Use();
+    UnBind();
 }
 
-GLuint &Shape::vboId()
+GLuint &Shape::VboId()
 {
     return m_vboId;
 }
 
-GLuint &Shape::eboId()
+GLuint &Shape::EboId()
 {
     return m_eboId;
 }
 
-GLuint &Shape::vaoId()
+GLuint &Shape::VaoId()
 {
     return m_vaoId;
 }

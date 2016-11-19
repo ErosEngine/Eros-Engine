@@ -12,13 +12,13 @@ Primitive::Primitive()
 void Primitive::setup()
 {
     m_time = 0;
-    vertShader.bind();
-    fragShader.bind();
-    if (vertShader.compile())
+    vertShader.Setup();
+    fragShader.Setup();
+    if (vertShader.Compile())
     {
         qDebug() << "Vertex shader compiled" << endl;
     }
-    if (fragShader.compile())
+    if (fragShader.Compile())
     {
         qDebug() << "fragment shader compiled" << endl;
     }
@@ -38,10 +38,10 @@ void Primitive::setup()
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    mainShader.addShader(this->fragShader);
-    mainShader.addShader(this->vertShader);
-    mainShader.bind();
-    if (mainShader.compile())
+    mainShader.AddShader(this->fragShader);
+    mainShader.AddShader(this->vertShader);
+    
+    if (mainShader.Compile())
     {
         qDebug() << "No shader compilation errors" << endl;
     }
@@ -57,9 +57,9 @@ void Primitive::draw()
     m_time += 1.0f;
     float xPos = sinf((float)m_time / 1000.0f);
     this->bind();
-    mainShader.use();
-    mainShader.setUniformFloat("time", m_time / 1000.0f);
-    mainShader.setUniformM44("translation", Translate(xPos));
+    mainShader.Use();
+    mainShader.SetUniform("time", m_time / 1000.0f);
+    mainShader.SetUniform("translation", Translate(xPos));
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0);
     this->unbind();
 }

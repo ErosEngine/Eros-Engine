@@ -18,7 +18,6 @@
 #define EROS_VERTEX_SHADER GL_VERTEX_SHADER
 #define EROS_FRAG_SHADER GL_FRAGMENT_SHADER
 
-
 using std::string;
 
 class SubShader
@@ -26,16 +25,15 @@ class SubShader
     
 public:
     
-    explicit SubShader(const GLenum &shaderType_ = GL_INVALID_ENUM) :
-        shaderType(shaderType_) { /* ... */ }
-    
     GLuint subShaderProgram;
     
-    void bind();
-    bool compile();
+    void Setup();
+    bool Compile();
     
     string shaderCode;
     GLenum shaderType;
+    
+    bool LoadFromFile(const char *fileName, GLenum nShaderType);
     
     inline SubShader &operator = (const SubShader &right)
     {
@@ -46,7 +44,6 @@ public:
     }
 };
 
-SubShader LoadShaderFromFile(const char *fileName, const GLenum &shaderType);
 
 class Shader
 {
@@ -67,7 +64,7 @@ class Shader
     
     // Note(kiecker): returns 0 if it wasn't found, 
     // so you can do: if (findInList(var)) { ... }
-    int findInList(const char *name);
+    int FindInList(const char *name);
     
     friend class Transform;
     
@@ -77,19 +74,18 @@ public:
    ~Shader();
     GLuint shaderProgram;
     
-    void addShader(const SubShader &shader);
-    void bind();
-    bool compile();
-    void use();
+    void AddShader(const SubShader &shader);
+    bool Compile();
+    void Use();
     
-    void setUniformV4f(const char *variableName, const Vector4 &data);
-    void setUniformV3f(const char *variableName, const Vector3 &data);
-    void setUniformV2f(const char *variableName, const Vector2 &data);
-    void setUniformInt(const char *variableName, int data);
-    void setUniformFloat(const char *variableName, float data);
-    void submitTexture(const char *variableName, Texture &data);
-    void setUniformM44(const char *variableName, const Matrix4x4 &data);
-    void setUniformM44(const char *variableName, const glm::mat4 &data);
+    void SetUniform(const char *variableName, const EVector4 &data);
+    void SetUniform(const char *variableName, const EVector3 &data);
+    void SetUniform(const char *variableName, const EVector2 &data);
+    void SetUniform(const char *variableName, int data);
+    void SetUniform(const char *variableName, float data);
+    void SetUniform(const char *variableName, Texture &data);
+    void SetUniform(const char *variableName, const EMatrix4x4 &data);
+    void SetUniform(const char *variableName, const glm::mat4 &data);
     
 };
 

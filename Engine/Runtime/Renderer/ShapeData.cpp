@@ -3,13 +3,12 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <linux/kernel.h>
 
 
 
-ShapeData CreateCube()
+Mesh CreateCube()
 {
-    ShapeData shape;
+    Mesh shape;
     
     // Note(kiecker): Hackey right now, but I will fix it later
     // This is for reference
@@ -27,27 +26,27 @@ ShapeData CreateCube()
     return shape;
 }
 
-ShapeData CreatePlane()
+Mesh CreatePlane()
 {
-    return ShapeData();
+    return Mesh();
 }
 
-ShapeData CreateQuad()
+Mesh CreateQuad()
 {
-    return ShapeData();
+    return Mesh();
 }
 
-ShapeData CreatePyramid()
+Mesh CreatePyramid()
 {
-    return ShapeData();
+    return Mesh();
 }
 
-ShapeData CreateSphere()
+Mesh CreateSphere()
 {
-    return ShapeData();
+    return Mesh();
 }
 
-void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Mesh *base)
+void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Model *base)
 {
     for (uint i = 0; i < mat->GetTextureCount(type); ++i)
     {
@@ -70,7 +69,7 @@ void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Mesh *
             texName.append(str.C_Str());
             Texture texture;
             texture.type = tType;
-            if (texture.loadFromFile(texName.c_str()))
+            if (texture.LoadFromFile(texName.c_str()))
             {
                 base->textures.push_back(texture);
             }
@@ -78,22 +77,22 @@ void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Mesh *
     }
 }
 
-void ProcessAssimpMesh(aiMesh *mesh, const aiScene *scene, Mesh *base)
+void ProcessAssimpMesh(aiMesh *pMesh, const aiScene *pScene, Model *pBase)
 {
-    for (uint i = 0; i < mesh->mNumVertices; ++i)
+    for (uint i = 0; i < pMesh->mNumVertices; ++i)
     {
         Vertex vert;
-        vert.position.x = mesh->mVertices[i].x;
-        vert.position.y = mesh->mVertices[i].y;
-        vert.position.z = mesh->mVertices[i].z;
-        vert.normal.x = mesh->mNormals[i].x;
-        vert.normal.y = mesh->mNormals[i].y;
-        vert.normal.z = mesh->mNormals[i].z;
+        vert.position.x = pMesh->mVertices[i].x;
+        vert.position.y = pMesh->mVertices[i].y;
+        vert.position.z = pMesh->mVertices[i].z;
+        vert.normal.x = pMesh->mNormals[i].x;
+        vert.normal.y = pMesh->mNormals[i].y;
+        vert.normal.z = pMesh->mNormals[i].z;
         
-        if (mesh->mTextureCoords[0])
+        if (pMesh->mTextureCoords[0])
         {
-            vert.texCoords.x = mesh->mTextureCoords[0][i].x;
-            vert.texCoords.y = mesh->mTextureCoords[0][i].y;
+            vert.texCoords.x = pMesh->mTextureCoords[0][i].x;
+            vert.texCoords.y = pMesh->mTextureCoords[0][i].y;
         }
         else
         {
@@ -101,43 +100,43 @@ void ProcessAssimpMesh(aiMesh *mesh, const aiScene *scene, Mesh *base)
             vert.texCoords.y = 0.0f;
         }
         
-        base->vertexes.push_back(vert);
+        pBase->vertexes.push_back(vert);
     }
     
-    for (uint i = 0; i < mesh->mNumFaces; ++i)
+    for (uint i = 0; i < pMesh->mNumFaces; ++i)
     {
-        aiFace face = mesh->mFaces[i];
+        aiFace face = pMesh->mFaces[i];
         for (uint j = 0; j < face.mNumIndices; ++j)
         {
-            base->indices.push_back(face.mIndices[j]);
+            pBase->indices.push_back(face.mIndices[j]);
         }
     }
     
-    if (mesh->mMaterialIndex >= 0)
+    if (pMesh->mMaterialIndex >= 0)
     {
-        aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-        ProcessAssimpTexture(material, aiTextureType_DIFFUSE, DiffuseTexture, base);
-        ProcessAssimpTexture(material, aiTextureType_SPECULAR, SpecularTexture, base);
+        aiMaterial *material = pScene->mMaterials[pMesh->mMaterialIndex];
+        ProcessAssimpTexture(material, aiTextureType_DIFFUSE, DiffuseTexture, pBase);
+        ProcessAssimpTexture(material, aiTextureType_SPECULAR, SpecularTexture, pBase);
     }
 }
 
-void ProcessAssimpNodes(aiNode *node, const aiScene *scene, Mesh *base)
+void ProcessAssimpNodes(aiNode *pNode, const aiScene *cpScene, Model *pBase)
 {
-    for (uint i = 0; i < node->mNumMeshes; ++i)
+    for (uint i = 0; i < pNode->mNumMeshes; ++i)
     {
-        aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-        ProcessAssimpMesh(mesh, scene, base);
+        aiMesh *mesh = cpScene->mMeshes[pNode->mMeshes[i]];
+        ProcessAssimpMesh(mesh, cpScene, pBase);
     }
     
-    for (uint i = 0; i < node->mNumChildren; ++i)
+    for (uint i = 0; i < pNode->mNumChildren; ++i)
     {
-        ProcessAssimpNodes(node->mChildren[i], scene, base);
+        ProcessAssimpNodes(pNode->mChildren[i], cpScene, pBase);
     }
 }
 
-Mesh *LoadMeshFromFile(const char *fileName)
+Model *LoadMeshFromFile(const char *fileName)
 {
-    Mesh *returnVal = new Mesh;
+    Model *returnVal = new Model;
     Assimp::Importer importer;
     const aiScene *pscene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
     

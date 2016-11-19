@@ -57,17 +57,17 @@ public:
 
     static Input *getInstance();
 
-    void updateKeys();
-    void updateEvent();
-    void updateMouse();
-    bool getKeyUp(KeyCode code);
-    bool getKeyDown(KeyCode code);
-    bool getButtonDown(MouseButton code);
-    bool getButtonUp(MouseButton code);
+    void UpdateKeys();
+    void UpdateEvent();
+    void UpdateMouse();
+    bool GetKeyUp(KeyCode code);
+    bool GetKeyDown(KeyCode code);
+    bool GetButtonDown(MouseButton code);
+    bool GetButtonUp(MouseButton code);
 
-    MousePosition getMouse();
+    MousePosition GetMouse();
 
-    inline SDL_Event getEvent() { updateEvent(); return m_event; }
+    inline SDL_Event GetEvent() { UpdateEvent(); return m_event; }
 
 private:
 
@@ -85,33 +85,32 @@ private:
 
 inline static bool HasQuit()
 {
-    return Input::getInstance()->getEvent().type == SDL_QUIT;
+    return Input::getInstance()->GetEvent().type == SDL_QUIT;
 }
 
 inline static bool GetKeyDown(Input::KeyCode code)
 {
-    return Input::getInstance()->getKeyDown(code);
+    return Input::getInstance()->GetKeyDown(code);
 }
 
 inline static bool GetKeyUp(Input::KeyCode code)
 {
-    return Input::getInstance()->getKeyUp(code);
+    return Input::getInstance()->GetKeyUp(code);
 }
 
 inline static MousePosition GetMousePosition()
 {
-    return Input::getInstance()->getMouse();
+    return Input::getInstance()->GetMouse();
 }
 
 inline static bool MouseUp(Input::MouseButton button)
 {
-    return Input::getInstance()->getButtonUp(button);
+    return Input::getInstance()->GetButtonUp(button);
 }
 
 inline static bool MouseDown(Input::MouseButton button)
 {
-    return Input::getInstance()->getButtonDown(button);
+    return Input::getInstance()->GetButtonDown(button);
 }
-
 
 #endif // INPUT_H

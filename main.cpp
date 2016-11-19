@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     if (d.returnedType == WindowType::WINDOW_SDL)
     {
         MainWindow_SDL w;
-        w.start();
+        w.Start();
         return 0;
     }
     if (d.returnedType == WindowType::WINDOW_QT)

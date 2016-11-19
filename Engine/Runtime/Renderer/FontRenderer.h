@@ -1,7 +1,6 @@
 #ifndef FONTRENDERER_H
 #define FONTRENDERER_H
 
-#include "Engine/Developer/FileSystem/Resource.h" // For file loading
 #include <QString>
 #include <GL/glew.h>
 #include <ft2build.h>
@@ -35,7 +34,7 @@ struct Font
 // to minimize the number of times that this function has to be called
 // if you plan to use a font more than once, then try to pass this pointer around
 // for perfomance
-Font *createFont(const char *fileName, int _sizeX, int _sizeY);
+Font *CreateFont(const char *fileName, int _sizeX, int _sizeY);
 
 // ------------------ Text --------------------------------
 
@@ -46,11 +45,12 @@ public:
     Text(Font *font, const char *text);
    ~Text();
     
-    void setText(const char *text);
-    void setFont(Font *font);
-    void bind();
+    void SetText(const char *text);
+
+    void SetFont(Font *font);
+    Font *GetFont();
     
-    Font *getFont();
+    void Setup();
     
 private:
     

@@ -7,7 +7,7 @@
 #include FT_OUTLINE_H
 
 
-Font *createFont(const char *fileName, int _sizeX, int _sizeY)
+Font *CreateFont(const char *fileName, int _sizeX, int _sizeY)
 {
      Font *retFont = new Font();
      
@@ -54,22 +54,22 @@ Text::Text(Font *font, const char *text)
     this->m_text += text;
 }
 
-void Text::setFont(Font *font)
+void Text::SetFont(Font *font)
 {
     this->m_font = font;
 }
 
-void Text::setText(const char *text)
+void Text::SetText(const char *text)
 {
     this->m_text = text;
 }
 
-Font *Text::getFont()
+Font *Text::GetFont()
 {
     return this->m_font;
 }
 
-void Text::bind()
+void Text::Setup()
 {
     if (m_font->texture == 0) // if the texture buffer wasn't generated
         glGenTextures(1, &m_font->texture);

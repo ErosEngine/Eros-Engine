@@ -20,24 +20,24 @@ struct Vertex
     glm::vec2 texCoords;
 };
 
-struct ShapeData
+struct Mesh
 {    
     std::vector<Vertex> vertexes;
     std::vector<GLushort> indices;
     std::vector<Texture> textures;
 };
 
-struct Mesh : public ShapeData
+struct Model : public Mesh
 {
     QString directory;
 };
 
-ShapeData CreateCube();
-ShapeData CreatePlane();
-ShapeData CreateQuad();
-ShapeData CreatePyramid();
-ShapeData CreateSphere();
-Mesh *LoadMeshFromFile(const char *fileName);
+Mesh CreateCube();
+Mesh CreatePlane();
+Mesh CreateQuad();
+Mesh CreatePyramid();
+Mesh CreateSphere();
+Model *LoadMeshFromFile(const char *fileName);
 
 
 #endif // SHAPEDATA_H
