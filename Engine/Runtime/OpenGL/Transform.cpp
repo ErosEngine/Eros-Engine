@@ -5,56 +5,56 @@ Transform::Transform()
     
 }
 
-void Transform::Translate(float x, float y, float z, float speed)
+void Transform::translate(float x, float y, float z, float speed)
 {
-    Translate(GVector3(x, y, z), speed);
+    translate(GVector3(x, y, z), speed);
 }
 
-void Transform::Translate(GVector3 pos, float speed)
+void Transform::translate(GVector3 pos, float speed)
 {
     m_modelMat = glm::translate(m_modelMat, pos * speed);
     m_position = pos;
 }
 
-void Transform::Rotate(float angle, GVector3 axis, float speed)
+void Transform::rotate(float angle, GVector3 axis, float speed)
 {
     m_modelMat = glm::rotate(m_modelMat, angle, axis);
 }
 
-void Transform::MoveTo(float x, float y, float z, float speed)
+void Transform::moveTo(float x, float y, float z, float speed)
 {
     m_modelMat = glm::translate(m_modelMat, GVector3(x, y, z));
     m_position = GVector3(x, y, z);
 }
 
-void Transform::MoveTo(GVector3 pos, float speed)
+void Transform::moveTo(GVector3 pos, float speed)
 {
     m_modelMat = glm::translate(m_modelMat, pos);
     m_position = pos;
 }
 
-void Transform::SetPosition(GVector3 pos) 
+void Transform::setPosition(GVector3 pos) 
 {
     m_position = pos;
     m_modelMat = glm::translate(m_modelMat, pos);
 }
 
-void Transform::SetRotation(Quaternion rot)
+void Transform::setRotation(Quaternion rot)
 {
     m_rotation = rot;
 }
 
-GVector3 Transform::GetPosition() const
+GVector3 Transform::getPosition() const
 {
     return m_position;
 }
 
-Quaternion Transform::GetRotation() const
+Quaternion Transform::getRotation() const
 {
     return m_rotation;
 }
 
-mat4 Transform::GetModelMat() const
+mat4 Transform::getModelMat() const
 {
     return m_modelMat;
 }

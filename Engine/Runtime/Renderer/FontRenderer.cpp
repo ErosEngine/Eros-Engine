@@ -54,22 +54,22 @@ Text::Text(Font *font, const char *text)
     this->m_text += text;
 }
 
-void Text::SetFont(Font *font)
+void Text::setFont(Font *font)
 {
     this->m_font = font;
 }
 
-void Text::SetText(const char *text)
+void Text::setText(const char *text)
 {
     this->m_text = text;
 }
 
-Font *Text::GetFont()
+const Font *Text::font() const
 {
     return this->m_font;
 }
 
-void Text::Setup()
+void Text::setup()
 {
     if (m_font->texture == 0) // if the texture buffer wasn't generated
         glGenTextures(1, &m_font->texture);

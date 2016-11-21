@@ -25,7 +25,7 @@ Texture::~Texture()
     glDeleteTextures(1, &this->texture);
 }
 
-bool Texture::LoadFromFile(const char *fileName)
+bool Texture::loadFromFile(const char *fileName)
 {
     this->fileName = fileName;
     ubyteptr texPtr = stbi_load(fileName, &width, &height, &comp, STBI_rgb);

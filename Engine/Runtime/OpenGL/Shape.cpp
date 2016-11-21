@@ -14,38 +14,31 @@ Shape::~Shape()
     delete mesh;
 }
 
-void Shape::Setup()
+void Shape::setup()
 {
-    mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
-    
-    if (!texture.LoadFromFile("Engine/Assets/Suit/arm_dif.png"))
-    {
-        qDebug() << "Failed to load texture";
-    }
-    
-    vertShader.LoadFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
-    fragShader.LoadFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
-    vertShader.Setup();
-    fragShader.Setup();
-    if (vertShader.Compile())
+    vertShader.loadFromFile("Engine/Runtime/Shaders/baseVert.vert", EROS_VERTEX_SHADER);
+    fragShader.loadFromFile("Engine/Runtime/Shaders/baseFrag.frag", EROS_FRAG_SHADER);
+    vertShader.setup();
+    fragShader.setup();
+    if (vertShader.compile())
     {
         qDebug() << "Vertex Shader compiled";
     }
-    if (fragShader.Compile())
+    if (fragShader.compile())
     {
         qDebug() << "Frag shader compiled";
     }
     
-    shader.AddShader(vertShader);
-    shader.AddShader(fragShader);
-    shader.Compile();
+    shader.addShader(vertShader);
+    shader.addShader(fragShader);
+    shader.compile();
     
     
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
     glGenBuffers(1, &m_eboId);
     
-    Bind();
+    bind();
     
     glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
     glBufferData(GL_ARRAY_BUFFER, mesh->vertexes.size() * sizeof(Vertex), 
@@ -66,21 +59,21 @@ void Shape::Setup()
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texCoords));
     
-    shader.Use();
-    UnBind();
+    shader.use();
+    unbind();
 }
 
-void Shape::UnBind()
+void Shape::unbind()
 {
     glBindVertexArray(0);
 }
 
-void Shape::Bind()
+void Shape::bind()
 {
     glBindVertexArray(m_vaoId);
 }
 
-void Shape::Draw()
+void Shape::draw()
 {
     // TODO(kiecker): This is far from optimal drawing code
     // I will need to look into improving it
@@ -113,23 +106,25 @@ void Shape::Draw()
     }
     glActiveTexture(GL_TEXTURE0); // cleanup
     */
-    Bind();
+    bind();
+    texture.bind();
+    glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, NULL);
     glDrawElementsInstanced(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, NULL, 20);    
-    shader.Use();
-    UnBind();
+    shader.use();
+    unbind();
 }
 
-GLuint &Shape::VboId()
+GLuint &Shape::vboId()
 {
     return m_vboId;
 }
 
-GLuint &Shape::EboId()
+GLuint &Shape::eboId()
 {
     return m_eboId;
 }
 
-GLuint &Shape::VaoId()
+GLuint &Shape::vaoId()
 {
     return m_vaoId;
 }

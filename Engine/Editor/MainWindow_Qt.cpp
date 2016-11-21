@@ -32,6 +32,6 @@ MainWindow_Qt *MainWindow_Qt::getInstance()
 void MainWindow_Qt::on_pushButton_released()
 {
     MainWindow_SDL w;
-    w.Start();
+    w.start();
     return;
 }

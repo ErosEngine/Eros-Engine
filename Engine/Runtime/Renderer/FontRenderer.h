@@ -45,12 +45,12 @@ public:
     Text(Font *font, const char *text);
    ~Text();
     
-    void SetText(const char *text);
+    void setText(const char *text);
 
-    void SetFont(Font *font);
-    Font *GetFont();
+    void setFont(Font *font);
+    const Font *font() const;
     
-    void Setup();
+    void setup();
     
 private:
     

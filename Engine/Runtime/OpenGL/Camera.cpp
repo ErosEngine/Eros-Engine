@@ -16,17 +16,17 @@ Camera::Camera():
 {
 }
 
-glm::mat4 Camera::GetViewMatrix()
+glm::mat4 Camera::getViewMatrix()
 {
     return glm::lookAt(position, position + target, up);
 }
 
-glm::mat4 Camera::GetPerspective()
+glm::mat4 Camera::getPerspective()
 {
     return glm::perspective(fov, aspect, zNear, zFar);
 }
 
-void Camera::MouseUpdate(int x, int y)
+void Camera::mouseUpdate(int x, int y)
 {
     glm::vec2 currentMousePos(x, y);
     glm::vec2 mouseDelta = currentMousePos - prevMousePos;
@@ -45,36 +45,41 @@ void Camera::MouseUpdate(int x, int y)
     prevMousePos = currentMousePos;
 }
 
-void Camera::StrafeRight()
+void Camera::strafeRight()
 {
     position += glm::normalize(glm::cross(target, up)) * speed;
 }
 
-void Camera::StrafeLeft()
+void Camera::strafeLeft()
 {
     position -= glm::normalize(glm::cross(target, up)) * speed;
 }
 
-void Camera::MoveForward()
+void Camera::moveForward()
 {
     position += target * speed;
 }
 
-void Camera::MoveDownward()
+void Camera::sprintForward(float multiplier)
+{
+    position += target * (speed * multiplier);
+}
+
+void Camera::moveDownward()
 {
     position -= up * speed;
 }
-void Camera::MoveUp()
+void Camera::moveUp()
 {
     position += up * speed;
 }
 
-void Camera::MoveBack()
+void Camera::moveBack()
 {
     position -= target * speed;
 }
 
-void Camera::UpdatePerspective(float fov_, float width_, float height_, 
+void Camera::updatePerspective(float fov_, float width_, float height_, 
                                float zNear_, float zFar_, float aspect_)
 {
     this->fov = fov_;

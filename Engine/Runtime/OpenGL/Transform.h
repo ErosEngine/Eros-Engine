@@ -21,21 +21,21 @@ class Transform
 public:
     Transform();
     
-    void Translate(float x, float y, float z, float speed = 1.0f);
-    void Translate(GVector3 pos, float speed = 1.0f);
-    void Rotate(float angle, GVector3 axis, float speed = 1.0f);
-    void MoveTo(float x, float y, float z, float speed = 1.0f);
-    void MoveTo(GVector3 pos, float speed = 1.0f);
+    void translate(float x, float y, float z, float speed = 1.0f);
+    void translate(GVector3 pos, float speed = 1.0f);
+    void rotate(float angle, GVector3 axis, float speed = 1.0f);
+    void moveTo(float x, float y, float z, float speed = 1.0f);
+    void moveTo(GVector3 pos, float speed = 1.0f);
     
     
     // NOTE(kiecker): Using the getters and setters because I 
     // will need the accessors to do stuff when they are changed
-    void SetPosition(GVector3 pos);
-    void SetRotation(Quaternion rot);
+    void setPosition(GVector3 pos);
+    void setRotation(Quaternion rot);
     
-    GVector3 GetPosition() const; 
-    Quaternion GetRotation() const;
-    glm::mat4 GetModelMat() const;
+    GVector3 getPosition() const; 
+    Quaternion getRotation() const;
+    glm::mat4 getModelMat() const;
     
 private:
     

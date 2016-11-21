@@ -29,6 +29,7 @@ protected:
     
 private:
     
+    Shape *shape;
     OpenGLRenderer *m_renderer;
 };
 

@@ -12,7 +12,7 @@ MainWindow_SDL::MainWindow_SDL()
     SDL_Init(SDL_INIT_EVERYTHING);
 }
 
-void MainWindow_SDL::Start()
+void MainWindow_SDL::start()
 {
     m_window = SDL_CreateWindow
     (
@@ -38,10 +38,10 @@ void MainWindow_SDL::Start()
     
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
-    GameStart();    
+    gameStart();    
 }
 
-void MainWindow_SDL::GameStart()
+void MainWindow_SDL::gameStart()
 {
     GLenum GlResult = glewInit();
     if (GlResult != GLEW_OK)
@@ -53,18 +53,18 @@ void MainWindow_SDL::GameStart()
         qDebug() << "OpenGL has initialized, Current version: " 
                  << ((const char *)glGetString(GL_VERSION));
     }
-    GameLoop();
+    gameLoop();
 }
 
-void MainWindow_SDL::GameLoop()
+void MainWindow_SDL::gameLoop()
 {
     OpenGLRenderer renderer;
-    renderer.PreGameRender();
+    renderer.preGameRender();
     
     while (m_state == GameState::RUNNING)
     {
         glPushMatrix();
-        renderer.DuringGameRender();
+        renderer.duringGameRender();
         
         SDL_Event e;
         while (SDL_PollEvent(&e))
@@ -75,11 +75,11 @@ void MainWindow_SDL::GameLoop()
             }
             if (e.key.keysym.sym == SDLK_w)
             {
-                renderer.camera->MoveForward();
+                renderer.camera->moveForward();
             }
             if (e.key.keysym.sym == SDLK_a)
             {
-                renderer.camera->StrafeLeft();
+                renderer.camera->strafeLeft();
             }
             if (e.key.keysym.sym == SDLK_ESCAPE)
             {
@@ -87,23 +87,23 @@ void MainWindow_SDL::GameLoop()
             }
             if (e.key.keysym.sym == SDLK_s)
             {
-                renderer.camera->MoveBack();
+                renderer.camera->moveBack();
             }
             if (e.key.keysym.sym == SDLK_d)
             {
-                renderer.camera->StrafeRight();
+                renderer.camera->strafeRight();
             }
             if (e.key.keysym.sym == SDLK_e)
             {
-                renderer.camera->MoveUp();
+                renderer.camera->moveUp();
             }
             if (e.key.keysym.sym == SDLK_q)
             {
-                renderer.camera->MoveDownward();
+                renderer.camera->moveDownward();
             }
             if (e.type == SDL_MOUSEMOTION)
             {
-                renderer.camera->MouseUpdate(e.motion.x, e.motion.y);
+                renderer.camera->mouseUpdate(e.motion.x, e.motion.y);
             }
         }
         
@@ -111,11 +111,11 @@ void MainWindow_SDL::GameLoop()
         glPopMatrix();
     }
     
-    renderer.PostGameRender();
-    GameEnd();
+    renderer.postGameRender();
+    gameEnd();
 }
 
-void MainWindow_SDL::GameEnd()
+void MainWindow_SDL::gameEnd()
 {
     SDL_DestroyWindow(m_window);
 }

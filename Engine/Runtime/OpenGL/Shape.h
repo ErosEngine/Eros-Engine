@@ -24,14 +24,14 @@ public:
     Transform transform;
     Model *mesh;
     
-    void Setup();
-    void UnBind();
-    void Bind();
-    void Draw();
+    void setup();
+    void unbind();
+    void bind();
+    void draw();
     
-    GLuint &VboId();
-    GLuint &EboId();
-    GLuint &VaoId();
+    GLuint &vboId();
+    GLuint &eboId();
+    GLuint &vaoId();
     
 private:
     

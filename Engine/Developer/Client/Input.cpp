@@ -17,27 +17,27 @@ Input *Input::getInstance()
     return m_instance;
 }
 
-void Input::UpdateKeys()
+void Input::updateKeys()
 {
     SDL_PumpEvents();
     m_keys = (Uint8 *)SDL_GetKeyboardState(NULL);
 }
 
-void Input::UpdateEvent()
+void Input::updateEvent()
 {
     (SDL_PollEvent(&m_event));
 }
 
-void Input::UpdateMouse()
+void Input::updateMouse()
 {
-    UpdateEvent();
+    updateEvent();
     SDL_GetMouseState(&m_mousePosition.x, &m_mousePosition.y);
 }
 
-bool Input::GetKeyUp(KeyCode code)
+bool Input::getKeyUp(KeyCode code)
 {
-    UpdateEvent();
-    UpdateKeys();
+    updateEvent();
+    updateKeys();
     if (!m_keys[code] && m_event.key.state == SDL_KEYUP)
     {
         return true;
@@ -45,10 +45,10 @@ bool Input::GetKeyUp(KeyCode code)
     return false;
 }
 
-bool Input::GetKeyDown(KeyCode code)
+bool Input::getKeyDown(KeyCode code)
 {
-    UpdateEvent();
-    UpdateKeys();
+    updateEvent();
+    updateKeys();
     if (m_keys[code] && m_event.key.state == SDL_KEYDOWN)
     {
         return true;
@@ -56,20 +56,20 @@ bool Input::GetKeyDown(KeyCode code)
     return false;
 }
 
-bool Input::GetButtonDown(MouseButton code)
+bool Input::getButtonDown(MouseButton code)
 {
     return false;
 }
 
-bool Input::GetButtonUp(MouseButton code)
+bool Input::getButtonUp(MouseButton code)
 {
     return false;
 }
 
-MousePosition Input::GetMouse()
+MousePosition Input::getMouse()
 {
     clearMouse();
-    UpdateMouse();
+    updateMouse();
     return m_mousePosition;
 }
 

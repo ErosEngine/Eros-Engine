@@ -11,7 +11,7 @@ class MainWindow_SDL
 public:
     explicit MainWindow_SDL();
     
-    void Start();
+    void start();
     
 private:
     
@@ -21,9 +21,9 @@ private:
         ENDING
     };
     
-    void GameStart();
-    void GameLoop();
-    void GameEnd();
+    void gameStart();
+    void gameLoop();
+    void gameEnd();
     
     SDL_Window *m_window;
     GameState m_state;

@@ -69,7 +69,7 @@ void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Model 
             texName.append(str.C_Str());
             Texture texture;
             texture.type = tType;
-            if (texture.LoadFromFile(texName.c_str()))
+            if (texture.loadFromFile(texName.c_str()))
             {
                 base->textures.push_back(texture);
             }

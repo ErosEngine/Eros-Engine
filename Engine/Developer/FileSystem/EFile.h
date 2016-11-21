@@ -19,8 +19,10 @@ enum OpenType
 
 enum FileErrorCode
 {
-    NoError = 1, // True, no error
-    FailedToFindFile = 0 // false, didn't find file
+    NoError                 =  1, // True, no error
+    FailedToFindFile        =  0, // false, didn't find file
+    InufficientPermissions  = -1, 
+    FileCurrupted           = -2
 };
 
 class EFile
@@ -29,12 +31,12 @@ public:
     
    ~EFile();
     
-    FileErrorCode OpenFile(const char *fileName, OpenType type);
-    void CloseFile();
-    const char *GetError();
-    const char *GetDataConst() const; // This is maximum string compatibility
-    char *GetData() const;
-    int Size();
+    FileErrorCode openFile(const char *fileName, OpenType type);
+    void closeFile();
+    const char *getError();
+    const char *getDataConst() const; // This is maximum string compatibility
+    char *getData() const;
+    int size();
     
 private:
     

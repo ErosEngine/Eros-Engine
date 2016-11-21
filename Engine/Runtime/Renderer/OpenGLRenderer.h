@@ -27,37 +27,10 @@ struct OpenGLRenderer
         shape = new Shape();
     }
     
-    void PreGameRender()
-    {
-        glLoadIdentity();
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_DEPTH_TEST);
-        glMatrixMode(GL_MODELVIEW);
-        glDisable(GL_LIGHTING);
-        glewExperimental = GL_TRUE;
-        shape->Setup();
-        camera->UpdatePerspective(60.0f, 4.0f, 3.0f, 0.1f, 100.0f, 1.33f);
-        gPerspective = camera->GetPerspective();
-        camera->width = (float)windowWidth;
-        camera->height = (float)windowHeight;
-        shape->shader.Use();
-        shape->shader.SetUniform("perspective", gPerspective);
-        shape->shader.SetUniform("translation", glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -7.0f)));
-    }
-    
-    void DuringGameRender()
-    {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_PROJECTION);
-        shape->Draw();
-        shape->shader.SetUniform("modelView", camera->GetViewMatrix());
-    }
-    
-    void PostGameRender()
-    {
-        delete shape;
-        delete camera;
-    }
+    void preGameRender();
+    void duringGameRender();
+    void postGameRender();
+    void drawShapeMulti(Shape *shape, int numTimes);
 };
 
 #endif // OPENGLRENDERER_H

@@ -5,7 +5,7 @@
 
 
 
-void SubShader::Setup()
+void SubShader::setup()
 {
     this->subShaderProgram = glCreateShader(shaderType);
     
@@ -13,7 +13,7 @@ void SubShader::Setup()
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
 }
 
-bool SubShader::Compile()
+bool SubShader::compile()
 {
     glCompileShader(subShaderProgram);
     GLint shaderCompOutput;
@@ -40,7 +40,7 @@ bool SubShader::Compile()
     return true;
 }
 
-bool SubShader::LoadFromFile(const char *_fileName, GLenum nShaderType)
+bool SubShader::loadFromFile(const char *_fileName, GLenum nShaderType)
 {
     QFile file(_fileName);
     if (!file.open(QIODevice::Text | QIODevice::ReadWrite))
@@ -66,7 +66,7 @@ bool Shader::ShaderInformation::operator ==(const Shader::ShaderInformation &rig
     return (this->varName == right.varName); // Shouln't need to return more than this
 }
 
-int Shader::FindInList(const char *name)
+int Shader::findInList(const char *name)
 {
     for (int i = 0; i < m_infoList.size(); ++i)
     {
@@ -87,13 +87,13 @@ Shader::~Shader()
     
 }
 
-void Shader::AddShader(const SubShader &shader)
+void Shader::addShader(const SubShader &shader)
 {
     m_shaderList.push_back(shader);
     glAttachShader(shaderProgram, shader.subShaderProgram);
 }
 
-bool Shader::Compile()
+bool Shader::compile()
 {
     glLinkProgram(shaderProgram);
     GLint shaderCompOutput;
@@ -121,14 +121,14 @@ bool Shader::Compile()
     return true;
 }
 
-void Shader::Use()
+void Shader::use()
 {
     glUseProgram(shaderProgram);
 }
 
-void Shader::SetUniform(const char *variableName, const EVector4 &data)
+void Shader::setUniform(const char *variableName, const EVector4 &data)
 {
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniform4f(m_infoList[b].varPos, data.x, data.y, data.z, data.w);
@@ -144,9 +144,9 @@ void Shader::SetUniform(const char *variableName, const EVector4 &data)
     }
 }
 
-void Shader::SetUniform(const char *variableName, const EVector3 &data)
+void Shader::setUniform(const char *variableName, const EVector3 &data)
 {
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniform3f(m_infoList[b].varPos, data.x, data.y, data.z);
@@ -162,9 +162,9 @@ void Shader::SetUniform(const char *variableName, const EVector3 &data)
     }
 }
 
-void Shader::SetUniform(const char *variableName, const EVector2 &data)
+void Shader::setUniform(const char *variableName, const EVector2 &data)
 {
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniform2f(m_infoList[b].varPos, data.x, data.y);
@@ -180,9 +180,9 @@ void Shader::SetUniform(const char *variableName, const EVector2 &data)
     }
 }
 
-void Shader::SetUniform(const char *variableName, int data)
+void Shader::setUniform(const char *variableName, int data)
 {
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniform1i(m_infoList[b].varPos, data);
@@ -198,9 +198,9 @@ void Shader::SetUniform(const char *variableName, int data)
     }
 }
 
-void Shader::SetUniform(const char *variableName, float data)
+void Shader::setUniform(const char *variableName, float data)
 {
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniform1f(m_infoList[b].varPos, data);
@@ -216,22 +216,22 @@ void Shader::SetUniform(const char *variableName, float data)
     }
 }
 
-void Shader::SetUniform(const char *variableName, Texture &data)
+void Shader::setUniform(const char *variableName, Texture &data)
 {
     // We have to assume that they set the active texture already
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
-        data.Bind();
+        data.bind();
         glUniform1i(m_infoList[b].varPos, data.texture);
-        data.UnBind();
+        data.unbind();
     }
     else
     {
         GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-        data.Bind();
+        data.bind();
         glUniform1i(uniformLoc, data.texture);
-        data.UnBind();
+        data.unbind();
         ShaderInformation i;
         i.varName = variableName;
         i.varPos = uniformLoc;
@@ -239,9 +239,9 @@ void Shader::SetUniform(const char *variableName, Texture &data)
     }
 }
 
-void Shader::SetUniform(const char *variableName, const EMatrix4x4 &data)
+void Shader::setUniform(const char *variableName, const EMatrix4x4 &data)
 {    
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniformMatrix4fv(m_infoList[b].varPos, 1, GL_TRUE, &data[0][0]);
@@ -259,9 +259,9 @@ void Shader::SetUniform(const char *variableName, const EMatrix4x4 &data)
 
 #include <glm/gtc/type_ptr.hpp>
 
-void Shader::SetUniform(const char *variableName, const glm::mat4 &data)
+void Shader::setUniform(const char *variableName, const glm::mat4 &data)
 {
-    int b = FindInList(variableName);
+    int b = findInList(variableName);
     if (b) // if we found the variable
     {
         glUniformMatrix4fv(m_infoList[b].varPos, 1, GL_FALSE, glm::value_ptr(data));

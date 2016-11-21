@@ -5,12 +5,12 @@
 
 OpenGLViewPort::OpenGLViewPort(QWidget *parent) : QOpenGLWidget(parent)
 {
-    
 }
 
 OpenGLViewPort::~OpenGLViewPort()
 {
-    m_renderer->PostGameRender();
+    m_renderer->postGameRender();
+    delete shape;
     delete m_renderer;
 }
 
@@ -25,15 +25,21 @@ void OpenGLViewPort::initializeGL()
         qDebug() << "OpenGL has initialized, Current version number " << QString((const char *)glGetString(GL_VERSION)) << endl;
     }
     m_renderer = new OpenGLRenderer();
+    shape = new Shape();
     
-    m_renderer->PreGameRender();
-    m_renderer->DuringGameRender();
+    shape->mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
+    shape->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
+    shape->setup();
+    
+    m_renderer->preGameRender();
+    m_renderer->duringGameRender();
 }
 
 void OpenGLViewPort::paintGL()
 {
     glPushMatrix();
-    m_renderer->DuringGameRender();
+    m_renderer->duringGameRender();
+    m_renderer->drawShapeMulti(shape, 30);
     glPopMatrix();
 }
 
@@ -44,25 +50,26 @@ void OpenGLViewPort::resizeGL(int w, int h)
 
 void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
 {
+    
     switch (e->key())
     {
         case (Qt::Key::Key_W):
-            m_renderer->camera->MoveForward();
+            m_renderer->camera->moveForward();
         break;
         case (Qt::Key::Key_A):
-            m_renderer->camera->StrafeLeft();
+            m_renderer->camera->strafeLeft();
         break;
         case (Qt::Key::Key_S):
-            m_renderer->camera->MoveBack();
+            m_renderer->camera->moveBack();
         break;
         case (Qt::Key::Key_D):
-            m_renderer->camera->StrafeRight();
+            m_renderer->camera->strafeRight();
         break;
         case (Qt::Key::Key_E):
-            m_renderer->camera->MoveUp();
+            m_renderer->camera->moveUp();
         break;
         case (Qt::Key::Key_Q):
-            m_renderer->camera->MoveDownward();
+            m_renderer->camera->moveDownward();
         break;
     }
     repaint();
@@ -71,6 +78,6 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
 void OpenGLViewPort::mouseMoveEvent(QMouseEvent *e)
 {
     setFocus();
-    m_renderer->camera->MouseUpdate(e->x(), e->y());
+    m_renderer->camera->mouseUpdate(e->x(), e->y());
     repaint();
 }

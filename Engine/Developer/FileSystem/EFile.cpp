@@ -7,12 +7,12 @@ EFile::~EFile()
     
 }
 
-FileErrorCode EFile::OpenFile(const char *fileName, OpenType type)
+FileErrorCode EFile::openFile(const char *fileName, OpenType type)
 {
     return NoError;
 }
 
-const char *EFile::GetError()
+const char *EFile::getError()
 {
     if (m_errorState == FailedToFindFile)
     {
@@ -22,17 +22,17 @@ const char *EFile::GetError()
     return "There was no error";
 }
 
-const char *EFile::GetDataConst() const
+const char *EFile::getDataConst() const
 {
     return reinterpret_cast<const char *>(m_str);
 }
 
-char *EFile::GetData() const
+char *EFile::getData() const
 {
     return m_str;
 }
 
-int EFile::Size()
+int EFile::size()
 {
     return m_size;
 }
