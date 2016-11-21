@@ -15,5 +15,6 @@ void main()
 {
     ourColor = normal;
     texCoord = texCoords;
-    gl_Position = (perspective * modelView * translation) * (vec4(position, 1.0f));
+    gl_Position = (perspective * modelView * translation) * 
+            (vec4(position.x + (gl_InstanceID * 10), position.y, position.z, 1.0f));
 }

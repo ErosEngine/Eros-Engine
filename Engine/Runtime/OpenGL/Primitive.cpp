@@ -59,7 +59,7 @@ void Primitive::draw()
     this->bind();
     mainShader.Use();
     mainShader.SetUniform("time", m_time / 1000.0f);
-    mainShader.SetUniform("translation", Translate(xPos));
+    //mainShader.SetUniform("translation", Translate(xPos));
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0);
     this->unbind();
 }

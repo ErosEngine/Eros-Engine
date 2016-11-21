@@ -114,7 +114,7 @@ void Shape::Draw()
     glActiveTexture(GL_TEXTURE0); // cleanup
     */
     Bind();
-    glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, 0);
+    glDrawElementsInstanced(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, NULL, 20);    
     shader.Use();
     UnBind();
 }

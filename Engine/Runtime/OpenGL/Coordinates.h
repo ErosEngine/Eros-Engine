@@ -1086,32 +1086,32 @@ EROS_INLINE EMatrix4x4 operator *= (EMatrix4x4 &left, EMatrix4x4 &right)
     RETURN_NOTHING(EMatrix4x4);
 }
 
-EROS_INLINE EMatrix4x4 Rotate(float angle)
+EROS_INLINE EMatrix4x4 Rotate( /* float angle */ )
 {
     RETURN_NOTHING(EMatrix4x4);
 }
 
-EROS_INLINE EMatrix4x4 Translate(float offsetX = 0.0f, float offsetY = 0.0f, float offsetZ = 0.0f)
+EROS_INLINE EMatrix4x4 Translate( /* float offsetX = 0.0f, float offsetY = 0.0f, float offsetZ = 0.0f */ )
 {
     RETURN_NOTHING(EMatrix4x4);
 }
 
-EROS_INLINE EMatrix4x4 Translate(EVector3 &offset)
-{
-    return Translate(offset.x, offset.y, offset.z);
-}
+//EROS_INLINE EMatrix4x4 Translate( /* EVector3 &offset */ )
+//{
+//    RETURN_NOTHING(EMatrix4x4);
+//}
 
-EROS_INLINE EMatrix4x4 Scale(float scaleX, float scaleY, float scaleZ)
-{
-    return EMatrix4x4();
-}
-
-EROS_INLINE EMatrix4x4 Perspective(float fovy, float aspect, float zNear, float zFar)
+EROS_INLINE EMatrix4x4 Scale(/* float scaleX, float scaleY, float scaleZ */ )
 {
     return EMatrix4x4();
 }
 
-EROS_INLINE EMatrix4x4 LookAt(EVector3 eye, EVector3 center, EVector3 up)
+EROS_INLINE EMatrix4x4 Perspective( /* float fovy, float aspect, float zNear, float zFar */ )
+{
+    return EMatrix4x4();
+}
+
+EROS_INLINE EMatrix4x4 LookAt( /* EVector3 eye, EVector3 center, EVector3 up */ )
 {
     return EMatrix4x4();
 }

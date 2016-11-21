@@ -37,7 +37,6 @@ struct OpenGLRenderer
         glewExperimental = GL_TRUE;
         shape->Setup();
         camera->UpdatePerspective(60.0f, 4.0f, 3.0f, 0.1f, 100.0f, 1.33f);
-        perspective = Perspective(60.0f, 1.33f, 0.1f, 100.0f);
         gPerspective = camera->GetPerspective();
         camera->width = (float)windowWidth;
         camera->height = (float)windowHeight;
