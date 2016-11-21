@@ -31,14 +31,19 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="debugOutput">
+   <widget class="DebugLogger" name="debugOutput">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>460</y>
+      <x>90</x>
+      <y>450</y>
       <width>751</width>
       <height>171</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#debugOutput {
+	font: 12pt &quot;Arial&quot;;
+}</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -89,6 +94,11 @@
    <class>OpenGLViewPort</class>
    <extends>QOpenGLWidget</extends>
    <header>Engine/Editor/OpenGLViewPort.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DebugLogger</class>
+   <extends>QTextBrowser</extends>
+   <header>Engine/Editor/DebugLogger.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

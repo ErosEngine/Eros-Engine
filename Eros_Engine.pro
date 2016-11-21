@@ -22,20 +22,22 @@ SOURCES += main.cpp \
     Engine/Runtime/OpenGL/Texture.cpp \
     Engine/Runtime/Renderer/FontRenderer.cpp \
     Engine/Runtime/OpenGL/Shape.cpp \
-    Engine/Developer/Util/BTextStream.cpp \
-    Engine/Developer/Util/EDebugStream.cpp \
+    ErosLib/BTextStream.cpp \
+    ErosLib/EDebugStream.cpp \
     Engine/Runtime/OpenGL/Camera.cpp \
     Engine/Developer/Client/Input.cpp \
     Engine/Runtime/Renderer/ShapeData.cpp \
     Engine/Runtime/OpenGL/Transform.cpp \
     Engine/Runtime/OpenGL/Model.cpp \
-    Engine/Developer/FileSystem/EFile.cpp
+    Engine/Developer/FileSystem/EFile.cpp \
+    Engine/Developer/Util/Util.cpp \
+    Engine/Editor/DebugLogger.cpp \
+    Engine/Editor/LoggerMessage.cpp
     
 
 HEADERS += \
     Engine/Runtime/Window/MainWindow.h \
     Engine/Runtime/Shaders/Shader.h \
-    Engine/Runtime/OpenGL/Coordinates.h \
     Engine/Runtime/OpenGL/Primitive.h \
     Engine/Runtime/Renderer/OpenGLRenderer.h \
     Engine/Developer/Util/Util.h \
@@ -46,15 +48,18 @@ HEADERS += \
     Engine/Runtime/OpenGL/Texture.h \
     Engine/Runtime/Renderer/FontRenderer.h \
     Engine/Runtime/OpenGL/Shape.h \
-    Engine/Developer/Util/BTextStream.h \
-    Engine/Developer/Util/EDebugStream.h \
+    ErosLib/BTextStream.h \
+    ErosLib/EDebugStream.h \
     Engine/Runtime/OpenGL/Camera.h \
     Engine/Developer/Client/Input.h \
     Engine/Runtime/Renderer/ShapeData.h \
     Engine/Runtime/OpenGL/Transform.h \
     Engine/Runtime/OpenGL/Model.h \
-    Engine/Developer/Util/ErosDefines.h \
-    Engine/Developer/FileSystem/EFile.h 
+    ErosLib/ErosDefines.h \
+    Engine/Developer/FileSystem/EFile.h \ 
+    Engine/Editor/DebugLogger.h \
+    Engine/Editor/LoggerMessage.h \
+    ErosLib/Math.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

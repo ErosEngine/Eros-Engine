@@ -29,9 +29,13 @@ MainWindow_Qt *MainWindow_Qt::getInstance()
     return m_singleton;
 }
 
+void MainWindow_Qt::test()
+{
+    LoggerMessage message("Test", ERROR_STRING);
+    ui->debugOutput->append(message);
+}
+
 void MainWindow_Qt::on_pushButton_released()
 {
-    MainWindow_SDL w;
-    w.start();
-    return;
+    this->test();
 }

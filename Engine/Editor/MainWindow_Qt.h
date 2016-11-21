@@ -22,13 +22,13 @@ public:
     ~MainWindow_Qt();
     
     static MainWindow_Qt *getInstance();
+        
+    void test();
     
 private slots:
     void on_pushButton_released();
 
 private:
-    
-    std::vector<QString> m_stringArr;
     
     static MainWindow_Qt *m_singleton;
     Ui::MainWindow_Qt *ui;

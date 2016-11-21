@@ -1,6 +1,6 @@
 #include "Primitive.h"
 #include "Engine/Developer/Util/Util.h"
-#include "Coordinates.h"
+#include "ErosLib/Math.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 

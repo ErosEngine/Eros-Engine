@@ -2,7 +2,7 @@
 #define OPENGLRENDERER_H
 
 #include "Engine/Runtime/OpenGL/Primitive.h"
-#include "Engine/Runtime/OpenGL/Coordinates.h"
+#include "ErosLib/Math.h"
 #include "Engine/Runtime/OpenGL/Camera.h"
 #include "../OpenGL/Shape.h"
 #include "ShapeData.h"

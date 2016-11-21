@@ -30,6 +30,7 @@ void OpenGLViewPort::initializeGL()
     shape->mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
     shape->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
     shape->setup();
+    shape->shader.setUniform("translation", glm::translate(glm::mat4(), glm::vec3(-1, 2, -7)));
     
     m_renderer->preGameRender();
     m_renderer->duringGameRender();
@@ -50,7 +51,6 @@ void OpenGLViewPort::resizeGL(int w, int h)
 
 void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
 {
-    
     switch (e->key())
     {
         case (Qt::Key::Key_W):

@@ -37,12 +37,15 @@ public:
     const char *getDataConst() const; // This is maximum string compatibility
     char *getData() const;
     int size();
+    void setSize();
     
 private:
     
+    struct _FILE_ 
+    {
+    };
+    
     FileErrorCode m_errorState;
-    char *m_str;
-    FILE *m_file;
     unsigned int m_size;   
     
 };

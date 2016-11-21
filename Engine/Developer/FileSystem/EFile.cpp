@@ -24,12 +24,12 @@ const char *EFile::getError()
 
 const char *EFile::getDataConst() const
 {
-    return reinterpret_cast<const char *>(m_str);
+    return NULL;
 }
 
 char *EFile::getData() const
 {
-    return m_str;
+    return NULL;
 }
 
 int EFile::size()

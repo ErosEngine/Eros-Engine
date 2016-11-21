@@ -1,7 +1,7 @@
 #ifndef EDEBUGSTREAM_H
 #define EDEBUGSTREAM_H
 
-#include "../Util/BTextStream.h"
+#include "BTextStream.h"
 #include "Engine/Editor/MainWindow_Qt.h"
 
 

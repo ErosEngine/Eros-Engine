@@ -18,9 +18,9 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "Engine/Editor/DebugLogger.h"
 #include "Engine/Editor/OpenGLViewPort.h"
 
 QT_BEGIN_NAMESPACE
@@ -30,7 +30,7 @@ class Ui_MainWindow_Qt
 public:
     QWidget *centralwidget;
     OpenGLViewPort *openGLWidget;
-    QTextBrowser *debugOutput;
+    DebugLogger *debugOutput;
     QPushButton *pushButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -51,9 +51,12 @@ public:
         openGLWidget = new OpenGLViewPort(centralwidget);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
         openGLWidget->setGeometry(QRect(90, 0, 741, 451));
-        debugOutput = new QTextBrowser(centralwidget);
+        debugOutput = new DebugLogger(centralwidget);
         debugOutput->setObjectName(QStringLiteral("debugOutput"));
-        debugOutput->setGeometry(QRect(80, 460, 751, 171));
+        debugOutput->setGeometry(QRect(90, 450, 751, 171));
+        debugOutput->setStyleSheet(QLatin1String("#debugOutput {\n"
+"	font: 12pt \"Arial\";\n"
+"}"));
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(0, 10, 91, 21));

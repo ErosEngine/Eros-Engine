@@ -244,12 +244,12 @@ void Shader::setUniform(const char *variableName, const EMatrix4x4 &data)
     int b = findInList(variableName);
     if (b) // if we found the variable
     {
-        glUniformMatrix4fv(m_infoList[b].varPos, 1, GL_TRUE, &data[0][0]);
+//      glUniformMatrix4fv(m_infoList[b].varPos, 1, GL_TRUE, &data[0][0]);
     }
     else
     {
         GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-        glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data[0][0]);
+//      glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, &data[0][0]);
         ShaderInformation i;
         i.varName = variableName;
         i.varPos = uniformLoc;
