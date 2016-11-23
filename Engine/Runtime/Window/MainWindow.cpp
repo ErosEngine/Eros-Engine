@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include "Engine/Runtime/Renderer/OpenGLRenderer.h"
+#include "Engine/Runtime/OpenGL/OpenGLRenderer.h"
 #include "MainWindow.h"
 #include "Engine/Developer/Util/Util.h"
 #include "Engine/Developer/Client/Input.h"
@@ -59,12 +59,12 @@ void MainWindow_SDL::gameStart()
 void MainWindow_SDL::gameLoop()
 {
     OpenGLRenderer renderer;
-    renderer.preGameRender();
+    renderer.prepareRenderer();
     
     while (m_state == GameState::RUNNING)
     {
         glPushMatrix();
-        renderer.duringGameRender();
+        renderer.renderQueue();
         
         SDL_Event e;
         while (SDL_PollEvent(&e))
@@ -111,7 +111,7 @@ void MainWindow_SDL::gameLoop()
         glPopMatrix();
     }
     
-    renderer.postGameRender();
+    renderer.cleanup();
     gameEnd();
 }
 

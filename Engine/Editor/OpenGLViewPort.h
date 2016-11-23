@@ -6,7 +6,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QDebug>
-#include "Engine/Runtime/Renderer/OpenGLRenderer.h"
+#include "Engine/Runtime/OpenGL/OpenGLRenderer.h"
 
 
 class OpenGLViewPort : public QOpenGLWidget
@@ -29,7 +29,7 @@ protected:
     
 private:
     
-    Shape *shape;
+    Shape *shape1, *shape2;
     OpenGLRenderer *m_renderer;
 };
 

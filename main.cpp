@@ -1,6 +1,7 @@
 #include "Engine/Runtime/Window/OpeningDialog.h"
 #include "Engine/Runtime/Window/MainWindow.h"
 #include "Engine/Editor/MainWindow_Qt.h"
+#include "Engine/Editor/OpenGLViewPort.h"
 #include <QApplication>
 
 #define TEST 0
@@ -9,8 +10,6 @@
 int main(int argc, char **argv)
 {
 #if TEST
-    
-    
     
 #else
     

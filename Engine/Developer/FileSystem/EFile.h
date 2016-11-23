@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <QDebug>
-#include "Engine/Developer/Util/ErosDefines.h"
+#include "ErosLib/ErosDefines.h"
 
 enum OpenType
 {

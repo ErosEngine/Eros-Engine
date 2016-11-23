@@ -9,8 +9,18 @@ OpenGLViewPort::OpenGLViewPort(QWidget *parent) : QOpenGLWidget(parent)
 
 OpenGLViewPort::~OpenGLViewPort()
 {
-    m_renderer->postGameRender();
-    delete shape;
+    m_renderer->cleanup();
+    
+    if (shape1)
+    {
+        qDebug() << "Shape1 wasn't deleted";
+        delete shape1;
+    }
+    if (shape2)
+    {
+        qDebug() << "Shape2 wasn't deleted";
+        delete shape2;
+    }
     delete m_renderer;
 }
 
@@ -25,27 +35,38 @@ void OpenGLViewPort::initializeGL()
         qDebug() << "OpenGL has initialized, Current version number " << QString((const char *)glGetString(GL_VERSION)) << endl;
     }
     m_renderer = new OpenGLRenderer();
-    shape = new Shape();
+    shape1 = new Shape();
+    shape2 = new Shape();
     
-    shape->mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
-    shape->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
-    shape->setup();
-    shape->shader.setUniform("translation", glm::translate(glm::mat4(), glm::vec3(-1, 2, -7)));
+    m_renderer->prepareRenderer();
+    glm::mat4 perspective = m_renderer->camera->getPerspective();
     
-    m_renderer->preGameRender();
-    m_renderer->duringGameRender();
+    
+    shape1->mesh = LoadMeshFromFile("Engine/Assets/_cube.obj");
+    shape1->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
+    shape1->setup();
+    shape1->shader.setUniform("translation", glm::translate(glm::mat4(), glm::vec3(0, 0, -4)));
+    shape1->shader.setUniform("perspective", perspective);
+    
+    shape2->mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
+    shape2->texture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
+    shape2->setup();
+    shape2->shader.setUniform("translation", glm::translate(glm::mat4(), glm::vec3(4, -1, -7)));
+    shape2->shader.setUniform("perspective", perspective);
+    
+    m_renderer->addShapeToQueue(shape1);
+    m_renderer->addShapeInstanceInfo(shape2, 2);
+    m_renderer->renderQueue();
 }
 
 void OpenGLViewPort::paintGL()
 {
-    glPushMatrix();
-    m_renderer->duringGameRender();
-    m_renderer->drawShapeMulti(shape, 30);
-    glPopMatrix();
+    m_renderer->renderQueue();
 }
 
 void OpenGLViewPort::resizeGL(int w, int h)
 {
+    glViewport(w, h, 1.0f, 1.0f);
     repaint();
 }
 

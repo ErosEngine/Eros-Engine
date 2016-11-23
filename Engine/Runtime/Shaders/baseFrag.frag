@@ -21,7 +21,7 @@ vec4 getRandColor()
 
 void main()
 {
-    color = getRandColor(); 
+    //color = getRandColor(); 
     color = texture2D(diffuse_texture1, texCoord);
 }
 

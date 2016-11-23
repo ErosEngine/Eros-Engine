@@ -17,5 +17,5 @@ void main()
     texCoord = texCoords;
     
     gl_Position = (perspective * modelView * translation) * 
-            (vec4(position.x + (gl_InstanceID * 10), position.y, position.z, 1.0f));
+            (vec4(position.x + (gl_InstanceID * 5), position.y, position.z, 1.0f));
 }

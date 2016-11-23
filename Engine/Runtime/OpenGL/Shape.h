@@ -6,7 +6,7 @@
 #include "Primitive.h"
 #include "Texture.h"
 #include "../Shaders/Shader.h"
-#include "../Renderer/ShapeData.h"
+#include "ShapeData.h"
 
 
 class Shape

@@ -75,41 +75,9 @@ void Shape::bind()
 
 void Shape::draw()
 {
-    // TODO(kiecker): This is far from optimal drawing code
-    // I will need to look into improving it
-    /*
-    for (GLuint i = 0; i < mesh->textures.size(); ++i)
-    {
-        glActiveTexture(GL_TEXTURE0 + i);
-        
-        QString currentTexture;
-        
-        // Note(kiecker): submit a diffuse texture
-        if (mesh->textures[i].type == DiffuseTexture)
-        {
-            currentTexture = "diffuse_texture";
-            currentTexture.append(i);
-            shader.submitTexture(
-                     currentTexture.toLatin1().constData(),
-                     mesh->textures[i]);
-        }
-        // Note(kiecker): submit a specular texture
-        else if (mesh->textures[i].type == SpecularTexture)
-        {
-            currentTexture = "specular_texture";
-            currentTexture.append(i);
-            shader.submitTexture(
-                     currentTexture.toLatin1().constData(),
-                     mesh->textures[i]);
-        }
-        mesh->textures[i].bind();
-    }
-    glActiveTexture(GL_TEXTURE0); // cleanup
-    */
     bind();
     texture.bind();
     glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, NULL);
-    glDrawElementsInstanced(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, NULL, 20);    
     shader.use();
     unbind();
 }

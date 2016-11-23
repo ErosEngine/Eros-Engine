@@ -65,7 +65,7 @@ void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, Model 
         if (!skip)
         {
             std::string texName;
-            texName.append(base->directory.toLatin1().constData());
+            texName.append(base->fileName.toLatin1().constData());
             texName.append(str.C_Str());
             Texture texture;
             texture.type = tType;
@@ -147,8 +147,7 @@ Model *LoadMeshFromFile(const char *fileName)
     }
     
     QString returnValDir = fileName;
-    returnValDir.remove(returnValDir.lastIndexOf("/") + 1, returnValDir.size());
-    returnVal->directory = returnValDir;
+    returnVal->fileName = returnValDir;
     
     ProcessAssimpNodes(pscene->mRootNode, pscene, returnVal);
     

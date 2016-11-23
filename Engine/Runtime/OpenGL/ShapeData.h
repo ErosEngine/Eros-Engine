@@ -21,7 +21,7 @@ struct Vertex
 };
 
 struct Mesh
-{    
+{
     std::vector<Vertex> vertexes;
     std::vector<GLushort> indices;
     std::vector<Texture> textures;
@@ -29,7 +29,7 @@ struct Mesh
 
 struct Model : public Mesh
 {
-    QString directory;
+    QString fileName;
 };
 
 Mesh CreateCube();

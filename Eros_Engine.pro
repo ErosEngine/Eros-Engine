@@ -18,15 +18,15 @@ SOURCES += main.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
     Engine/Runtime/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
-    Engine/Runtime/Renderer/OpenGLRenderer.cpp \
+    Engine/Runtime/OpenGL/OpenGLRenderer.cpp \
     Engine/Runtime/OpenGL/Texture.cpp \
-    Engine/Runtime/Renderer/FontRenderer.cpp \
+    Engine/Runtime/OpenGL/FontRenderer.cpp \
     Engine/Runtime/OpenGL/Shape.cpp \
     ErosLib/BTextStream.cpp \
     ErosLib/EDebugStream.cpp \
     Engine/Runtime/OpenGL/Camera.cpp \
     Engine/Developer/Client/Input.cpp \
-    Engine/Runtime/Renderer/ShapeData.cpp \
+    Engine/Runtime/OpenGL/ShapeData.cpp \
     Engine/Runtime/OpenGL/Transform.cpp \
     Engine/Runtime/OpenGL/Model.cpp \
     Engine/Developer/FileSystem/EFile.cpp \
@@ -39,20 +39,20 @@ HEADERS += \
     Engine/Runtime/Window/MainWindow.h \
     Engine/Runtime/Shaders/Shader.h \
     Engine/Runtime/OpenGL/Primitive.h \
-    Engine/Runtime/Renderer/OpenGLRenderer.h \
+    Engine/Runtime/OpenGL/OpenGLRenderer.h \
     Engine/Developer/Util/Util.h \
     Engine/Editor/MainWindow_Qt.h \
     Engine/Runtime/Window/OpeningDialog.h \
     Engine/Editor/OpenGLViewPort.h \
     Engine/Developer/FileSystem/stb_image.h \
     Engine/Runtime/OpenGL/Texture.h \
-    Engine/Runtime/Renderer/FontRenderer.h \
+    Engine/Runtime/OpenGL/FontRenderer.h \
     Engine/Runtime/OpenGL/Shape.h \
     ErosLib/BTextStream.h \
     ErosLib/EDebugStream.h \
     Engine/Runtime/OpenGL/Camera.h \
     Engine/Developer/Client/Input.h \
-    Engine/Runtime/Renderer/ShapeData.h \
+    Engine/Runtime/OpenGL/ShapeData.h \
     Engine/Runtime/OpenGL/Transform.h \
     Engine/Runtime/OpenGL/Model.h \
     ErosLib/ErosDefines.h \
