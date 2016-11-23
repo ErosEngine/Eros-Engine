@@ -78,9 +78,9 @@ public:
     bool compile();
     void use();
     
-    void setUniform(const char *variableName, const EVector4 &data);
-    void setUniform(const char *variableName, const EVector3 &data);
-    void setUniform(const char *variableName, const EVector2 &data);
+    void setUniform(const char *variableName, const glm::vec4 &data);
+    void setUniform(const char *variableName, const glm::vec3 &data);
+    void setUniform(const char *variableName, const glm::vec2 &data);
     void setUniform(const char *variableName, int data);
     void setUniform(const char *variableName, float data);
     void setUniform(const char *variableName, Texture &data);

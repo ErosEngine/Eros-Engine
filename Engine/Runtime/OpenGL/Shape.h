@@ -21,7 +21,9 @@ public:
     
     Texture texture;
     Transform transform;
-    Model *mesh;
+    
+    Model *getMesh() const;
+    void setMesh(Model *value);
     
     void setup();
     void unbind();
@@ -31,9 +33,9 @@ public:
     GLuint &vboId();
     GLuint &eboId();
     GLuint &vaoId();
-    
 private:
     
+    Model *m_mesh;
     GLuint m_vboId, m_eboId, m_vaoId;
 };
 

@@ -11,7 +11,17 @@ Shape::~Shape()
     glDeleteBuffers(1, &m_vboId);
     glDeleteBuffers(1, &m_eboId);
     glDeleteVertexArrays(1, &m_vaoId);
-    delete mesh;
+    delete m_mesh;
+}
+
+Model *Shape::getMesh() const
+{
+    return m_mesh;
+}
+
+void Shape::setMesh(Model *value)
+{
+    m_mesh = value;
 }
 
 void Shape::setup()
@@ -41,11 +51,11 @@ void Shape::setup()
     bind();
     
     glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
-    glBufferData(GL_ARRAY_BUFFER, mesh->vertexes.size() * sizeof(Vertex), 
-                 &mesh->vertexes[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_mesh->vertexes.size() * sizeof(Vertex), 
+                 &m_mesh->vertexes[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_eboId);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->indices.size() * sizeof(GLushort),
-                 &mesh->indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_mesh->indices.size() * sizeof(GLushort),
+                 &m_mesh->indices[0], GL_STATIC_DRAW);
     
     // Note(kiecker): Positions
     glEnableVertexAttribArray(0);
@@ -77,7 +87,7 @@ void Shape::draw()
 {
     bind();
     texture.bind();
-    glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_SHORT, NULL);
+    glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_SHORT, NULL);
     shader.use();
     unbind();
 }

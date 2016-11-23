@@ -41,24 +41,35 @@ void OpenGLViewPort::initializeGL()
     m_renderer->prepareRenderer();
     glm::mat4 perspective = m_renderer->camera->getPerspective();
     
-    
-    shape1->mesh = LoadMeshFromFile("Engine/Assets/_cube.obj");
+    shape1->setMesh(LoadMeshFromFile("Engine/Assets/_cube.obj"));
     shape1->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
     shape1->setup();
     shape1->bind();
     shape1->shader.use();
     shape1->transform.translate(VEC3_BACK, 4.0f);
     shape1->shader.setUniform("perspective", perspective);
+    shape1->shader.setUniform("lightPos", glm::vec3(0, 1, -2));
+    shape1->shader.setUniform("objectColor", glm::vec3(0.5, 0.7, 1.0f));
+    shape1->shader.setUniform("ambientStrength", 0.5f);
+    shape1->shader.setUniform("lightColor", glm::vec3(0.8f, 0.8f, 0.8f));
+    shape1->shader.setUniform("specularStrength", 0.7f);
     shape1->unbind();
     glUseProgram(0);
     
-    shape2->mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
+    // Very Bad and I do plan to change this
+    shape2->setMesh(LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj"));
     shape2->texture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
     shape2->setup();
     shape2->bind();
     shape2->shader.use();
     shape2->transform.translate(VEC3_LEFT, 4.0f);
     shape2->shader.setUniform("perspective", perspective);
+    shape2->shader.setUniform("perspective", perspective);
+    shape2->shader.setUniform("lightPos", glm::vec3(0, 1, -2));
+    shape2->shader.setUniform("objectColor", glm::vec3(0.5, 0.7, 1.0f));
+    shape2->shader.setUniform("ambientStrength", 0.5f);
+    shape2->shader.setUniform("lightColor", glm::vec3(0.8f, 0.8f, 0.8f));
+    shape2->shader.setUniform("specularStrength", 0.7f);
     shape2->unbind();
     glUseProgram(0);
     

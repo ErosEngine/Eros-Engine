@@ -126,7 +126,7 @@ void Shader::use()
     glUseProgram(shaderProgram);
 }
 
-void Shader::setUniform(const char *variableName, const EVector4 &data)
+void Shader::setUniform(const char *variableName, const glm::vec4 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -144,7 +144,7 @@ void Shader::setUniform(const char *variableName, const EVector4 &data)
     }
 }
 
-void Shader::setUniform(const char *variableName, const EVector3 &data)
+void Shader::setUniform(const char *variableName, const glm::vec3 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -162,7 +162,7 @@ void Shader::setUniform(const char *variableName, const EVector3 &data)
     }
 }
 
-void Shader::setUniform(const char *variableName, const EVector2 &data)
+void Shader::setUniform(const char *variableName, const glm::vec2 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable

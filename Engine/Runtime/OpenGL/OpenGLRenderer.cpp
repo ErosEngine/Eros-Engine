@@ -36,22 +36,23 @@ void OpenGLRenderer::renderQueue()
         {
             pShape->shader.setUniform("translation", pShape->transform.getModelMat());
         }
+        pShape->shader.setUniform("viewPos", camera->position);
         pShape->unbind();
-        qDebug() << (int)glGetError();
     }
     for (int b = 0; b < m_instancingListQueue.size(); ++b)
     {
         // Instanced objects have to be drawn manually
         InstancingInfo *pInstInfo = &m_instancingListQueue[b];
         Shape *pShape = pInstInfo->shapePtr;
+        glUseProgram(0);
         pShape->bind();
+        pShape->shader.use();
         pShape->texture.bind();
         glDrawElementsInstanced(
                     GL_TRIANGLES, 
-                    pShape->mesh->indices.size(), 
+                    pShape->getMesh()->indices.size(), 
                     GL_UNSIGNED_SHORT, NULL, pInstInfo->numberTimes
         );
-        pShape->shader.use();
         pShape->shader.setUniform("modelView", currentModelView);
         pShape->unbind();
     }

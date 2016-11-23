@@ -10,11 +10,16 @@ uniform mat4 modelView;
 
 out vec3 ourColor;
 out vec2 texCoord;
+out vec3 Normal;
+out vec3 FragPos;
 
 void main()
 {
     ourColor = normal;
     texCoord = texCoords;
+    
+    Normal = mat3(transpose(inverse(translation))) * normal;
+    FragPos = vec3((translation) * (vec4(position, 1.0f)));
     
     gl_Position = (perspective * modelView * translation) * 
             (vec4(position.x + (gl_InstanceID * 5), position.y, position.z, 1.0f));

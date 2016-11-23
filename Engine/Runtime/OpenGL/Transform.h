@@ -24,16 +24,21 @@ public:
     void rotate(float angle, glm::vec3 axis, float speed = 1.0f);
     void moveTo(float x, float y, float z, float speed = 1.0f);
     void moveTo(glm::vec3 pos, float speed = 1.0f);
+    void scale(glm::vec3 newScale);    
+    void scale(float nX, float nY, float nZ);
     
     
     // NOTE(kiecker): Using the getters and setters because I 
     // will need the accessors to do stuff when they are changed
     void setPosition(glm::vec3 pos);
-    void setRotation(glm::quat rot);
+    void setRotation(glm::vec4 rot);
     
+    glm::vec3 getScale()    const;
     glm::vec3 getPosition() const; 
-    glm::quat getRotation() const;
-    glm::mat4 getModelMat();
+    glm::vec4 getRotation() const;
+    
+    // This will probably only be used for the renderer
+    glm::mat4 getModelMat(); 
     
     bool hasChanged() const;
     
@@ -41,8 +46,8 @@ private:
     
     bool      m_hasChanged;
     glm::vec3 m_position;
-    glm::quat m_rotation;
-    
+    glm::vec4 m_rotation;
+    glm::vec3 m_scale;
     glm::mat4 m_modelMat;
 };
 
