@@ -9,7 +9,6 @@ in vec3 FragPos;
 
 uniform vec3 lightPos;
 uniform vec3 lightColor;
-uniform vec3 objectColor; // Might take this out later
 uniform vec3 viewPos;
 
 uniform float time;
@@ -35,10 +34,8 @@ void main()
     
     float difference = max(dot(normalizedVec, lightDir), 0.0f);
     vec3 diffuse = difference * lightColor;
-    vec3 result = (ambient + diffuse + specular) * objectColor;    
+    vec3 result = (ambient + diffuse + specular) * vec3(texture2D(diffuse_texture1, texCoord));    
     
-    color = vec4(result, 1.0f);                      // Light
-    //color = getRandColor();                          // Yellow
-    //color = texture2D(diffuse_texture1, texCoord);   // Textured
+    color = vec4(result, 1.0f);
 }
 

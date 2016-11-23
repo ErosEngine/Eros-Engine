@@ -3,7 +3,8 @@
 
 #include "ErosLib/Math.h"
 #include "Engine/Runtime/OpenGL/Camera.h"
-#include "../OpenGL/Shape.h"
+#include "Light.h"
+#include "Shape.h"
 #include "ShapeData.h"
 #include <cassert>
 
@@ -17,6 +18,7 @@ class OpenGLRenderer
 {
     std::vector<Shape *>         m_shapeQueue;
     std::vector<InstancingInfo>  m_instancingListQueue;
+    std::vector<PointLight>      m_lights;
     
 public:
     
@@ -35,6 +37,7 @@ public:
     // the renderer is done with them
     void addShapeInstanceInfo(Shape *pShape, int numTimes);
     void addShapeToQueue(Shape *pShape);
+    void addLightToQueue(PointLight light);
 };
 
 #endif // OPENGLRENDERER_H

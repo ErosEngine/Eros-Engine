@@ -41,18 +41,25 @@ void OpenGLViewPort::initializeGL()
     m_renderer->prepareRenderer();
     glm::mat4 perspective = m_renderer->camera->getPerspective();
     
+    PointLight light1, light2;
+    
+    light1.ambientStrength = 0.5f;
+    light1.position = glm::vec3(0, 0, -2);
+    light1.specularStrength = 1.0f;
+    light1.color = glm::vec3(1.0f, 1.0f, 1.0f);
+    
+    light2.ambientStrength = 0.5f;
+    light2.position = glm::vec3(4, 2, -2);
+    light2.specularStrength = 1.0f;
+    light2.color = glm::vec3(1.0f, 0.4f, 0.4f);
+    
     shape1->setMesh(LoadMeshFromFile("Engine/Assets/_cube.obj"));
     shape1->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
     shape1->setup();
     shape1->bind();
     shape1->shader.use();
-    shape1->transform.translate(VEC3_BACK, 4.0f);
     shape1->shader.setUniform("perspective", perspective);
-    shape1->shader.setUniform("lightPos", glm::vec3(0, 1, -2));
-    shape1->shader.setUniform("objectColor", glm::vec3(0.5, 0.7, 1.0f));
-    shape1->shader.setUniform("ambientStrength", 0.5f);
-    shape1->shader.setUniform("lightColor", glm::vec3(0.8f, 0.8f, 0.8f));
-    shape1->shader.setUniform("specularStrength", 0.7f);
+    shape1->transform.translate(VEC3_BACK, 4.0f);
     shape1->unbind();
     glUseProgram(0);
     
@@ -62,19 +69,15 @@ void OpenGLViewPort::initializeGL()
     shape2->setup();
     shape2->bind();
     shape2->shader.use();
+    shape2->shader.setUniform("perspective", perspective);
     shape2->transform.translate(VEC3_LEFT, 4.0f);
-    shape2->shader.setUniform("perspective", perspective);
-    shape2->shader.setUniform("perspective", perspective);
-    shape2->shader.setUniform("lightPos", glm::vec3(0, 1, -2));
-    shape2->shader.setUniform("objectColor", glm::vec3(0.5, 0.7, 1.0f));
-    shape2->shader.setUniform("ambientStrength", 0.5f);
-    shape2->shader.setUniform("lightColor", glm::vec3(0.8f, 0.8f, 0.8f));
-    shape2->shader.setUniform("specularStrength", 0.7f);
     shape2->unbind();
     glUseProgram(0);
-    
+        
     m_renderer->addShapeToQueue(shape1);
     m_renderer->addShapeToQueue(shape2);
+    m_renderer->addLightToQueue(light1);
+    m_renderer->addLightToQueue(light2);
     m_renderer->renderQueue();
 }
 

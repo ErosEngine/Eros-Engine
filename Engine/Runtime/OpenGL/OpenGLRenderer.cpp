@@ -28,16 +28,22 @@ void OpenGLRenderer::renderQueue()
     {
         glUseProgram(0);
         Shape *pShape = m_shapeQueue[i];
+        PointLight light = m_lights[0];
         pShape->bind();
         pShape->shader.use();
         pShape->draw(); // Drawing it one time is handled internally
-        pShape->shader.setUniform("modelView", currentModelView); 
+        pShape->shader.setUniform("modelView",          currentModelView);
+        pShape->shader.setUniform("lightPos",           light.position);
+        pShape->shader.setUniform("ambientStrength",    light.ambientStrength);
+        pShape->shader.setUniform("lightColor",         light.color);
+        pShape->shader.setUniform("specularStrength",   light.specularStrength);
         if (pShape->transform.hasChanged())
         {
             pShape->shader.setUniform("translation", pShape->transform.getModelMat());
         }
         pShape->shader.setUniform("viewPos", camera->position);
         pShape->unbind();
+        qDebug() << (int)glGetError();
     }
     for (int b = 0; b < m_instancingListQueue.size(); ++b)
     {
@@ -85,4 +91,9 @@ void OpenGLRenderer::addShapeInstanceInfo(Shape *pShape, int numTimes)
 void OpenGLRenderer::addShapeToQueue(Shape *pShape)
 {
     m_shapeQueue.push_back(pShape);
+}
+
+void OpenGLRenderer::addLightToQueue(PointLight light)
+{
+    m_lights.push_back(light);
 }
