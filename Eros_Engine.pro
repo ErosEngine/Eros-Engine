@@ -14,7 +14,6 @@ DEPENDPATH += $$PWD/ExtLibs/include
 SOURCES += main.cpp \
     Engine/Runtime/Window/MainWindow.cpp \
     Engine/Runtime/Shaders/Shader.cpp \
-    Engine/Runtime/OpenGL/Primitive.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
     Engine/Runtime/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
@@ -32,13 +31,13 @@ SOURCES += main.cpp \
     Engine/Developer/FileSystem/EFile.cpp \
     Engine/Developer/Util/Util.cpp \
     Engine/Editor/DebugLogger.cpp \
-    Engine/Editor/LoggerMessage.cpp
+    Engine/Editor/LoggerMessage.cpp \
+    Engine/Runtime/OpenGL/Light.cpp
     
 
 HEADERS += \
     Engine/Runtime/Window/MainWindow.h \
     Engine/Runtime/Shaders/Shader.h \
-    Engine/Runtime/OpenGL/Primitive.h \
     Engine/Runtime/OpenGL/OpenGLRenderer.h \
     Engine/Developer/Util/Util.h \
     Engine/Editor/MainWindow_Qt.h \
@@ -59,7 +58,8 @@ HEADERS += \
     Engine/Developer/FileSystem/EFile.h \ 
     Engine/Editor/DebugLogger.h \
     Engine/Editor/LoggerMessage.h \
-    ErosLib/Math.h
+    ErosLib/Math.h \
+    Engine/Runtime/OpenGL/Light.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

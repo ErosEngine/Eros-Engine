@@ -45,17 +45,25 @@ void OpenGLViewPort::initializeGL()
     shape1->mesh = LoadMeshFromFile("Engine/Assets/_cube.obj");
     shape1->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
     shape1->setup();
-    shape1->shader.setUniform("translation", glm::translate(glm::mat4(), glm::vec3(0, 0, -4)));
+    shape1->bind();
+    shape1->shader.use();
+    shape1->transform.translate(VEC3_BACK, 4.0f);
     shape1->shader.setUniform("perspective", perspective);
+    shape1->unbind();
+    glUseProgram(0);
     
     shape2->mesh = LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj");
     shape2->texture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
     shape2->setup();
-    shape2->shader.setUniform("translation", glm::translate(glm::mat4(), glm::vec3(4, -1, -7)));
+    shape2->bind();
+    shape2->shader.use();
+    shape2->transform.translate(VEC3_LEFT, 4.0f);
     shape2->shader.setUniform("perspective", perspective);
+    shape2->unbind();
+    glUseProgram(0);
     
     m_renderer->addShapeToQueue(shape1);
-    m_renderer->addShapeInstanceInfo(shape2, 2);
+    m_renderer->addShapeToQueue(shape2);
     m_renderer->renderQueue();
 }
 
@@ -93,6 +101,7 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
             m_renderer->camera->moveDownward();
         break;
     }
+    
     repaint();
 }
 

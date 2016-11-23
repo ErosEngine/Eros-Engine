@@ -1,7 +1,6 @@
 #ifndef OPENGLRENDERER_H
 #define OPENGLRENDERER_H
 
-#include "Engine/Runtime/OpenGL/Primitive.h"
 #include "ErosLib/Math.h"
 #include "Engine/Runtime/OpenGL/Camera.h"
 #include "../OpenGL/Shape.h"

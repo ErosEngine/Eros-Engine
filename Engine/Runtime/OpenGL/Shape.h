@@ -3,7 +3,6 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-#include "Primitive.h"
 #include "Texture.h"
 #include "../Shaders/Shader.h"
 #include "ShapeData.h"

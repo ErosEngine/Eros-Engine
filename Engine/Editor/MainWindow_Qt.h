@@ -22,7 +22,7 @@ public:
     ~MainWindow_Qt();
     
     static MainWindow_Qt *getInstance();
-        
+    
     void test();
     
 private slots:

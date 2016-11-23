@@ -26,8 +26,18 @@ void OpenGLRenderer::renderQueue()
     // Draw individual shapes from the queue
     for (int i = 0; i < m_shapeQueue.size(); ++i)
     {
-        m_shapeQueue[i]->draw(); // Drawing it one time is handled internally
-        m_shapeQueue[i]->shader.setUniform("modelView", currentModelView);
+        glUseProgram(0);
+        Shape *pShape = m_shapeQueue[i];
+        pShape->bind();
+        pShape->shader.use();
+        pShape->draw(); // Drawing it one time is handled internally
+        pShape->shader.setUniform("modelView", currentModelView); 
+        if (pShape->transform.hasChanged())
+        {
+            pShape->shader.setUniform("translation", pShape->transform.getModelMat());
+        }
+        pShape->unbind();
+        qDebug() << (int)glGetError();
     }
     for (int b = 0; b < m_instancingListQueue.size(); ++b)
     {
@@ -42,8 +52,8 @@ void OpenGLRenderer::renderQueue()
                     GL_UNSIGNED_SHORT, NULL, pInstInfo->numberTimes
         );
         pShape->shader.use();
-        pShape->unbind();
         pShape->shader.setUniform("modelView", currentModelView);
+        pShape->unbind();
     }
     
     glPopMatrix();
