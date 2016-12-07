@@ -85,9 +85,19 @@ void ProcessAssimpMesh(aiMesh *pMesh, const aiScene *pScene, Model *pBase)
         vert.position.x = pMesh->mVertices[i].x;
         vert.position.y = pMesh->mVertices[i].y;
         vert.position.z = pMesh->mVertices[i].z;
-        vert.normal.x = pMesh->mNormals[i].x;
-        vert.normal.y = pMesh->mNormals[i].y;
-        vert.normal.z = pMesh->mNormals[i].z;
+        
+        if (pMesh->mNormals)
+        {
+            vert.normal.x = pMesh->mNormals[i].x;
+            vert.normal.y = pMesh->mNormals[i].y;
+            vert.normal.z = pMesh->mNormals[i].z;
+        }
+        else
+        {
+            vert.normal.x = 1.0f;
+            vert.normal.y = 1.0f;
+            vert.normal.z = 1.0f;
+        }
         
         if (pMesh->mTextureCoords[0])
         {

@@ -19,8 +19,7 @@ void Transform::translate(glm::vec3 dir, float speed)
 
 void Transform::rotate(float angle, glm::vec3 axis, float speed)
 {
-    m_modelMat *= glm::rotate(m_modelMat, angle * speed, axis);
-    m_rotation.x += 1; // test
+    m_modelMat = glm::rotate(m_modelMat, angle * speed, axis);
     m_hasChanged = true;
 }
 
@@ -31,14 +30,14 @@ void Transform::moveTo(float x, float y, float z, float speed)
 
 void Transform::moveTo(glm::vec3 pos, float speed)
 {
-    m_modelMat *= glm::translate(m_modelMat, pos);
+    m_modelMat = glm::translate(m_modelMat, pos);
     m_position = pos;
     m_hasChanged = true;
 }
 
 void Transform::scale(glm::vec3 newScale)
 {
-    m_modelMat *= glm::scale(m_modelMat, newScale);
+    m_modelMat = glm::scale(m_modelMat, newScale);
     m_hasChanged = true;
     m_scale = newScale;
 }
@@ -51,7 +50,7 @@ void Transform::scale(float nX, float nY, float nZ)
 void Transform::setPosition(glm::vec3 pos) 
 {
     m_position = pos;
-    m_modelMat *= glm::translate(m_modelMat, pos);
+    m_modelMat = glm::translate(m_modelMat, pos);
     m_hasChanged = true;
 }
 
@@ -76,7 +75,7 @@ glm::vec4 Transform::getRotation() const
     return m_rotation;
 }
 
-glm::mat4 Transform::getModelMat()
+const glm::mat4 &Transform::getModelMat()
 {
     m_hasChanged = false;
     return m_modelMat;

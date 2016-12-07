@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "../Shaders/Shader.h"
 #include "ShapeData.h"
+#include "Material.h"
 
 
 class Shape
@@ -19,10 +20,11 @@ public:
     SubShader fragShader;
     Shader shader;
     
+    Material material;
     Texture texture;
     Transform transform;
     
-    Model *getMesh() const;
+    const Model *getMesh() const;
     void setMesh(Model *value);
     
     void setup();

@@ -38,7 +38,7 @@ public:
     glm::vec4 getRotation() const;
     
     // This will probably only be used for the renderer
-    glm::mat4 getModelMat(); 
+    const glm::mat4 &getModelMat(); 
     
     bool hasChanged() const;
     

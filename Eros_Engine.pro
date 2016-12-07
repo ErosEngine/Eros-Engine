@@ -32,7 +32,10 @@ SOURCES += main.cpp \
     Engine/Developer/Util/Util.cpp \
     Engine/Editor/DebugLogger.cpp \
     Engine/Editor/LoggerMessage.cpp \
-    Engine/Runtime/OpenGL/Light.cpp
+    Engine/Runtime/OpenGL/Light.cpp \
+    Engine/Runtime/OpenGL/Material.cpp \
+    Engine/Runtime/ErosObjects/Scene.cpp \
+    Engine/Runtime/ErosObjects/Entity.cpp
     
 
 HEADERS += \
@@ -59,7 +62,10 @@ HEADERS += \
     Engine/Editor/DebugLogger.h \
     Engine/Editor/LoggerMessage.h \
     ErosLib/Math.h \
-    Engine/Runtime/OpenGL/Light.h
+    Engine/Runtime/OpenGL/Light.h \
+    Engine/Runtime/OpenGL/Material.h \
+    Engine/Runtime/ErosObjects/Scene.h \
+    Engine/Runtime/ErosObjects/Entity.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

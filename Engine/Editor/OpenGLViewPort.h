@@ -29,8 +29,9 @@ protected:
     
 private:
     
-    Shape *shape1, *shape2;
     OpenGLRenderer *m_renderer;
+    
+    DirectionalLight m_light;
 };
 
 #endif // OPENGLVIEWPORT_H

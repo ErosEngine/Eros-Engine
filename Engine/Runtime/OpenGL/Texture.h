@@ -19,8 +19,7 @@ public:
     
     QString fileName;
     
-    GLuint texture;
-    GLuint activeTexture;
+    GLuint texture = 0;
     
     int type;
     int width;
@@ -28,6 +27,7 @@ public:
     int comp;
     
     bool loadFromFile(const char *fileName);    
+    bool isEmpty();
     
     inline void bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
     inline void unbind() { glBindTexture(GL_TEXTURE_2D, 0); }

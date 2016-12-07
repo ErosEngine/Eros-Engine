@@ -1,4 +1,6 @@
 #include "OpenGLViewPort.h"
+#include <Windows.h>
+
 
 #define PARENT (MainWindow_Qt *)parentWidget()
 
@@ -10,17 +12,6 @@ OpenGLViewPort::OpenGLViewPort(QWidget *parent) : QOpenGLWidget(parent)
 OpenGLViewPort::~OpenGLViewPort()
 {
     m_renderer->cleanup();
-    
-    if (shape1)
-    {
-        qDebug() << "Shape1 wasn't deleted";
-        delete shape1;
-    }
-    if (shape2)
-    {
-        qDebug() << "Shape2 wasn't deleted";
-        delete shape2;
-    }
     delete m_renderer;
 }
 
@@ -35,49 +26,42 @@ void OpenGLViewPort::initializeGL()
         qDebug() << "OpenGL has initialized, Current version number " << QString((const char *)glGetString(GL_VERSION)) << endl;
     }
     m_renderer = new OpenGLRenderer();
-    shape1 = new Shape();
-    shape2 = new Shape();
+    Shape shape1;
+    Shape shape2;
+    Shape shape3;
     
     m_renderer->prepareRenderer();
-    glm::mat4 perspective = m_renderer->camera->getPerspective();
     
-    PointLight light1, light2;
+    m_light.ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
+    m_light.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+    m_light.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+    m_light.direction = glm::vec3(3.0f, 0.0f, 0.0f);
     
-    light1.ambientStrength = 0.5f;
-    light1.position = glm::vec3(0, 0, -2);
-    light1.specularStrength = 1.0f;
-    light1.color = glm::vec3(1.0f, 1.0f, 1.0f);
+    shape1.setMesh(LoadMeshFromFile("Engine/Assets/_cube_.obj"));
+    shape1.material.shininess = 2.0f;
+    shape1.material.diffuseTexture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
+    shape1.material.specularTexture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
+    shape1.setup();
+    shape1.transform.translate(VEC3_BACK, 4.0f);
     
-    light2.ambientStrength = 0.5f;
-    light2.position = glm::vec3(4, 2, -2);
-    light2.specularStrength = 1.0f;
-    light2.color = glm::vec3(1.0f, 0.4f, 0.4f);
+    shape2.setMesh(LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj"));
+    shape2.texture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
+    shape2.setup();
+    shape2.material.shininess = 200.0f;
+    shape2.transform.translate(VEC3_LEFT, 4.0f);
+    shape2.transform.scale(0.3f, 0.3f, 0.3f);
     
-    shape1->setMesh(LoadMeshFromFile("Engine/Assets/_cube.obj"));
-    shape1->texture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
-    shape1->setup();
-    shape1->bind();
-    shape1->shader.use();
-    shape1->shader.setUniform("perspective", perspective);
-    shape1->transform.translate(VEC3_BACK, 4.0f);
-    shape1->unbind();
-    glUseProgram(0);
+    shape3.setMesh(LoadMeshFromFile("Engine/Assets/cylinder.obj"));
+    shape3.texture.loadFromFile("Engine/Assets/SpiderTex.jpg");
+    shape3.setup();
+    shape3.transform.translate(VEC3_BACK, 2.0f);
+    shape3.transform.translate(VEC3_RIGHT, 4.0f);
     
-    // Very Bad and I do plan to change this
-    shape2->setMesh(LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj"));
-    shape2->texture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
-    shape2->setup();
-    shape2->bind();
-    shape2->shader.use();
-    shape2->shader.setUniform("perspective", perspective);
-    shape2->transform.translate(VEC3_LEFT, 4.0f);
-    shape2->unbind();
-    glUseProgram(0);
-        
+    
     m_renderer->addShapeToQueue(shape1);
     m_renderer->addShapeToQueue(shape2);
-    m_renderer->addLightToQueue(light1);
-    m_renderer->addLightToQueue(light2);
+//    m_renderer->addShapeToQueue(shape3);
+    m_renderer->addLightToQueue(m_light);
     m_renderer->renderQueue();
 }
 
@@ -88,12 +72,13 @@ void OpenGLViewPort::paintGL()
 
 void OpenGLViewPort::resizeGL(int w, int h)
 {
-    glViewport(w, h, 1.0f, 1.0f);
+    glViewport(w, h, width(), height());
     repaint();
 }
 
 void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
 {
+    this->setFocus();
     switch (e->key())
     {
         case (Qt::Key::Key_W):
@@ -113,6 +98,12 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
         break;
         case (Qt::Key::Key_Q):
             m_renderer->camera->moveDownward();
+        break;
+        case (Qt::Key::Key_T):
+            m_renderer->rotateLight(1.0f);
+        break;
+        case (Qt::Key::Key_G):
+            m_renderer->rotateLight(-1.0f);
         break;
     }
     

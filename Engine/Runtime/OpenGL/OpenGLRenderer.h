@@ -16,9 +16,11 @@ struct InstancingInfo
 
 class OpenGLRenderer
 {
-    std::vector<Shape *>         m_shapeQueue;
-    std::vector<InstancingInfo>  m_instancingListQueue;
-    std::vector<PointLight>      m_lights;
+    std::vector<Shape>              m_shapeQueue;
+    std::vector<InstancingInfo>     m_instancingListQueue;
+    std::vector<PointLight>         m_pointLights;
+    std::vector<DirectionalLight>   m_directionalLights;
+    std::vector<Spotlight>          m_spotLights;
     
 public:
     
@@ -33,11 +35,20 @@ public:
     void renderQueue();
     void cleanup();
     
+    inline void rotateLight(float val)
+    {
+        m_directionalLights[0].direction.x += val;
+    }
+    
+    void updateLights();
+    
     // Clean up your pointers, however don't delete them before
     // the renderer is done with them
     void addShapeInstanceInfo(Shape *pShape, int numTimes);
-    void addShapeToQueue(Shape *pShape);
+    void addShapeToQueue(Shape shape);
     void addLightToQueue(PointLight light);
+    void addLightToQueue(DirectionalLight light);
+    void addLightToQueue(Spotlight light);
 };
 
 #endif // OPENGLRENDERER_H

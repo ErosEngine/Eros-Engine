@@ -58,3 +58,8 @@ bool Texture::loadFromFile(const char *fileName)
     }
     return true;
 }
+
+bool Texture::isEmpty()
+{
+    return (texture != 0);
+}

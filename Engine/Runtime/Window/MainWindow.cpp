@@ -66,6 +66,8 @@ void MainWindow_SDL::gameLoop()
         glPushMatrix();
         renderer.renderQueue();
         
+        
+        
         SDL_Event e;
         while (SDL_PollEvent(&e))
         {

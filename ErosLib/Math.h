@@ -3,6 +3,8 @@
 
 #include <cmath>
 
+
+
 struct EVector4
 {
     float x, y, z, w;
@@ -15,7 +17,7 @@ struct EVector3
 
 struct EVector2
 {
-    float x, y, z;
+    float x, y;
 };
 
 struct EMatrix4x4

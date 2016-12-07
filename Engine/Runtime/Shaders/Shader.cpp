@@ -240,7 +240,7 @@ void Shader::setUniform(const char *variableName, Texture &data)
 }
 
 void Shader::setUniform(const char *variableName, const EMatrix4x4 &data)
-{    
+{
     int b = findInList(variableName);
     if (b) // if we found the variable
     {

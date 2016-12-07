@@ -14,7 +14,7 @@ Shape::~Shape()
     delete m_mesh;
 }
 
-Model *Shape::getMesh() const
+const Model *Shape::getMesh() const
 {
     return m_mesh;
 }
@@ -49,7 +49,6 @@ void Shape::setup()
     glGenBuffers(1, &m_eboId);
     
     bind();
-    
     glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
     glBufferData(GL_ARRAY_BUFFER, m_mesh->vertexes.size() * sizeof(Vertex), 
                  &m_mesh->vertexes[0], GL_STATIC_DRAW);
@@ -70,7 +69,7 @@ void Shape::setup()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texCoords));
     
     shader.use();
-    unbind();
+    unbind(); 
 }
 
 void Shape::unbind()
@@ -86,7 +85,10 @@ void Shape::bind()
 void Shape::draw()
 {
     bind();
-    texture.bind();
+    glActiveTexture(GL_TEXTURE0);
+    material.diffuseTexture.bind();
+    glActiveTexture(GL_TEXTURE0 + 1);
+    material.specularTexture.bind();
     glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_SHORT, NULL);
     shader.use();
     unbind();

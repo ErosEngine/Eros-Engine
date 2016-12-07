@@ -8,8 +8,6 @@ MainWindow_Qt::MainWindow_Qt(QWidget *parent) :
     ui(new Ui::MainWindow_Qt)
 {
     ui->setupUi(this);
-    
-    // allocate the singleton to this
 }
 
 MainWindow_Qt::~MainWindow_Qt()

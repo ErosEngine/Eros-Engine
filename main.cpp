@@ -11,6 +11,11 @@ int main(int argc, char **argv)
 {
 #if TEST
     
+    QApplication a(argc, argv);
+    OpenGLViewPort p;
+    p.show();
+    a.exec();
+    
 #else
     
     QApplication a(argc, argv);

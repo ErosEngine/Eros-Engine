@@ -20,6 +20,8 @@
 
 using std::string;
 
+
+
 class SubShader
 {
     
@@ -59,13 +61,14 @@ class Shader
     typedef std::vector<ShaderInformation> ShaderInfoList;
     typedef std::vector<SubShader> Shaders;
     
-    Shaders m_shaderList;
-    ShaderInfoList m_infoList;
+    Shaders         m_shaderList;
+    ShaderInfoList  m_infoList;
     
     // Note(kiecker): returns 0 if it wasn't found, 
     // so you can do: if (findInList(var)) { ... }
     int findInList(const char *name);
     
+    // This might be a todo
     friend class Transform;
     
 public:
