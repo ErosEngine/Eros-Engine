@@ -4,7 +4,6 @@
 #include <QTextBrowser>
 #include <QObject>
 #include "LoggerMessage.h"
-#include <Windows.h>
 
 
 class DebugLogger : public QTextBrowser

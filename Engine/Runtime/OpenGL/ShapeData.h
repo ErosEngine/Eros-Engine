@@ -29,15 +29,14 @@ struct Mesh
 
 struct Model : public Mesh
 {
+    /*
+     * Supported formats
+     *   OBJ
+     */
+    bool loadMeshFromFile(const char *fileName);
     QString fileName;
+    QString errorReason;
 };
-
-Mesh CreateCube();
-Mesh CreatePlane();
-Mesh CreateQuad();
-Mesh CreatePyramid();
-Mesh CreateSphere();
-Model *LoadMeshFromFile(const char *fileName);
 
 
 #endif // SHAPEDATA_H

@@ -1,5 +1,4 @@
 #include "OpenGLViewPort.h"
-#include <Windows.h>
 
 
 #define PARENT (MainWindow_Qt *)parentWidget()

@@ -11,7 +11,7 @@ class Entity : public Shape
 public:
     
     void setName(const QString &name);
-    const QString &getName() const; // We want it to be a const reference for code footprint
+    const QString &name() const; // We want it to be a const reference for code footprint
     
 private:
     
