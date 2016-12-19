@@ -1,18 +1,19 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "../OpenGL/Shape.h"
+#include "IComponent.h"
 #include <QString>
 
-// It will inherit all the properties
-// Drawing, etc
-class Entity : public Shape
+
+class Entity
 {
 public:
     
     void setName(const QString &name);
     const QString &name() const; // We want it to be a const reference for code footprint
     
+	void attachComponent(IComponent *component);
+	
 private:
     
     QString m_name;

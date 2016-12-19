@@ -30,8 +30,12 @@ protected:
 private:
     
     OpenGLRenderer *m_renderer;
-    
-    DirectionalLight m_light;
+	
+	Shape *m_shape1;
+    Shape *m_shape2;
+    Shape *m_shape3;
+	
+    PointLight m_light;
 };
 
 #endif // OPENGLVIEWPORT_H

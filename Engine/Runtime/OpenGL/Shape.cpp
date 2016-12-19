@@ -32,7 +32,6 @@ void Shape::setup()
     shader.addShader(fragShader);
     shader.compile();
     
-    
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
     glGenBuffers(1, &m_eboId);
@@ -74,11 +73,8 @@ void Shape::bind()
 void Shape::draw()
 {
     bind();
-    glActiveTexture(GL_TEXTURE0);
     material.diffuseTexture.bind();
-    glActiveTexture(GL_TEXTURE0 + 1);
-    material.specularTexture.bind();
-    glDrawElements(GL_TRIANGLES, m_mesh->indices.size(), GL_UNSIGNED_SHORT, NULL);
+    glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_SHORT, NULL);
     shader.use();
     unbind();
 }

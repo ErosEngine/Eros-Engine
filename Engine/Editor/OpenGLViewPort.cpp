@@ -10,6 +10,10 @@ OpenGLViewPort::OpenGLViewPort(QWidget *parent) : QOpenGLWidget(parent)
 
 OpenGLViewPort::~OpenGLViewPort()
 {
+	delete m_shape1;
+	delete m_shape2;
+	delete m_shape3;
+	
     m_renderer->cleanup();
     delete m_renderer;
 }
@@ -22,44 +26,49 @@ void OpenGLViewPort::initializeGL()
     }
     else if (GlResult == GLEW_OK)
     {
-        qDebug() << "OpenGL has initialized, Current version number " << QString((const char *)glGetString(GL_VERSION)) << endl;
+        qDebug() << "OpenGL has initialized, Current version number " 
+				 << QString((const char *)glGetString(GL_VERSION)) << endl;
     }
     m_renderer = new OpenGLRenderer();
-    Shape shape1;
-    Shape shape2;
-    Shape shape3;
-    
+
+    m_shape1 = new Shape();
+	m_shape2 = new Shape();
+	m_shape3 = new Shape();
+	
     m_renderer->prepareRenderer();
     
-    m_light.ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
-    m_light.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
-    m_light.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
-    m_light.direction = glm::vec3(3.0f, 0.0f, 0.0f);
+	m_light.position = glm::vec3(0.0f, 0.0f, 0.0f);
+    m_light.constant = 1.0f;
+	m_light.linear = 0.09f;
+	m_light.quadratic = 0.032f;
+	m_light.ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	m_light.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	m_light.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
     
-    shape1.setMesh(LoadMeshFromFile("Engine/Assets/_cube_.obj"));
-    shape1.material.shininess = 2.0f;
-    shape1.material.diffuseTexture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
-    shape1.material.specularTexture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
-    shape1.setup();
-    shape1.transform.translate(VEC3_BACK, 4.0f);
+	m_shape1->mesh.loadFromFile("Engine/Assets/_cube_.obj");
+    m_shape1->material.shininess = 2.0f;
+    m_shape1->material.diffuseTexture.loadFromFile("Engine/Assets/Suit/glass_dif.png");
+    m_shape1->material.specularTexture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
+    m_shape1->setup();
+    m_shape1->transform.translate(VEC3_BACK, 4.0f);
     
-    shape2.setMesh(LoadMeshFromFile("Engine/Assets/Suit/nanosuit.obj"));
-    shape2.texture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
-    shape2.setup();
-    shape2.material.shininess = 200.0f;
-    shape2.transform.translate(VEC3_LEFT, 4.0f);
-    shape2.transform.scale(0.3f, 0.3f, 0.3f);
+    m_shape2->mesh.loadFromFile("Engine/Assets/Suit/nanosuit.obj");
+    m_shape2->material.diffuseTexture.loadFromFile("Engine/Assets/Suit/arm_dif.png");
+    m_shape2->setup();
+    m_shape2->material.shininess = 20.0f;
+    m_shape2->transform.translate(VEC3_LEFT, 4.0f);
+    m_shape2->transform.scale(0.3f, 0.3f, 0.3f);
     
-    shape3.setMesh(LoadMeshFromFile("Engine/Assets/cylinder.obj"));
-    shape3.texture.loadFromFile("Engine/Assets/SpiderTex.jpg");
-    shape3.setup();
-    shape3.transform.translate(VEC3_BACK, 2.0f);
-    shape3.transform.translate(VEC3_RIGHT, 4.0f);
+	m_shape3->mesh.loadFromFile("Engine/Assets/cylinder.obj");
+    m_shape3->material.diffuseTexture.loadFromFile("Engine/Assets/SpiderTex.jpg");
+    m_shape3->setup();
+    m_shape3->transform.translate(VEC3_BACK, 2.0f);
+    m_shape3->transform.translate(VEC3_RIGHT, 4.0f);
     
-    
-    m_renderer->addShapeToQueue(shape1);
-    m_renderer->addShapeToQueue(shape2);
-//    m_renderer->addShapeToQueue(shape3);
+    m_renderer->addShapeToQueue(m_shape1);
+    m_renderer->addShapeToQueue(m_shape2);
+//	m_renderer->addShapeToQueue(m_shape3);
+//	m_renderer->addShapeInstanceInfo(&shape1, 1);
     m_renderer->addLightToQueue(m_light);
     m_renderer->renderQueue();
 }
@@ -97,12 +106,6 @@ void OpenGLViewPort::keyPressEvent(QKeyEvent *e)
         break;
         case (Qt::Key::Key_Q):
             m_renderer->camera->moveDownward();
-        break;
-        case (Qt::Key::Key_T):
-            m_renderer->rotateLight(1.0f);
-        break;
-        case (Qt::Key::Key_G):
-            m_renderer->rotateLight(-1.0f);
         break;
     }
     

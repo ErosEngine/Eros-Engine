@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include "Texture.h"
 #include "../Shaders/Shader.h"
-#include "ShapeData.h"
+#include "../ErosObjects/Mesh.h"
 #include "Material.h"
 
 
@@ -24,7 +24,7 @@ public:
     Texture texture;
     Transform transform;
     
-    Model mesh;
+    MeshComponent mesh;
     
     void setup();
     void unbind();

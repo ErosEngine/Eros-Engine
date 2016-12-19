@@ -8,7 +8,6 @@
 class Material
 {
 public:
-    
     float shininess;
     Texture diffuseTexture;
     Texture specularTexture;

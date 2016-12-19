@@ -8,6 +8,10 @@ void Entity::setName(const QString &name)
 
 const QString &Entity::name() const
 {
-    return m_name;
+	return m_name;
+}
+
+void Entity::attachComponent(IComponent *component)
+{
 }
 

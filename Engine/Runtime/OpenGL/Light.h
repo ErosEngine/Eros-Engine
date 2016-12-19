@@ -2,21 +2,19 @@
 #define LIGHT_H
 
 #include <glm/glm.hpp>
+#include "../ErosObjects/IComponent.h"
 
 
 struct PointLight
-{
-    bool castShadows; // TODO(kiecker)
-    glm::vec3 position;
-    glm::vec3 color;
-    glm::vec3 specularColor;
-    float ambientStrength;
-    float specularStrength;
-    float reach;
-    float brightness;    
-    float constant;
-    float linear;
-    float quadratic;
+{    
+	glm::vec3 position;
+	glm::vec3 ambientColor;
+	glm::vec3 diffuseColor;
+	glm::vec3 specularColor;
+	
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 struct DirectionalLight

@@ -25,9 +25,8 @@ SOURCES += main.cpp \
     ErosLib/EDebugStream.cpp \
     Engine/Runtime/OpenGL/Camera.cpp \
     Engine/Developer/Client/Input.cpp \
-    Engine/Runtime/OpenGL/ShapeData.cpp \
+    Engine/Runtime/ErosObjects/Mesh.cpp \
     Engine/Runtime/OpenGL/Transform.cpp \
-    Engine/Runtime/OpenGL/Model.cpp \
     Engine/Developer/FileSystem/EFile.cpp \
     Engine/Developer/Util/Util.cpp \
     Engine/Editor/DebugLogger.cpp \
@@ -35,7 +34,9 @@ SOURCES += main.cpp \
     Engine/Runtime/OpenGL/Light.cpp \
     Engine/Runtime/OpenGL/Material.cpp \
     Engine/Runtime/ErosObjects/Scene.cpp \
-    Engine/Runtime/ErosObjects/Entity.cpp
+    Engine/Runtime/ErosObjects/Entity.cpp \
+    Engine/Runtime/ErosObjects/Component.cpp \
+    Engine/Runtime/OpenGL/OpenGLFrameBuffer.cpp
     
 
 HEADERS += \
@@ -54,9 +55,8 @@ HEADERS += \
     ErosLib/EDebugStream.h \
     Engine/Runtime/OpenGL/Camera.h \
     Engine/Developer/Client/Input.h \
-    Engine/Runtime/OpenGL/ShapeData.h \
+    Engine/Runtime/ErosObjects/Mesh.h \
     Engine/Runtime/OpenGL/Transform.h \
-    Engine/Runtime/OpenGL/Model.h \
     ErosLib/ErosDefines.h \
     Engine/Developer/FileSystem/EFile.h \ 
     Engine/Editor/DebugLogger.h \
@@ -65,7 +65,10 @@ HEADERS += \
     Engine/Runtime/OpenGL/Light.h \
     Engine/Runtime/OpenGL/Material.h \
     Engine/Runtime/ErosObjects/Scene.h \
-    Engine/Runtime/ErosObjects/Entity.h
+    Engine/Runtime/ErosObjects/Entity.h \
+    Engine/Runtime/ErosObjects/IRenderBase.h \
+    Engine/Runtime/ErosObjects/IComponent.h \
+    Engine/Runtime/OpenGL/OpenGLFrameBuffer.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \
