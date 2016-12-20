@@ -36,7 +36,8 @@ SOURCES += main.cpp \
     Engine/Runtime/ErosObjects/Scene.cpp \
     Engine/Runtime/ErosObjects/Entity.cpp \
     Engine/Runtime/ErosObjects/Component.cpp \
-    Engine/Runtime/OpenGL/OpenGLFrameBuffer.cpp
+    Engine/Runtime/OpenGL/OpenGLFrameBuffer.cpp \
+    Engine/Runtime/Vulkan/VulkanRenderer.cpp
     
 
 HEADERS += \
@@ -68,7 +69,8 @@ HEADERS += \
     Engine/Runtime/ErosObjects/Entity.h \
     Engine/Runtime/ErosObjects/IRenderBase.h \
     Engine/Runtime/ErosObjects/IComponent.h \
-    Engine/Runtime/OpenGL/OpenGLFrameBuffer.h
+    Engine/Runtime/OpenGL/OpenGLFrameBuffer.h \
+    Engine/Runtime/Vulkan/VulkanRenderer.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

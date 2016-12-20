@@ -40,8 +40,11 @@ struct SpotLight
 };
 // ---- Lights ---- //
 
+// This is going to be data in from the framebuffer
+layout (location = 0) in vec3 depthColor;
+
+
 // Transformations; ie. Vertex shader data
-in vec3 ourColor;
 in vec2 texCoord;
 in vec3 Normal;
 in vec3 FragPos;
