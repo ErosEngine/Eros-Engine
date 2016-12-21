@@ -2,11 +2,11 @@
 #define LIGHT_H
 
 #include <glm/glm.hpp>
-#include "../ErosObjects/IComponent.h"
+#include "../Core/IComponent.h"
 
 
 struct PointLight
-{    
+{
 	glm::vec3 position;
 	glm::vec3 ambientColor;
 	glm::vec3 diffuseColor;

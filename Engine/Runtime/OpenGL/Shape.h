@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include "Texture.h"
 #include "../Shaders/Shader.h"
-#include "../ErosObjects/Mesh.h"
+#include "../Core/Mesh.h"
 #include "Material.h"
 
 

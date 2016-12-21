@@ -43,7 +43,6 @@ void OpenGLFrameBuffer::create(FrameBufferType type, int windowWidth, int window
     }
     else if (type == STENCIL_BUFFER)
     {
-        
     }
     
     glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_renderedTexture, 0);

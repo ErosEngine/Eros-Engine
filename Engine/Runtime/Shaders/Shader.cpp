@@ -1,11 +1,11 @@
-#include "Shader.h"
+#include "OGLShader.h"
 #include <iostream>
 #include <QFile>
 #include "Engine/Developer/Util/Util.h"
 
 
 
-void SubShader::setup()
+void OGLShader::setup()
 {
     this->subShaderProgram = glCreateShader(shaderType);
     
@@ -13,7 +13,7 @@ void SubShader::setup()
     glShaderSource(subShaderProgram, 1, &temp_, NULL);
 }
 
-bool SubShader::compile()
+bool OGLShader::compile()
 {
     glCompileShader(subShaderProgram);
     GLint shaderCompOutput;
@@ -40,7 +40,7 @@ bool SubShader::compile()
     return true;
 }
 
-bool SubShader::loadFromFile(const char *_fileName, GLenum nShaderType)
+bool OGLShader::loadFromFile(const char *_fileName, GLenum nShaderType)
 {
     QFile file(_fileName);
     if (!file.open(QIODevice::Text | QIODevice::ReadWrite))
@@ -61,12 +61,12 @@ bool SubShader::loadFromFile(const char *_fileName, GLenum nShaderType)
 
 // Note(kiecker): These are just some quick util funcs
 
-bool Shader::ShaderInformation::operator ==(const Shader::ShaderInformation &right)
+bool OGLShaderProgram::ShaderInformation::operator ==(const OGLShaderProgram::ShaderInformation &right)
 {
     return (this->varName == right.varName); // Shouln't need to return more than this
 }
 
-int Shader::findInList(const char *name)
+int OGLShaderProgram::findInList(const char *name)
 {
     for (int i = 0; i < m_infoList.size(); ++i)
     {
@@ -77,23 +77,23 @@ int Shader::findInList(const char *name)
     return false; // <- this works o_O
 }
 
-Shader::Shader()
+OGLShaderProgram::OGLShaderProgram()
 {
     shaderProgram = glCreateProgram();    
 }
 
-Shader::~Shader()
+OGLShaderProgram::~OGLShaderProgram()
 {
     
 }
 
-void Shader::addShader(const SubShader &shader)
+void OGLShaderProgram::addShader(const OGLShader &shader)
 {
     m_shaderList.push_back(shader);
     glAttachShader(shaderProgram, shader.subShaderProgram);
 }
 
-bool Shader::compile()
+bool OGLShaderProgram::compile()
 {
     glLinkProgram(shaderProgram);
     GLint shaderCompOutput;
@@ -121,12 +121,12 @@ bool Shader::compile()
     return true;
 }
 
-void Shader::use()
+void OGLShaderProgram::use()
 {
     glUseProgram(shaderProgram);
 }
 
-void Shader::setUniform(const char *variableName, const glm::vec4 &data)
+void OGLShaderProgram::setUniform(const char *variableName, const glm::vec4 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -144,7 +144,7 @@ void Shader::setUniform(const char *variableName, const glm::vec4 &data)
     }
 }
 
-void Shader::setUniform(const char *variableName, const glm::vec3 &data)
+void OGLShaderProgram::setUniform(const char *variableName, const glm::vec3 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -162,7 +162,7 @@ void Shader::setUniform(const char *variableName, const glm::vec3 &data)
     }
 }
 
-void Shader::setUniform(const char *variableName, const glm::vec2 &data)
+void OGLShaderProgram::setUniform(const char *variableName, const glm::vec2 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -180,7 +180,7 @@ void Shader::setUniform(const char *variableName, const glm::vec2 &data)
     }
 }
 
-void Shader::setUniform(const char *variableName, int data)
+void OGLShaderProgram::setUniform(const char *variableName, int data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -198,7 +198,7 @@ void Shader::setUniform(const char *variableName, int data)
     }
 }
 
-void Shader::setUniform(const char *variableName, float data)
+void OGLShaderProgram::setUniform(const char *variableName, float data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -216,7 +216,7 @@ void Shader::setUniform(const char *variableName, float data)
     }
 }
 
-void Shader::setUniform(const char *variableName, Texture &data)
+void OGLShaderProgram::setUniform(const char *variableName, Texture &data)
 {
     // We have to assume that they set the active texture already
     int b = findInList(variableName);
@@ -239,7 +239,7 @@ void Shader::setUniform(const char *variableName, Texture &data)
     }
 }
 
-void Shader::setUniform(const char *variableName, const EMatrix4x4 &data)
+void OGLShaderProgram::setUniform(const char *variableName, const EMatrix4x4 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable
@@ -259,7 +259,7 @@ void Shader::setUniform(const char *variableName, const EMatrix4x4 &data)
 
 #include <glm/gtc/type_ptr.hpp>
 
-void Shader::setUniform(const char *variableName, const glm::mat4 &data)
+void OGLShaderProgram::setUniform(const char *variableName, const glm::mat4 &data)
 {
     int b = findInList(variableName);
     if (b) // if we found the variable

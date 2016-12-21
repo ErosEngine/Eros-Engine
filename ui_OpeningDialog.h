@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'OpeningDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.0
+** Created by: Qt User Interface Compiler version 5.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -50,7 +50,7 @@ public:
 
     void retranslateUi(QDialog *OpeningDialog)
     {
-        OpeningDialog->setWindowTitle(QApplication::translate("OpeningDialog", "Dialog", 0));
+        OpeningDialog->setWindowTitle(QApplication::translate("OpeningDialog", "Dialog", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -7,13 +7,6 @@
 
 #include "ErosLib/ErosDefines.h"
 
-#if defined(EROS_WINDOWS)
-    #include <Windows.h>
-    typedef HWND WindowHandle;
-#elif defined(EROS_LINUX)
-    #include <X11/Xlib.h>
-    typedef Window WindowHandle;
-#endif
 
 class MainWindow_SDL
 {
