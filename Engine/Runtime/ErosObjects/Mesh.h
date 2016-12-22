@@ -8,8 +8,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <QString>
-#include "../Core/Texture.h"
-#include "../Core/IComponent.h"
+#include "../OpenGL/Texture.h"
+#include "../ErosObjects/IComponent.h"
 
 #define ARRAY_SIZE(x) sizeof(x) / sizeof(typeof(x))
 
@@ -26,8 +26,6 @@ struct MeshComponent : public IComponent
 	std::vector<Vertex> vertexes;
     std::vector<GLushort> indices;
     std::vector<Texture> textures;
-	
-	QString fileName;
 	
 	virtual bool loadFromFile(const char *fileName) override;
 	virtual void fromExisting(const IComponent *other) override;

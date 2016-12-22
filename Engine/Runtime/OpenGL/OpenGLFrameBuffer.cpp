@@ -17,13 +17,13 @@ void OpenGLFrameBuffer::create(FrameBufferType type, int windowWidth, int window
     glGenTextures(1, &m_renderedTexture);
     glBindTexture(GL_TEXTURE_2D, m_renderedTexture);
     glTexImage2D(
-        GL_TEXTURE_2D, 
-        0, GL_RGB, 
-        windowWidth, 
-        windowHeight, 
-        0, GL_RGB, 
-        GL_UNSIGNED_BYTE, 
-        NULL
+		GL_TEXTURE_2D, 
+		0, GL_RGB, 
+		windowWidth, 
+		windowHeight, 
+		0, GL_RGB, 
+		GL_UNSIGNED_BYTE, 
+		nullptr
     );
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -43,6 +43,7 @@ void OpenGLFrameBuffer::create(FrameBufferType type, int windowWidth, int window
     }
     else if (type == STENCIL_BUFFER)
     {
+	//	glRenderbufferStorage(GL_RENDERBUFFER, )
     }
     
     glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_renderedTexture, 0);

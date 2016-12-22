@@ -12,10 +12,7 @@
 #include "../OpenGL/Transform.h"
 #endif
 #ifndef TEXTURE_H
-#include "../Core/Texture.h"
-#endif
-#ifndef LIGHT_H
-#include "../Core/Light.h"
+#include "../OpenGL/Texture.h"
 #endif
 
 #define EROS_VERTEX_SHADER GL_VERTEX_SHADER
@@ -25,7 +22,7 @@ using std::string;
 
 
 
-class OGLShader
+class SubShader
 {
     
 public:
@@ -40,7 +37,7 @@ public:
     
     bool loadFromFile(const char *fileName, GLenum nShaderType);
     
-    inline OGLShader &operator = (const OGLShader &right)
+    inline SubShader &operator = (const SubShader &right)
     {
         this->shaderCode = right.shaderCode;
         this->shaderType = right.shaderType;
@@ -50,8 +47,7 @@ public:
 };
 
 
-
-class OGLShaderProgram
+class Shader
 {
     struct ShaderInformation
     {
@@ -63,11 +59,8 @@ class OGLShaderProgram
         
     // Note(kiecker):
     typedef std::vector<ShaderInformation> ShaderInfoList;
-    typedef std::vector<OGLShader> Shaders;
+    typedef std::vector<SubShader> Shaders;
     
-	template<typename T>
-	using Vector = std::vector<T>; 
-	
     Shaders         m_shaderList;
     ShaderInfoList  m_infoList;
     
@@ -80,11 +73,11 @@ class OGLShaderProgram
     
 public:
     
-    OGLShaderProgram();
-   ~OGLShaderProgram();
+    Shader();
+   ~Shader();
     GLuint shaderProgram;
     
-    void addShader(const OGLShader &shader);
+    void addShader(const SubShader &shader);
     bool compile();
     void use();
     
@@ -96,9 +89,6 @@ public:
     void setUniform(const char *variableName, Texture &data);
     void setUniform(const char *variableName, const EMatrix4x4 &data);
     void setUniform(const char *variableName, const glm::mat4 &data);
-	void setBuffer(const char *variableName, const Vector<PointLight> &light);
-	void setBuffer(const char *variableName, const Vector<DirectionalLight> &light);
-	void setBuffer(const char *variableName, const Vector<Spotlight> &light);
     
 };
 

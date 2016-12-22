@@ -30,7 +30,6 @@ void OpenGLRenderer::renderQueue()
         Shape *pShape = m_shapeQueue[i];
         pShape->bind();
         pShape->shader.use();
-        pShape->draw(); // Drawing it one time is handled internally
         pShape->shader.setUniform("modelView", currentModelView);
         if (pShape->transform.hasChanged())
         {
@@ -41,6 +40,7 @@ void OpenGLRenderer::renderQueue()
         pShape->shader.setUniform("numPointLights", (int)m_spotLights.size());
         
         updateLights();
+        pShape->draw(); // Drawing it one time is handled internally
         
         pShape->unbind();
     }
@@ -86,59 +86,7 @@ void OpenGLRenderer::updateLights()
         Shape *pShape = m_shapeQueue[b];
         for (int i = 0; i < m_directionalLights.size(); ++i)
         {
-            std::string currentVariable;
-            currentVariable.append("directionalLights[" + std::to_string(i) + "]");
-            pShape->shader.setUniform(
-                        (currentVariable + ".direction").c_str(), 
-                        m_directionalLights[i].direction);
-            pShape->shader.setUniform(
-                        (currentVariable + ".ambientColor").c_str(),
-                        m_directionalLights[i].ambientColor);
-            pShape->shader.setUniform(
-                        (currentVariable + ".diffuseColor").c_str(),
-                        m_directionalLights[i].diffuseColor);
-            pShape->shader.setUniform(
-                        (currentVariable + ".specularColor").c_str(),
-                        m_directionalLights[i].specularColor);
-        }
-        /* 
-         * 
-         * vec3 position;
-         * vec3 ambientColor;
-         * vec3 diffuseColor;
-         * vec3 specularColor;
-         * 
-         * float distance;
-         * float constant;
-         * float linear;
-         * float quadratic;
-         */
-        for (int i = 0; i < m_pointLights.size(); ++i)
-        {
-            std::string currentVariable;
-            currentVariable.append("pointLights[" + std::to_string(i) + "]");
-            PointLight &currentLight = m_pointLights[i];
-            pShape->shader.setUniform(
-                        (currentVariable + ".position").c_str(),
-                         currentLight.position);
-            pShape->shader.setUniform( 
-                        (currentVariable + ".ambientColor").c_str(), 
-                         currentLight.ambientColor);
-            pShape->shader.setUniform(
-                        (currentVariable + ".diffuseColor").c_str(),
-                         currentLight.diffuseColor);
-            pShape->shader.setUniform(
-                        (currentVariable + ".specularColor").c_str(),
-                         currentLight.specularColor);
-            pShape->shader.setUniform(
-                        (currentVariable + ".constant").c_str(),
-                         currentLight.constant);
-            pShape->shader.setUniform(
-                        (currentVariable + ".linear").c_str(),
-                         currentLight.linear);
-            pShape->shader.setUniform(
-                        (currentVariable + ".quadratic").c_str(),
-                         currentLight.quadratic);
+            pShape->shader.setBuffer("DirectionalLights_t", m_directionalLights);
         }
     }
 }
@@ -157,6 +105,7 @@ void OpenGLRenderer::addShapeToQueue(Shape *pShape)
     pShape->bind();
     pShape->shader.use();
     pShape->shader.setUniform("perspective", camera->getPerspective());
+	pShape->shader.setUniform("mat_shininess", pShape->material.shininess);
     pShape->unbind();
     glUseProgram(0);
     m_shapeQueue.push_back(pShape);

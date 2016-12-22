@@ -1,5 +1,6 @@
 #version 430
 
+
 out vec4 color;
 
 
@@ -13,6 +14,7 @@ struct Material
 // ---- Lights ---- //
 struct DirectionalLight
 {
+    bool castShadows;
     vec3 direction;
     // Since this should be the brightest light in the scene
     // this should be the one to hold the ambient color;
@@ -23,6 +25,7 @@ struct DirectionalLight
 
 struct PointLight
 {
+    bool castShadows;
     vec3 position;
     vec3 ambientColor;
     vec3 diffuseColor;
@@ -53,13 +56,25 @@ uniform int numPointLights;
 uniform int numSpotLights;
 uniform int numDirectionalLights;
 
-uniform Material inMaterial;
 
-const int MAX_LIGHTS = 50;
+//uniform sampler2D mat_diffuse;
+//uniform sampler2D mat_specular;
+uniform float mat_shininess;
 
-uniform PointLight pointLights[MAX_LIGHTS];
-uniform SpotLight spotLights[MAX_LIGHTS];
-uniform DirectionalLight directionalLights[MAX_LIGHTS];
+/*
+layout (std140) uniform PointLights_t
+{
+    PointLight mLight;
+} pointLights[MAX_LIGHTS];
+*/
+
+
+uniform PointLight pointLights[50];
+uniform SpotLight spotLights[50];
+layout (std140) uniform DirectionalLights_t
+{
+    DirectionalLight mLight;
+} directionalLights;
 
 
 // Old, using for testing
@@ -76,7 +91,7 @@ vec3 CalculateDirLight(DirectionalLight light, vec3 normal, vec3 viewDir);
 vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 // Test main
-void _main()
+void nmain()
 {
     color = vec4(1.0f, 0.4f, 0.4f, 1.0f);
 }
@@ -90,7 +105,7 @@ void main()
     vec3 result;
     for (int i = 0; i < numDirectionalLights; ++i)
     {
-        result += CalculateDirLight(directionalLights[i], norm, dir);
+        result += CalculateDirLight(directionalLights.mLight, norm, dir);
     }
     for (int i = 0; i < numPointLights; ++i)
     {
@@ -101,6 +116,11 @@ void main()
 
 vec3 CalculateDirLight(DirectionalLight light, vec3 normal, vec3 viewDir)
 {
+    if (light.diffuseColor == vec3(0, 0, 0))
+    {
+        return vec3(1.0f, 0.0f, 0.0f);
+    }
+    
     vec3 lightDir = normalize(-light.direction);
     
     // Calculate diffuse
@@ -108,7 +128,7 @@ vec3 CalculateDirLight(DirectionalLight light, vec3 normal, vec3 viewDir)
     
     // Calculate specular
     vec3 reflectionDir = reflect(-lightDir, normal);
-    float spec = (pow(max(dot(viewDir, reflectionDir), 0.0f), inMaterial.shininess));
+    float spec = (pow(max(dot(viewDir, reflectionDir), 0.0f), mat_shininess));
     
     // Combine results
     vec3 ambientCol = light.ambientColor * vec3(texture2D(diffuse_texture, texCoord));    
@@ -126,7 +146,7 @@ vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
     
     // Calculate specular
     vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0f), inMaterial.shininess);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0f), mat_shininess);
     
     // Attenuation
     float distance = length(light.position - fragPos);

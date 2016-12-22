@@ -13,7 +13,6 @@ DEPENDPATH += $$PWD/ExtLibs/include
 
 SOURCES += main.cpp \
     Engine/Runtime/Window/MainWindow.cpp \
-    Engine/Runtime/Shaders/Shader.cpp \
     Engine/Editor/MainWindow_Qt.cpp \
     Engine/Runtime/Window/OpeningDialog.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
@@ -36,7 +35,8 @@ SOURCES += main.cpp \
     Engine/Runtime/Core/Scene.cpp \
     Engine/Runtime/Core/Entity.cpp \
     Engine/Runtime/OpenGL/OpenGLFrameBuffer.cpp \
-    Engine/Runtime/Vulkan/VulkanRenderer.cpp
+    Engine/Runtime/Vulkan/VulkanRenderer.cpp \
+    Engine/Runtime/Shaders/OGLShader.cpp
     
 
 HEADERS += \

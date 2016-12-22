@@ -3,14 +3,14 @@
 
 #include <QString>
 
-typedef void * GenericHandle;
-
 /* =====================================
  * The component interface object
- * ===================================== */
+ ===================================== */
 class IComponent
 {
 public:
+	
+	QString fileName;
 	
 	// Load a component from file
 	virtual bool loadFromFile(const char *fileName) = 0;

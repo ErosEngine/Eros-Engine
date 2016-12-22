@@ -37,10 +37,7 @@ void OpenGLViewPort::initializeGL()
 	
     m_renderer->prepareRenderer();
     
-	m_light.position = glm::vec3(0.0f, 0.0f, 0.0f);
-    m_light.constant = 1.0f;
-	m_light.linear = 0.09f;
-	m_light.quadratic = 0.032f;
+	m_light.direction = glm::vec3(1.0f, 0.0f, 0.0f);
 	m_light.ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	m_light.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	m_light.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);

@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-#include "Texture.h"
+#include "../Core/Texture.h"
 #include "../Shaders/OGLShader.h"
 #include "../Core/Mesh.h"
 #include "../Core/Material.h"

@@ -35,7 +35,7 @@ private:
     Shape *m_shape2;
     Shape *m_shape3;
 	
-    PointLight m_light;
+    DirectionalLight m_light;
 };
 
 #endif // OPENGLVIEWPORT_H

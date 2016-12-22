@@ -274,7 +274,49 @@ void OGLShaderProgram::setUniform(const char *variableName, const glm::mat4 &dat
         i.varName = variableName;
         i.varPos = uniformLoc;
         m_infoList.push_back(i);
-    }
+	}
+}
+
+void OGLShaderProgram::setBuffer(const char *variableName, const Vector<PointLight> &light)
+{
+	GLuint uniformBuffer = 0;
+	GLuint uniformLocation = 0;
+	glGenBuffers(1, &uniformBuffer);
+	glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer);
+	glBufferData(GL_UNIFORM_BUFFER, sizeof(PointLight), &light, GL_DYNAMIC_DRAW);
+	
+	uniformLocation = glGetUniformBlockIndex(this->shaderProgram, variableName);
+	
+	glUniformBlockBinding(this->shaderProgram, uniformLocation, uniformBuffer);
+	glBindBufferBase(GL_UNIFORM_BUFFER, uniformBuffer, uniformLocation);
+	
+	
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+}
+
+void OGLShaderProgram::setBuffer(const char *variableName, const Vector<DirectionalLight> &light)
+{
+	GLuint uniformBuffer = 0;
+	GLuint uniformLocation = 0;
+	glGenBuffers(1, &uniformBuffer);
+	glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer);
+	glBufferData(GL_UNIFORM_BUFFER, sizeof(DirectionalLight), &light[0], GL_DYNAMIC_DRAW);
+	
+	uniformLocation = glGetUniformBlockIndex(this->shaderProgram, variableName);
+	glUniformBlockBinding(this->shaderProgram, uniformLocation, 1);
+	glBindBufferBase(GL_UNIFORM_BUFFER, 1, uniformBuffer);
+	
+	int activeBlock;
+	glGetIntegerv(GL_ACTIVE_UNIFORM_BLOCKS, &activeBlock);
+	
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	glDeleteBuffers(1, &uniformBuffer);
+}
+
+// TODO
+void OGLShaderProgram::setBuffer(const char *variableName, const Vector<Spotlight> &light)
+{
+	
 }
 
 

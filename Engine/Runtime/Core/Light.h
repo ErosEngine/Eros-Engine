@@ -5,27 +5,30 @@
 #include "../Core/IComponent.h"
 
 
-struct PointLight
-{
-	glm::vec3 position;
-	glm::vec3 ambientColor;
-	glm::vec3 diffuseColor;
-	glm::vec3 specularColor;
-	
-	float constant;
-	float linear;
-	float quadratic;
-};
-
 struct DirectionalLight
 {
-    bool castShadows; // TODO(kiecker)
-    float brightness;
+    bool castShadows;
     glm::vec3 direction;
-    glm::vec3 ambientColor; // Ambient ?
-    glm::vec3 specularColor;
+    // Since this should be the brightest light in the scene
+    // this should be the one to hold the ambient color;
+    glm::vec3 ambientColor; 
     glm::vec3 diffuseColor;
+    glm::vec3 specularColor;
 };
+
+struct PointLight
+{
+    bool castShadows;
+    glm::vec3 position;
+    glm::vec3 ambientColor;
+    glm::vec3 diffuseColor;
+    glm::vec3 specularColor;
+    
+    float constant;
+    float linear;
+    float quadratic;
+};
+
 
 struct Spotlight
 {

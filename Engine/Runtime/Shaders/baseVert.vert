@@ -8,14 +8,12 @@ uniform mat4 translation;
 uniform mat4 perspective;
 uniform mat4 modelView;
 
-out vec3 ourColor;
 out vec2 texCoord;
 out vec3 Normal;
 out vec3 FragPos;
 
 void main()
 {
-    ourColor = normal;
     texCoord = texCoords;
     
     Normal = mat3(transpose(inverse(translation))) * normal;
