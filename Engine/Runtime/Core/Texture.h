@@ -12,6 +12,11 @@ enum TextureType
     SpecularTexture = 2
 };
 
+
+/*
+ * TODO(kiecker): Make this more interfaceable with d3d and vulkan
+ * vulkan for certain, but d3d will be on the todo for a while
+ */
 class Texture : public IComponent
 {
 public:

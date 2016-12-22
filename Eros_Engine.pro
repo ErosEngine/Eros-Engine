@@ -31,8 +31,8 @@ SOURCES += main.cpp \
     Engine/Developer/Util/Util.cpp \
     Engine/Editor/DebugLogger.cpp \
     Engine/Editor/LoggerMessage.cpp \
-    Engine/Runtime/OpenGL/Light.cpp \
-    Engine/Runtime/OpenGL/Material.cpp \
+    Engine/Runtime/Core/Light.cpp \
+    Engine/Runtime/Core/Material.cpp \
     Engine/Runtime/Core/Scene.cpp \
     Engine/Runtime/Core/Entity.cpp \
     Engine/Runtime/OpenGL/OpenGLFrameBuffer.cpp \
@@ -61,8 +61,8 @@ HEADERS += \
     Engine/Editor/DebugLogger.h \
     Engine/Editor/LoggerMessage.h \
     ErosLib/Math.h \
-    Engine/Runtime/OpenGL/Light.h \
-    Engine/Runtime/OpenGL/Material.h \
+    Engine/Runtime/Core/Light.h \
+    Engine/Runtime/Core/Material.h \
     Engine/Runtime/Core/Scene.h \
     Engine/Runtime/Core/Entity.h \
     Engine/Runtime/Core/IRenderBase.h \

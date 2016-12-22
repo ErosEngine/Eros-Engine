@@ -59,6 +59,12 @@ bool Texture::loadFromFile(const char *fileName)
     return true;
 }
 
+void Texture::fromExisting(const IComponent *pOther)
+{
+    const Texture *pOtherPtr = (Texture *)pOther;
+    this = *pOtherPtr;
+}
+
 bool Texture::isEmpty()
 {
     return (texture != 0);

@@ -3,7 +3,7 @@
 
 #include "ErosLib/Math.h"
 #include "Engine/Runtime/OpenGL/Camera.h"
-#include "Light.h"
+#include "../Core/Light.h"
 #include "Shape.h"
 #include <cassert>
 

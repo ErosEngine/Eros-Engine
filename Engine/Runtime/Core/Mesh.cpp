@@ -166,7 +166,7 @@ bool MeshComponent::loadFromFile(const char *fileName)
 void MeshComponent::fromExisting(const IComponent *other)
 {
 	assert(other != nullptr);
-	MeshComponent *pOther = (MeshComponent *)other;
+	MeshComponent *pOther = (MeshComponent *)(other);
 	
 	this->indices.clear();
 	this->vertexes.clear();

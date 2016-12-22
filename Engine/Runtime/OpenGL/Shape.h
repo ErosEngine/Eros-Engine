@@ -4,9 +4,9 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include "Texture.h"
-#include "../Shaders/Shader.h"
+#include "../Shaders/OGLShader.h"
 #include "../Core/Mesh.h"
-#include "Material.h"
+#include "../Core/Material.h"
 
 
 class Shape
@@ -16,9 +16,9 @@ public:
     Shape();
    ~Shape();
     
-    SubShader vertShader;
-    SubShader fragShader;
-    Shader shader;
+    OGLShader vertShader;
+    OGLShader fragShader;
+    OGLShaderProgram shader;
     
     Material material;
     Texture texture;

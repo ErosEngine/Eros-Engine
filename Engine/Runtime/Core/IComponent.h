@@ -3,9 +3,11 @@
 
 #include <QString>
 
+typedef void * GenericHandle;
+
 /* =====================================
  * The component interface object
- ===================================== */
+ * ===================================== */
 class IComponent
 {
 public:
