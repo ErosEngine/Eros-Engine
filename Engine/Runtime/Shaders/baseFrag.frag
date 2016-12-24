@@ -71,10 +71,10 @@ layout (std140) uniform PointLights_t
 
 uniform PointLight pointLights[50];
 uniform SpotLight spotLights[50];
-layout (std140) uniform DirectionalLights_t
-{
-    DirectionalLight mLight;
-} directionalLights;
+//layout (std140) uniform DirectionalLights_t
+//{
+    uniform DirectionalLight mLight;
+//} directionalLights;
 
 
 // Old, using for testing
@@ -105,7 +105,7 @@ void main()
     vec3 result;
     for (int i = 0; i < numDirectionalLights; ++i)
     {
-        result += CalculateDirLight(directionalLights.mLight, norm, dir);
+        result += CalculateDirLight(mLight, norm, dir);
     }
     for (int i = 0; i < numPointLights; ++i)
     {

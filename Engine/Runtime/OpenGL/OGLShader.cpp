@@ -180,6 +180,60 @@ void OGLShaderProgram::setUniform(const char *variableName, const glm::vec2 &dat
     }
 }
 
+void OGLShaderProgram::setUniform(const char *variableName, const EVector4 &data)
+{
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform4f(m_infoList[b].varPos, data.x, data.y, data.z, data.w);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform4f(uniformLoc, data.x, data.y, data.z, data.w);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
+}
+
+void OGLShaderProgram::setUniform(const char *variableName, const EVector3 &data)
+{
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform3f(m_infoList[b].varPos, data.x, data.y, data.z);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform3f(uniformLoc, data.x, data.y, data.z);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
+}
+
+void OGLShaderProgram::setUniform(const char *variableName, const EVector2 &data)
+{
+    int b = findInList(variableName);
+    if (b) // if we found the variable
+    {
+        glUniform2f(m_infoList[b].varPos, data.x, data.y);
+    }
+    else
+    {
+        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
+        glUniform2f(uniformLoc, data.x, data.y);
+        ShaderInformation i;
+        i.varName = variableName;
+        i.varPos = uniformLoc;
+        m_infoList.push_back(i);
+    }
+}
+
 void OGLShaderProgram::setUniform(const char *variableName, int data)
 {
     int b = findInList(variableName);
@@ -209,29 +263,6 @@ void OGLShaderProgram::setUniform(const char *variableName, float data)
     {
         GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
         glUniform1f(uniformLoc, data);
-        ShaderInformation i;
-        i.varName = variableName;
-        i.varPos = uniformLoc;
-        m_infoList.push_back(i);
-    }
-}
-
-void OGLShaderProgram::setUniform(const char *variableName, Texture &data)
-{
-    // We have to assume that they set the active texture already
-    int b = findInList(variableName);
-    if (b) // if we found the variable
-    {
-        data.bind();
-        glUniform1i(m_infoList[b].varPos, data.texture);
-        data.unbind();
-    }
-    else
-    {
-        GLint uniformLoc = glGetUniformLocation(shaderProgram, variableName);
-        data.bind();
-        glUniform1i(uniformLoc, data.texture);
-        data.unbind();
         ShaderInformation i;
         i.varName = variableName;
         i.varPos = uniformLoc;
@@ -277,47 +308,6 @@ void OGLShaderProgram::setUniform(const char *variableName, const glm::mat4 &dat
 	}
 }
 
-void OGLShaderProgram::setBuffer(const char *variableName, const Vector<PointLight> &light)
-{
-	GLuint uniformBuffer = 0;
-	GLuint uniformLocation = 0;
-	glGenBuffers(1, &uniformBuffer);
-	glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(PointLight), &light, GL_DYNAMIC_DRAW);
-	
-	uniformLocation = glGetUniformBlockIndex(this->shaderProgram, variableName);
-	
-	glUniformBlockBinding(this->shaderProgram, uniformLocation, uniformBuffer);
-	glBindBufferBase(GL_UNIFORM_BUFFER, uniformBuffer, uniformLocation);
-	
-	
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-}
-
-void OGLShaderProgram::setBuffer(const char *variableName, const Vector<DirectionalLight> &light)
-{
-	GLuint uniformBuffer = 0;
-	GLuint uniformLocation = 0;
-	glGenBuffers(1, &uniformBuffer);
-	glBindBuffer(GL_UNIFORM_BUFFER, uniformBuffer);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(DirectionalLight), &light[0], GL_DYNAMIC_DRAW);
-	
-	uniformLocation = glGetUniformBlockIndex(this->shaderProgram, variableName);
-	glUniformBlockBinding(this->shaderProgram, uniformLocation, 1);
-	glBindBufferBase(GL_UNIFORM_BUFFER, 1, uniformBuffer);
-	
-	int activeBlock;
-	glGetIntegerv(GL_ACTIVE_UNIFORM_BLOCKS, &activeBlock);
-	
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	glDeleteBuffers(1, &uniformBuffer);
-}
-
-// TODO
-void OGLShaderProgram::setBuffer(const char *variableName, const Vector<Spotlight> &light)
-{
-	
-}
 
 
 

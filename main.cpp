@@ -25,8 +25,8 @@ int main(int argc, char **argv)
     
     if (d.returnedType == WindowType::WINDOW_SDL)
     {
-        MainWindow_SDL w;
-        w.start();
+        MainWindowSDL w;
+        w.create("Eros Engine", 1000, 650, WINDOWED_RESIZEABLE_WINDOW);
         return 0;
     }
     if (d.returnedType == WindowType::WINDOW_QT)

@@ -3,7 +3,6 @@
 
 #include <QString>
 #include <GL/glew.h>
-#include "IComponent.h"
 
 
 enum TextureType
@@ -17,7 +16,7 @@ enum TextureType
  * TODO(kiecker): Make this more interfaceable with d3d and vulkan
  * vulkan for certain, but d3d will be on the todo for a while
  */
-class Texture : public IComponent
+class Texture
 {
 public:
     
@@ -32,8 +31,7 @@ public:
     int height;
     int comp;
     
-    virtual bool loadFromFile(const char *fileName) override;
-    virtual void fromExisting(const IComponent *pOther) override;    
+    bool loadFromFile(const char *fileName);    
     bool isEmpty();
     
     inline void bind()   { glBindTexture(GL_TEXTURE_2D, texture); }

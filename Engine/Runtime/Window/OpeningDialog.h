@@ -10,6 +10,12 @@ enum WindowType
     WINDOW_QT
 };
 
+enum RenderingType
+{
+	RENDERING_OPENGL,
+	RENDERING_DIRECTX
+};
+
 namespace Ui {
 class OpeningDialog;
 }
@@ -22,7 +28,8 @@ public:
     explicit OpeningDialog(QWidget *parent = 0);
     ~OpeningDialog();
     
-    WindowType returnedType;
+    WindowType		returnedType;
+	RenderingType	apiType;
     
 private slots:
     void on_buttonBox_accepted();

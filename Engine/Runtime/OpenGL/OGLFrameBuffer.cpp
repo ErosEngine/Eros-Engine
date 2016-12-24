@@ -1,4 +1,4 @@
-#include "OpenGLFrameBuffer.h"
+#include "OGLFrameBuffer.h"
 
 
 OpenGLFrameBuffer::OpenGLFrameBuffer()

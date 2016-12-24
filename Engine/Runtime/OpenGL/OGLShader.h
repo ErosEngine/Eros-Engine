@@ -8,15 +8,7 @@
 #include "ErosLib/Math.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-#ifndef TRANSFORM_H
-#include "../OpenGL/Transform.h"
-#endif
-#ifndef TEXTURE_H
-#include "../Core/Texture.h"
-#endif
-#ifndef LIGHT_H
-#include "../Core/Light.h"
-#endif
+
 
 #define EROS_VERTEX_SHADER GL_VERTEX_SHADER
 #define EROS_FRAG_SHADER GL_FRAGMENT_SHADER
@@ -91,14 +83,13 @@ public:
     void setUniform(const char *variableName, const glm::vec4 &data);
     void setUniform(const char *variableName, const glm::vec3 &data);
     void setUniform(const char *variableName, const glm::vec2 &data);
+	void setUniform(const char *variableName, const EVector4 &data);
+    void setUniform(const char *variableName, const EVector3 &data);
+    void setUniform(const char *variableName, const EVector2 &data);
     void setUniform(const char *variableName, int data);
     void setUniform(const char *variableName, float data);
-    void setUniform(const char *variableName, Texture &data);
     void setUniform(const char *variableName, const EMatrix4x4 &data);
     void setUniform(const char *variableName, const glm::mat4 &data);
-	void setBuffer(const char *variableName, const Vector<PointLight> &light);
-	void setBuffer(const char *variableName, const Vector<DirectionalLight> &light);
-	void setBuffer(const char *variableName, const Vector<Spotlight> &light);
     
 };
 

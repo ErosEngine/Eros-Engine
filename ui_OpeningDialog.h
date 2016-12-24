@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'OpeningDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.1
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -25,21 +25,25 @@ class Ui_OpeningDialog
 public:
     QDialogButtonBox *buttonBox;
     QComboBox *comboBox;
+    QComboBox *renderingApi;
 
     void setupUi(QDialog *OpeningDialog)
     {
         if (OpeningDialog->objectName().isEmpty())
             OpeningDialog->setObjectName(QStringLiteral("OpeningDialog"));
-        OpeningDialog->resize(294, 131);
+        OpeningDialog->resize(296, 158);
         buttonBox = new QDialogButtonBox(OpeningDialog);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setGeometry(QRect(-110, 70, 341, 32));
+        buttonBox->setGeometry(QRect(-60, 110, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         comboBox = new QComboBox(OpeningDialog);
         comboBox->setObjectName(QStringLiteral("comboBox"));
         comboBox->setGeometry(QRect(20, 30, 261, 22));
         comboBox->setStyleSheet(QStringLiteral(""));
+        renderingApi = new QComboBox(OpeningDialog);
+        renderingApi->setObjectName(QStringLiteral("renderingApi"));
+        renderingApi->setGeometry(QRect(20, 70, 261, 22));
 
         retranslateUi(OpeningDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), OpeningDialog, SLOT(accept()));
@@ -50,7 +54,7 @@ public:
 
     void retranslateUi(QDialog *OpeningDialog)
     {
-        OpeningDialog->setWindowTitle(QApplication::translate("OpeningDialog", "Dialog", Q_NULLPTR));
+        OpeningDialog->setWindowTitle(QApplication::translate("OpeningDialog", "Dialog", 0));
     } // retranslateUi
 
 };

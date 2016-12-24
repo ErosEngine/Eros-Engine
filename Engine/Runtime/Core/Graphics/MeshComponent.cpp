@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "MeshComponent.h"
 #include <QDebug>
 #include <QFile>
 #include <assimp/Importer.hpp>
@@ -163,17 +163,11 @@ bool MeshComponent::loadFromFile(const char *fileName)
 	return true;
 }
 
-void MeshComponent::fromExisting(const IComponent *other)
+void MeshComponent::clearMesh()
 {
-	assert(other != nullptr);
-	MeshComponent *pOther = (MeshComponent *)(other);
-	
-	this->indices.clear();
-	this->vertexes.clear();
-	this->textures.clear();
-	
-	this->indices = pOther->indices;
-	this->vertexes = pOther->vertexes;
-	this->textures = pOther->textures;
-	this->fileName = pOther->fileName;
+	vertexes.clear();
+	indices.clear();
+	textures.clear();
+	fileName.clear();
 }
+
