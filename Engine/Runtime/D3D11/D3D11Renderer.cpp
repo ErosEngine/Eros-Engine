@@ -101,8 +101,8 @@ void D3D11Renderer::internalCreate(HWND windowHandle, int width, int height, int
     m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
     
     // Create viewport
-    m_viewport.Width = (float)width;
-    m_viewport.Height = (float)height;
+    m_viewport.Width = 1.0f;
+    m_viewport.Height = -1.0f;
     m_viewport.TopLeftX = -1.0f;
     m_viewport.TopLeftY = 1.0f;
     m_viewport.MinDepth = 0.0f;
@@ -111,7 +111,7 @@ void D3D11Renderer::internalCreate(HWND windowHandle, int width, int height, int
     m_pDeviceContext->RSSetViewports(1, &m_viewport);
 }
 
-static const float clearColor[4] = { 1.0f, 0.3f, 0.3f, 1.0f };
+static const float clearColor[4] = { 0.9f, 0.3f, 0.3f, 1.0f };
 
 void D3D11Renderer::clear()
 {
