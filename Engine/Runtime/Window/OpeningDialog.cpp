@@ -27,10 +27,10 @@ void OpeningDialog::SyncData()
     else if (ui->comboBox->currentText() == "GAME")
         returnedType = WindowType::WINDOW_SDL;
 	
-	if (ui->renderingApi->currentData() == "OpenGL 4.5")
-		apiType = RenderingType::RENDERING_OPENGL;
-	else if (ui->renderingApi->currentData() == "DirectX 11")
-		apiType = RenderingType::RENDERING_DIRECTX;
+	if (ui->renderingApi->currentText() == "OpenGL 4.5")
+		apiType = ApiType::RENDERING_OPENGL_4_5;
+	else if (ui->renderingApi->currentText() == "DirectX 11")
+		apiType = ApiType::RENDERING_DIRECTX_11;
 }
 
 OpeningDialog::~OpeningDialog()

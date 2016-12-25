@@ -1,4 +1,5 @@
 #include "OGLRenderer.h"
+#include "OGLModel.h"
 #include <SDL.h>
 #include <QDebug.h>
 
@@ -9,7 +10,7 @@ void OpenGLRenderer::create(MainWindowSDL *pWindow)
 
     // Force application failure if no context
     assert(context != 0);
-    assert(SDL_GL_MakeCurrent(pWindow->m_pWindow, context) != 0);
+    assert(SDL_GL_MakeCurrent(pWindow->m_pWindow, context) == 0);
     
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	
@@ -31,20 +32,36 @@ void OpenGLRenderer::create(MainWindowSDL *pWindow)
 
 void OpenGLRenderer::create(QWidget *pQtWindow)
 {
-	
+	glLoadIdentity();
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glMatrixMode(GL_MODELVIEW);
+    glDisable(GL_LIGHTING);
+    glewExperimental = GL_TRUE;
 }
 
 void OpenGLRenderer::clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.3f, 0.5f, 1.0f, 1.0f);
 }
 
 // TODO(kiecker): Add some logic to optimize this
-void OpenGLRenderer::renderScene()
+void OpenGLRenderer::renderArgs()
 {
     glPushMatrix();
 	
-	
+	for (uint i = 0; i < i_pRendererArgs->meshes.size(); ++i)
+	{
+		OGLModel *pComponent = (OGLModel *)i_pRendererArgs->meshes[i];
+		OpenGLBuffer *pCurrentBuf = (OpenGLBuffer *)pComponent->getBuffer();
+		
+		glBindVertexArray(pCurrentBuf->vertexArray);
+		
+		glDrawElements(GL_TRIANGLES, pComponent->mesh()->indices.size(), GL_UNSIGNED_SHORT, NULL);
+		
+		glBindVertexArray(0);
+	}
 	
 	if (m_isSDLWindow)
 		SDL_GL_SwapWindow(m_pWindow);
@@ -57,13 +74,28 @@ void OpenGLRenderer::cleanup()
 	
 }
 
-void OpenGLRenderer::setScene(Scene *pScene)
+void OpenGLRenderer::setRendererArgs(RendererArgs *pRendererArgs)
 {
+	if (i_pRendererArgs)
+	{
+		for (uint i = 0; i < i_pRendererArgs->meshes.size(); ++i)
+		{
+			OGLModel *pComponent = (OGLModel *)i_pRendererArgs->meshes[i];
+			pComponent->cleanup();
+		}
+	}
 	
+	i_pRendererArgs = pRendererArgs;
+	
+	for (uint i = 0; i < i_pRendererArgs->meshes.size(); ++i)
+	{
+		OGLModel *pComponent = (OGLModel *)i_pRendererArgs->meshes[i];
+		pComponent->generateBuffers();
+	}
 }
 
-const Scene *OpenGLRenderer::scene() const
+const RendererArgs *OpenGLRenderer::rendererArgs() const
 {
-	return this->i_pScene;
+	return this->i_pRendererArgs;
 }
 

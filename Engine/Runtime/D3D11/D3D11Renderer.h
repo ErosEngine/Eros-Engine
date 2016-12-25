@@ -6,22 +6,32 @@
 #include <d3dcommon.h>
 #include <QWidget>
 #include "Engine/Runtime/Window/MainWindow.h"
+#include "../Core/Framework/IRenderBase.h"
 
 #define IMMEDIATE_MODE 1
 #define DIRECT_MODE 2  // TODO(kiecker): get the right name
 
 
-class D3D11Renderer
+class D3D11Renderer : public IRenderBase
 {
 public:
 	D3D11Renderer();
 	
-	void create(QWidget *pQtWindow);
-	void create(MainWindowSDL *pMainWindow);
-	void clear();
-	void cleanup();
+	virtual void create(QWidget *pQtWindow) override;
+	virtual void create(MainWindowSDL *pMainWindow) override;
+	virtual void clear() override;
+	virtual void renderArgs() override;
+	virtual void cleanup() override;
+	
+	virtual void setRendererArgs(RendererArgs *pRendererArgs) override;
+	virtual const RendererArgs *rendererArgs() const override;
+	
 	
 private:
+	
+	/* --- From inherited object IRenderBase
+	RendererArgs *i_pRendererArgs;
+	   --- */
 	
 	void internalCreate(HWND windowHandle, int width, int height, int flags);
 	

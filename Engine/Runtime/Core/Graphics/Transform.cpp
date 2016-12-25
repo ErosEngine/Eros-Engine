@@ -54,7 +54,7 @@ void Transform::setPosition(glm::vec3 pos)
     m_hasChanged = true;
 }
 
-void Transform::setRotation(glm::vec4 rot)
+void Transform::setRotation(glm::vec3 rot)
 {
     m_rotation = rot;
     m_hasChanged = true;
@@ -70,7 +70,7 @@ glm::vec3 Transform::getPosition() const
     return m_position;
 }
 
-glm::vec4 Transform::getRotation() const
+glm::vec3 Transform::getRotation() const
 {
     return m_rotation;
 }

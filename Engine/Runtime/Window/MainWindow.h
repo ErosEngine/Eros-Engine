@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <SDL_video.h>
+#include <SDL_events.h>
 #include <QDebug>
 
 #include "ErosLib/ErosDefines.h"
@@ -19,6 +20,7 @@ class MainWindowSDL
 	friend class D3D11Renderer;
 	friend class OpenGLRenderer;
 	friend class VulkanRenderer;
+	friend class GameLoop;
 	
 public:
     explicit MainWindowSDL();
@@ -28,6 +30,9 @@ public:
     int width() { return m_width; }
     int height() { return m_height; }
 	bool isFullScreen() { return m_isFullScreen; }
+	bool isOpen();
+	bool pollEvent(SDL_Event &event);
+	void close();
 	
 private:
     
@@ -36,6 +41,7 @@ private:
     SDL_Window  * m_pWindow;
     int           m_width, m_height;
 	bool		  m_isFullScreen;
+	bool		  m_isOpen = true;
     
 };
 

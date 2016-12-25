@@ -111,12 +111,17 @@ void D3D11Renderer::internalCreate(HWND windowHandle, int width, int height, int
     m_pDeviceContext->RSSetViewports(1, &m_viewport);
 }
 
-static const float clearColor[4] = { 0.0f, 1.0f, 0.5f, 1.0f };
+static const float clearColor[4] = { 1.0f, 0.3f, 0.3f, 1.0f };
 
 void D3D11Renderer::clear()
 {
 	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, clearColor);
-    m_pDxgiSwapChain->Present(0, 0);
+	m_pDxgiSwapChain->Present(0, 0);
+}
+
+void D3D11Renderer::renderArgs()
+{
+	
 }
 
 void D3D11Renderer::cleanup()
@@ -131,6 +136,16 @@ void D3D11Renderer::cleanup()
 	m_pDeviceContext	= nullptr;
 	m_pRenderTargetView	= nullptr;
 	m_pDxgiSwapChain	= nullptr;
+}
+
+void D3D11Renderer::setRendererArgs(RendererArgs *pRendererArgs)
+{
+	
+}
+
+const RendererArgs *D3D11Renderer::rendererArgs() const
+{
+	return i_pRendererArgs;
 }
 
 

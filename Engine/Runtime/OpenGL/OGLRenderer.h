@@ -8,15 +8,6 @@
 
 class OpenGLRenderer : public IRenderBase
 {
-	bool		  m_isSDLWindow;
-	SDL_Window	* m_pWindow;
-	
-	/* From IRenderBase
-	 
-	Scene *i_pScene;
-	 
-	*/
-	
 public:
     
 	OpenGLRenderer() { } // Empty constructor
@@ -27,11 +18,24 @@ public:
 	virtual void create(QWidget *pQtWindow) override;
     
 	virtual void clear() override;
-	virtual void renderScene() override;
+	virtual void renderArgs() override;
 	virtual void cleanup() override;
 	
-	virtual void setScene(Scene *pScene) override;
-	virtual const Scene *scene() const override;
+	virtual void setRendererArgs(RendererArgs *pRendererArgs) override;
+	virtual const RendererArgs *rendererArgs() const override;
+	
+private:
+	
+	bool		  m_isSDLWindow = false;
+	SDL_Window	* m_pWindow;
+	
+	/* From IRenderBase
+	 
+	RendererArgs *i_pRendererArgs;
+	 
+	*/
+	
+	
 };
 
 #endif // OPENGLRENDERER_H

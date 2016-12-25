@@ -11,7 +11,10 @@ void OGLModel::generateBuffers()
 	glGenVertexArrays(1, &m_buffer.vertexArray);
 	glGenBuffers(1, &m_buffer.arrayBuffer);
 	glGenBuffers(1, &m_buffer.indexBuffer);
-	
+}
+
+void OGLModel::setupBuffers()
+{
 	glBindVertexArray(m_buffer.vertexArray);
 	glBindBuffer(GL_ARRAY_BUFFER, m_buffer.arrayBuffer);
 	glBufferData(GL_ARRAY_BUFFER, i_mesh.vertexes.size() * sizeof(Vertex), 
@@ -31,6 +34,7 @@ void OGLModel::generateBuffers()
 	// Note(kiecker): Texture Coordinates
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texCoords));
+	
 }
 
 void OGLModel::draw()
@@ -40,6 +44,7 @@ void OGLModel::draw()
 
 void OGLModel::cleanup()
 {
+	i_mesh.clearMesh();
 	glDeleteBuffers(1, &m_buffer.arrayBuffer);
 	glDeleteBuffers(1, &m_buffer.indexBuffer);
 	glDeleteVertexArrays(1, &m_buffer.vertexArray);

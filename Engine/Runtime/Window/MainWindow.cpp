@@ -38,6 +38,21 @@ void MainWindowSDL::create(const char *name, int width, int height, int windowFl
 	}
 }
 
+bool MainWindowSDL::isOpen()
+{
+	return m_isOpen;
+}
+
+bool MainWindowSDL::pollEvent(SDL_Event &event)
+{
+	return SDL_PollEvent(&event);
+}
+
+void MainWindowSDL::close()
+{
+	m_isOpen = false;
+}
+
 void MainWindowSDL::destroy()
 {
     SDL_DestroyWindow(m_pWindow);

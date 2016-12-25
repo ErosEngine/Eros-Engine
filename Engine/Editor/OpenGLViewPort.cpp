@@ -21,12 +21,12 @@ void OpenGLViewPort::initializeGL()
 	m_renderer->create(this);
     
 	m_renderer->clear();
-    m_renderer->renderScene();
+    //m_renderer->renderScene();
 }
 
 void OpenGLViewPort::paintGL()
 {
-    m_renderer->renderScene();
+    //m_renderer->renderScene();
 }
 
 void OpenGLViewPort::resizeGL(int w, int h)

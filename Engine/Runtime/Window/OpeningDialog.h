@@ -10,10 +10,12 @@ enum WindowType
     WINDOW_QT
 };
 
-enum RenderingType
+enum ApiType
 {
-	RENDERING_OPENGL,
-	RENDERING_DIRECTX
+	RENDERING_OPENGL_4_5 = 1,
+	RENDERING_DIRECTX_11 = 2,
+	RENDERING_VULKAN	 = 3,
+	RENDERING_DIRECTX_12 = 4
 };
 
 namespace Ui {
@@ -29,7 +31,7 @@ public:
     ~OpeningDialog();
     
     WindowType		returnedType;
-	RenderingType	apiType;
+	ApiType			apiType;
     
 private slots:
     void on_buttonBox_accepted();

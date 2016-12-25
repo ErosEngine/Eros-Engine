@@ -20,7 +20,7 @@ SOURCES += main.cpp \
     Engine/Runtime/OpenGL/FontRenderer.cpp \
     ErosLib/BTextStream.cpp \
     ErosLib/EDebugStream.cpp \
-    Engine/Runtime/OpenGL/Camera.cpp \
+    Engine/Runtime/Core/Graphics/Camera.cpp \
     Engine/Developer/Client/Input.cpp \
     Engine/Runtime/Core/Graphics/Transform.cpp \
     Engine/Developer/FileSystem/EFile.cpp \
@@ -30,14 +30,15 @@ SOURCES += main.cpp \
     Engine/Runtime/Core/Graphics/Light.cpp \
     Engine/Runtime/Core/Graphics/Material.cpp \
     Engine/Runtime/Core/Framework/Scene.cpp \
-    Engine/Runtime/Core/Framework/Entity.cpp \
     Engine/Runtime/Vulkan/VulkanRenderer.cpp \
     Engine/Runtime/OpenGL/OGLShader.cpp \
     Engine/Runtime/D3D11/D3D11Renderer.cpp \
     Engine/Runtime/Core/Graphics/MeshComponent.cpp \
     Engine/Runtime/OpenGL/OGLModel.cpp \
     Engine/Runtime/OpenGL/OGLFrameBuffer.cpp \
-    Engine/Runtime/OpenGL/OGLRenderer.cpp
+    Engine/Runtime/OpenGL/OGLRenderer.cpp \
+    Engine/Runtime/Core/Framework/GameLoop.cpp \
+    Engine/Runtime/Core/Framework/SceneManager.cpp
     
 
 HEADERS += \
@@ -51,7 +52,7 @@ HEADERS += \
     Engine/Runtime/OpenGL/FontRenderer.h \
     ErosLib/BTextStream.h \
     ErosLib/EDebugStream.h \
-    Engine/Runtime/OpenGL/Camera.h \
+    Engine/Runtime/Core/Graphics/Camera.h \
     Engine/Developer/Client/Input.h \
     Engine/Runtime/Core/Graphics/Transform.h \
     ErosLib/ErosDefines.h \
@@ -62,7 +63,6 @@ HEADERS += \
     Engine/Runtime/Core/Graphics/Light.h \
     Engine/Runtime/Core/Graphics/Material.h \
     Engine/Runtime/Core/Framework/Scene.h \
-    Engine/Runtime/Core/Framework/Entity.h \
     Engine/Runtime/Core/Framework/IRenderBase.h \
     Engine/Runtime/Vulkan/VulkanRenderer.h \
     Engine/Runtime/OpenGL/OGLShader.h \
@@ -71,11 +71,15 @@ HEADERS += \
     Engine/Runtime/Core/Graphics/MeshComponent.h \
     Engine/Runtime/OpenGL/OGLModel.h \
     Engine/Runtime/OpenGL/OGLFrameBuffer.h \
-    Engine/Runtime/OpenGL/OGLRenderer.h
+    Engine/Runtime/OpenGL/OGLRenderer.h \
+    Engine/Runtime/Core/Framework/GameLoop.h \
+    Engine/Runtime/Core/Framework/SceneManager.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \
-    Engine/Runtime/Shaders/baseVert.vert
+    Engine/Runtime/Shaders/baseVert.vert \
+    Engine/Runtime/Shaders/GlobalVertexShader.vsh \
+    Engine/Runtime/Shaders/GlobalFragmentShader.fsh
 
 FORMS += \
     Engine/Editor/MainWindow_Qt.ui \

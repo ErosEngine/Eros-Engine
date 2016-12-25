@@ -3,6 +3,8 @@
 
 #include "ErosLib/ErosDefines.h"
 #include "../Graphics/MeshComponent.h"
+#include "../Graphics/Transform.h"
+#include <QDebug>
 
 #ifndef __glew_h__
 #include <GL/glew.h>
@@ -75,9 +77,12 @@ public:
 		return &i_mesh;
 	}
 	
+	Transform transform;
+	
+	
 protected:
 	
-	MeshComponent i_mesh;
+	MeshComponent	i_mesh;
 	
 };
 

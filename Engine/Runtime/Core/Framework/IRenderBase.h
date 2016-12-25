@@ -1,7 +1,17 @@
-#ifndef IRENDERBASE_H
+﻿#ifndef IRENDERBASE_H
 #define IRENDERBASE_H
 
+#include "ErosLib/ErosDefines.h"
 #include "Scene.h"
+
+
+enum RenderingApi
+{
+	API_OPENGL_4_5  = 1,
+	API_DIRECTX_11  = 2,
+	API_VULKAN		= 3,
+	API_DIRECTX_12	= 4
+};
 
 class MainWindowSDL;
 class QWidget;
@@ -19,15 +29,15 @@ public:
 	// The clear and draw functions that will
 	// be abstracted to the rendering api's
 	virtual void clear()		= 0;
-	virtual void renderScene()	= 0;
+	virtual void renderArgs()	= 0;
 	virtual void cleanup()		= 0;
 	
-	virtual void setScene(Scene *pScene) = 0;
-	virtual const Scene *scene() const   = 0;
+	virtual void setRendererArgs(RendererArgs *pRendererArgs) = 0;
+	virtual const RendererArgs *rendererArgs() const   = 0;
 	
 protected:
 	
-	Scene *i_pScene;
+	RendererArgs *i_pRendererArgs = nullptr;
 	
 };
 

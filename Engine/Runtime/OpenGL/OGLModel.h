@@ -26,9 +26,12 @@ public:
 	
 	virtual void *getBuffer() override;
 	
-	/* ---- Inherited functions ----
+	/* ---- From inherited object IDrawableComponent ----
 	void loadNewMesh(const char *fileName);
 	const MeshComponent *mesh() const;
+	
+	Transform transform;
+	
 	 */
     
 	

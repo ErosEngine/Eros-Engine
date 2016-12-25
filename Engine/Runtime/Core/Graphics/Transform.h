@@ -31,11 +31,11 @@ public:
     // NOTE(kiecker): Using the getters and setters because I 
     // will need the accessors to do stuff when they are changed
     void setPosition(glm::vec3 pos);
-    void setRotation(glm::vec4 rot);
+    void setRotation(glm::vec3 rot);
     
     glm::vec3 getScale()    const;
     glm::vec3 getPosition() const; 
-    glm::vec4 getRotation() const;
+    glm::vec3 getRotation() const;
     
     // This will probably only be used for the renderer
     const glm::mat4 &getModelMat(); 
@@ -46,7 +46,7 @@ private:
     
     bool      m_hasChanged;
     glm::vec3 m_position;
-    glm::vec4 m_rotation;
+    glm::vec3 m_rotation;
     glm::vec3 m_scale;
     glm::mat4 m_modelMat;
 };
