@@ -22,7 +22,7 @@ typedef unsigned char *ubyteptr;
 
 Texture::~Texture()
 {
-    glDeleteTextures(1, &this->texture);
+    glDeleteTextures(1, &texture);
 }
 
 bool Texture::loadFromFile(const char *fileName)

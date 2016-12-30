@@ -1,6 +1,7 @@
 #include "OpeningDialog.h"
 #include "ui_OpeningDialog.h"
-#include "ErosLib/ErosDefines.h"
+
+
 
 OpeningDialog::OpeningDialog(QWidget *parent) :
     QDialog(parent),
@@ -28,9 +29,9 @@ void OpeningDialog::SyncData()
         returnedType = WindowType::WINDOW_SDL;
 	
 	if (ui->renderingApi->currentText() == "OpenGL 4.5")
-		apiType = ApiType::RENDERING_OPENGL_4_5;
+		apiType = API_OPENGL_4_5;
 	else if (ui->renderingApi->currentText() == "DirectX 11")
-		apiType = ApiType::RENDERING_DIRECTX_11;
+		apiType = API_DIRECTX_11;
 }
 
 OpeningDialog::~OpeningDialog()

@@ -1,8 +1,5 @@
 #include "SceneManager.h"
 #include "../../OpenGL/OGLModel.h"
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonValue>
 #include <QFile>
 #include <QHash>
 
@@ -12,7 +9,7 @@ SceneManager::SceneManager()
 	
 }
 
-void SceneManager::initialize(RenderingApi api)
+void SceneManager::initialize(RenderingType api)
 {
 }
 
@@ -30,9 +27,7 @@ void SceneManager::cleanSelectedScene(int scene)
 {
 	Scene *pScene = &m_scenes[scene];
 	
-	pScene->m_meshComponents;
-	
-	for (std::vector<IDrawableComponent *>::iterator it = pScene->m_meshComponents.begin(); 
+	for (std::vector<IDrawable *>::iterator it = pScene->m_meshComponents.begin(); 
 		 it != pScene->m_meshComponents.end(); ++it)
 	{
 		delete *it;

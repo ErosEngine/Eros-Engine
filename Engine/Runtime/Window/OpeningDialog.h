@@ -3,19 +3,12 @@
 
 #include <QDialog>
 #include <QThread>
+#include "Engine/Runtime/Core/Framework/Platform.h"
 
 enum WindowType
 {
     WINDOW_SDL,
     WINDOW_QT
-};
-
-enum ApiType
-{
-	RENDERING_OPENGL_4_5 = 1,
-	RENDERING_DIRECTX_11 = 2,
-	RENDERING_VULKAN	 = 3,
-	RENDERING_DIRECTX_12 = 4
 };
 
 namespace Ui {
@@ -31,7 +24,7 @@ public:
     ~OpeningDialog();
     
     WindowType		returnedType;
-	ApiType			apiType;
+	RenderingType	apiType;
     
 private slots:
     void on_buttonBox_accepted();

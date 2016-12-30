@@ -2,7 +2,7 @@
 #define GAMELOOP_H
 
 #include <QElapsedTimer>
-#include "ErosLib/ErosDefines.h"
+#include "Platform.h"
 #include "SceneManager.h"
 
 // Renderers
@@ -23,7 +23,7 @@ public:
 	
 	// We are running off the assumption the renderer
 	// is already set up
-	void setRenderer(IRenderBase *pRenderer, RenderingApi api);
+	void setRenderer(IRenderBase *pRenderer, RenderingType api);
 	void setWindow(MainWindowSDL *pWindow);
 	
 	void initializeLoop();
@@ -34,7 +34,7 @@ private:
 	IRenderBase		* m_pRenderer;
 	MainWindowSDL	* m_pWindow;
 	SceneManager	m_sceneManager;
-	RenderingApi	m_renderingApi;
+	RenderingType	m_renderingApi;
 	QElapsedTimer	m_timer;
 	
 };

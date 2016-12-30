@@ -54,28 +54,15 @@ void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, MeshCo
     {
         aiString str;
         mat->GetTexture(type, i, &str);
-        bool skip = false;
-        for (uint t = 0; t < base->textures.size(); t++)
-        {
-            if (base->textures[t].fileName == str.C_Str())
-            {
-                base->textures.push_back(base->textures[t]);
-                skip = true;
-                break;
-            }
-        }
-        if (!skip)
-        {
-            std::string texName;
-            texName.append(base->fileName.toLatin1().constData());
-            texName.append(str.C_Str());
-            Texture texture;
-            texture.type = tType;
-            if (texture.loadFromFile(texName.c_str()))
-			{
-                base->textures.push_back(texture);
-            }
-        }
+        std::string texName;
+		texName.append(base->fileName.toLatin1().constData());
+		texName.append(str.C_Str());
+		Texture texture;
+		texture.type = tType;
+		if (texture.loadFromFile(texName.c_str()))
+		{
+			base->textures.push_back(texture);
+		}
     }
 }
 

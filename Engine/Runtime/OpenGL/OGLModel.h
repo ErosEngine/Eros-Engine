@@ -7,8 +7,8 @@
 
 
 
-class OGLModel : public IDrawableComponent
-{	
+class OGLModel : public IDrawable
+{
 public:
 	
 	// TODO(kiecker): determine what it will load, this function has to be

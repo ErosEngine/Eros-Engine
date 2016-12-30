@@ -10,22 +10,22 @@
 
 struct Font
 {
-    GLuint texture = 0;
-    FT_Library *lib;
-    FT_Face face;
-    FT_Bitmap bitmap;
-    int sizeX, sizeY;
-    int bearingX, bearingY;
-    int weight;
-    
-    inline ~Font() // Brief cleanup
-    {
-        FT_Done_Face(this->face);
-        FT_Done_FreeType(*lib);
-        
-        if (lib != nullptr)
-            delete lib;
-    }
+	GLuint texture = 0;
+	FT_Library *lib;
+	FT_Face face;
+	FT_Bitmap bitmap;
+	int sizeX, sizeY;
+	int bearingX, bearingY;
+	int weight;
+	
+	inline ~Font() // Brief cleanup
+	{
+		FT_Done_Face(this->face);
+		FT_Done_FreeType(*lib);
+		
+		if (lib != nullptr)
+			delete lib;
+	}
 };
 
 
@@ -41,22 +41,22 @@ Font *CreateFont(const char *fileName, int _sizeX, int _sizeY);
 class Text
 {
 public:
-    Text();
-    Text(Font *font, const char *text);
-   ~Text();
-    
-    void setText(const char *text);
-
-    void setFont(Font *font);
-    const Font *font() const;
-    
-    void setup();
-    
+	Text();
+	Text(Font *font, const char *text);
+	~Text();
+	
+	void setText(const char *text);
+	
+	void setFont(Font *font);
+	const Font *font() const;
+	
+	void setup();
+	
 private:
-    
+	
     GLfloat *m_verts;   
-    Font *m_font;
-    QString m_text;
+	Font *m_font;
+	QString m_text;
 };
 
 

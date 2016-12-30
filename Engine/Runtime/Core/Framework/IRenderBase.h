@@ -1,20 +1,11 @@
 ﻿#ifndef IRENDERBASE_H
 #define IRENDERBASE_H
 
-#include "ErosLib/ErosDefines.h"
+#include "Platform.h"
 #include "Scene.h"
 
 
-enum RenderingApi
-{
-	API_OPENGL_4_5  = 1,
-	API_DIRECTX_11  = 2,
-	API_VULKAN		= 3,
-	API_DIRECTX_12	= 4
-};
-
-class MainWindowSDL;
-class QWidget;
+typedef void *GenericHandle;
 
 /* ==============
  * The rendering interface
@@ -23,8 +14,7 @@ class IRenderBase
 {
 public:
 	
-    virtual void create(MainWindowSDL *pWindow)		= 0;
-	virtual void create(QWidget *pQtWindow)			= 0;
+    virtual void create(GenericHandle hWindow, int width, int height, int flags) = 0;
 	
 	// The clear and draw functions that will
 	// be abstracted to the rendering api's

@@ -17,8 +17,7 @@ class D3D11Renderer : public IRenderBase
 public:
 	D3D11Renderer();
 	
-	virtual void create(QWidget *pQtWindow) override;
-	virtual void create(MainWindowSDL *pMainWindow) override;
+	void create(GenericHandle hWindow, int width, int height, int flags);
 	virtual void clear() override;
 	virtual void renderArgs() override;
 	virtual void cleanup() override;
@@ -33,7 +32,6 @@ private:
 	RendererArgs *i_pRendererArgs;
 	   --- */
 	
-	void internalCreate(HWND windowHandle, int width, int height, int flags);
 	
 	ID3D11Device				* m_pDevice;
 	ID3D11DeviceContext			* m_pDeviceContext;

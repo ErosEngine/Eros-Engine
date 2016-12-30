@@ -11,11 +11,8 @@ class OpenGLRenderer : public IRenderBase
 public:
     
 	OpenGLRenderer() { } // Empty constructor
-	    
-    virtual void create(MainWindowSDL *pWindow) override;
 	
-	// TODO(kiecker): use our own custom widget for opengl context
-	virtual void create(QWidget *pQtWindow) override;
+    virtual void create(GenericHandle hWindow, int width, int height, int flags) override;
     
 	virtual void clear() override;
 	virtual void renderArgs() override;

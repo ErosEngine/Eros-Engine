@@ -111,7 +111,7 @@ bool OGLShaderProgram::compile()
         qDebug() << "Shader Program error :" << QString((const char *)compileOutput);
         return false;
     }
-        
+    
     // After compilation was successful, detach 
     for (int i = 0; i < m_shaderList.size(); ++i)
     {

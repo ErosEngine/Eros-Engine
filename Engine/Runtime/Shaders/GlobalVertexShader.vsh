@@ -16,8 +16,6 @@ uniform mat4 uniModelView;
 
 void main(void)
 {
-    
-    
     vsOutTexCoords = inTexCoords;
     gl_Position = (uniProjectionMat * uniTranslation * uniModelView) * vec4(inPosition, 1.0f);
 }

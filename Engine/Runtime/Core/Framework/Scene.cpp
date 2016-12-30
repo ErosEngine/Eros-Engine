@@ -28,9 +28,9 @@ bool Scene::isRelevantComponent(const glm::vec3 &position)
  * TODO(kiecker): make it a binary tree search, making it a standard search as of writing this
  *	because I wanted to get the stream moving along
 */
-std::vector<IDrawableComponent *> Scene::searchForComponents()
+std::vector<IDrawable *> Scene::searchForComponents()
 {
-	std::vector<IDrawableComponent *> retComponents;
+	std::vector<IDrawable *> retComponents;
 	for (uint i = 0; i < m_meshComponents.size(); ++i)
 	{
 		if (isRelevantComponent(m_meshComponents[i]->transform.getPosition()))

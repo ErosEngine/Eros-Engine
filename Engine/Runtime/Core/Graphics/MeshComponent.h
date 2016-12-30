@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #endif
 
-#include "ErosLib/Math.h"
+#include "../Framework/Math.h"
 #include <vector>
 #include <QString>
 #include "Texture.h"

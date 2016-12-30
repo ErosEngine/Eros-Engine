@@ -4,8 +4,9 @@
 #include <QDebug.h>
 
 
-void OpenGLRenderer::create(MainWindowSDL *pWindow)
+void OpenGLRenderer::create(GenericHandle hWindow, int width, int height, int flags)
 {
+	MainWindowSDL *pWindow = (MainWindowSDL *)hWindow;
     SDL_GLContext context = SDL_GL_CreateContext(pWindow->m_pWindow);
 
     // Force application failure if no context
@@ -25,17 +26,6 @@ void OpenGLRenderer::create(MainWindowSDL *pWindow)
     glLoadIdentity();
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
-    glMatrixMode(GL_MODELVIEW);
-    glDisable(GL_LIGHTING);
-    glewExperimental = GL_TRUE;
-}
-
-void OpenGLRenderer::create(QWidget *pQtWindow)
-{
-	glLoadIdentity();
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_DEPTH_TEST);
-    glMatrixMode(GL_MODELVIEW);
     glDisable(GL_LIGHTING);
     glewExperimental = GL_TRUE;
 }
@@ -49,8 +39,6 @@ void OpenGLRenderer::clear()
 // TODO(kiecker): Add some logic to optimize this
 void OpenGLRenderer::renderArgs()
 {
-    glPushMatrix();
-	
 	for (uint i = 0; i < i_pRendererArgs->meshes.size(); ++i)
 	{
 		OGLModel *pComponent = (OGLModel *)i_pRendererArgs->meshes[i];
@@ -66,7 +54,7 @@ void OpenGLRenderer::renderArgs()
 	if (m_isSDLWindow)
 		SDL_GL_SwapWindow(m_pWindow);
 	
-	glPopMatrix();
+	clear();
 }
 
 void OpenGLRenderer::cleanup()

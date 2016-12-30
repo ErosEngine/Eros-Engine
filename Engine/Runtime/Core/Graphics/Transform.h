@@ -24,7 +24,7 @@ public:
     void rotate(float angle, glm::vec3 axis, float speed = 1.0f);
     void moveTo(float x, float y, float z, float speed = 1.0f);
     void moveTo(glm::vec3 pos, float speed = 1.0f);
-    void scale(glm::vec3 newScale);    
+    void scale(glm::vec3 newScale);
     void scale(float nX, float nY, float nZ);
     
     

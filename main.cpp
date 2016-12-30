@@ -30,15 +30,15 @@ int main(int argc, char **argv)
         w.create("Eros Engine", 1000, 650, WINDOWED_RESIZEABLE_WINDOW);
 		
 		IRenderBase *pRenderer;
-		if (d.apiType == RENDERING_OPENGL_4_5)
+		if (d.apiType == API_OPENGL_4_5)
 			pRenderer = new OpenGLRenderer();
-		else if (d.apiType == RENDERING_DIRECTX_11)
+		else if (d.apiType == API_DIRECTX_11)
 			pRenderer = new D3D11Renderer();
 		
-		pRenderer->create(&w);
+		pRenderer->create(&w, w.width(), w.height(), 0);
 		GameLoop gameLoop;
 		gameLoop.setWindow(&w);
-		gameLoop.setRenderer(pRenderer, (RenderingApi)(int)d.apiType);
+		gameLoop.setRenderer(pRenderer, d.apiType);
 		gameLoop.initializeLoop();
 		gameLoop.runGameLoop();
 		gameLoop.endGameLoop();

@@ -18,8 +18,6 @@ SOURCES += main.cpp \
     Engine/Editor/OpenGLViewPort.cpp \
     Engine/Runtime/Core/Graphics/Texture.cpp \
     Engine/Runtime/OpenGL/FontRenderer.cpp \
-    ErosLib/BTextStream.cpp \
-    ErosLib/EDebugStream.cpp \
     Engine/Runtime/Core/Graphics/Camera.cpp \
     Engine/Developer/Client/Input.cpp \
     Engine/Runtime/Core/Graphics/Transform.cpp \
@@ -50,16 +48,12 @@ HEADERS += \
     Engine/Developer/FileSystem/stb_image.h \
     Engine/Runtime/Core/Graphics/Texture.h \
     Engine/Runtime/OpenGL/FontRenderer.h \
-    ErosLib/BTextStream.h \
-    ErosLib/EDebugStream.h \
     Engine/Runtime/Core/Graphics/Camera.h \
     Engine/Developer/Client/Input.h \
     Engine/Runtime/Core/Graphics/Transform.h \
-    ErosLib/ErosDefines.h \
     Engine/Developer/FileSystem/EFile.h \ 
     Engine/Editor/DebugLogger.h \
     Engine/Editor/LoggerMessage.h \
-    ErosLib/Math.h \
     Engine/Runtime/Core/Graphics/Light.h \
     Engine/Runtime/Core/Graphics/Material.h \
     Engine/Runtime/Core/Framework/Scene.h \
@@ -73,7 +67,9 @@ HEADERS += \
     Engine/Runtime/OpenGL/OGLFrameBuffer.h \
     Engine/Runtime/OpenGL/OGLRenderer.h \
     Engine/Runtime/Core/Framework/GameLoop.h \
-    Engine/Runtime/Core/Framework/SceneManager.h
+    Engine/Runtime/Core/Framework/SceneManager.h \
+    Engine/Runtime/Core/Framework/Math.h \
+    Engine/Runtime/Core/Framework/Platform.h
 
 DISTFILES += \
     Engine/Runtime/Shaders/baseFrag.frag \

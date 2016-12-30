@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <QDebug>
-#include "ErosLib/Math.h"
+#include "../Core/Framework/Math.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 
@@ -53,20 +53,14 @@ class OGLShaderProgram
         bool operator == (const ShaderInformation &right);
     };
         
-    // Note(kiecker):
-    typedef std::vector<ShaderInformation> ShaderInfoList;
-    typedef std::vector<OGLShader> Shaders;
     
-	template<typename T>
-	using Vector = std::vector<T>; 
-	
-    Shaders         m_shaderList;
-    ShaderInfoList  m_infoList;
+    std::vector<OGLShader>         m_shaderList;
+    std::vector<ShaderInformation> m_infoList;
     
     // Note(kiecker): returns 0 if it wasn't found, 
     // so you can do: if (findInList(var)) { ... }
     int findInList(const char *name);
-    
+	
     // This might be a todo
     friend class Transform;
     

@@ -9,23 +9,12 @@ D3D11Renderer::D3D11Renderer()
 	
 }
 
-void D3D11Renderer::create(QWidget *pQtWindow)
+void D3D11Renderer::create(GenericHandle hWindow, int width, int height, int flags)
 {
-	internalCreate((HWND)pQtWindow->winId(), pQtWindow->width(), pQtWindow->height(), IMMEDIATE_MODE);
-}
-
-void D3D11Renderer::create(MainWindowSDL *pMainWindow)
-{
-	SDL_SysWMinfo sysInfo;
-	SDL_VERSION(&sysInfo.version);
-	SDL_GetWindowWMInfo(pMainWindow->m_pWindow, &sysInfo);
-	int mode = pMainWindow->isFullScreen() ?  DIRECT_MODE : IMMEDIATE_MODE;
-	internalCreate(sysInfo.info.win.window, pMainWindow->width(), pMainWindow->height(), mode);
-}
-
-void D3D11Renderer::internalCreate(HWND windowHandle, int width, int height, int flags)
-{
-	// TODO(kiecker): actually process the flags
+	HWND windowHandle = (HWND)hWindow;
+	
+	// -- Kiecker
+	// TODO: actually process the flags
 	UINT deviceCreateFlags = 0;
     #ifdef _DEBUG
     

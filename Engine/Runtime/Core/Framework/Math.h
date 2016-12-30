@@ -547,7 +547,6 @@ inline EVector2 &operator += (EVector2 &left, float right)
 
 
 
-
 inline float inverseSqrt(float value)
 {
     return 1.0f / sqrtf(value);
@@ -655,6 +654,5 @@ struct EMatrix2x2
 {
     
 };
-
 
 #endif // MATH_H

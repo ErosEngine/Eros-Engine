@@ -2,7 +2,7 @@
 
 
 
-void GameLoop::setRenderer(IRenderBase *pRenderer, RenderingApi api)
+void GameLoop::setRenderer(IRenderBase *pRenderer, RenderingType api)
 {
 	m_pRenderer = pRenderer;
 	m_renderingApi = api;

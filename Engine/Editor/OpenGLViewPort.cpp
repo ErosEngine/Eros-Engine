@@ -18,7 +18,7 @@ void OpenGLViewPort::initializeGL()
 {
     m_renderer = new OpenGLRenderer();
 
-	m_renderer->create(this);
+	m_renderer->create((void *)this, width(), height(), 0);
     
 	m_renderer->clear();
     //m_renderer->renderScene();

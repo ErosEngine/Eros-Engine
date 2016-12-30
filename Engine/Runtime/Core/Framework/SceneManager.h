@@ -20,7 +20,7 @@ public:
 	// The default scene is index 1
 	// If no scene file is found then 
 	// it will spit a verbose error
-	void initialize(RenderingApi api);
+	void initialize(RenderingType api);
 	
 	// Getters and setters for the scene
 	void setScene(int scene);

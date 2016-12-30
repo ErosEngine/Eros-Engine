@@ -6,7 +6,7 @@
 #include <SDL_events.h>
 #include <QDebug>
 
-#include "ErosLib/ErosDefines.h"
+#include "../Core/Framework/Platform.h"
 
 enum WindowFlags
 {

@@ -1,7 +1,7 @@
 #ifndef COMPONENTSBASE_H
 #define COMPONENTSBASE_H
 
-#include "ErosLib/ErosDefines.h"
+#include "Platform.h"
 #include "../Graphics/MeshComponent.h"
 #include "../Graphics/Transform.h"
 #include <QDebug>
@@ -43,11 +43,11 @@ struct D3D11Buffer
 #endif
 
 
-class IDrawableComponent : public IComponent
+class IDrawable : public IComponent
 {
 public:
 	
-	virtual ~IDrawableComponent() { }
+	virtual ~IDrawable() { }
 	
 	// The individual buffer information
 	// will fill a different structure based 
@@ -79,10 +79,9 @@ public:
 	
 	Transform transform;
 	
-	
 protected:
 	
-	MeshComponent	i_mesh;
+	MeshComponent i_mesh;
 	
 };
 
