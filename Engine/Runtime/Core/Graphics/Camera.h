@@ -15,7 +15,7 @@ struct Camera
     
     float speed;
     float yRot;
-    float xRot;    
+    float xRot;
     float fov;
     float zNear;
     float zFar;
@@ -26,20 +26,20 @@ struct Camera
     
     bool isFirstMouse;
     
-    glm::mat4 getViewMatrix();
-    glm::mat4 getPerspective();
+    glm::mat4 GetViewMatrix();
+    glm::mat4 GetPerspective();
     
     // ALL TRANSFOMATIONS ARE RELATIVE
-    void mouseUpdate(int x, int y);
-    void strafeRight();
-    void strafeLeft();
-    void moveForward();
-    void sprintForward(float multiplier);
-    void moveDownward();
-    void moveUp();
-    void moveBack();
-    void updatePerspective(float fov, float width, 
-                           float height, float zNear, 
+    void MouseUpdate(int x, int y);
+    void StrafeRight();
+    void StrafeLeft();
+    void MoveForward();
+    void SprintForward(float multiplier);
+    void MoveDownward();
+    void MoveUp();
+    void MoveBack();
+    void UpdatePerspective(float fov, float width,
+                           float height, float zNear,
                            float zFar, float aspect_);
     
 };

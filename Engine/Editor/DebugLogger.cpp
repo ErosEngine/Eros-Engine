@@ -4,9 +4,9 @@ DebugLogger::DebugLogger(QWidget *parent) : QTextBrowser(parent)
 {
 }
 
-void DebugLogger::append(LoggerMessage &message)
+void DebugLogger::Append(LoggerMessage &message)
 {
-    message.generateHTML();
-    QString current = message.getString();
+    message.GenerateHTML();
+    QString current = message.GetString();
     QTextBrowser::append(current);
 }

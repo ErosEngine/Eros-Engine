@@ -14,27 +14,27 @@ LoggerMessage::LoggerMessage(const QString &message, MessageType messageType)
     m_type = messageType;
 }
 
-QString LoggerMessage::getString()
+QString LoggerMessage::GetString()
 {
     return m_string;
 }
 
-void LoggerMessage::setMessage(const QString &message)
+void LoggerMessage::SetMessage(const QString &message)
 {
     m_message = message;
 }
 
-const MessageType LoggerMessage::type() const
+const MessageType LoggerMessage::GetType() const
 {
     return m_type;
 }
 
-void LoggerMessage::setType(const MessageType &type)
+void LoggerMessage::SetType(const MessageType &type)
 {
     m_type = type;
 }
 
-void LoggerMessage::generateHTML()
+void LoggerMessage::GenerateHTML()
 {
     switch (m_type)
     {

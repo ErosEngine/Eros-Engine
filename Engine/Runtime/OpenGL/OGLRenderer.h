@@ -1,8 +1,9 @@
 #ifndef OPENGLRENDERER_H
 #define OPENGLRENDERER_H
 
-#include "Engine/Runtime/Window/MainWindow.h"
+#include "Engine/Runtime/Window/Window.h"
 #include "../Core/Framework/IRenderBase.h"
+#include <QOpenGLContext>
 #include <cassert>
 
 
@@ -12,19 +13,22 @@ public:
     
 	OpenGLRenderer() { } // Empty constructor
 	
-    virtual void create(GenericHandle hWindow, int width, int height, int flags) override;
+    virtual void Create(GenericHandle hWindow, int width, int height, int flags) override;
     
-	virtual void clear() override;
-	virtual void renderArgs() override;
-	virtual void cleanup() override;
-	
-	virtual void setRendererArgs(RendererArgs *pRendererArgs) override;
-	virtual const RendererArgs *rendererArgs() const override;
+	virtual void Clear() override;
+	virtual void Swap() override;
+	virtual void Cleanup() override;
 	
 private:
 	
-	bool		  m_isSDLWindow = false;
-	SDL_Window	* m_pWindow;
+#if defined(EROS_WINDOWS)
+	
+	HDC m_deviceHandle;
+	HGLRC m_OGLrenderContextHandle;
+	
+#elif defined(EROS_LINUX)
+	
+#endif
 	
 	/* From IRenderBase
 	 

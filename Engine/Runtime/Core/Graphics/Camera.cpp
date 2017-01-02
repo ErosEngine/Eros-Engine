@@ -16,17 +16,17 @@ Camera::Camera():
 {
 }
 
-glm::mat4 Camera::getViewMatrix()
+glm::mat4 Camera::GetViewMatrix()
 {
     return glm::lookAt(position, position + target, up);
 }
 
-glm::mat4 Camera::getPerspective()
+glm::mat4 Camera::GetPerspective()
 {
     return glm::perspective(fov, aspect, zNear, zFar);
 }
 
-void Camera::mouseUpdate(int x, int y)
+void Camera::MouseUpdate(int x, int y)
 {
     glm::vec2 currentMousePos(x, y);
     glm::vec2 mouseDelta = currentMousePos - prevMousePos;
@@ -45,41 +45,41 @@ void Camera::mouseUpdate(int x, int y)
     prevMousePos = currentMousePos;
 }
 
-void Camera::strafeRight()
+void Camera::StrafeRight()
 {
     position += glm::normalize(glm::cross(target, up)) * speed;
 }
 
-void Camera::strafeLeft()
+void Camera::StrafeLeft()
 {
     position -= glm::normalize(glm::cross(target, up)) * speed;
 }
 
-void Camera::moveForward()
+void Camera::MoveForward()
 {
     position += target * speed;
 }
 
-void Camera::sprintForward(float multiplier)
+void Camera::SprintForward(float multiplier)
 {
     position += target * (speed * multiplier);
 }
 
-void Camera::moveDownward()
+void Camera::MoveDownward()
 {
     position -= up * speed;
 }
-void Camera::moveUp()
+void Camera::MoveUp()
 {
     position += up * speed;
 }
 
-void Camera::moveBack()
+void Camera::MoveBack()
 {
     position -= target * speed;
 }
 
-void Camera::updatePerspective(float fov_, float width_, float height_, 
+void Camera::UpdatePerspective(float fov_, float width_, float height_, 
                                float zNear_, float zFar_, float aspect_)
 {
     this->fov = fov_;

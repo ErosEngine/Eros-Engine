@@ -13,7 +13,7 @@ class DebugLogger : public QTextBrowser
 public:
     explicit DebugLogger(QWidget *parent = 0);
     
-    void append(LoggerMessage &message);
+    void Append(LoggerMessage &message);
 };
 
 #endif // DEBUGLOGGER_H

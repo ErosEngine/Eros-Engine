@@ -1,28 +1,12 @@
 #include "MeshComponent.h"
 #include <QDebug>
 #include <QFile>
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
+#include <fbxsdk.h>
 
 
 MeshComponent CreateCube()
 {
     MeshComponent shape;
-    
-    // Note(kiecker): Hackey right now, but I will fix it later
-    // This is for reference
-    /* position              normals                
-     * -0.5f,  0.5f, -0.5f,  0.0f,  0.0f,  0.0f,
-     *  0.5f,  0.5f, -0.5f,  0.0f,  0.0f,  0.0f,
-     * -0.5f, -0.5f, -0.5f,  0.0f,  0.0f,  0.0f,
-     *  0.5f, -0.5f, -0.5f,  0.0f,  0.0f,  0.0f,
-     * -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  0.0f,
-     *  0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  0.0f,
-     *  0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  0.0f,
-     * -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  0.0f
-     */
     
     return shape;
 }
@@ -48,113 +32,72 @@ MeshComponent CreateSphere()
 }
 
 
-void ProcessAssimpTexture(aiMaterial *mat, aiTextureType type, int tType, MeshComponent *base)
+void ProcessMesh(FbxMesh *pMesh, MeshComponent *pBase)
 {
-    for (uint i = 0; i < mat->GetTextureCount(type); ++i)
-    {
-        aiString str;
-        mat->GetTexture(type, i, &str);
-        std::string texName;
-		texName.append(base->fileName.toLatin1().constData());
-		texName.append(str.C_Str());
-		Texture texture;
-		texture.type = tType;
-		if (texture.loadFromFile(texName.c_str()))
-		{
-			base->textures.push_back(texture);
-		}
-    }
-}
-
-void ProcessAssimpMesh(aiMesh *pMesh, const aiScene *pScene, MeshComponent *pBase)
-{
-    for (uint i = 0; i < pMesh->mNumVertices; ++i)
-    {
-        Vertex vert;
-        vert.position.x = pMesh->mVertices[i].x;
-        vert.position.y = pMesh->mVertices[i].y;
-        vert.position.z = pMesh->mVertices[i].z;
-        
-        if (pMesh->mNormals)
-        {
-            vert.normal.x = pMesh->mNormals[i].x;
-            vert.normal.y = pMesh->mNormals[i].y;
-            vert.normal.z = pMesh->mNormals[i].z;
-        }
-        else
-        {
-            vert.normal.x = 1.0f;
-            vert.normal.y = 1.0f;
-            vert.normal.z = 1.0f;
-        }
-        
-        if (pMesh->mTextureCoords[0])
-        {
-            vert.texCoords.x = pMesh->mTextureCoords[0][i].x;
-            vert.texCoords.y = pMesh->mTextureCoords[0][i].y;
-        }
-        else
-        {
-            vert.texCoords.x = 0.0f; 
-            vert.texCoords.y = 0.0f;
-        }
-        
-        pBase->vertexes.push_back(vert);
-    }
-    
-    for (uint i = 0; i < pMesh->mNumFaces; ++i)
-    {
-        aiFace face = pMesh->mFaces[i];
-        for (uint j = 0; j < face.mNumIndices; ++j)
-        {
-            pBase->indices.push_back(face.mIndices[j]);
-        }
-    }
-    
-    if (pMesh->mMaterialIndex >= 0)
-    {
-        aiMaterial *material = pScene->mMaterials[pMesh->mMaterialIndex];
-        ProcessAssimpTexture(material, aiTextureType_DIFFUSE, DiffuseTexture, pBase);
-        ProcessAssimpTexture(material, aiTextureType_SPECULAR, SpecularTexture, pBase);
-    }
-}
-
-void ProcessAssimpNodes(aiNode *pNode, const aiScene *cpScene, MeshComponent *pBase)
-{
-	for (uint i = 0; i < pNode->mNumMeshes; ++i)		 
-    {		
-        aiMesh *mesh = cpScene->mMeshes[pNode->mMeshes[i]];		 
-        ProcessAssimpMesh(mesh, cpScene, pBase);		
-    }		
-    		
-    for (uint i = 0; i < pNode->mNumChildren; ++i)		
-    {		
-        ProcessAssimpNodes(pNode->mChildren[i], cpScene, pBase);		
-    }
-}
-
-// Core model loading function
-bool MeshComponent::loadFromFile(const char *fileName)
-{
-    Assimp::Importer importer;
-	
-	const aiScene *pScene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
-    if(!pScene || pScene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode) 
-    {
-        qDebug() << "Failed to load mesh: Assimp error: " << importer.GetErrorString();
-        return false;
+	for (uint i = 0; i < pMesh->GetControlPointsCount(); ++i)
+	{
+		Vertex vertex;
+		FbxVector4 currentVertex = pMesh->GetControlPointAt(i);
+		vertex.position.x = currentVertex.mData[0];
+		vertex.position.y = currentVertex.mData[1];
+		vertex.position.z = currentVertex.mData[2];
+		
+		vertex.normal = EVector3(0.0f, 0.0f, 0.0f);
+		// TODO
+		vertex.texCoords = EVector2(0.0f, 0.0f);
+		
+		pBase->vertexes.push_back(vertex);
 	}
-    
-    ProcessAssimpNodes(pScene->mRootNode, pScene, this);
-	
-	return true;
 }
 
-void MeshComponent::clearMesh()
+void ProcessNodes(FbxNode *pNode, MeshComponent *pBase)
+{
+	FbxMesh *pMesh = pNode->GetMesh();
+	
+	for (uint i = 0; i < pNode->GetChildCount(); ++i)
+	{
+		ProcessNodes(pNode->GetChild(i), pBase);
+	}
+}
+
+void ProcessScene(FbxScene *pScene, MeshComponent *pBase)
+{
+	FbxNode *pRootNode = pScene->GetRootNode();
+	
+	for (uint i = 0; i < pRootNode->GetChildCount(); ++i)
+	{
+		ProcessNodes(pRootNode->GetChild(i), pBase);
+	}
+}
+
+bool MeshComponent::LoadFromFile(const char *fileName)
+{
+	FbxManager *pManager = FbxManager::Create();
+	FbxIOSettings *pIoSettings = FbxIOSettings::Create(pManager, IOSROOT);
+	
+	pManager->SetIOSettings(pIoSettings);
+	
+	FbxImporter *pImporter = FbxImporter::Create(pManager, "");
+	
+	if (!pImporter->Initialize(fileName, -1, pManager->GetIOSettings()))
+	{
+		qDebug() << "Failed to load the specified model with the following errors: \n" <<
+					pImporter->GetStatus().GetErrorString();
+		return false;
+	}
+	
+	FbxScene *pMainScene = FbxScene::Create(pManager, "loadedScene");
+	pImporter->Import(pMainScene);
+	pImporter->Destroy();
+	
+	ProcessScene(pMainScene, this);
+	return true;	
+}
+
+void MeshComponent::ClearMesh()
 {
 	vertexes.clear();
 	indices.clear();
-	textures.clear();
 	fileName.clear();
 }
 

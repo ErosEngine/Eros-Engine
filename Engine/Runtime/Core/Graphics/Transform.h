@@ -19,28 +19,28 @@ class Transform
 public:
     Transform();
     
-    void translate(float x, float y, float z, float speed = 1.0f);
-    void translate(glm::vec3 dir, float speed = 1.0f);
-    void rotate(float angle, glm::vec3 axis, float speed = 1.0f);
-    void moveTo(float x, float y, float z, float speed = 1.0f);
-    void moveTo(glm::vec3 pos, float speed = 1.0f);
-    void scale(glm::vec3 newScale);
-    void scale(float nX, float nY, float nZ);
+    void Translate(float x, float y, float z, float speed = 1.0f);
+    void Translate(glm::vec3 dir, float speed = 1.0f);
+    void Rotate(float angle, glm::vec3 axis, float speed = 1.0f);
+    void MoveTo(float x, float y, float z, float speed = 1.0f);
+    void MoveTo(glm::vec3 pos, float speed = 1.0f);
+    void Scale(glm::vec3 newScale);
+    void Scale(float nX, float nY, float nZ);
     
     
     // NOTE(kiecker): Using the getters and setters because I 
     // will need the accessors to do stuff when they are changed
-    void setPosition(glm::vec3 pos);
-    void setRotation(glm::vec3 rot);
+    void SetPosition(glm::vec3 pos);
+    void SetRotation(glm::vec3 rot);
     
-    glm::vec3 getScale()    const;
-    glm::vec3 getPosition() const; 
-    glm::vec3 getRotation() const;
+    glm::vec3 GetScale()    const;
+    glm::vec3 GetPosition() const; 
+    glm::vec3 GetRotation() const;
     
     // This will probably only be used for the renderer
-    const glm::mat4 &getModelMat(); 
+    const glm::mat4 &GetModelMat(); 
     
-    bool hasChanged() const;
+    bool HasChanged() const;
     
 private:
     

@@ -19,13 +19,13 @@ public:
     LoggerMessage();
     LoggerMessage(const QString &message, MessageType messageType);
 
-    QString getString();
-    void setMessage(const QString &message);
+    QString GetString();
+    void SetMessage(const QString &message);
     
-    const MessageType type() const;
-    void setType(const MessageType &type);
+    const MessageType GetType() const;
+    void SetType(const MessageType &GetType);
     
-    void generateHTML();
+    void GenerateHTML();
     
 private:
     

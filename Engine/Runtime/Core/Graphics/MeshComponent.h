@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #endif
 
-#include "../Framework/Math.h"
+#include "Core/Math.h"
 #include <vector>
 #include <QString>
 #include "Texture.h"
@@ -28,8 +28,8 @@ struct MeshComponent
 	
 	QString fileName;
 	
-	bool loadFromFile(const char *fileName);
-	void clearMesh();
+	bool LoadFromFile(const char *fileName);
+	void ClearMesh();
 	
 };
 

@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QThread>
-#include "Engine/Runtime/Core/Framework/Platform.h"
+#include "Core/Platform.h"
 
 enum WindowType
 {

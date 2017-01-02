@@ -1,7 +1,7 @@
 #ifndef COMPONENTSBASE_H
 #define COMPONENTSBASE_H
 
-#include "Platform.h"
+#include "Core/Platform.h"
 #include "../Graphics/MeshComponent.h"
 #include "../Graphics/Transform.h"
 #include <QDebug>
@@ -21,8 +21,9 @@ public:
 	
 	virtual ~IComponent() { }
 	
-	virtual bool loadFromFile(const char *fileName) = 0;
-	
+	virtual bool LoadFromFile(const char *fileName) = 0;
+	virtual void Clear() = 0;
+	virtual QString ToString() = 0;
 };
 
 
@@ -48,40 +49,6 @@ class IDrawable : public IComponent
 public:
 	
 	virtual ~IDrawable() { }
-	
-	// The individual buffer information
-	// will fill a different structure based 
-	// on the api
-	virtual void generateBuffers()  = 0;
-	virtual void setupBuffers()		= 0;
-	
-	// The actual Drawing code for the renderer
-	virtual void draw()		= 0;
-	virtual void cleanup()	= 0;
-	
-	// Because we won't know the exact buffer 
-	// structure we will just return some anonymous memory
-	virtual void *getBuffer()	= 0;
-	
-	inline void loadNewMesh(const char *fileName)
-	{
-		i_mesh.clearMesh();
-		if (!i_mesh.loadFromFile(fileName))
-		{
-			qDebug() << "Failed to load new mesh!";
-		}
-	}
-
-	inline const MeshComponent *mesh() const
-	{
-		return &i_mesh;
-	}
-	
-	Transform transform;
-	
-protected:
-	
-	MeshComponent i_mesh;
 	
 };
 

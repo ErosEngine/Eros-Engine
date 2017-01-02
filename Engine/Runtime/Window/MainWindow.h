@@ -6,7 +6,7 @@
 #include <SDL_events.h>
 #include <QDebug>
 
-#include "../Core/Framework/Platform.h"
+#include "Core/Platform.h"
 
 enum WindowFlags
 {
@@ -15,28 +15,30 @@ enum WindowFlags
 	WINDOWED_RESIZEABLE_WINDOW = WINDOWED_WINDOW | SDL_WINDOW_RESIZABLE
 };
 
-class MainWindowSDL
+class Window
 {
 	friend class D3D11Renderer;
 	friend class OpenGLRenderer;
 	friend class VulkanRenderer;
-	friend class GameLoop;
+	friend class Application;
 	
 public:
-    explicit MainWindowSDL();
+    explicit Window();
     
-    void create(const char *name, int width, int height, int windowFlags);
+    void Create(const char *name, int width, int height, int windowFlags);
     
-    int width() { return m_width; }
-    int height() { return m_height; }
-	bool isFullScreen() { return m_isFullScreen; }
-	bool isOpen();
-	bool pollEvent(SDL_Event &event);
-	void close();
+    int GetWidth() { return m_width; }
+    int GetHeight() { return m_height; }
+	bool IsFullScreen() { return m_isFullScreen; }
+	bool IsOpen();
+	bool PollEvent(SDL_Event &event);
+	void Close();
+	
+	GenericHandle GetPlatformHandle();
 	
 private:
     
-    void destroy();
+    void Destroy();
     
     SDL_Window  * m_pWindow;
     int           m_width, m_height;

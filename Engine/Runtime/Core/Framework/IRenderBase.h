@@ -1,7 +1,7 @@
 ﻿#ifndef IRENDERBASE_H
 #define IRENDERBASE_H
 
-#include "Platform.h"
+#include "Core/Platform.h"
 #include "Scene.h"
 
 
@@ -14,20 +14,15 @@ class IRenderBase
 {
 public:
 	
-    virtual void create(GenericHandle hWindow, int width, int height, int flags) = 0;
+    virtual void Create(GenericHandle hWindow, int width, int height, int flags) = 0;
 	
 	// The clear and draw functions that will
 	// be abstracted to the rendering api's
-	virtual void clear()		= 0;
-	virtual void renderArgs()	= 0;
-	virtual void cleanup()		= 0;
-	
-	virtual void setRendererArgs(RendererArgs *pRendererArgs) = 0;
-	virtual const RendererArgs *rendererArgs() const   = 0;
+	virtual void Clear()		= 0;
+	virtual void Swap()			= 0;
+	virtual void Cleanup()		= 0;
 	
 protected:
-	
-	RendererArgs *i_pRendererArgs = nullptr;
 	
 };
 

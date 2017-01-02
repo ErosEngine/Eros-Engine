@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <QDebug>
-#include "../Core/Framework/Math.h"
+#include "Core/Math.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 

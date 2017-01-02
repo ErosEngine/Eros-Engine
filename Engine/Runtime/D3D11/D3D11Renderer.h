@@ -17,13 +17,10 @@ class D3D11Renderer : public IRenderBase
 public:
 	D3D11Renderer();
 	
-	void create(GenericHandle hWindow, int width, int height, int flags);
-	virtual void clear() override;
-	virtual void renderArgs() override;
-	virtual void cleanup() override;
-	
-	virtual void setRendererArgs(RendererArgs *pRendererArgs) override;
-	virtual const RendererArgs *rendererArgs() const override;
+	virtual void Create(GenericHandle hWindow, int width, int height, int flags) override;
+	virtual void Clear() override;
+	virtual void Swap() override;
+	virtual void Cleanup() override;
 	
 	
 private:
@@ -37,7 +34,7 @@ private:
 	ID3D11DeviceContext			* m_pDeviceContext;
 	IDXGISwapChain				* m_pDxgiSwapChain;
 	ID3D11RenderTargetView		* m_pRenderTargetView;
-	ID3D11Texture2D				* m_pDepthStencil;
+	ID3D11Texture2D				* m_pDepthStencilBuffer;
 	ID3D11DepthStencilState		* m_pDepthStencilState;
 	ID3D11DepthStencilView		* m_pDepthStencilView;
 	ID3D11RasterizerState		* m_pRasterizerState;

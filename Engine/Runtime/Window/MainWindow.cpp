@@ -7,12 +7,12 @@
 #include <cassert>
 
 
-MainWindowSDL::MainWindowSDL()
+Window::Window()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
 }
 
-void MainWindowSDL::create(const char *name, int width, int height, int windowFlags)
+void Window::Create(const char *name, int width, int height, int windowFlags)
 {
     m_pWindow = SDL_CreateWindow
     (
@@ -38,23 +38,24 @@ void MainWindowSDL::create(const char *name, int width, int height, int windowFl
 	}
 }
 
-bool MainWindowSDL::isOpen()
+bool Window::IsOpen()
 {
 	return m_isOpen;
 }
 
-bool MainWindowSDL::pollEvent(SDL_Event &event)
+bool Window::PollEvent(SDL_Event &event)
 {
 	return SDL_PollEvent(&event);
 }
 
-void MainWindowSDL::close()
+void Window::Close()
 {
 	m_isOpen = false;
 }
 
-void MainWindowSDL::destroy()
+void Window::Destroy()
 {
     SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
 }
+
