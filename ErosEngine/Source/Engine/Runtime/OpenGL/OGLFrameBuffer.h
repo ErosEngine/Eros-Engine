@@ -2,30 +2,30 @@
 #define OPENGLFRAMEBUFFER_H
 
 #include <GL/glew.h>
-
+#include "Core/Common.h"
 
 
 enum FrameBufferType
 {
 	DEPTH_BUFFER = 1,
-	STENCIL_BUFFER = 2 // TODO(kiecker): Add more buffer types
+	STENCIL_BUFFER = 2 // TODO: Add more buffer types
 };
 
 class OpenGLFrameBuffer
 {
 	friend class OpenGLRenderer;
 	
-	GLuint				m_renderBuffer, m_frameBuffer;
-    GLuint              m_renderedTexture;
-	FrameBufferType		m_frameBufferType;
+	Uint32				m_RenderBuffer, m_FrameBuffer;
+    Uint32              m_RenderedTexture;
+	FrameBufferType		m_FrameBufferType;
 	
 public:
 	OpenGLFrameBuffer();
 	
-	void Create(FrameBufferType type, int windowWidth, int windowHeight);
+	void Create(FrameBufferType type, Sint32 windowWidth, Sint32 windowHeight);
 	FrameBufferType GetType();
 	
-	GLuint GetBuffer();
+	Uint32 GetBuffer();
 	
 	void Bind();
 };

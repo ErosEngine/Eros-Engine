@@ -8,13 +8,13 @@
     #version 430
     
     in vec2 texCoords;
-    uniform Sampler2D inTex; // send in texture
+    uniform Sampler2D Sint32ex; // send in texture
     
     out vec4 color; // send out color
     
     void main(void)
     {
-        color = vec4(texture(inTex, texCoords), 1.0f);
+        color = vec4(texture(Sint32ex, texCoords), 1.0f);
     }
 */
 
@@ -25,7 +25,7 @@ Texture::~Texture()
     glDeleteTextures(1, &texture);
 }
 
-bool Texture::loadFromFile(const char *fileName)
+bool Texture::LoadFromFile(const char *fileName)
 {
     this->fileName = fileName;
     ubyteptr texPtr = stbi_load(fileName, &width, &height, &comp, STBI_rgb);
@@ -59,7 +59,7 @@ bool Texture::loadFromFile(const char *fileName)
     return true;
 }
 
-bool Texture::isEmpty()
+bool Texture::IsEmpty()
 {
     return (texture != 0);
 }

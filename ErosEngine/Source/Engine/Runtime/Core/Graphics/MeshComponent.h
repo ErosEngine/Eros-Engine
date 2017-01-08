@@ -4,7 +4,7 @@
 #include "Core/Math.h"
 #include "Runtime/Core/Framework/ComponentsBase.h"
 #include <vector>
-#include <QString>
+#include <QtCore/QString>
 
 
 struct Vertex

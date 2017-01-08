@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
-#include <QString>
+#include <QtCore/QString>
 
 const glm::vec3 VEC3_UP    ( 0,  1,  0);
 const glm::vec3 VEC3_RIGHT ( 1,  0,  0);

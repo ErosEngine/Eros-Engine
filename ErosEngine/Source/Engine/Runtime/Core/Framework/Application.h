@@ -1,7 +1,7 @@
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
 
-#include <QElapsedTimer>
+#include <QtCore/QElapsedTimer>
 #include "Core/Platform.h"
 #include "SceneManager.h"
 

@@ -29,11 +29,10 @@ void Application::RunGameLoop()
 	{
 		m_pRenderer->Clear();
 		
-		SDL_Event e;
-		
+		Event e;
 		while (m_pWindow->PollEvent(e))
 		{
-			if (e.type == SDL_QUIT)
+			if (e.type == EVENT_CLOSE_EVENT)
 				m_pWindow->Close();
 		}
 		

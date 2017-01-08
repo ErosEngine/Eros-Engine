@@ -2,6 +2,7 @@
 #define MATH_H
 
 #include <math.h>
+#include <Core/Common.h>
 
 struct EVector3;
 struct EVector2;
@@ -106,6 +107,82 @@ EVector2 &EVector2::operator =(const EVector2 &right)
 	this->y = right.y;
 	return *this;
 }
+
+
+inline bool operator == (const EVector4 &left, const EVector4 &right)
+{
+	return (left.x == right.x && left.y == right.y && left.z == right.z && left.w == right.w);
+}
+inline bool operator == (const EVector4 &left, const EVector3 &right)
+{
+	return (left.x == right.x && left.y == right.y && left.z == right.z);
+}
+inline bool operator == (const EVector4 &left, const EVector2 &right)
+{
+	return (left.x == right.x && left.y == right.y);
+}
+inline bool operator == (const EVector3 &left, const EVector4 &right)
+{
+	return (left.x == right.x && left.y == right.y && left.z == right.z);
+}
+inline bool operator == (const EVector3 &left, const EVector3 &right)
+{
+	return (left.x == right.x && left.y == right.y && left.z == right.z);
+}
+inline bool operator == (const EVector3 &left, const EVector2 &right)
+{
+	return (left.x == right.x && left.y == right.y);
+}
+inline bool operator == (const EVector2 &left, const EVector4 &right)
+{
+	return (left.x == right.x && left.y == right.y);
+}
+inline bool operator == (const EVector2 &left, const EVector3 &right)
+{
+	return (left.x == right.x && left.y == right.y);
+}
+inline bool operator == (const EVector2 &left, const EVector2 &right)
+{
+	return (left.x == right.x && left.y == right.y);
+}
+
+inline bool operator != (const EVector4 &left, const EVector4 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector4 &left, const EVector3 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector4 &left, const EVector2 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector3 &left, const EVector4 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector3 &left, const EVector3 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector3 &left, const EVector2 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector2 &left, const EVector4 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector2 &left, const EVector3 &right)
+{
+	return !(left == right);
+}
+inline bool operator != (const EVector2 &left, const EVector2 &right)
+{
+	return !(left == right);
+}
+
 
 inline EVector4 operator * (const EVector4 &left, const EVector4 &right)
 {
@@ -692,6 +769,21 @@ inline float distance(const EVector2 &right, const EVector2 &left)
     return length(right - left);
 }
 
+struct ERect
+{
+	Sint32 x, y, width, height;
+	ERect() : x(0), y(0), width(0), height(0) { }
+	ERect(Sint32 X, Sint32 Y, Sint32 Width, Sint32 Height) : x(X), y(Y), width(Width), height(Height) { }
+};
+
+inline bool operator == (const ERect &left, const ERect &right)
+{
+	return (left.x == right.x && left.y == right.y && left.width == right.width && left.height == right.height);
+}
+inline bool operator != (const ERect &left, const ERect &right)
+{
+	return !(left == right);
+}
 
 
 /* ******* MATRICES ******* */

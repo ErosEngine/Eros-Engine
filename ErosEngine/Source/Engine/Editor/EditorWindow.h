@@ -1,42 +1,31 @@
-#ifndef MAINWINDOW_QT_H
-#define MAINWINDOW_QT_H
+#pragma once
 
-#include <GL/glew.h>
-#include <QMainWindow>
-#include <QTextBrowser>
-#include <QWidget>
-#include "Widgets/SceneViewport.h"
-#include <QObject>
-#include "Core/Platform.h"
+#include "Widgets/Widget.h"
+#include <memory>
+#include <vector>
 
 
-namespace Ui 
+class EditorWindow
 {
-    class EditorWindow;
-}
-
-class EditorWindow : public QMainWindow
-{
-    Q_OBJECT
-    
 public:
-    explicit EditorWindow(QWidget *parent = 0);
-    ~EditorWindow();
-    
-    static EditorWindow *GetInstance();
-	
-	void SetRenderer(IRenderBase *pRenderer);
-	void SetVSyncEnabled(bool isVsync);
-	
-private slots:
-    void on_pushButton_released();
+	EditorWindow();
+	~EditorWindow();
+
+	void Create(const char *windowName, ERect geometry);
+	void AddWidget(Widget *widget);
+	void SetWindowTitle(const char *newName);
+	void SetGeometry(ERect geometry);
+	void Run();
+
+	HWND GetWindowHandle();
 
 private:
-    
-    static EditorWindow *m_singleton;
-    Ui::EditorWindow *ui;
+	typedef std::vector<std::shared_ptr<Widget>> WidgetsList;
+
+	WidgetsList m_Widgets;
+	HWND		m_WindowHandle;
+	ERect		m_Geometry;
+	const char *m_WindowTitle;
+	bool		m_isRunning = true;
 };
 
-
-
-#endif // MAINWINDOW_QT_H

@@ -4,7 +4,8 @@
 #include <GL/glew.h>
 #include <fstream>
 #include <vector>
-#include <QDebug>
+#include <QtCore/QDebug>
+#include "Core/Common.h"
 #include "Core/Math.h"
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -22,7 +23,7 @@ class OGLShader
     
 public:
     
-    GLuint subShaderProgram;
+    Uint32 subShaderProgram;
     
     void Setup();
     bool Compile();
@@ -48,7 +49,7 @@ class OGLShaderProgram
     struct ShaderInformation
     {
         string varName;
-        GLint varPos;
+        Sint32 varPos;
         
         bool operator == (const ShaderInformation &right);
     };
@@ -59,7 +60,7 @@ class OGLShaderProgram
     
     // Note(kiecker): returns 0 if it wasn't found, 
     // so you can do: if (findInList(var)) { ... }
-    int findInList(const char *name);
+    Sint32 findInList(const char *name);
 	
     // This might be a todo
     friend class Transform;
@@ -68,7 +69,7 @@ public:
     
     OGLShaderProgram();
    ~OGLShaderProgram();
-    GLuint shaderProgram;
+    Sint32 shaderProgram;
     
     void AddShader(const OGLShader &shader);
     bool Compile();
@@ -80,7 +81,7 @@ public:
 	void SetUniform(const char *variableName, const EVector4 &data);
     void SetUniform(const char *variableName, const EVector3 &data);
     void SetUniform(const char *variableName, const EVector2 &data);
-    void SetUniform(const char *variableName, int data);
+    void SetUniform(const char *variableName, Sint32 data);
     void SetUniform(const char *variableName, float data);
     void SetUniform(const char *variableName, const EMatrix4x4 &data);
     void SetUniform(const char *variableName, const glm::mat4 &data);

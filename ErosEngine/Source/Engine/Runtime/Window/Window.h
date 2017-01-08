@@ -2,17 +2,16 @@
 #define MAINWINDOW_H
 
 #include <GL/glew.h>
-#include <SDL_video.h>
-#include <SDL_events.h>
-#include <QDebug>
+#include <Core/Platform.h>
+#include <QtCore/QDebug>
+#include "Events.h"
 
-#include "Core/Platform.h"
 
 enum WindowFlags
 {
-	FULLSCREEN_WINDOW = SDL_WINDOW_FULLSCREEN,
-	WINDOWED_WINDOW = SDL_WINDOW_SHOWN,
-	WINDOWED_RESIZEABLE_WINDOW = WINDOWED_WINDOW | SDL_WINDOW_RESIZABLE
+	FULLSCREEN_WINDOW = 11,
+	WINDOWED_WINDOW = 14,
+	WINDOWED_RESIZEABLE_WINDOW = 12
 };
 
 class Window
@@ -25,13 +24,13 @@ class Window
 public:
     explicit Window();
     
-    void Create(const char *name, int GetWidth, int GetHeight, int windowFlags);
+    void Create(const char *name, Sint32 width, Sint32 height, Sint32 windowFlags);
     
-    int GetWidth() { return m_width; }
-    int GetHeight() { return m_height; }
+    Sint32 GetWidth() { return m_Width; }
+    Sint32 GetHeight() { return m_Height; }
 	bool IsFullScreen() { return m_isFullScreen; }
 	bool IsOpen();
-	bool PollEvent(SDL_Event &event);
+	bool PollEvent(Event &event);
 	void Close();
 	
 	GenericHandle GetPlatformHandle();
@@ -40,10 +39,10 @@ private:
     
     void Destroy();
     
-    SDL_Window  * m_pWindow;
-    int           m_width, m_height;
-	bool		  m_isFullScreen;
-	bool		  m_isOpen = true;
+    HWND		m_WindowHandle;
+    Uint32		m_Width, m_Height;
+	bool		m_isFullScreen;
+	bool		m_isOpen = true;
     
 };
 

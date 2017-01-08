@@ -1,11 +1,13 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
-#if defined(WIN32) || defined(WIN64)
+#if defined(_WIN32) || defined(_WIN64)
 	#define EROS_WINDOWS
 #elif defined(unix)
 	#define EROS_LINUX
 #endif
+
+#include "Common.h"
 
 enum RenderingType
 {
@@ -16,8 +18,6 @@ enum RenderingType
 };
 
 typedef void *GenericHandle;
-
-
 
 
 

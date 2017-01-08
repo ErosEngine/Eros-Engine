@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include <QDebug>
+#include <QtCore/QDebug>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -26,7 +26,7 @@ glm::mat4 Camera::GetPerspective()
     return glm::perspective(fov, aspect, zNear, zFar);
 }
 
-void Camera::MouseUpdate(int x, int y)
+void Camera::MouseUpdate(Sint32 x, Sint32 y)
 {
     glm::vec2 currentMousePos(x, y);
     glm::vec2 mouseDelta = currentMousePos - prevMousePos;
@@ -60,7 +60,7 @@ void Camera::MoveForward()
     position += target * speed;
 }
 
-void Camera::SprintForward(float multiplier)
+void Camera::SprSint32Forward(float multiplier)
 {
     position += target * (speed * multiplier);
 }

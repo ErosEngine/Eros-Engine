@@ -24,12 +24,12 @@ void OGLBufferMGR::RegisterMesh(const MeshComponent *mesh)
 
 void OGLBufferMGR::UnregisterMesh(const QString &meshName)
 {
-	glDeleteBuffers(1, &m_bufferMap[meshName].indexBuffer);
-	glDeleteBuffers(1, &m_bufferMap[meshName].arrayBuffer);
-	glDeleteVertexArrays(1, &m_bufferMap[meshName].vertexArray);
+	glDeleteBuffers(1, &m_BufferMap[meshName].indexBuffer);
+	glDeleteBuffers(1, &m_BufferMap[meshName].arrayBuffer);
+	glDeleteVertexArrays(1, &m_BufferMap[meshName].vertexArray);
 }
 
 OpenGLBuffer OGLBufferMGR::GetBuffer(const QString &meshName)
 {
-	return m_bufferMap[meshName];
+	return m_BufferMap[meshName];
 }

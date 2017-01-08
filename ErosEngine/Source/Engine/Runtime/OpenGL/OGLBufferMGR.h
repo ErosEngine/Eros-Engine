@@ -3,16 +3,16 @@
 
 #include <GL/glew.h>
 #include "Runtime/Core/Graphics/MeshComponent.h"
-#include <QString>
+#include <QtCore/QString>
 #include <map>
 
 
 // Stores the essential buffer information
 struct OpenGLBuffer
 {
-	GLuint vertexArray; // from glGenVertexArrays()
-	GLuint arrayBuffer; // GL_ARRAY_BUFFER
-	GLuint indexBuffer; // GL_ELEMENT_ARRAY_BUFFER
+	Uint32 vertexArray; // from glGenVertexArrays()
+	Uint32 arrayBuffer; // GL_ARRAY_BUFFER
+	Uint32 indexBuffer; // GL_ELEMENT_ARRAY_BUFFER
 };
 
 class OGLBufferMGR
@@ -26,7 +26,7 @@ public:
 	
 private:
 	
-	std::map<QString, OpenGLBuffer> m_bufferMap;
+	std::map<QString, OpenGLBuffer> m_BufferMap;
 	
 };
 

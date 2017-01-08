@@ -1,7 +1,8 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <QString>
+#include <QtCore/QString>
+#include <Core/Common.h>
 #include <GL/glew.h>
 
 
@@ -13,8 +14,7 @@ enum TextureType
 
 
 /*
- * TODO(kiecker): Make this more interfaceable with d3d and vulkan
- * vulkan for certain, but d3d will be on the todo for a while
+ * TODO: Make this more interfaceable with d3d and vulkan\
  */
 class Texture
 {
@@ -24,18 +24,18 @@ public:
     
     QString fileName;
     
-    GLuint texture = 0;
+    Uint32 texture = 0;
     
-    int type;
-    int width;
-    int height;
-    int comp;
+    Sint32 type;
+    Sint32 width;
+    Sint32 height;
+    Sint32 comp;
     
-    bool loadFromFile(const char *fileName);    
-    bool isEmpty();
+    bool LoadFromFile(const char *fileName);    
+    bool IsEmpty();
     
-    inline void bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
-    inline void unbind() { glBindTexture(GL_TEXTURE_2D, 0); }
+    inline void Bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
+    inline void Unbind() { glBindTexture(GL_TEXTURE_2D, 0); }
     
     inline Texture &operator = (const Texture &right)
     {

@@ -12,17 +12,17 @@ public:
     
 	OpenGLRenderer() { } // Empty constructor
 	
-    virtual void Create(GenericHandle hWindow, int width, int height, int flags) override;
+    virtual void Create(GenericHandle hWindow, Sint32 width, Sint32 height, Sint32 flags) override;
     
 	virtual void Clear() override;
-	virtual void Swap(int vsync) override;
+	virtual void Swap(Sint32 vsync) override;
 	virtual void Cleanup() override;
 	
 private:
 	
 #if defined(EROS_WINDOWS)
 	
-	HDC m_deviceHandle;
+	HDC m_DeviceHandle;
 	HGLRC m_OGLrenderContextHandle;
 	
 #elif defined(EROS_LINUX)

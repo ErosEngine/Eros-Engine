@@ -4,12 +4,10 @@
 #include <d3d11.h>
 #include <dxgi.h>
 #include <d3dcommon.h>
-#include <QWidget>
-#include "Engine/Runtime/Window/MainWindow.h"
-#include "../Core/Framework/IRenderBase.h"
+#include "Runtime/Core/Framework/IRenderBase.h"
 
 #define IMMEDIATE_MODE 1
-#define DIRECT_MODE 2  // TODO(kiecker): get the right name
+#define DIRECT_MODE 2  // TODO: Maybe get rid of these
 
 
 class D3D11Renderer : public IRenderBase
@@ -17,9 +15,9 @@ class D3D11Renderer : public IRenderBase
 public:
 	D3D11Renderer();
 	
-	virtual void Create(GenericHandle hWindow, int width, int height, int flags) override;
+	virtual void Create(GenericHandle hWindow, Sint32 width, Sint32 height, Sint32 flags) override;
 	virtual void Clear() override;
-	virtual void Swap(int vsync) override;
+	virtual void Swap(Sint32 vsync) override;
 	virtual void Cleanup() override;
 	
 	

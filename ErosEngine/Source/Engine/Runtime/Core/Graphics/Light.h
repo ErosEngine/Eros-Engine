@@ -15,7 +15,7 @@ struct DirectionalLight
     glm::vec3 specularColor;
 };
 
-struct PointLight
+struct PoSint32Light
 {
     bool castShadows;
     glm::vec3 position;

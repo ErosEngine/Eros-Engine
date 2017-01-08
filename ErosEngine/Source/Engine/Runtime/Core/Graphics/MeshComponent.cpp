@@ -1,12 +1,11 @@
 #include "MeshComponent.h"
-#include <QDebug>
-#include <QFile>
+#include <QtCore/QDebug>
 #include <fbxsdk.h>
 
 
 void ProcessMesh(FbxMesh *pMesh, MeshComponent *pBase)
 {
-	for (uint i = 0; i < pMesh->GetControlPointsCount(); ++i)
+	for (Uint32 i = 0; i < pMesh->GetControlPointsCount(); ++i)
 	{
 		Vertex vertex;
 		FbxVector4 currentVertex = pMesh->GetControlPointAt(i);
@@ -26,7 +25,7 @@ void ProcessNodes(FbxNode *pNode, MeshComponent *pBase)
 {
 	FbxMesh *pMesh = pNode->GetMesh();
 	
-	for (uint i = 0; i < pNode->GetChildCount(); ++i)
+	for (Uint32 i = 0; i < pNode->GetChildCount(); ++i)
 	{
 		ProcessNodes(pNode->GetChild(i), pBase);
 	}
@@ -36,7 +35,7 @@ void ProcessScene(FbxScene *pScene, MeshComponent *pBase)
 {
 	FbxNode *pRootNode = pScene->GetRootNode();
 	
-	for (uint i = 0; i < pRootNode->GetChildCount(); ++i)
+	for (Uint32 i = 0; i < pRootNode->GetChildCount(); ++i)
 	{
 		ProcessNodes(pRootNode->GetChild(i), pBase);
 	}

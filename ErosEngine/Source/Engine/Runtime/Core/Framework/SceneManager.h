@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "IRenderBase.h"
 #include <vector>
-#include <QString>
+#include <QtCore/QString>
 
 
 class SceneManager

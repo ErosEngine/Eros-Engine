@@ -1,5 +1,5 @@
 #include "OGLRenderer.h"
-#include <QDebug.h>
+#include <QtCore/QDebug>
 #include "Core/Platform.h"
 #if defined(EROS_WINDOWS)
 	#include <GL/wglew.h>
@@ -11,13 +11,13 @@
 #include <GL/glew.h>
 
 
-void OpenGLRenderer::Create(GenericHandle hWindow, int width, int height, int flags)
+void OpenGLRenderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, Sint32 flags)
 {
 #if defined(EROS_WINDOWS)
 	
 	HWND windowHandle = (HWND)hWindow;
 	
-	m_deviceHandle = GetDC(windowHandle);
+	m_DeviceHandle = GetDC(windowHandle);
 	
 	PIXELFORMATDESCRIPTOR pixelFormatDescriptor =
 	{
@@ -32,21 +32,21 @@ void OpenGLRenderer::Create(GenericHandle hWindow, int width, int height, int fl
 	};
 	
 	// Get the pixel format
-	int indexPixelFormat = ChoosePixelFormat(m_deviceHandle, &pixelFormatDescriptor);
+	Sint32 indexPixelFormat = ChoosePixelFormat(m_DeviceHandle, &pixelFormatDescriptor);
 	
-	DescribePixelFormat(m_deviceHandle, indexPixelFormat,
+	DescribePixelFormat(m_DeviceHandle, indexPixelFormat,
 		sizeof(PIXELFORMATDESCRIPTOR), &pixelFormatDescriptor);
 	
 	// set the device handle to have the pixel format
-	SetPixelFormat(m_deviceHandle, indexPixelFormat, &pixelFormatDescriptor);
+	SetPixelFormat(m_DeviceHandle, indexPixelFormat, &pixelFormatDescriptor);
 	
 	// Create the render context
-	HGLRC openglRenderContextHandle = wglCreateContext(m_deviceHandle);
+	HGLRC openglRenderContextHandle = wglCreateContext(m_DeviceHandle);
 	
 	wglMakeCurrent(NULL, NULL);
 	
 	// make the context current
-	if (!wglMakeCurrent(m_deviceHandle, openglRenderContextHandle))
+	if (!wglMakeCurrent(m_DeviceHandle, openglRenderContextHandle))
 	{
 		return;
 	}
@@ -56,11 +56,11 @@ void OpenGLRenderer::Create(GenericHandle hWindow, int width, int height, int fl
 	PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB 
 			= (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
 	
-	m_OGLrenderContextHandle = wglCreateContextAttribsARB(m_deviceHandle, openglRenderContextHandle, NULL);
+	m_OGLrenderContextHandle = wglCreateContextAttribsARB(m_DeviceHandle, openglRenderContextHandle, NULL);
 		
 	if (m_OGLrenderContextHandle)
 	{
-		if (!wglMakeCurrent(m_deviceHandle, m_OGLrenderContextHandle))
+		if (!wglMakeCurrent(m_DeviceHandle, m_OGLrenderContextHandle))
 		{
 			return;
 		}
@@ -86,11 +86,11 @@ void OpenGLRenderer::Clear()
 	glClearColor(0.3f, 0.5f, 1.0f, 1.0f);
 }
 
-void OpenGLRenderer::Swap(int vsync)
+void OpenGLRenderer::Swap(Sint32 vsync)
 {
 #if defined(EROS_WINDOWS)
 	
-	SwapBuffers(m_deviceHandle);
+	SwapBuffers(m_DeviceHandle);
 	wglSwapIntervalEXT(vsync);
 	
 #elif defined(EROS_LINUX)
@@ -102,7 +102,7 @@ void OpenGLRenderer::Cleanup()
 {
 #if defined(EROS_WINDOWS)
 	wglMakeCurrent(NULL, NULL);
-	DeleteDC(m_deviceHandle);
+	DeleteDC(m_DeviceHandle);
 #endif
 }
 

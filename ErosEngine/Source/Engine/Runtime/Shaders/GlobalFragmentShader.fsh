@@ -33,7 +33,7 @@ struct PointLight
     float quadratic;
 };
 
-// TODO(kiecker):
+// TODO:
 struct SpotLight
 {
     int x;

@@ -1,5 +1,5 @@
 #include "D3D11Renderer.h"
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 D3D11Renderer::D3D11Renderer()
@@ -7,7 +7,7 @@ D3D11Renderer::D3D11Renderer()
 	
 }
 
-void D3D11Renderer::Create(GenericHandle hWindow, int width, int height, int flags)
+void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, Sint32 flags)
 {
 	HWND windowHandle = (HWND)hWindow;
 	
@@ -20,14 +20,6 @@ void D3D11Renderer::Create(GenericHandle hWindow, int width, int height, int fla
 	deviceCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
 
 #endif
-
-	D3D_DRIVER_TYPE driverTypes[] = {
-		D3D_DRIVER_TYPE_HARDWARE,
-		D3D_DRIVER_TYPE_WARP,
-		D3D_DRIVER_TYPE_REFERENCE
-	};
-
-	UINT numberDriverTypes = 3;
 
 	D3D_FEATURE_LEVEL featureLevels[] = {
 		D3D_FEATURE_LEVEL_11_0,
@@ -45,7 +37,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, int width, int height, int fla
 	ID3D11Texture2D *pBackBufferTexture;
 
 	//m_vSync = pWindow->m_vSync;
-	uint numModes;
+	UINT numModes;
 
 	if (FAILED(CreateDXGIFactory(__uuidof(IDXGIFactory), (void **)&pDxgiFactory)))
 	{
@@ -67,22 +59,19 @@ void D3D11Renderer::Create(GenericHandle hWindow, int width, int height, int fla
 		qDebug() << ("Failed to get the display mode list");
 		return;
 	}
+
 	displayModeList = new DXGI_MODE_DESC[numModes];
 	if (FAILED(pDxgiOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModeList)))
 	{
 		qDebug() << ("Failed to get the display mode list");
 		return;
 	}
-	uint numerator, denominator;
-	for (uint i = 0; i < numModes; ++i)
-	{
-		if (displayModeList[i].Width == width &&
-			displayModeList[i].Height == height)
-		{
-			numerator = displayModeList[i].RefreshRate.Numerator;
-			denominator = displayModeList[i].RefreshRate.Denominator;
-		}
-	}
+
+	// TODO: Get the actual refresh rate of the client
+	Uint32 numerator, denominator;
+	numerator = 40;
+	denominator = 1;
+
 	DXGI_ADAPTER_DESC videoCardDesc;
 
 	if (FAILED(pAdapter->GetDesc(&videoCardDesc)))
@@ -108,6 +97,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, int width, int height, int fla
 	swapChainDesc.BufferDesc.Height = (float)height;
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
+	
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = numerator;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = denominator;
 	
@@ -237,7 +227,7 @@ void D3D11Renderer::Clear()
 	m_pDeviceContext->RSSetViewports(1, &m_viewport);
 }
 
-void D3D11Renderer::Swap(int vsync)
+void D3D11Renderer::Swap(Sint32 vsync)
 {
 	m_pDxgiSwapChain->Present(vsync, 0);
 }

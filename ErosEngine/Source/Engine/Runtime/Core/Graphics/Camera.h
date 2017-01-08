@@ -1,6 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include <Core/Common.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
@@ -30,11 +31,11 @@ struct Camera
     glm::mat4 GetPerspective();
     
     // ALL TRANSFOMATIONS ARE RELATIVE
-    void MouseUpdate(int x, int y);
+    void MouseUpdate(Sint32 x, Sint32 y);
     void StrafeRight();
     void StrafeLeft();
     void MoveForward();
-    void SprintForward(float multiplier);
+    void SprSint32Forward(float multiplier);
     void MoveDownward();
     void MoveUp();
     void MoveBack();
