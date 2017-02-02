@@ -2,7 +2,7 @@
 
 #include "Widget.h"
 #include "Core/Math.h"
-#include "Runtime/Core/Framework/IRenderBase.h"
+#include "Runtime/Core/Framework/IRenderer.h"
 
 
 class SceneEditor : public Widget
@@ -12,7 +12,7 @@ public:
 	SceneEditor() { }
 	~SceneEditor() { }
 
-	void SetRenderer(IRenderBase *pRenderer);
+	void SetRenderer(IRenderer *pRenderer);
 	
 	virtual void OnShow() override;
 	virtual void OnUpdate() override;
@@ -22,6 +22,6 @@ public:
 	
 private:
 
-	IRenderBase *m_pRenderer;
+	IRenderer *m_pRenderer;
 
 };

@@ -2,7 +2,7 @@
 #define SHAPEDATA_H
 
 #include "Core/Math.h"
-#include "Runtime/Core/Framework/ComponentsBase.h"
+#include "Runtime/Core/Entity/ComponentsBase.h"
 #include <vector>
 #include <QtCore/QString>
 
@@ -14,18 +14,18 @@ struct Vertex
     EVector2 texCoords;
 };
 
-class MeshComponent : public IComponent
+class MeshComponent : public ILoadedComponent
 {
+	
 public:
 	std::vector<Vertex> vertexes;
     std::vector<ushort> indices;
 	
-	QString fileName;
-	
-	
+	virtual void CreateFromOther(const IComponent *other) override;
 	virtual bool LoadFromFile(const char *fileName) override;
-	virtual void Clear() override;
-	virtual QString ToString() override;
+	virtual void FreeResources() override;
+	virtual QString ToString() const override;
+	virtual ComponentType GetType() const override;
 };
 
 

@@ -28,7 +28,7 @@ public:
     void Scale(float nX, float nY, float nZ);
     
     
-    // NOTE(kiecker): Using the getters and setters because I 
+    // NOTE Using the getters and setters because I 
     // will need the accessors to do stuff when they are changed
     void SetPosition(glm::vec3 pos);
     void SetRotation(glm::vec3 rot);

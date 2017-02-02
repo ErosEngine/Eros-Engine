@@ -1,10 +1,10 @@
 #include "SceneEditor.h"
+#include "Runtime/Core/Graphics/MeshComponent.h"
+#include "Runtime/OpenGL/OGLRenderer.h"
 
 
-void SceneEditor::SetRenderer(IRenderBase *pRenderer)
+void SceneEditor::SetRenderer(IRenderer *pRenderer)
 {
-	pRenderer->Create(m_WindowHandle, m_Geometry.width, m_Geometry.height, 0);
-	m_pRenderer = pRenderer;
 }
 
 void SceneEditor::OnShow()

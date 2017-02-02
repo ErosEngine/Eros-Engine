@@ -1,15 +1,13 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
-#include <vulkan/vulkan.hpp>
-#include "Runtime/Core/Framework/IRenderer.h"
+#include "..\Core\Framework\IRenderer.h"
+#include <dxgi1_4.h>
+#include <d3d12.h>
 
-class VulkanRenderer : public IRenderer
+
+
+class DX12Renderer : public IRenderer
 {
-public:
-
-    VulkanRenderer();
-	
 	virtual bool Create(Handle hWindow, Sint32 width, Sint32 height, Sint32 flags) override;
 
 	virtual void Clear() override;
@@ -20,9 +18,13 @@ public:
 
 	virtual void SetScene(Scene *pScene) override;
 	virtual void OnSceneUnload() override;
-	
+
 private:
-	
-	VkInstance m_Instance;
-	
+
+	ID3D12Device			*m_pDevice;
+	ID3D12CommandAllocator	*m_pAllocator;
+	IDXGISwapChain2			*m_pSwapChain;
+	ID3D12PipelineState		*m_pPipelineState;
+	ID3D12CommandQueue		*m_pCommandQueue;
+
 };

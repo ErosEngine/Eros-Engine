@@ -1,13 +1,13 @@
-#include "D3D11Renderer.h"
+#include "DX11Renderer.h"
 #include <QtCore/QDebug>
 
 
-D3D11Renderer::D3D11Renderer()
+DX11Renderer::DX11Renderer()
 {
 	
 }
 
-void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, Sint32 flags)
+bool DX11Renderer::Create(Handle hWindow, Sint32 width, Sint32 height, Sint32 flags)
 {
 	HWND windowHandle = (HWND)hWindow;
 	
@@ -42,29 +42,29 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 	if (FAILED(CreateDXGIFactory(__uuidof(IDXGIFactory), (void **)&pDxgiFactory)))
 	{
 		qDebug() << ("Failed to create the dxgi factory");
-		return;
+		return false;
 	}
 	if (FAILED(pDxgiFactory->EnumAdapters(0, &pAdapter)))
 	{
 		qDebug() << ("Failed to find a compatible adapter");
-		return;
+		return false;
 	}
 	if (FAILED(pAdapter->EnumOutputs(0, &pDxgiOutput)))
 	{
 		qDebug() << ("Failed to find a compatible monitor");
-		return;
+		return false;
 	}
 	if (FAILED(pDxgiOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL)))
 	{
 		qDebug() << ("Failed to get the display mode list");
-		return;
+		return false;
 	}
 
 	displayModeList = new DXGI_MODE_DESC[numModes];
 	if (FAILED(pDxgiOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModeList)))
 	{
 		qDebug() << ("Failed to get the display mode list");
-		return;
+		return false;
 	}
 
 	// TODO: Get the actual refresh rate of the client
@@ -77,7 +77,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 	if (FAILED(pAdapter->GetDesc(&videoCardDesc)))
 	{
 		qDebug() << ("Failed to get the video card description");
-		return;
+		return false;
 	}
 
 	delete[] displayModeList;
@@ -120,17 +120,17 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 			&m_featureLevel, &m_pDeviceContext)))
 	{
 		qDebug() << ("Failed to create the device and swap chain");
-		return;
+		return false;
 	}
-	if (FAILED(m_pDxgiSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void **)&pBackBufferTexture)))
+	if (FAILED(m_pDxgiSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void **>(&pBackBufferTexture))))
 	{
 		qDebug() << ("Failed to create the back buffer");
-		return;
+		return false;
 	}
 	if (FAILED(m_pDevice->CreateRenderTargetView(pBackBufferTexture, NULL, &m_pRenderTargetView)))
 	{
 		qDebug() << ("Failed to set the back buffer");
-		return;
+		return false;
 	}
 	pBackBufferTexture->Release();
 	pBackBufferTexture = nullptr;
@@ -152,7 +152,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 	if (FAILED(m_pDevice->CreateTexture2D(&backBufferDesc, NULL, &m_pDepthStencilBuffer)))
 	{
 		qDebug() << ("Failed to create the depth stencil buffer texture");
-		return;
+		return false;
 	}
 
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
@@ -165,7 +165,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 	if (FAILED(m_pDevice->CreateDepthStencilState(&depthStencilDesc, &m_pDepthStencilState)))
 	{
 		qDebug() << ("Failed to create the depth stencil state");
-		return;
+		return false;
 	}
 
 	m_pDeviceContext->OMSetDepthStencilState(m_pDepthStencilState, 0);
@@ -180,7 +180,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 		&depthStencilViewDesc, &m_pDepthStencilView)))
 	{
 		qDebug() << ("Failed to create the depth stencil view");
-		return;
+		return false;
 	}
 
 	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
@@ -200,7 +200,7 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 
 	if (FAILED(m_pDevice->CreateRasterizerState(&rasterizerDesc, &m_pRasterizerState)))
 	{
-		return;
+		return false;
 	}
 
 	m_pDeviceContext->RSSetState(m_pRasterizerState);
@@ -214,12 +214,12 @@ void D3D11Renderer::Create(GenericHandle hWindow, Sint32 width, Sint32 height, S
 
 	m_pDeviceContext->RSSetViewports(1, &m_viewport);
 
-	return;
+	return true;
 }
 
 static const float clearColor[4] = { 0.9f, 0.3f, 0.3f, 1.0f };
 
-void D3D11Renderer::Clear()
+void DX11Renderer::Clear()
 {
 	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, clearColor);
@@ -227,12 +227,17 @@ void D3D11Renderer::Clear()
 	m_pDeviceContext->RSSetViewports(1, &m_viewport);
 }
 
-void D3D11Renderer::Swap(Sint32 vsync)
+void DX11Renderer::RenderScene()
+{
+
+}
+
+void DX11Renderer::Swap(Sint32 vsync)
 {
 	m_pDxgiSwapChain->Present(vsync, 0);
 }
 
-void D3D11Renderer::Cleanup()
+void DX11Renderer::Cleanup()
 {
     m_pDeviceContext->ClearState();
 	m_pRenderTargetView->Release();
@@ -246,4 +251,15 @@ void D3D11Renderer::Cleanup()
 	m_pDxgiSwapChain	= nullptr;
 }
 
+void DX11Renderer::ResizeTarget(Sint32 width, Sint32 height)
+{
+}
+
+void DX11Renderer::SetScene(Scene *pScene)
+{
+}
+
+void DX11Renderer::OnSceneUnload()
+{
+}
 

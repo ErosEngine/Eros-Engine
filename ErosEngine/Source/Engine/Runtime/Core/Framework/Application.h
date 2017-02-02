@@ -6,36 +6,41 @@
 #include "SceneManager.h"
 
 // Renderers
-#include "IRenderBase.h"
+#include "IRenderer.h"
 #include "Engine/Runtime/OpenGL/OGLRenderer.h"
 #if defined(EROS_WINDOWS)
-	#include "Engine/Runtime/D3D11/D3D11Renderer.h"
+	#include "Engine/Runtime/D3D11/DX11Renderer.h"
 #endif
 
 // Window
 #include "Engine/Runtime/Window/Window.h"
 
 
-
 class Application
 {
 public:
 	
+	Application();
+	~Application();
+
 	// We are running off the assumption the renderer
 	// is already set up
-	void SetRenderer(IRenderBase *pRenderer, RenderingType api);
+	void SetRenderer(IRenderer *pRenderer, Api api);
 	void SetWindow(Window *pWindow);
 	void SetVSyncEnabled(bool vsync);
 	
 	void InitializeLoop();
 	void RunGameLoop(); // Update and render, play sound, etc.
 	void EndGameLoop();
+	void FireCloseEvent();
+
+	static Application *GetInstance();
 
 private:	
-	IRenderBase		* m_pRenderer;
-	Window			* m_pWindow;
-	SceneManager	m_sceneManager;
-	RenderingType	m_renderingApi;
+	IRenderer		*m_pRenderer;
+	Window			*m_pWindow;
+	SceneManager	m_SceneManager;
+	Api				m_renderingApi;
 	QElapsedTimer	m_timer;
 	bool			m_isVsync = true;
 	

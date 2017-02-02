@@ -60,7 +60,7 @@ void main()
     vec3 norm = normalize(vsOutNormal);
     
     // Not adding lights just yet
-    fsOutColor = vec4(0.3f, 0.5f, 0.2f, 1.0f);
+    fsOutColor = vec4(1.0f, 0.0f, 0.2f, 1.0f);
 }
 
 vec3 CalculateDirLight(DirectionalLight light, vec3 normal, vec3 viewDir)

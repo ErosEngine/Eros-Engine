@@ -4,30 +4,26 @@
 #include <d3d11.h>
 #include <dxgi.h>
 #include <d3dcommon.h>
-#include "Runtime/Core/Framework/IRenderBase.h"
-
-#define IMMEDIATE_MODE 1
-#define DIRECT_MODE 2  // TODO: Maybe get rid of these
+#include "Runtime/Core/Framework/IRenderer.h"
 
 
-class D3D11Renderer : public IRenderBase
+
+class DX11Renderer : public IRenderer
 {
 public:
-	D3D11Renderer();
+	DX11Renderer();
 	
-	virtual void Create(GenericHandle hWindow, Sint32 width, Sint32 height, Sint32 flags) override;
+	virtual bool Create(Handle hWindow, Sint32 width, Sint32 height, Sint32 flags) override;
 	virtual void Clear() override;
+	virtual void RenderScene() override;
 	virtual void Swap(Sint32 vsync) override;
 	virtual void Cleanup() override;
-	
-	
+	virtual void ResizeTarget(Sint32 width, Sint32 height) override;
+	virtual void SetScene(Scene *pScene) override;
+	virtual void OnSceneUnload() override;
+
 private:
-	
-	/* --- From inherited object IRenderBase
-	RendererArgs *i_pRendererArgs;
-	   --- */
-	
-	
+		
 	ID3D11Device				* m_pDevice;
 	ID3D11DeviceContext			* m_pDeviceContext;
 	IDXGISwapChain				* m_pDxgiSwapChain;

@@ -774,6 +774,14 @@ struct ERect
 	Sint32 x, y, width, height;
 	ERect() : x(0), y(0), width(0), height(0) { }
 	ERect(Sint32 X, Sint32 Y, Sint32 Width, Sint32 Height) : x(X), y(Y), width(Width), height(Height) { }
+	inline ERect &operator = (const ERect &right)
+	{
+		this->x = right.x;
+		this->y = right.y;
+		this->width = right.width;
+		this->height = right.height;
+		return *this;
+	}
 };
 
 inline bool operator == (const ERect &left, const ERect &right)

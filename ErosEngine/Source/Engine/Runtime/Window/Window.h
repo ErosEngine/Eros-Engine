@@ -9,14 +9,13 @@
 
 enum WindowFlags
 {
-	FULLSCREEN_WINDOW = 11,
-	WINDOWED_WINDOW = 14,
-	WINDOWED_RESIZEABLE_WINDOW = 12
+	WINDOW_RESIZEABLE = 1,
+	WINDOW_FULLSCREEN = 2,
 };
 
 class Window
 {
-	friend class D3D11Renderer;
+	friend class DX11Renderer;
 	friend class OpenGLRenderer;
 	friend class VulkanRenderer;
 	friend class Application;
@@ -24,26 +23,29 @@ class Window
 public:
     explicit Window();
     
-    void Create(const char *name, Sint32 width, Sint32 height, Sint32 windowFlags);
+    void Create(const char *name, Uint32 width, Uint32 height, Uint32 xPos, Uint32 yPos, Uint32 windowFlags);
     
-    Sint32 GetWidth() { return m_Width; }
-    Sint32 GetHeight() { return m_Height; }
+    Uint32 GetWidth() { return m_Width; }
+    Uint32 GetHeight() { return m_Height; }
 	bool IsFullScreen() { return m_isFullScreen; }
+	bool IsMouseLocked() { return m_isMouseLocked; }
+	void SetMouseLocked(bool value);
 	bool IsOpen();
 	bool PollEvent(Event &event);
+	bool IsKeyDown(Uint32 key);
+	bool IsKeyUp(Uint32 key);
 	void Close();
 	
-	GenericHandle GetPlatformHandle();
+	Handle GetPlatformHandle();
 	
 private:
     
-    void Destroy();
-    
     HWND		m_WindowHandle;
+	HINSTANCE	m_Instance;
     Uint32		m_Width, m_Height;
 	bool		m_isFullScreen;
 	bool		m_isOpen = true;
-    
+	bool		m_isMouseLocked = false;
 };
 
 

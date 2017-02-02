@@ -71,6 +71,9 @@ public:
    ~OGLShaderProgram();
     Sint32 shaderProgram;
     
+	// Add implicit creation so that we don't 
+	// have to worry about null function pointers
+	void Create();
     void AddShader(const OGLShader &shader);
     bool Compile();
     void UseShader();

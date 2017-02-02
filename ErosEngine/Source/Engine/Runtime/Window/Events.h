@@ -36,10 +36,10 @@ enum EventType : Uint32
 	EVENT_RESIZE_EVENT = 4
 };
 
-union Event
+struct Event
 {
 	Uint32 button;
 	Uint32 type;
 	Sint32 mouseX, mouseY;
-	Uint32 sizeX, sizeY;
+	Uint32 resizeX, resizeY;
 };

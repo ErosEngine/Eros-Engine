@@ -1,3 +1,4 @@
+#include <QtCore/QDebug>
 #include "Widget.h"
 #include "Editor/EditorWindow.h"
 
@@ -126,38 +127,38 @@ void Widget::Update()
 		Event curEvent;
 		switch (message.message)
 		{
-		case WM_CLOSE:
-		case WM_DESTROY:
-		case WM_QUIT:
-		{	
-			curEvent.type = EVENT_CLOSE_EVENT;
-			OnClose();
-			Close();
-			return;
-		}	break;
-		case WM_MOUSEMOVE:
-		{
-			curEvent.type = EVENT_MOUSE_EVENT;
-			short *mousePositions = (short *)&message.lParam;
-			curEvent.mouseX = mousePositions[0];
-			curEvent.mouseY = mousePositions[1];
-		}	break;
-		case WM_KEYDOWN:
-		{
-			curEvent.type = EVENT_KEY_EVENT;
-			curEvent.button = message.wParam;
-		}	break;
-		case WM_SIZE:
-		{
-			curEvent.type = EVENT_RESIZE_EVENT;
-			short *resizeSizes = (short *)&message.lParam;
-			curEvent.sizeX = resizeSizes[0];
-			curEvent.sizeY = resizeSizes[1];
-		}	break;
-		case WM_PAINT:
-		{
-			OnPaint();
-		}	break;
+			case WM_CLOSE:
+			case WM_DESTROY:
+			case WM_QUIT:
+			{
+				curEvent.type = EVENT_CLOSE_EVENT;
+				OnClose();
+				Close();
+				return;
+			} break;
+			case WM_MOUSEMOVE:
+			{
+				curEvent.type = EVENT_MOUSE_EVENT;
+				short *mousePositions = (short *)&message.lParam;
+				curEvent.mouseX = mousePositions[0];
+				curEvent.mouseY = mousePositions[1];
+			} break;
+			case WM_KEYDOWN:
+			{
+				curEvent.type = EVENT_KEY_EVENT;
+				curEvent.button = message.wParam;
+			} break;
+			case WM_SIZE:
+			{
+				curEvent.type = EVENT_RESIZE_EVENT;
+				short *resizeSizes = (short *)&message.lParam;
+				curEvent.resizeX = resizeSizes[0];
+				curEvent.resizeY = resizeSizes[1];
+			} break;
+			case WM_PAINT:
+			{
+				OnPaint();
+			} break;
 		}
 		OnEvent(curEvent);
 		TranslateMessage(&message);

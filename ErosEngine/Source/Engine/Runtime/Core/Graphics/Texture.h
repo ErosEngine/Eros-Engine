@@ -6,16 +6,21 @@
 #include <GL/glew.h>
 
 
-enum TextureType
+enum TextureComp
 {
-    DiffuseTexture = 1,
-    SpecularTexture = 2
+	COMP_R =	1,
+	COMP_RG =	2,
+	COMP_RGB =	3,
+	COMP_RGBA = 4
 };
 
+enum TextureFlags
+{
+	TextureFlag_WRAPPING_ENABLED	= 0x00000000,
+	TextureFlag_WRAPPING_DISABLED	= 0x00000001,
+	TextureFlag_
+};
 
-/*
- * TODO: Make this more interfaceable with d3d and vulkan\
- */
 class Texture
 {
 public:
@@ -24,29 +29,24 @@ public:
     
     QString fileName;
     
-    Uint32 texture = 0;
-    
-    Sint32 type;
-    Sint32 width;
+	Sint32 width;
     Sint32 height;
     Sint32 comp;
+	Uint32 textureFlags;
     
-    bool LoadFromFile(const char *fileName);    
+    bool LoadFromFile(const char *fileName);
+	void Create(Sint32 width, Sint32 height, Sint32 textureComp = COMP_RGBA);
+	void CopyTexture(Texture *pOther);
+	void ReadFromMemory(Byte *memory, Sint32 width, Sint32 height, Sint32 comp);
     bool IsEmpty();
+	void Clear();
     
-    inline void Bind()   { glBindTexture(GL_TEXTURE_2D, texture); }
-    inline void Unbind() { glBindTexture(GL_TEXTURE_2D, 0); }
-    
-    inline Texture &operator = (const Texture &right)
-    {
-        this->texture = right.texture;
-        this->type = right.type;
-        this->fileName = right.fileName;
-        this->width = right.width;
-        this->height = right.height;
-        this->comp = right.comp;
-        return *this;
-    }
+	Byte *GetBuffer() const { return m_Buffer; }
+
+private:
+
+	Byte *m_Buffer = NULL;
+
 };
 
 

@@ -7,17 +7,13 @@
 	#define EROS_LINUX
 #endif
 
+#ifndef _WINDOWS_
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#endif
+
+
 #include "Common.h"
-
-enum RenderingType
-{
-	API_OPENGL_4_5	= 1,
-	API_DIRECTX_11	= 2,
-	API_VULKAN		= 3,
-	API_DIRECTX_12	= 4
-};
-
-typedef void *GenericHandle;
 
 
 

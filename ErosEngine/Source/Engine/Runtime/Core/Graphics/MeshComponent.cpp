@@ -5,6 +5,9 @@
 
 void ProcessMesh(FbxMesh *pMesh, MeshComponent *pBase)
 {
+	FbxLayerElementArrayTemplate<FbxVector2> *pTexCoords;
+	pMesh->GetTextureUV(&pTexCoords);
+
 	for (Uint32 i = 0; i < pMesh->GetControlPointsCount(); ++i)
 	{
 		Vertex vertex;
@@ -13,17 +16,30 @@ void ProcessMesh(FbxMesh *pMesh, MeshComponent *pBase)
 		vertex.position.y = currentVertex.mData[1];
 		vertex.position.z = currentVertex.mData[2];
 		
-		vertex.normal = EVector3(0.0f, 0.0f, 0.0f);
 		// TODO
-		vertex.texCoords = EVector2(0.0f, 0.0f);
+		vertex.normal = EVector3(0.0f, 0.0f, 0.0f);
 		
+		FbxVector2 currentTexCoord = pTexCoords->GetAt(i);
+		vertex.texCoords.x = currentTexCoord.mData[0];
+		vertex.texCoords.y = currentTexCoord.mData[1];
+
 		pBase->vertexes.push_back(vertex);
+	}
+
+	Uint32 numIndices = pMesh->GetPolygonVertexCount();
+	Uint32 *indices = (Uint32 *)pMesh->GetPolygonVertices();
+
+	for (Uint32 i = 0; i < numIndices; ++i)
+	{
+		pBase->indices.push_back((Uint16)indices[i]);
 	}
 }
 
 void ProcessNodes(FbxNode *pNode, MeshComponent *pBase)
 {
 	FbxMesh *pMesh = pNode->GetMesh();
+	if (pMesh)
+		ProcessMesh(pMesh, pBase);
 	
 	for (Uint32 i = 0; i < pNode->GetChildCount(); ++i)
 	{
@@ -41,8 +57,23 @@ void ProcessScene(FbxScene *pScene, MeshComponent *pBase)
 	}
 }
 
+void MeshComponent::CreateFromOther(const IComponent *other)
+{
+	if (other->ToString() != "Mesh Component")
+		return;
+
+	MeshComponent *pOther = (MeshComponent *)other;
+	
+	vertexes.clear();
+	vertexes.swap(pOther->vertexes);
+	indices.clear();
+	indices.swap(pOther->indices);
+}
+
 bool MeshComponent::LoadFromFile(const char *fileName)
 {
+	FileName = fileName;
+
 	FbxManager *pManager = FbxManager::Create();
 	FbxIOSettings *pIoSettings = FbxIOSettings::Create(pManager, IOSROOT);
 	
@@ -65,14 +96,22 @@ bool MeshComponent::LoadFromFile(const char *fileName)
 	return true;	
 }
 
-void MeshComponent::Clear()
+void MeshComponent::FreeResources()
 {
 	vertexes.clear();
 	indices.clear();
-	fileName.clear();
+	FileName = nullptr;
+
+	if (this)
+		delete this;
 }
 
-QString MeshComponent::ToString()
+QString MeshComponent::ToString() const
 {
 	return "Mesh Component";
+}
+
+ComponentType MeshComponent::GetType() const
+{
+	return ComponentType_MESH;
 }

@@ -1,13 +1,19 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "ComponentsBase.h"
-#include "../Graphics/Camera.h"
+#include "../Entity/ComponentsBase.h"
+#include "../Entity/Entity.h"
 #include <memory>
 
 
 class Scene
 {
+public:
+
+	std::vector<Entity *> Entities;
+
+	
+
 };
 
 #endif // SCENE_H

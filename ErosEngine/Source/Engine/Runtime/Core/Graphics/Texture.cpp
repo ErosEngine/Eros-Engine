@@ -18,48 +18,67 @@
     }
 */
 
-typedef unsigned char *ubyteptr;
 
 Texture::~Texture()
 {
-    glDeleteTextures(1, &texture);
+	Clear();
 }
 
 bool Texture::LoadFromFile(const char *fileName)
 {
-    this->fileName = fileName;
-    ubyteptr texPtr = stbi_load(fileName, &width, &height, &comp, STBI_rgb);
-    
-    if (!texPtr)
-    {
-        return false;
-    }
-    else
-    {
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexImage2D
-        (
-            GL_TEXTURE_2D,
-            0, GL_RGB, 
-            width, 
-            height,
-            0, GL_RGB,
-            GL_UNSIGNED_BYTE,
-            texPtr
-        );
-        glGenerateMipmap(GL_TEXTURE_2D);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
-        STBI_FREE(texPtr);
-        glBindTexture(GL_TEXTURE_2D, 0);
-    }
-    return true;
+	Byte *buffer = stbi_load(fileName, &width, &height, &comp, STBI_rgb_alpha);
+	m_Buffer = new Byte[width * height * comp];
+	memcpy(m_Buffer, buffer, width * height * comp);
+	STBI_FREE(buffer);
+	return m_Buffer != nullptr;
+}
+
+void Texture::Create(Sint32 width, Sint32 height, Sint32 textureComp /*= COMP_RGBA*/)
+{
+	if (m_Buffer != nullptr)
+		delete[] m_Buffer;
+
+	this->width = width;
+	this->height = height;
+	this->comp = textureComp;
+
+	m_Buffer = new Byte[width * height * textureComp];
+}
+
+void Texture::CopyTexture(Texture *pOther)
+{
+	if (this->m_Buffer)
+	{
+		delete[] m_Buffer;
+	}
+
+	width = pOther->width;
+	height = pOther->height;
+	comp = pOther->comp;
+	Uint32 size = width * height * comp;
+
+	memcpy(m_Buffer, pOther->GetBuffer(), size);
+}
+
+void Texture::ReadFromMemory(Byte *memory, Sint32 width, Sint32 height, Sint32 comp)
+{
+	if (m_Buffer)
+		delete[] m_Buffer;
+
+	m_Buffer = new Byte[width * height * comp];
+	memcpy(m_Buffer, memory, width * height * comp);
+
+	this->width = width;
+	this->height = height;
+	this->comp = comp;
 }
 
 bool Texture::IsEmpty()
 {
-    return (texture != 0);
+	return (m_Buffer != nullptr);
+}
+
+void Texture::Clear()
+{
+	delete[] m_Buffer;
 }

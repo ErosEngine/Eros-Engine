@@ -6,15 +6,16 @@
 
 void OGLShader::Setup()
 {
-    this->subShaderProgram = glCreateShader(shaderType);
-    
-    const GLchar *temp_ = shaderCode.c_str();
-    glShaderSource(subShaderProgram, 1, &temp_, NULL);
 }
 
 bool OGLShader::Compile()
 {
-    glCompileShader(subShaderProgram);
+	subShaderProgram = glCreateShader(shaderType);
+	const GLchar *temp_ = shaderCode.c_str();
+	glShaderSource(subShaderProgram, 1, &temp_, NULL);
+    
+
+	glCompileShader(subShaderProgram);
     Sint32 shaderCompOutput;
     GLchar compileOutput[512];
     QString shaderType_;
@@ -52,13 +53,9 @@ bool OGLShader::LoadFromFile(const char *_fileName, GLenum nShaderType)
     return true;
 }
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
-
-/**************************************************************************/
-/**************************************************************************/
-
-
-// Note(kiecker): These are just some quick util funcs
 
 bool OGLShaderProgram::ShaderInformation::operator ==(const OGLShaderProgram::ShaderInformation &right)
 {
@@ -69,7 +66,7 @@ Sint32 OGLShaderProgram::findInList(const char *name)
 {
     for (Sint32 i = 0; i < m_infoList.size(); ++i)
     {
-        // Note(kiecker): string on right order to avoid warnings        
+        // Note: string on right order to avoid warnings        
         if (m_infoList[i].varName == name) 
             return i;
     }
@@ -78,12 +75,16 @@ Sint32 OGLShaderProgram::findInList(const char *name)
 
 OGLShaderProgram::OGLShaderProgram()
 {
-    shaderProgram = glCreateProgram();    
 }
 
 OGLShaderProgram::~OGLShaderProgram()
 {
-    
+	glDeleteProgram(shaderProgram);
+}
+
+void OGLShaderProgram::Create()
+{
+	shaderProgram = glCreateProgram();
 }
 
 void OGLShaderProgram::AddShader(const OGLShader &shader)
@@ -300,7 +301,7 @@ void OGLShaderProgram::SetUniform(const char *variableName, const glm::mat4 &dat
     {
         Sint32 uniformLoc = glGetUniformLocation(shaderProgram, variableName);
         glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(data));
-        ShaderInformation i;
+		ShaderInformation i;
         i.varName = variableName;
         i.varPos = uniformLoc;
         m_infoList.push_back(i);
